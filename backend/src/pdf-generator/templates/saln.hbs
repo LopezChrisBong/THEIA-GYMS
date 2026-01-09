@@ -1,0 +1,792 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+
+      body { font-family: 'Arial Narrow'; margin: 0 0
+      50px 0 } .table { width: 100%; border-collapse: collapse; } .strong {
+      font-weight: bold; } .bordered { border: 1px solid black; } .font-10 {
+      font-size: 10px; } .font-12 { font-size: 12px; } .font-14 { font-size:
+      14px; } .font-16 { font-size: 16px; } .font-18 { font-size: 18px; }
+      .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr {
+      page-break-inside: avoid; page-break-after: auto; } thead { display:
+      table-header-group; } tfoot { display: table-footer-group; }
+      .bold-text{font-weight: bold;} #table td{ border:1px solid black}
+      .csc_res{ display: grid;width: 50%; } .text-underline{ border-bottom:1px
+      solid black; } .avoid_page_break{ page-break-inside: avoid !important;
+      margin: 4px 0 4px 0; }.table_header_bg{ background-color: rgb(214, 209,
+      209); } @page { @bottom-left { content: counter(page) "/" counter(pages);
+      } } .page-count-div{ width:100%; display: flex; justify-content: center;
+      align-items: center; } /**body { font-family: 'Liberation Sans'; }*/
+    </style>
+  </head>
+
+  <body>
+    <div style='display:flex;'>
+      <div style='width: 80%;'></div>
+      <div class='csc_res_div'>
+        <div class='font-10'>Revised as of January 20</div>
+        <div class='font-10'>Per CSC Resolution No. 1500088</div>
+        <div class='font-10'>Promulgated on January 23, 2015</div>
+      </div>
+    </div>
+
+   
+  {{#each this}}
+      <table style='width:100%; margin-bottom:20px'>
+
+        <tr>
+          <td align='center'>
+            <div style='display:grid'>
+              <div class='font_14 bold-text'>SWORN STATEMENT OF ASSETS, AND
+                LIABILITIES AND NET WORTH</div>
+              <div class='font-12'>As of December 31, {{saln_for_year}}</div>
+              <div class='font-12'>(Required by R.A. Nos. 6713)</div>
+             <div class='font-10'>(<b>Note</b>:<i> Husband and Wife who are both public officials or employees may file the required statements jointly or separately.)</i></div>
+          </td>
+        </tr>
+
+      </table>
+
+
+     
+      <table class='table' style='width:100%; margin-top:20px'  >
+        <tr>
+          {{#ifCond filing_type 1}}
+            <td style="width: 30%;" align="center" colspan="2"><input type="checkbox" checked>&nbsp;<b class="font-12">Joint Filing</b> </td>
+            <td style="width: 30%;" align="center" colspan="2"><input type="checkbox">&nbsp;<b class="font-12">Separate Filing</b> </td>
+            <td style="width: 30%;" align="center" colspan="2"><input type="checkbox">&nbsp;<b class="font-12">Not Applicable</b> </td>
+          {{else}}
+            {{#ifCond filing_type 2}}
+              <td style="width: 30%;" align="center" colspan="2"><input type="checkbox">&nbsp;<b class="font-12">Joint Filing</b> </td>
+              <td style="width: 30%;" align="center" colspan="2"><input type="checkbox" checked>&nbsp;<b class="font-12">Separate Filing</b> </td>
+              <td style="width: 30%;" align="center" colspan="2"><input type="checkbox">&nbsp;<b class="font-12">Not Applicable</b> </td>
+            {{else}}
+              <td style="width: 30%;" align="center" colspan="2"><input type="checkbox">&nbsp;<b class="font-12">Joint Filing</b> </td>
+              <td style="width: 30%;" align="center" colspan="2"><input type="checkbox">&nbsp;<b class="font-12">Separate Filing</b> </td>
+              <td style="width: 30%;" align="center" colspan="2"><input type="checkbox" checked>&nbsp;<b class="font-12">Not Applicable</b> </td>
+            {{/ifCond}}
+          {{/ifCond}}
+           
+        </tr>
+        <tr >
+            <td align="center" colspan="6" height="20"></td>
+        </tr>
+        <tr>
+            <td style="width: 10%;" class="font-12 strong" >DECLARANT:</td>
+            {{#ifCond declarant_suffix null}}
+             <td style="width: 15%;" class="font-12 text-underline">{{declarant_lname}} </td>
+            {{else}}
+                {{#isNotNullAndNotNAandNotEmpty declarant_suffix}}
+               <td style="width: 15%;" class="font-12 text-underline">{{declarant_lname}}, {{declarant_suffix}}</td>
+               {{else}}
+                <td style="width: 15%;" class="font-12 text-underline">{{declarant_lname}} </td>
+               {{/isNotNullAndNotNAandNotEmpty}}
+            {{/ifCond}}
+            <td style="width: 15%;" class="font-12 text-underline">{{declarant_fname}}</td>
+            <td  align="center" style="width: 10%;" class="font-12 text-underline">{{declarant_mname}}</td>
+            <td style="width: 20%;" class="font-12 strong">POSITION</td>
+            <td style="width: 30%;" class="font-12 text-underline" >{{declarant_position}}</td>
+        </tr>
+        <tr>
+           <td  align="center" class="font-10"></td>
+           <td  align="center" class="font-10">(Family Name)</td>
+            <td align="center" class="font-10">(First Name)</td>
+            <td  align="center" class="font-10">(M.I.)</td>
+            <td class="font-12 strong">AGENCY/OFFICE</td>
+            <td class="font-12 text-underline">{{declarant_agency}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="font-12 strong">OFFICE ADDRESS</td>
+            <td class="font-12 text-underline">{{declarant_office_address}}</td>
+        </tr>
+         <tr>
+            <td class="font-12 strong">ADDRESS</td>
+            <td colspan="3" class="font-12 text-underline">{{declarant_address}}</td>
+            <td></td>
+            <td></td>
+            
+        </tr>
+      {{#ifCond hasSpouse 1}}
+       <tr>
+            <td style="width: 10%;" class="font-12 strong" >SPOUSE:</td>
+            <td style="width: 15%;" class="font-12 text-underline">{{spouse_lname}}</td>
+            <td  style="width: 10%;" class="font-12 text-underline">{{spouse_fname}}</td>
+            {{#ifCond is_spouse_deceased 1}}
+            <td align="center" style="width: 15%;" class="font-12 text-underline"> 
+               {{spouse_mname}} (DECEASED)
+              {{else}}
+               <td  align="center" style="width: 10%;" class="font-12 text-underline"> 
+              {{spouse_mname}}
+              {{/ifCond}}
+            </td>
+            <td style="width: 20%;" class="font-12 strong">POSITION</td>
+            <td style="width: 30%;" class="font-12 text-underline" >
+               
+              {{#ifCond is_spouse_deceased 1}}
+              N/A
+              {{else}}
+             {{spouse_position}}
+              {{/ifCond}}</td>
+        </tr>
+          <tr>
+           <td  align="center" class="font-10"></td>
+           <td  align="center" class="font-10">(Family Name)</td>
+            <td align="center" class="font-10">(First Name)</td>
+            <td  align="center" class="font-10">(M.I.)</td>
+            <td class="font-12 strong">AGENCY/OFFICE</td>
+            <td class="font-12 text-underline"> {{#ifCond is_spouse_deceased 1}}
+              N/A
+              {{else}}
+           {{spouse_agency}}
+              {{/ifCond}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="font-12 strong">OFFICE ADDRESS</td>
+            <td class="font-12 text-underline"> {{#ifCond is_spouse_deceased 1}}
+              N/A
+              {{else}}
+           {{spouse_office_address}}
+              {{/ifCond}}</td>
+        </tr>
+      {{else}}
+       <tr>
+            <td style="width: 10%;" class="font-12 strong" >SPOUSE:</td>
+            <td style="width: 15%;" class="font-12 text-underline">N/A</td>
+            <td style="width: 15%;" class="font-12 text-underline">N/A</td>
+            <td style="width: 10%;" class="font-12 text-underline">N/A</td>
+            <td style="width: 20%;" class="font-12 strong">POSITION</td>
+            <td style="width: 30%;" class="font-12 text-underline" >N/A</td>
+        </tr>
+          <tr>
+           <td  align="center" class="font-10"></td>
+           <td  align="center" class="font-10">(Family Name)</td>
+            <td align="center" class="font-10">(First Name)</td>
+            <td  align="center" class="font-10">(M.I.)</td>
+            <td class="font-12 strong">AGENCY/OFFICE</td>
+            <td class="font-12 text-underline">N/A</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="font-12 strong">OFFICE ADDRESS</td>
+            <td class="font-12 text-underline">N/A</td>
+        </tr>
+      {{/ifCond}}
+
+         
+      </table>
+{{!-- unmarried children --}}
+       <table class='table' style='width:100%; margin-top:20px'  >
+        
+        <tr>
+          <td align='center' colspan="6">
+          
+              <div class='font_14 bold-text' style="text-decoration: underline;">UNMARRIED CHILDREN BELOW EIGHTEEN (18) YRS OF AGE LIVING IN DECLARANT’S HOUSEHOLD</div>
+              </td>
+        </tr>
+          <tr>
+            <td height="25" colspan="6"></td>
+        </tr>
+          <tr>
+            <td align="center" style="width: 30%;" class="font-12">NAME</td>
+            <td style="width: 10%;"></td>
+            <td align="center" style="width: 20%;"  class="font-12">DATE OF BIRTH</td>
+            <td style="width: 10%;"></td>
+            <td align="center" style="width: 20%;"  class="font-12">AGE</td>
+            <td  style="width: 10%;"></td>
+        </tr>
+        {{!-- #ifCount == value1 greater than condition value 2 --}}
+  {{!-- {{#ifCond ifCount (getCount children) 4  }} --}}
+    {{#ifCond isChildCntExceed true}}
+      {{#children}}
+         <tr>
+            <td height="20" align="center" style="width: 30%;" class="font-12 text-underline">{{name}}</td>
+            <td height="20" style="width: 10%;"></td>
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline">{{bdate}}</td>
+            <td height="20" style="width: 10%;"></td>
+          {{!-- <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline">{{age}}</td> --}}
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline">{{calcAge bdate}}</td>
+            <td height="20"  style="width: 10%;"></td>
+        </tr>
+      {{/children}}
+    {{else}}
+      {{#hasData children 0}}
+     
+         {{#children}}
+         <tr>
+            <td height="20" align="center" style="width: 30%;" class="font-12 text-underline">{{name}}</td>
+            <td height="20" style="width: 10%;"></td>
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline">{{bdate}}</td>
+            <td height="20" style="width: 10%;"></td>
+            {{!-- <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline">{{age}}</td> --}}
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline">{{calcAge bdate}}</td>
+            <td height="20"  style="width: 10%;"></td>
+        </tr>
+      {{/children}}
+
+       {{#for 0 childrenBufferLen 1}}
+      <tr>
+            <td height="20" align="center" style="width: 30%;" class="font-12 text-underline"></td>
+            <td height="20" style="width: 10%;"></td>
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline"></td>
+            <td height="20" style="width: 10%;"></td>
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline"></td>
+            <td height="20"  style="width: 10%;"></td>
+        </tr>
+    {{/for}}
+     {{else}}
+     <tr>
+            <td height="20" align="center" style="width: 30%;" class="font-12 text-underline">N/A</td>
+            <td height="20" style="width: 10%;"></td>
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline">N/A</td>
+            <td height="20" style="width: 10%;"></td>
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline">N/A</td>
+            <td height="20"  style="width: 10%;"></td>
+        </tr>
+      {{#for 0 3 1}}
+      <tr>
+            <td height="20" align="center" style="width: 30%;" class="font-12 text-underline"></td>
+            <td height="20" style="width: 10%;"></td>
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline"></td>
+            <td height="20" style="width: 10%;"></td>
+            <td height="20" align="center" style="width: 20%;"  class="font-12 text-underline"></td>
+            <td height="20"  style="width: 10%;"></td>
+        </tr>
+    {{/for}}
+
+    {{/hasData}}
+     {{/ifCond}}
+
+       </table>
+{{!-- assets liabilities and networth --}}
+    <table class='table' style='width:100%; margin-top:50px'  >
+        
+        <tr>
+          <td align='center' colspan="6">
+                <div style="display: grid;">
+                     <div class='font_14 bold-text' style="text-decoration: underline;">ASSETS, LIABILITIES AND NET WORTH</div>
+                      <div class='font-10'><b>(Including those of the spouse and unmarried children below eighteen (18) years of age living in declarant's household)</b></div>
+                 </div>
+             
+              </td>
+        </tr>
+          <tr>
+            <td height="25" colspan="6"></td>
+        </tr>
+    
+
+       </table>
+{{!-- assets --}}
+{{!-- asset 1 --}}
+<div  class="strong font-12">
+    1. ASSETS
+    <div class="font-12" style="margin-left:50px">
+        a. <span class="strong">Real Properties*</span>
+    </div>
+</div>
+
+       <table class='table ' style='width:100%; margin-top:20px'  id="table">
+        <tr>
+            <td style="width: 15%;" class="table_header_bg" align="center" rowspan="2"><span class="strong font-12 ">DESCRIPTION</span><br><span class="font-10">(e.g. lot, house and lot, condominium and improvements)</span> </td>
+            <td style="width: 15%;" class="table_header_bg"  align="center" rowspan="2"><span class="strong font-12 ">KIND</span><br><span class="font-10">(e.g. residential, commercial, industrial, agricultural and mixed use)</span> </td>
+            <td style="width: 10%;" class="table_header_bg"  align="center" rowspan="2"><span class="strong font-12 ">EXACT LOCATION</span> </td>
+            <td style="width: 10%;" class="table_header_bg"  align="center" ><span class="strong font-12 ">ASSESSED VALUE</span> </td>
+            <td style="width: 10%;" class="table_header_bg"  align="center" ><span class="strong font-12 ">CURRENT FAIR MARKET VALUE</span> </td>
+            <td style="width: 20%;" class="table_header_bg"  align="center" colspan="2"><span class="strong font-12 ">ACQUISITION</span> </td>
+            <td style="width: 20%;" class="table_header_bg"  align="center" rowspan="2" ><span class="strong font-12 ">ACQUISITION COST</span> </td>
+            
+        </tr>
+        <tr>
+            <td class="font-10 table_header_bg" colspan="2" align="center">(as found in the Tax Declaration of Real Property)</td>
+            <td class="font-10 strong table_header_bg" align="center">YEAR</td>
+            <td class="font-10 strong table_header_bg"  align="center">MODE</td>
+        </tr>
+    
+
+        {{#ifCond isAssetAExceed true}}
+          {{#assetsA}}
+            <tr>
+                <td height="20" align="center" class="font-12">{{assetA_desc}}</td>
+                <td height="20" align="center" class="font-12">{{kind}}</td>
+                <td height="20" align="center" class="font-12">{{exact_loc}}</td>
+                <td height="20" align="center" class="font-12">{{assessed_val}}</td>
+                <td height="20" align="center" class="font-12">{{current_market_val}}</td>
+                <td height="20" align="center" class="font-12">{{acq_year}}</td>
+                <td height="20" align="center" class="font-12">{{acq_mode}}</td>
+                <td height="20" align="right" class="font-12">{{acq_cost}}</td>
+              </tr>
+          {{/assetsA}}
+        {{else}}
+        {{#hasData assetsA 0}}
+         {{#assetsA}}
+             <tr>
+                <td height="20" align="center" class="font-12">{{assetA_desc}}</td>
+                <td height="20" align="center" class="font-12">{{kind}}</td>
+                <td height="20" align="center" class="font-12">{{exact_loc}}</td>
+               
+                <td height="20" align="center" class="font-12">{{formatValueIfNotIsNaN assessed_val}}</td>
+                <td height="20" align="center" class="font-12">{{formatValueIfNotIsNaN current_market_val}}</td>
+                <td height="20" align="center" class="font-12">{{acq_year}}</td>
+                <td height="20" align="center" class="font-12">{{acq_mode}}</td>
+                <td height="20" align="right" class="font-12">{{formatAmount acq_cost}}</td>
+              </tr>
+          {{/assetsA}}
+          {{#for 0 assetsABufferLen 1}}
+          <tr>
+              <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+          </tr>
+          {{/for}}
+          {{else}}
+          <tr>
+              <td height="20" align="center" class="font-12">N/A</td>
+            <td height="20" align="center" class="font-12">N/A</td>
+            <td height="20" align="center" class="font-12">N/A</td>
+            <td height="20" align="center" class="font-12">N/A</td>
+            <td height="20" align="center" class="font-12">N/A</td>
+            <td height="20" align="center" class="font-12">N/A</td>
+            <td height="20" align="center" class="font-12">N/A</td>
+            <td height="20" align="center" class="font-12">N/A</td>
+          </tr>
+          {{#for 0 3 1}}
+          <tr>
+              <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+            <td height="20"></td>
+          </tr>
+          {{/for}}
+          {{/hasData}}
+        {{/ifCond}}
+
+       
+
+        <tr>
+            <td height="25" colspan="6" style="border:none"></td>
+          
+           <td height="25" style="border:none" align="center" class="strong font-12 ">Subtotal</td>
+           <td height="25" style="border-right:none; border-left:none" class="strong  font-12 text-underline" align="right">{{formatAmount assAtotal}}</td>
+        </tr>
+       </table>
+
+  {{!-- asset 2 --}}
+    <div class="font-12" style="margin-left:50px; margin-top:20px">
+        b. <span class="strong">Personal Properties*</span>
+    </div>
+
+       <table class='table ' style='width:100%; margin-top:20px'  id="table">
+        <tr>
+            <td style="width: 40%;" align="center" class="table_header_bg"><span class="strong font-12 ">DESCRIPTION</span> </td>
+            <td style="width: 40%;" align="center" class="table_header_bg"><span class="strong font-12 ">YEAR ACQUIRED</span></td>
+            <td style="width: 30%;" align="center" class="table_header_bg"><span class="strong font-12 ">ACQUISITION COST/AMOUNT</span> </td>
+          
+            
+        </tr>
+
+        {{#ifCond isAssetBExceed true}}
+          {{#assetsB}}
+              <tr>
+                <td height="20" class="font-12" align="center">{{assetB_desc}}</td>
+                <td height="20" class="font-12" align="center">{{year_acq}}</td>
+                <td height="20" class="font-12" align="right">{{formatAmount assetB_acq_cost}}</td>
+              
+            </tr>
+          {{/assetsB}}
+        {{else}}
+        {{#hasData assetsB 0}}
+           {{#assetsB}}
+              <tr>
+                <td height="20" class="font-12" align="center">{{assetB_desc}}</td>
+                <td height="20" class="font-12" align="center">{{year_acq}}</td>
+                <td height="20" class="font-12" align="right">{{formatAmount assetB_acq_cost}}</td>
+              
+            </tr>
+          {{/assetsB}}
+           {{#for 0 assetsBBufferLen 1}}
+            <tr>
+                <td height="20"></td>
+                <td height="20"></td>
+                <td height="20"></td>
+              
+            </tr>
+            {{/for}}
+            {{else}}
+             <tr>
+                <td height="20" class="font-12" align="center">N/A</td>
+                <td height="20" class="font-12" align="center">N/A</td>
+                <td height="20" class="font-12" align="center">N/A</td>
+              
+            </tr>
+             {{#for 0 assetsBBufferLen 1}}
+            
+            <tr>
+                <td height="20"></td>
+                <td height="20"></td>
+                <td height="20"></td>
+              
+            </tr>
+            {{/for}}
+            {{/hasData}}
+        {{/ifCond}}
+       
+        
+         <tr>
+            <td height="25" colspan="2" style="border:none" height="25" align="right" class="font-12 strong">Subtotal&nbsp;&nbsp;&nbsp;</td>
+           <td height="25" style="border-right:none; border-left:none" align="right" class="text-underline font-12 strong">{{formatAmount assBtotal}}</td>
+          
+        </tr>
+        <tr>
+             <td height="25" colspan="2" style="border:none" align="right" height="25"   class="font-12 strong">TOTAL ASSET (a+b)&nbsp;&nbsp;&nbsp;</td>
+           <td height="25" style="border-right:none; border-left:none" class="text-underline strong font-12" align="right">{{formatAmount totalAssets}}</td>
+          
+        </tr>
+       </table>  
+
+
+
+        {{!-- liabilities --}}
+        <div class="avoid_page_break">
+           <div class="font-12">
+        2. <span class="strong">LIABILITIES*</span>
+    </div>
+
+       <table class='table ' style='width:100%; margin-top:20px'  id="table">
+        <tr>
+            <td style="width: 40%;" align="center" class="table_header_bg"><span class="strong font-12">NATURE</span> </td>
+            <td style="width: 40%;" align="center" class="table_header_bg"><span class="strong font-12">NAME OF CREDITORS</span></td>
+            <td style="width: 30%;" align="center" class="table_header_bg"><span class="strong font-12">OUTSTANDING BALANCE</span> </td>
+        </tr>
+
+        {{#ifCond isLiabilityExceed true}}
+          {{#liabilities}}
+              <tr>
+                <td height="20" class="font-12" align="center">{{nature}}</td>
+                <td height="20" class="font-12" align="center">{{creditor_name}}</td>
+                <td height="20" class="font-12" align="right">{{formatAmount out_bal}}</td>
+              </tr>
+          {{/liabilities}}
+        {{else}}
+        {{#hasData liabilities 0}}
+             {{#liabilities}}
+                  <tr>
+                    <td height="20" class="font-12" align="center">{{nature}}</td>
+                    <td height="20" class="font-12" align="center">{{creditor_name}}</td>
+                    <td height="20" class="font-12" align="right">{{formatAmount out_bal}}</td>
+                  </tr>
+              {{/liabilities}}
+
+                {{#for 0 liabiltiesBufferLen 1}}
+                    <tr>
+                        <td height="20"></td>
+                        <td height="20"></td>
+                        <td height="20"></td>
+                      
+                    </tr>
+                {{/for}}
+                {{else}}
+                 <tr>
+                    <td height="20" class="font-12" align="center">N/A</td>
+                    <td height="20" class="font-12" align="center">N/A</td>
+                    <td height="20" class="font-12" align="right">N/A</td>
+                  </tr>
+                   {{#for 0 3 1}}
+                    <tr>
+                        <td height="20"></td>
+                        <td height="20"></td>
+                        <td height="20"></td>
+                      
+                    </tr>
+                {{/for}}
+                {{/hasData}}
+        {{/ifCond}}
+       
+      
+          <tr>
+            <td height="25" colspan="2" style="border:none" height="25" align="right" class="font-12 strong">TOTAL LIABILITIES:&nbsp;&nbsp;&nbsp;</td>
+           <td height="25" style="border-right:none; border-left:none" class="text-underline font-12 strong" align="right">{{formatAmount liabilitiestotal}}</td>
+          
+        </tr>
+        <tr>
+             <td height="25" colspan="2" style="border:none" align="right" height="25"   class="font-12 strong">NET WORTH: Total Assests Less Total Liabilities =&nbsp;&nbsp;&nbsp;</td>
+           <td height="25" style="border-right:none; border-left:none" class="text-underline font-12 strong" align="right">{{formatAmount networth}}</td>
+          
+        </tr>
+        </table>
+        </div>
+   
+
+        {{!-- business interest and financial connections --}}
+
+<div class="avoid_page_break">
+        <div  style="margin-top: 50px;" >
+          <center>
+               <div class='font_14 bold-text' style="text-decoration: underline;">BUSINESS INTERESTS AND FINANCIAL CONNECTIONS</div>
+              <div class='font-10'>(of Declarant / Declarant's spouse/ Unmarried Children Below Eighteen (18) years of Age living in Declarant's Household)</div>
+              <div class='font-12' style="margin-top: 5px;">
+                {{#ifCond hasBIFC 1}}
+                <input type="checkbox" checked>
+                {{else}}
+                <input type="checkbox">
+                {{/ifCond}}
+                
+                &nbsp;&nbsp;<i> I/We do not have any business interest and other financial connection.</i></div>
+          </center>
+        </div>
+       <table  class='table ' style='width:100%; margin-top:20px' id="table" >
+        
+        
+        
+          <tr>
+            <td align="center" style="width: 25%;" class="font-12 strong table_header_bg">NAME OF ENTITY/ BUSINESS ENTERPRISE</td>
+            <td align="center" style="width: 25%;" class="font-12 strong table_header_bg">BUSINESS ADDRESS</td>
+            <td align="center" style="width: 25%;" class="font-12 strong table_header_bg">NATURE OF BUSINESS INTEREST &/OR FINANCIAL CONNECTION</td>
+            <td align="center" style="width: 25%;" class="font-12 strong table_header_bg">DATE OF ACQUISITION OF INTEREST OR CONNECTION</td>
+            
+        </tr>
+        {{#ifCond hasBIFC 1}}
+          <tr>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">N/A</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">N/A</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">N/A</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">N/A</td>
+                      
+                  </tr>
+             {{#for 0 3 1}}
+                <tr>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      
+                  </tr>
+              {{/for}}
+        {{else}}
+         
+            {{#ifCond isBifcExceed true}}
+              {{#bifc}}
+               <tr>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">{{bifc_name}}</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">{{bifc_address}}</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">{{nature_of_business}}</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">{{date_acq}}</td>
+                      
+                  </tr>
+              {{/bifc}}
+             
+            {{else}}
+            
+               {{#bifc}}
+               <tr>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">{{bifc_name}}</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">{{bifc_address}}</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">{{nature_of_business}}</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">{{date_acq}}</td>
+                      
+                  </tr>
+              {{/bifc}}
+                {{#for 0 bifcBufferLen 1}}
+                <tr>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      
+                  </tr>
+              {{/for}}
+            {{/ifCond}}
+      
+        {{/ifCond}}
+
+   
+
+       </table>
+
+        <div  style="margin-top: 50px;" >
+          <center>
+             <div class='font_14 bold-text' style="text-decoration: underline;">RELATIVES IN THE GOVERNMENT SERVICE</div>
+              <div class='font-10'>(Within the Fourth Degree of Consanguinity or Affinity. Include also Bilas, Balae and Inso) </div>
+              <div class='font-12' style="margin-top: 5px;">
+               
+                 {{#ifCond hasRelativeInGov 1}}
+                <input type="checkbox" checked>
+                {{else}}
+                <input type="checkbox">
+                {{/ifCond}}
+                &nbsp;&nbsp;<i> I/We do not know of any relative/s in the government service.</i></div>
+          </center>
+        </div>
+       {{!-- relatives in the governament service --}}
+       <table  class='table ' style='width:100%; margin-top:20px' id="table" >
+          
+          <tr>
+            <td align="center" style="width: 25%;" class="font-12 strong table_header_bg">NAME OF RELATIVE</td>
+            <td align="center" style="width: 25%;" class="font-12 strong table_header_bg">RELATIONSHIP</td>
+            <td align="center" style="width: 25%;" class="font-12 strong table_header_bg">POSITION</td>
+            <td align="center" style="width: 25%;" class="font-12 strong table_header_bg">NAME OF AGENCY/OFFICE AND ADDRESS</td>
+            
+        </tr>
+
+         
+
+        {{#ifCond hasRelativeInGov 1}}
+            <tr>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">N/A</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">N/A</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">N/A</td>
+                      <td height="20" align="center" style="width: 25%;" class="font-12">N/A</td>
+                      
+                  </tr>
+             {{#for 0 3 1}}
+                <tr>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      <td height="20" style="width: 25%;"></td>
+                      
+                  </tr>
+              {{/for}}
+        {{else}}
+          {{#ifCond isRelativeInGovExceed true}}
+              {{#relatives_in_gov}}
+                    <tr>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_name}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_relationship}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_position}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_name_of_agency_and_address}}</td>
+                        
+                    </tr>
+              {{/relatives_in_gov}}
+             
+          {{else}}
+               {{#relatives_in_gov}}
+                    <tr>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_name}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_relationship}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_position}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_name_of_agency_and_address}}</td>
+                        
+                    </tr>
+              {{/relatives_in_gov}}
+               {{#for 0 relativeInGovBufferLen 1}}
+                   <tr>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_name}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_relationship}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_position}}</td>
+                        <td height="20" align="center" style="width: 25%;" class="font-12">{{relative_name_of_agency_and_address}}</td>
+                        
+                    </tr>
+                {{/for}}
+          {{/ifCond}}
+        {{/ifCond}}
+
+
+   
+
+       </table>
+</div>
+<div class="avoid_page_break">
+<div style="margin-top: 20px;">
+  <p style="text-align: justify;" class="font-12">
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I  hereby certify that these are true statements of my assets , liabilities, networth, business interest, and financial connections, including those of my spouse and unmarried children below eighteen (18) years of age living in my household, and that to the best of my knowledge, the above-enumerated are names of my relatives in the government within the fourth civil degree of consanguinity or of affinity. 
+  </p>
+   <p style="text-align: justify;" class="font-12">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I hereby authorize the Ombudsman or his/her duly authorized representatives to obtain and secure from all appropriate government agencies, including the Bureau of Internal Revenue such documents that may show my assets, liabilities, net worth, business interests and financial connections, to include those of my spouse and unmarried children below 18 years of age living with me in my household covering previous years to include the year I first assumed office in government.
+   </p>
+</div>
+
+<div style="margin-top: 20px;display:flex; width: 25%">
+  <div class="font-12" style="width: 40%;">DATE:</div>
+  <div class="font-12 text-underline" style="width: 60%;"></div>
+</div>
+
+
+<div style="display:flex;margin-top:40px" >
+  <div style="width:50%; text-align:center">
+    <div class="text-underline"></div>
+    <div class="font-12">(Signature of Declarant)</div>
+
+    <div style="margin-top: 30px;display:flex;">
+        <div style="width:50%; text-align:left" class="font-12">Government Issued ID:</div>
+        <div style="width:50%" class="font-12 text-underline">{{declarant_gov_issued_id}}</div>
+    </div>
+     <div style="margin-top: 10px;display:flex;">
+        <div style="width:50%; text-align:left" class="font-12">ID No. :</div>
+        <div style="width:50%" class="font-12 text-underline">{{declarant_id_no}}</div>
+    </div>
+     <div style="margin-top: 10px;display:flex;">
+        <div style="width:50%; text-align:left" class="font-12">Date Issued</div>
+        <div style="width:50%; border-bottom:1px solid black" class="font-12 ">{{declarant_id_date_issued}}</div>
+    </div>
+  </div>
+  <div style="width:10%;"></div>
+    {{#ifCond is_spouse_deceased 1}}
+  <div style="width:40%; text-align:center">
+    <div class="text-underline"></div>
+    <div class="font-12">(Signature of Co-Declarant/Spouse)</div>
+      <div style="margin-top: 30px;display:flex; ">
+        <div style="width:50%; text-align:left" class="font-12 ">Government Issued ID:</div>
+        <div style="width:50%; " class="font-12 text-underline">N/A</div>
+    </div>
+     <div style="margin-top: 10px;display:flex;">
+        <div style="width:50%; text-align:left" class="font-12">ID No. :</div>
+        <div style="width:50%" class="font-12 text-underline">N/A</div>
+    </div>
+     <div style="margin-top: 10px;display:flex;">
+        <div style="width:50%; text-align:left" class="font-12">Date Issued</div>
+        <div style="width:50%" class="font-12 text-underline">N/A</div>
+    </div>
+  </div>
+  {{else}}
+  <div style="width:40%; text-align:center">
+    <div class="text-underline"></div>
+    <div class="font-12">(Signature of Co-Declarant/Spouse)</div>
+      <div style="margin-top: 30px;display:flex; ">
+        <div style="width:50%; text-align:left" class="font-12 ">Government Issued ID:</div>
+        <div style="width:50%; " class="font-12 text-underline">{{spouse_gov_issued_id}}</div>
+    </div>
+     <div style="margin-top: 10px;display:flex;">
+        <div style="width:50%; text-align:left" class="font-12">ID No. :</div>
+        <div style="width:50%" class="font-12 text-underline">{{spouse_id_no}}</div>
+    </div>
+     <div style="margin-top: 10px;display:flex;">
+        <div style="width:50%; text-align:left" class="font-12">Date Issued</div>
+        <div style="width:50%" class="font-12 text-underline">{{spouse_id_date_issued}}</div>
+    </div>
+  </div>
+  {{/ifCond}}
+</div>
+
+<div style="margin-top: 40px;">
+  <p class="font-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="strong"> SUBCRIBED AND SWORN</span> to before me this   _______day of _______________ ,  affiant exhibiting to me the above-stated  government issued identification card.</p>
+</div>
+</div>
+    {{/each}}
+  </body>
+
+
+</html>

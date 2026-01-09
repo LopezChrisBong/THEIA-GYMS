@@ -1,0 +1,231 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ header { position: relative;
+      top: 0px; left: 0px; right: 0px; height: 100px; border: 1px solid black }
+      body { font-family: 'Arial Narrow' } .table { width: 100%;
+      page-break-inside: auto; border-collapse: collapse; } .strong {
+      font-weight: bold; } .bordered { border: 1px solid black; } .font-10 {
+      font-size: 10px; } .font-12 { font-size: 12px; } .font-14 { font-size:
+      14px; } .font-16 { font-size: 16px; } .font-18 { font-size: 18px; }
+      .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr {
+      page-break-inside: avoid; page-break-after: auto; } thead { display:
+      table-header-group; } tfoot { display: table-footer-group; }
+      .bold-text{font-weight: bold;} #table td{ border:1px solid black }
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <table style='width:100%; margin-bottom:20px'>
+
+        <tr>
+          <td align='center'>
+            <div style='display:grid'>
+              <div class='font_14 bold-text'>DAVAO DEL NORTE STATE COLLEGE</div>
+              <div class='font_14'>Summary List of Filer (NEWLY-HIRED EMPLOYEES)</div>
+              <div class='font_14'>Summary of Assets, Liabilities and Networth</div>
+              <div class='font_14'>AS OF
+                {{getCurrentMonth}},
+                {{getCurrentYear}}</div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table class='table' style='width:100%;' id='table'>
+
+        <tr>
+          <td width='3%' rowspan='2' align='center' class='font-12'>No.</td>
+          <td width='30%' colspan='3' align='center' class='font-12'>NAME OF
+            EMPLOYEE (In alphabetical order)</td>
+          <td width='5%' rowspan='2' align='center' class='font-12'>TIN</td>
+          <td
+            width='15%'
+            rowspan='2'
+            align='center'
+            class='font-12'
+          >POSITION</td>
+          <td
+            width='10%'
+            rowspan='2'
+            align='center'
+            class='font-12'
+          >NETWORTH</td>
+          <td width='20%' rowspan='2' align='center'><div
+              style='display: grid;'
+            ><div class='font-10'>If spouse is with government service</div><div
+                class='font-10'
+              >PLEASE INDICATE </div><div class='font-10'>NAME OF
+                SPOUSE/EMPLOYER/ADDRESS</div></div></td>
+          <td width='7%' rowspan='2' align='center' class='font-12'><div
+              style='display: grid;'
+            ><div>Please check (/)</div><div>if </div>Joint Filing</div></td>
+
+        </tr>
+        <tr>
+          <td align='center' class='font-12'>LAST NAME</td>
+          <td align='center' class='font-12'>FIRST NAME</td>
+          <td align='center' class='font-12'>MIDDLE NAME</td>
+
+        </tr>
+        {{#saln}}
+
+          <tr>
+            <td align='center' class='font-12'>{{math @index '+' 1}}</td>
+            <td align='center' class='font-12'>{{lname}}</td>
+            <td align='center' class='font-12'>{{fname}}</td>
+            <td align='center' class='font-12'>{{mname}}</td>
+            <td align='center' class='font-12'>{{TIN}}</td>
+            {{#ifCond employment_status 'Permanent'}}
+              <td align='center' class='font-12'>{{position}}</td>
+            {{else}}
+              <td align='center' class='font-12'>{{position}}
+                ({{employment_status}})</td>
+            {{/ifCond}}
+
+            <td align='center' class='font-12'>{{formatAmount netWorth}}</td>
+            <td align='center' class='font-10'>
+              {{#ifCond filing_type 1}}
+                {{spouse_fname}}
+                {{spouse_mname}}.
+                {{spouse_lname}},
+                {{spouse_agency}},
+                {{spouse_office_address}}
+              {{/ifCond}}
+            </td>
+            <td align='center' class='font-12'>
+              {{#ifCond filing_type 1}}
+                /
+              {{else}}
+
+              {{/ifCond}}
+            </td>
+
+          </tr>
+
+        {{/saln}}
+
+      </table>
+
+      <table style='margin-top:10px; page-break-inside:avoid; width:40%'>
+        <tr>
+          <td class='font-14' width='50%'>Total Number of Filers:</td>
+          <td
+            class='font-14'
+            align='center'
+            width='50%'
+            style='border-bottom: 1px solid black;'
+          >{{totalSALNCnt}}</td>
+        </tr>
+        <tr>
+          <td class='font-14' width='50%'>Total Number of Personel Complement:</td>
+          <td
+            class='font-14'
+            align='center'
+            width='50%'
+            style='border-bottom: 1px solid black;'
+          >{{totalPersonelComplementCnt}}</td>
+        </tr>
+
+      </table>
+
+      <div
+        style='width: 100%; display:flex; page-break-inside:avoid; margin-top: 50px'
+      >
+        <div style='display: grid; width:50%'>
+          <div class='font-12' style='margin-bottom: 50px;'>Prepared by:</div>
+          <div style='width: 60%; text-align:center'>
+            <div
+              class='font-12 strong'
+              style='border-bottom:1px solid black; text-align:center'
+            >RAQUEL J. EDJEC</div>
+            <div class='font-12'>Person In-charge of SALN</div>
+
+            <div style='display: flex; width:100%; margin-top:50px'>
+              <div
+                style='width:50%;text-align:left'
+                class='font-14'
+              >Position:</div>
+              <div
+                class='font-14'
+                style='width:50%; border-bottom:1px solid black'
+              >Administrative Officer V</div>
+            </div>
+            <div
+              class='font-14'
+              style='display: flex; width:100%; margin-top:10px'
+            >
+
+              <div style='width:50%;text-align:left'>Email Address:</div>
+              <div
+                style='width:50%; border-bottom:1px solid black'
+              >hrmo@dnsc.edu.ph</div>
+            </div>
+            <div
+              class='font-14'
+              style='display: flex; width:100%; margin-top:10px'
+            >
+              <div style='width:50%;text-align:left'>Contact Number:</div>
+              <div
+                style='width:50%; border-bottom:1px solid black'
+              >+639285549051</div>
+            </div>
+          </div>
+        </div>
+
+        <div style='display: grid; width:50%'>
+          <div class='font-12' style='margin-bottom: 50px;'>Noted by:</div>
+          <div style='width: 60%; text-align:center'>
+            <div
+              class='font-12 strong'
+              style='border-bottom:1px solid black; text-align:center'
+            >JOY M. SORROSA, PhD</div>
+            <div class='font-12'>Head of Agency</div>
+
+            <div style='display: flex; width:100%; margin-top:50px'>
+              <div
+                class='font-14'
+                style='width:50%;text-align:left'
+              >Position:</div>
+              <div
+                class='font-14'
+                style='width:50%; border-bottom:1px solid black'
+              >SUC President III</div>
+            </div>
+            <div
+              class='font-14'
+              style='display: flex; width:100%; margin-top:10px'
+            >
+              <div class='font-14' style='width:50%;text-align:left'>Email
+                Address:</div>
+              <div
+                class='font-14'
+                style='width:50%; border-bottom:1px solid black'
+              >hrmo@dnsc.edu.ph</div>
+            </div>
+            <div
+              class='font-14'
+              style='display: flex; width:100%; margin-top:10px'
+            >
+              <div class='font-14' style='width:50%;text-align:left'>Contact
+                Number:</div>
+              <div
+                class='font-14'
+                style='width:50%; border-bottom:1px solid black'
+              >+639285549051</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

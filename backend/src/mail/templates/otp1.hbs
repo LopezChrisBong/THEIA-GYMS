@@ -1,0 +1,65 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      body { font-family: "Roboto"; } .otp { border: 1px solid; font-size: 30px;
+      border-color: #6DB249; border-radius: 5px; padding: 5px 10px; width: 50px;
+      height: 50px; box-sizing: border-box; margin-right: 2px; margin-left: 2px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style='text-align: center;'>
+      <div style=' line-height: 1.6;margin-bottom:20px'>
+        {{! <img src="cid:headerImg" alt="HRMIS logo" style="width: 20%; height:40%;"> }}
+        <hr style='color:#8D8B8A; ' />
+        <p style='font-size:10px;margin-top:-70px;color:#8D8B8A;'><i>Do not
+            reply</i></p>
+      </div>
+
+      <div>
+        <img
+          src='cid:headerImg'
+          alt='HRMIS_logo'
+          style='width: 20%; height:40%;'
+        />
+      </div>
+
+      <h1 style='color:#519043; margin-bottom:20px;'>Here is your
+        <span style='color: #FFC107;'>One Time Pin</span>
+      </h1>
+      <center>
+        <p style='color: #595959;width:40%; '>NEVER SHARE YOUR OTP OR USE IT IN
+          ANY LINK.<br />There is a request to register your email on DNSC - HIS<br
+          />(Davao del Norte State College - Human Resource Management
+          Information System). To register this email, here is your OTP.
+        </p>
+      </center>
+
+      <div
+        style=' margin-top:50px; margin-bottom: 30px; display:flex;width:40%  border:1px solid'
+      >
+
+        <div class='otp' style='display: inline;'>{{i1 OTP}}</div>
+        <div class='otp' style='display: inline;'>{{i2 OTP}}</div>
+        <div class='otp' style='display: inline;'>{{i3 OTP}}</div>
+        <div class='otp' style='display: inline;'>{{i4 OTP}}</div>
+        <div class='otp' style='display: inline;'>{{i5 OTP}}</div>
+        <div class='otp' style='display: inline;'>{{i6 OTP}}</div>
+
+      </div>
+
+      <p style='color: #595959;'>If you DID NOT make this request, please ignore
+        this message. Thank you</p>
+      <p style='color: #595959;font-size:10px;'><i>Please disregard attachment
+          below.</i></p>
+
+    </div>
+  </body>
+
+</html>

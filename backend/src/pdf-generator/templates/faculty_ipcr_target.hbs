@@ -1,0 +1,708 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Arial Narrow' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 80px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .underline{ border-bottom:1px solid black } #eval_table tr td, #eval_table
+      tr th{ padding: 8px; } #eval_table{ page-break-after: always; } #f_table
+      th,#f_table td,#eval_table th,#eval_table td{ border: 1px solid black; }
+      #f_table,#eval_table, #target{ border-collapse: collapse; } 
+      #eval_table{ border: 1px solid black; } #target td{ border:
+      1px solid black; padding: 2px;} 
+      #corefunction{ border-collapse: collapse; } #corefunction td{ border:
+      1px solid black; padding: 2px; width: 11.11%;} 
+      .tableClassess{ border-collapse: collapse; } .tableClassess td{ border:
+      1px solid black; padding: 5px; width: 11.11%;} 
+      #target{ border-collapse: collapse; } 
+      #eval_table{ border: 1px solid black; } #target td{ border:
+      1px solid black; padding: 2px;} 
+      #header-form{ border-collapse: collapse; width: 15%; height: 10px;} #header-form td{ border:
+      1px solid black; }
+      
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+   <div class='header' style="display: flex;" >
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='80%'
+            height="140px"
+            alt=''
+          />
+          <div style="width: 5%;">
+
+          </div>
+            <table id="header-form" class="font-10">
+                <tr>
+                    <td>Form No.</td>
+                    <td>FM-DNSC-PPE-01</td>
+                </tr>
+                <tr>
+                    <td>Issue Status</td>
+                    <td>06</td>
+                </tr>
+                <tr>
+                    <td>Revision No.</td>
+                    <td>08</td>
+                </tr>
+                <tr>
+                    <td>Effective Date:</td>
+                    <td>06 June 2024</td>
+                </tr>
+                <tr>
+                    <td>Approved by:</td>
+                    <td>President</td>
+                </tr>
+            </table>
+        </div>
+        <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            height="80px"
+            alt=''
+          />
+        </div>
+        
+          <div style='width: 100%;'>
+            <table 
+              style='margin:0 auto; width: 100%; page-break-inside:auto; table-layout:fixed'
+            >
+              {{! // Add this css to make main table fixed, child tables will still scroll }}
+              <thead>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+                  </td>
+                </tr>
+              </tfoot>
+        
+              <tbody class=""> 
+                 <tr>
+                    <td colspan="2">
+                   <table id="" style="width:100%" class="font-12">
+                        <tr>
+                           <td class="font-12" ><p style="text-align: center;">INDIVIDUAL PERFORMANCE COMMITMENT AND REVIEW (IPCR)</p></td>     
+                        </tr>
+                        <tr>
+                             <td class="font-12" ><p style="text-align: center;">I, <b style="text-transform: uppercase;"><u>{{user.name}}</u></b>, Administrative Officer IV of <b style="text-transform: uppercase;"><u>{{user.office_name}}</u></b>, commit to deliver and agree to be rated on the attainment of the following targets in accordance with the indicated measures for the period <b>{{ipcrPeriod}} {{year}}</b>.</p></td>  
+                        </tr>
+                        <tr >
+                            <td > <p dir="rtl" style="">___________________________ </p></td>
+                        </tr>
+                        <tr>
+                               <td > <p dir="rtl" style="margin-right:20px">(Employee's signature)</p></td>
+                        </tr>
+                        <tr>
+                               <td > <p dir="rtl" style="margin-right:20px; margin-top:5px">Date:{{curDate 'numeric'}}</p></td>
+                        </tr>
+                    </table>     
+                    </td>
+                    
+                   
+                </tr>
+                {{!-- Evaluated --}}
+                <tr>
+                    <td colspan="2">
+                     <table id="target" style="width:100%" class="font-12">
+                        <tr>
+                            <td style="width: 25%;">
+                               Reviewed by: 
+                            </td>
+                            <td style="width: 10%;">
+                                Date:
+                            </td>
+                            <td style="width: 25%;">
+                                Approved by:
+                            </td>
+                            <td style="width: 10%;">
+                                Date:  
+                            </td>
+                            <td colspan="2" style="width: 15%;" align="center">
+                                Rating Legend
+                            </td>
+                            <td colspan="2" style="width: 15%;" align="center">
+                                Scale and Description
+                            </td>
+                        </tr>
+                         {{#signatory}}
+                        <tr >
+                           
+                            <td rowspan="5" align="center">
+                         <span style="text-transform: uppercase"> <b><u>{{assesedBy}}</u></b></span>
+                            <br>{{assesedByPosition}}
+                            <br>(Immediate Supervisor)
+                            </td>
+                            <td rowspan="5" align="center"></td>
+                            <td rowspan="5" align="center"><span class="strong" style="text-transform: uppercase"><u>{{finalRatingBy}}</u></span>
+                               <br> {{finalRatingByPosition}}
+                               <br> (Head of Office)</td>
+                            <td rowspan="5" align="center"></td> 
+                            <td style="width: 5%;" align="center">E</td>    
+                            <td style="width: 10%;" align="center">Efficiency</td>    
+                            <td style="width: 5%;" align="center">5</td>    
+                            <td style="width: 10%;" align="center">Outstanding</td>    
+                        </tr>
+                        {{/signatory}}
+                        <tr>
+                            <td align="center">Q</td>
+                            <td align="center">Quality</td>
+                            <td align="center">4</td>
+                            <td align="center">Very Satisfactory</td>
+                        </tr>
+                        <tr>
+                            <td align="center">T</td>
+                            <td align="center">Timeliness</td>
+                            <td align="center">3</td>
+                            <td align="center">Satisfactory</td>
+                        </tr>
+                       <tr>
+                            <td align="center">NR</td>
+                            <td align="center">Not Rated</td>
+                            <td align="center">2</td>
+                            <td align="center">Unsatisfactory</td>
+                        </tr>
+                        <tr>
+                            <td align="center">A</td>
+                            <td align="center">Average</td>
+                            <td align="center">1</td>
+                            <td align="center">Poor</td>
+                        </tr>
+                        </table>   
+                    </td>
+                   
+                </tr>
+          {{!-- Core Function --}}
+                <tr>
+                    <td colspan="2">
+                     <table  style="width: 100%; margin-top: 5px;" class="font-12 tableClassess">
+                        <tr>
+                            <td rowspan="2" colspan="2" style="width:20%" align="center"><b>Major Final Output (MFO)</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>SUCCESS INDICATORS <br> (Target +Measure)</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>ACTUAL<br> ACCOMPLISHMENT</b></td>
+                            <td colspan="4" style="width:20%" align="center"><b>RATING</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>REMARKS</b></td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" align="center"><b>E</b></td>
+                            <td style="width:5%" align="center"><b>Q</b></td>
+                            <td style="width:5%" align="center"><b>T</b></td>
+                            <td style="width:5%" align="center"><b>A</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="9"> <b>CORE FUNCTIONS ( {{coreFunction.prct_display}}% )</b></td>
+                        </tr>
+                        {{resetCfCounter}}
+                        {{#coreFunctionInstruction}}
+                             <tr><td colspan="9" style="padding: 7px;">
+                           <b> Instruction {{#if prct_display}} {{prct_display}}%{{/if}}</b>
+                        </td></tr>
+                        {{#data}}
+                        <tr>
+                            <td style="width: 5%;" align="center">{{cfCounter}}</td>
+                            <td style="width: 20%; text-align: justify;text-justify: inter-word;padding:7px" align="center">{{mfo}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px">{{success_indicator}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td align="center"></td>
+                        </tr>
+                        {{/data}}
+                        {{/coreFunctionInstruction}}
+                           {{#coreFunctionDesignated}}
+                        <tr><td colspan="9" style="padding: 7px;">
+                            <b> Designation {{#if prct_display}} {{prct_display}}%{{/if}}</b>
+                        </td></tr>
+                        {{#data}}
+                        <tr>
+                            <td style="width: 5%;" align="center">{{cfCounter}}</td>
+                            <td style="width: 20%; text-align: justify;text-justify: inter-word;padding:7px" align="center">{{mfo}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px">{{success_indicator}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td align="center"></td>
+                        </tr>
+                        {{/data}}
+                        {{/coreFunctionDesignated}}
+                        <tr class="strong">
+                            <td colspan="7" dir="rtl"> <b>Total CORE Functions</b>  </td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td></td>
+                        </tr>
+                    </table>    
+                    </td>
+                   
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table class="tableClassess">
+                           <tr class="font-12">
+                            <td style=" width:30%">Evaluated by:</td>
+                            <td style=" width:20%">Date:</td>
+                            <td style=" width:30%">Reviewed by:</td>
+                            <td style=" width:20%">Date:</td>
+                        </tr>
+                    </table> 
+                    </td>
+                   
+                </tr>
+                {{!-- Strategic Priority --}}
+                 <tr>
+                    <td colspan="2">
+                    <table  style="width: 100%; margin-top: 5px;" class="font-12 tableClassess" >
+                        <tr>
+                            <td rowspan="2" colspan="2" style="width:20%" align="center"> <b>Major Final Output (MFO)</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>SUCCESS INDICATORS <br> (Target +Measure)</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>ACTUAL<br> ACCOMPLISHMENT</b></td>
+                            <td colspan="4" style="width:20%" align="center"><b>RATING</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>REMARKS</b></td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" align="center"><b>E</b></td>
+                            <td style="width:5%" align="center"><b>Q</b></td>
+                            <td style="width:5%" align="center"><b>T</b></td>
+                            <td style="width:5%" align="center"><b>A</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="9"> <b>Strategic Priority ( {{strategicPriority.prct_display}}% )</b></td>
+                        </tr>
+                        {{resetSpCounter}}
+                        {{#strategicPriorityResearch}}
+                        {{#if data}}
+                         <tr><td colspan="9"><b>Research {{#if prct_display}} {{prct_display}}% {{/if}}</b></td></tr>
+                        {{#each data}}
+                       
+                        <tr>
+                            <td style="width: 5%;" align="center">{{spCounter}}</td>
+                            <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:7px" align="center">{{mfo}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px" >{{success_indicator}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td align="center"></td>
+                        </tr>
+                        {{/each}}
+                        {{else}}
+                           <tr>
+                                <td style="width: 5%;" align="center">SF1</td>
+                                <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:40px" align="center"></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px" ></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 5%;" align="center">SF2</td>
+                                <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:40px" align="center"></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px" ></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                               <tr>
+                                <td style="width: 5%;" align="center">SF3</td>
+                                <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:40px" align="center"></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px" ></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                               <tr>
+                                <td style="width: 5%;" align="center">SF4</td>
+                                <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:40px" align="center"></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px" ></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                        {{/if}}
+                        {{/strategicPriorityResearch}}
+
+                        {{#strategicPriorityExtension}}
+                        {{#if data}}
+                          <tr><td colspan="9"><b>Extension {{#if prct_display}} {{prct_display}}% {{/if}}</b></td></tr>
+                        {{#each data}}
+                       
+                        <tr>
+                            <td style="width: 5%;" align="center">{{spCounter}}</td>
+                            <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:7px" align="center">{{mfo}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px" >{{success_indicator}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td align="center"></td>
+                        </tr>
+                        {{/each}}
+                        {{else}}
+                           <tr>
+                                <td style="width: 5%;" align="center">SF1</td>
+                                <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:40px" align="center"></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px" ></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 5%;" align="center">SF2</td>
+                                <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:40px" align="center"></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px" ></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                               <tr>
+                                <td style="width: 5%;" align="center">SF3</td>
+                                <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:40px" align="center"></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px" ></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                               <tr>
+                                <td style="width: 5%;" align="center">SF4</td>
+                                <td style="width: 15%;text-align: justify;text-justify: inter-word;padding:40px" align="center"></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px" ></td>
+                                <td align="center" style="text-align: justify;text-justify: inter-word;padding:40px"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td style="width: 5%;" align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                        {{/if}}
+                        {{/strategicPriorityExtension}}
+
+                        <tr class="strong">
+                            <td colspan="7" dir="rtl"> <b>Total STRATEGIC Priority</b>  </td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td></td>
+                        </tr>
+                    </table>    
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="2">
+                     <table class="tableClassess">
+                           <tr class="font-12">
+                            <td style=" width:30%">Evaluated by:</td>
+                            <td style=" width:20%">Date:</td>
+                            <td style=" width:30%">Reviewed by:</td>
+                            <td style=" width:20%">Date:</td>
+                        </tr>
+                    </table>   
+                    </td>
+                    
+                </tr>
+                  {{!-- Support Function --}}
+                 <tr>
+                    <td colspan="2">
+                       <table  style="width: 100%; margin-top: 5px;" class="font-12 tableClassess">
+                        <tr>
+                            <td rowspan="2" colspan="2" style="width:20%" align="center"> <b>Major Final Output (MFO)</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>SUCCESS INDICATORS <br> (Target +Measure)</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>ACTUAL<br> ACCOMPLISHMENT</b></td>
+                            <td colspan="4" style="width:20%" align="center"><b>RATING</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>REMARKS</b></td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" align="center"><b>E</b></td>
+                            <td style="width:5%" align="center"><b>Q</b></td>
+                            <td style="width:5%" align="center"><b>T</b></td>
+                            <td style="width:5%" align="center"><b>A</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="9"> <b>Support FUNCTIONS ( {{supportFunction.prct_display}}% )</b></td>
+                        </tr>
+                        {{resetSfCounter}}
+                        {{#if supportFunctionInstitutional}}
+                        {{#supportFunctionInstitutional}}
+
+                        <tr>
+                            {{#ifCond @index 0}} 
+                            <td style="width: 5%; " align="center" rowspan="{{../sf1_legnth}}">{{sfCounter}}</td>
+                            <td style="width: 15%; text-align: justify;text-justify: inter-word;padding:7px" align="center" rowspan="{{../sf1_legnth}}">Institutional Obligations</td>
+                            {{/ifCond}}
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px;width: 20%;">{{success_indicator}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px;width: 20%;"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td align="center" style="width: 20%;"></td>
+                        </tr>
+                    
+                        {{/supportFunctionInstitutional}}
+                        {{else}}
+                        {{/if}}
+
+
+                    {{#if supportFunctionProfessional}}
+                        {{#each supportFunctionProfessional}}
+                            {{#if @first}}
+                                <tr>
+                                    <td style="width: 5%;" align="center">{{sfCounter}}</td>
+                                    <td style="width: 15%; text-align: justify; text-justify: inter-word; padding:7px"
+                                        align="center"
+                                        rowspan="{{../supportFunctionProfessional.length}}">
+                                        Professional Development
+                                    </td>
+                                    <td style="text-align: justify; text-justify: inter-word; padding:7px">
+                                        {{success_indicator}}
+                                    </td>
+                                    <td align="center" style="width: 20%;"></td>
+                                    <td align="center" style="width: 5%;"></td>
+                                    <td align="center" style="width: 5%;"></td>
+                                    <td align="center" style="width: 5%;"></td>
+                                    <td align="center" style="width: 5%;"></td>
+                                    <td align="center" style="width: 20%;"></td>
+                                </tr>
+                            {{else}}
+                                <tr>
+                                    <td style="width: 5%;" align="center">{{sfCounter}}</td>
+                                    <td style="text-align: justify; text-justify: inter-word; padding:7px">
+                                        {{success_indicator}}
+                                    </td>
+                                    <td align="center" style="width: 20%;"></td>
+                                    <td align="center" style="width: 5%;"></td>
+                                    <td align="center" style="width: 5%;"></td>
+                                    <td align="center" style="width: 5%;"></td>
+                                    <td align="center" style="width: 5%;"></td>
+                                    <td align="center" style="width: 20%;"></td>
+                                </tr>
+                            {{/if}}
+                        {{/each}}
+                    {{/if}}
+
+
+                        {{#if supportFunctionIntervening.data}}
+                           {{#supportFunctionIntervening}}
+                    
+                        <tr>
+                            <td style="width: 5%;" align="center" rowspan="{{../length}}">{{sfCounter}}</td>
+                            <td style="width: 15%; text-align: justify;text-justify: inter-word;padding:7px" align="center" rowspan="{{../length}}">Intervening Function</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px">{{success_indicator}}</td>
+                            <td align="center" style="text-align: justify;text-justify: inter-word;padding:7px"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td style="width: 5%;" align="center"></td>
+                            <td align="center"></td>
+                        </tr>
+                    
+                        {{/supportFunctionIntervening}}
+
+                        {{else}}
+                        {{/if}}
+                          <tr>
+                            <td colspan="7" dir="rtl"><b>Total Support Functions</b></td>
+                            <td style="width: 5%;" align="center"><b></b></td>
+                            <td></td>
+                        </tr> 
+                    </table>   
+                    </td>
+                  
+                </tr>
+                <tr>
+                    <td colspan="2">
+                   <table id="corefunction">
+                           <tr class="font-12">
+                            <td style=" width:30%">Evaluated by:</td>
+                            <td style=" width:20%">Date:</td>
+                            <td style=" width:30%">Reviewed by:</td>
+                            <td style=" width:20%">Date:</td>
+                        </tr>
+                    </table>     
+                    </td>
+                    
+                </tr>
+                {{!-- category --}}
+                <tr >
+                    <td colspan="2">
+                        <table style="width: 100%; margin-top:5px" class="font-12 tableClassess">
+                            <tr>
+                                <td colspan="2" style="width: 35%;">
+                                    <b>CATEGORY</b>
+                                </td>
+                                <td align="center" style="width: 15%;">
+                                    <b>Total</b>
+                                </td>
+                                <td align="center" style="width: 15%;">
+                                    <b>No. MFOs</b>
+                                </td>
+                                <td align="center" style="width: 15%;">
+                                    <b>Percentage (%)</b>
+                                </td>
+                                <td align="center" style="width: 20%;">
+                                    <b>General Average</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" ><b>Core Functions</b></td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                             <tr>
+                                <td colspan="2"><b>Strategic Priority</b> </td>
+                                 <td align="center"></td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                               <tr>
+                                <td colspan="2" ><b>Support Functions</b>  </td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" ><b>Total/Final Overall Rating</b></td>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5"><b>Final Average Rating (by PMT)</b></td>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><b>Adjectival Rating Equivalence</b></td>
+                                <td colspan="4"><b>Adjectival Rating:</b></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><b>Range</b></td>
+                                <td align="center"><b>Adjectival Rating</b></td>
+                                <td colspan="6" rowspan="6" style="vertical-align: super;"><p><b>Comments and Recommendations for Development Purposes: </b></p></td>
+                            </tr>
+                            <tr>
+                                <td align="center">4-20 - 5.00</td>
+                                <td align="center">Outstanding</td>
+                            </tr>
+                            <tr>
+                                <td align="center">3.40 – 4.19</td>
+                                <td align="center">Very Satisfactory</td>
+                            </tr>
+                            <tr>
+                                <td align="center">2.60 – 3.39</td>
+                                <td align="center">Satisfactory</td>
+                            </tr>
+                            <tr>
+                                <td align="center">1.80 – 2.59</td>
+                                <td align="center">Unsatisfactory</td>
+                            </tr>
+                            <tr>
+                                <td align="center">1.75 and below</td>
+                                <td align="center">Poor</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                {{!-- signatory --}}
+                 <tr>
+                    <td colspan="2">
+                        <table  style="width: 100%; margin-top:5px" class="font-12 tableClassess">
+                               <tr>
+                                <td colspan="2"><b>Discussed with:</b></td>
+                                <td colspan="2"><b>Assessed by:</b></td>
+                                <td colspan="2"><b>Final Rating by:</b></td>
+                            </tr>
+                            
+                            <tr>
+                          
+                                <td rowspan="2" align="center">
+                               <div style="text-decoration: underline;text-transform: uppercase"><b>{{user.name}}</b></div>
+                            {{user.position}}<br>
+                                    (Employee)
+                                </td>
+                                <td rowspan="2" style="vertical-align: super;"><b>Date:</b></td>
+                                <td>I certify that I discussed my assessment of the performance with the employee.</td>
+                                <td rowspan="2" style="vertical-align: super;"><b>Date:</b> </td>
+                                {{#signatory}}
+                                <td rowspan="2" align="center"> <div style="text-decoration: underline;text-transform: uppercase"><b>{{finalRatingBy}}</b></div>
+                                   {{finalRatingByPosition}}<br>
+                                            (Head of Office)
+                                </td>
+                                {{/signatory}}
+                            </tr>
+                            {{#signatory}}
+                            <tr>
+                                <td align="center" style="padding: 25px 10px 25px 10px;"> <div style="text-decoration: underline;text-transform: uppercase"><b>{{assesedBy}}</b></div>
+                                 {{assesedByPosition}}<br>
+                                (Immediate Supervisor)
+                                </td>
+                            </tr>
+                            {{/signatory}}
+                        </table>
+                    </td>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+
+        
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

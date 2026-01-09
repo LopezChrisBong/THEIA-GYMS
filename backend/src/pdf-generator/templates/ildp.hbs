@@ -1,0 +1,602 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Arial' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ margin-top: 0px;}.to_title_div{ text-align: center; }
+      .to_content{page-break-inside: auto; margin-top: 120px; margin-left: 40px;
+      margin-right: 40px; } .to_number{margin-right: 100px;} .employee_table{
+      }.recommending_approval{ display: flex; justify-content: space-between; }
+      .underline{ border-bottom:1px solid black } #userBackground tr td, #userBackground
+      tr th{ padding: 5px; } #userBackground{ page-break-after: always; } #f_table
+      th,#f_table td,#userBackground th,#userBackground td{ border: 1px solid black; }
+      #f_table,#userBackground, #ildpTable{ border-collapse: collapse; } 
+      #userBackground{ border: 1px solid black; } #ildpTable  td{ border:
+      1px solid black; padding: 2px;width:  11.11%;} 
+      #approverTable{border-collapse: collapse;} #approverTable td{border: 1px solid black; padding: 10px; width: 11.11%;}
+      #ildpTable th,#ildpTable td { page-break-inside: auto; } 
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='header' style="display: grid; justify-items:center">
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='100%'
+            height="120px"
+            alt=''
+          />
+
+        </div>
+        <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            height="80px"
+            alt=''
+          />
+        </div>
+
+        
+          <div style='width: 100%;'>
+            <table
+              style='margin:0 auto; width: 100%; page-break-inside:auto; table-layout:fixed'
+            >
+              {{! // Add this css to make main table fixed, child tables will still scroll }}
+              <thead>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 120px;'></div>
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+
+                  </td>
+                </tr>
+              </tfoot>
+        
+              <tbody class="">  
+                <tr>
+                  <td colspan="12"> 
+                    <div style="text-align:center" class="strong">
+                   <div>
+                      INDIVIDUAL LEARNING AND DEVELOPMENT PLAN 
+                   </div> 
+                   <div>
+                      CALENDAR YEAR <u>{{ILDPYear}}</u>
+                   </div>
+                  
+                    </div>
+                    
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12" >
+                      <div width="100%">
+                               {{#backgroundED}}
+                        <table id="userBackground" style="width: 100%; margin-top:20px" class="font-12">
+                        <tbody>
+                             <tr>
+                          <td width="15%">
+                          <strong >  Name</strong>
+                          </td>
+                          <td colspan="5" width="85%"><p style="text-transform: uppercase;">{{name}}</p></td>
+                        </tr>
+                        <tr>
+                          <td width="15%"><strong>Current Rank</strong></td>
+                          <td colspan="5" width="85%">{{cur_rank}}</td>
+                        </tr>
+                        <tr>
+                          <td width="15%"><strong>Educational Attainment</strong></td>
+                          <td align="center" width="25%"><strong>Program</strong></td>
+                          <td align="center" width="16%"><strong>Highest Level/Units Earned</strong></td>
+                          <td align="center" width="16%"><strong>Year Graduated</strong></td>
+                          <td align="center" width="16%"><strong> Name of School(Write in full) & Address</strong></td>
+                          <td align="center" width="16%"><strong>Period of Attendance(From/To)</strong></td>
+                        </tr>
+                     
+                        
+                        <tr>
+                          <td><strong>Bachelor's Degreee</strong></td>
+                          <td align="center"> 
+                          {{#education}}
+                         {{#ifCond level 'College'}}
+                          {{educ_course}}<br><br>
+                          {{/ifCond}}
+                         {{/education}}
+                         </td>
+                          <td align="center">
+                              {{#education}}
+                         {{#ifCond level 'College'}}
+                         {{units_earned}} <br><br>
+                          {{/ifCond}}
+                         {{/education}}
+                         </td>
+                          <td align="center">
+                            {{#education}}
+                         {{#ifCond level 'College'}}
+                         {{year_graduated}} <br><br>
+                          {{/ifCond}}
+                         {{/education}}
+                         </td>
+                          <td align="center">
+                            {{#education}}
+                         {{#ifCond level 'College'}}
+                         {{school_name}} <br><br>
+                         {{/ifCond}}
+                         {{/education}}
+                         </td>
+                          <td align="center">
+                             {{#education}}
+                         {{#ifCond level 'College'}}
+                         {{period_of_attendance}} <br><br>
+                            {{/ifCond}}
+                         {{/education}}
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><strong>Masters Degree</strong></td>
+                          <td align="center">
+                               {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Masteral'}}
+                          {{educ_course}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                          <td align="center">
+                                           {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Masteral'}}
+                          {{units_earned}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                            </td>
+                          <td align="center">
+                                         {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Masteral'}}
+                          {{year_graduated}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                          <td align="center">
+                                         {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Masteral'}}
+                          {{school_name}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                          <td align="center">
+                                         {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Masteral'}}
+                          {{period_of_attendance}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Doctorate</strong></td>
+                          <td align="center">
+                                                {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Doctorate'}}
+                          {{educ_course}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                          <td align="center">
+                                                      {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Doctorate'}}
+                          {{units_earned}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                          <td align="center">
+                                                      {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Doctorate'}}
+                          {{year_graduated}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                          <td align="center">
+                                                      {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Doctorate'}}
+                          {{school_name}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                          <td align="center">
+                                                      {{#education}}
+                         {{#ifCond level 'Graduate Studies'}}
+                         {{#ifCond grad_study_type 'Doctorate'}}
+                          {{period_of_attendance}}<br><br>
+                          {{/ifCond}}
+                          {{/ifCond}}
+                         {{/education}}
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                       {{/backgroundED}}
+                      </div>
+                     
+                    </td>
+                </tr>
+
+                <tr>
+                  <td colspan="12">
+                    <div width="100%">
+                      <table id="ildpTable" style="width: 100%; margin-top:10px; page-break-inside:auto; table-layout:fixed" class="font-12">
+                        <colgroup>
+                        <col style="width: 19%;">
+                        <col style="width: 27%;">
+                        <col style="width: 27%;">
+                        <col style="width: 27%;">
+                        </colgroup>
+                        <thead>
+                          <tr >
+                          <td align="center"  style="width:10%">
+                           <strong> Learning and Development Activities</strong>
+                          </td>
+                          <td colspan="3" align="center" style="width:90%">
+                            <strong>(Indicate Target Completion Dates for Advanced Studies & Skills Certification/Licensure/Eligibilities)
+                           <br> (Write the specific title of the Seminar, Workshops, Training & Conferences)</strong>
+                          </td>
+                        </tr>
+                        </thead>
+                    
+                        <tbody>
+                          <tr>
+                            <td style="border-bottom:none; border-top:none; padding:5px"></td>
+                            <td align="center" class="yrtd" style="border-bottom:none; padding:5px">{{year1}}</td>
+                            <td align="center" class="yrtd" style="border-bottom:none;padding:5px">{{year2}}</td>
+                            <td align="center" class="yrtd" style="border-bottom:none; border-top:none; padding:5px">{{year3}}</td>
+                           
+                          </tr>
+                          <tr>
+                            <td align="center" style="border-top: none;"><strong>Seminars, Workshops, Training and Conferences</strong></td>
+                             <td style="border-top: none;">
+                              <ul>
+                             {{#each ildpData}}
+                             {{#ifCond ld_actID 1}}
+                             {{#ifCond year ../year1}}
+                                  <li>{{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>  
+                            <td style="border-top: none;">  
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 1}}
+                             {{#ifCond year ../year2}}
+                                 <li> {{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                              </td>
+                            <td style="border-top: none;">
+                              <ul>
+                               {{#each ildpData}}
+                             {{#ifCond ld_actID 1}}
+                             {{#ifCond year ../year3}}
+                                  <li>{{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center"><strong>Advanced Studies/ Professional Development</strong></td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 2}}
+                             {{#ifCond year ../year1}}
+                                  <li>{{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 2}}
+                             {{#ifCond year ../year2}}
+                                 <li> {{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 2}}
+                             {{#ifCond year ../year3}}
+                                 <li> {{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center"><strong>Skills Certification/ Licensure/Eligibilities</strong></td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 3}}
+                             {{#ifCond year ../year1}}
+                                  <li>{{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 3}}
+                             {{#ifCond year ../year2}}
+                                 <li> {{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                              </td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 3}}
+                             {{#ifCond year ../year3}}
+                                 <li> {{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center"><strong>Research, Extension, Production, Administration and Other Interests</strong></td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 4}}
+                             {{#ifCond year ../year1}}
+                                <li>  {{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 4}}
+                             {{#ifCond year ../year2}}
+                                <li>  {{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                            <td>
+                              <ul>
+                              {{#each ildpData}}
+                             {{#ifCond ld_actID 4}}
+                             {{#ifCond year ../year3}}
+                                  
+
+                                 <li> {{title}}</li>
+                              {{/ifCond}}
+                              {{/ifCond}}
+                              {{/each}}
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                    <td colspan="12" >
+                        <div width="100%" >
+                          <table style="width: 100%; margin-top:10px; border-top: 1px solid black; border-left:1px solid black; border-right:1px solid black; border-bottom:1px solid black; padding:20px">
+                            <tr >
+                              <td colspan="12" >
+                                <div>
+                                  <div style="display: flex; justify-content:center;">
+                                  <p><strong>Statement of Commitment</strong></p>
+                                  </div>
+                                
+                                  <p style="text-align: justify;text-justify: inter-word;" class="font-14">
+                                    &emsp;&emsp;&emsp;On this  {{curDate 'daywithsuffix'}}, at DNSC, New Visayas, Panabo City, I commit myself to pursue to completion the above stated personal career development plans for CY {{ILDPYear}}, as I know that its fulfillment is paramount to my achievement of my personal goals in life and in my career and a testament of my willful contribution towards the achievement of the vision and mission of this College and to the limit of which I am a part.
+                                  </p>
+                                </div>
+                              </td>
+                       
+                            </tr>
+                            <tr >
+                                     <td colspan="12" style="padding-top: 50px;" class="font-12">
+                                      <div style="display: flex; justify-content:right; margin-right:30px">
+                                          <div>
+                                            <div
+                                              style='text-decoration: underline;position:relative'
+                                               >
+                              
+                                              {{#ifCond esig_exist.emp_hasEsig true}}
+                                            <img
+                                             src='data:image/png;base64, {{emp_esigImg}}'
+                                             style='position:absolute; top:-15px; left:45px;width: 70px; height : 50px;' />
+                                            {{else}}
+                                              {{/ifCond}}  
+                                              <br>
+                                                <span class='font-12' style="margin-left:0px; font-weight:bold">{{toUpperCase backgroundED.name}}</span>
+                                              </div>
+                                            </div>
+                                            {{!-- <u style="text-transform: uppercase;"><strong>{{backgroundED.name}}</strong></u><br> --}}
+                                      
+                                        </div>
+                                        <div style="display: flex; justify-content:right; margin-right:25px">
+                                      Signature Above Printed Name
+                                        </div>
+                           
+                              </td>
+                            </tr>
+                            <tr>
+
+                            </tr>
+                          </table>
+                        </div>
+                        <div width="100%">
+                          <table id="approverTable" style="width: 100%;" class="font-12">
+                            <tr>
+                              <td align="center"><strong>Concord</strong></td>
+                              <td align="center"><strong>Name</strong></td>
+                              <td align="center"><strong>Signature</strong></td>
+                            </tr>
+                            <tr>
+                              <td><strong>Immediate Head/Supervisor</strong></td>
+                              <td align="center"><strong>{{dean.name}}</strong></td>
+                              <td align="center"><span>  
+                              {{#ifCond esig_exist.dean_hasEsig true}}
+                              <img
+                              src='data:image/png;base64, {{dean_esigImg}}'
+                              style='width: 70px; height : 50px;'
+                              />
+                              {{else}}
+                              {{/ifCond}}
+                              </span></td>
+                            </tr>
+                              <tr>
+                              <td><strong>Vice President</strong></td>
+                              <td align="center"><strong>{{vp.name}}</strong></td>
+                              <td align="center"><span>  
+                              {{#ifCond esig_exist.vp_hasEsig true}}
+                              <img
+                              src='data:image/png;base64, {{vp_esigImg}}'
+                              style='width: 70px; height : 50px;'
+                              />
+                              {{else}}
+                              {{/ifCond}}
+                              </span></td>
+                            </tr>
+                              <tr>
+                              <td><strong>President</strong></td>
+                              <td align="center"><strong>{{pres.name}}</strong></td>
+                              <td align="center"><span>  
+                              {{#ifCond esig_exist.pres_hasEsig true}}
+                              <img
+                              src='data:image/png;base64, {{pres_esigImg}}'
+                              style='width: 70px; height : 50px;'
+                              />
+                              {{else}}
+                              {{/ifCond}}
+                              </span></td>
+                            </tr>
+                          </table>
+                        </div>
+                    </td>
+
+              
+                  {{!-- <td colspan="12">
+                      <div style="display: flex; justify-content:space-between; margin-left:60px; margin-right:60px; margin-top:50px">
+                        <div align="center">
+                          <span>  
+                          {{#ifCond esig_exist.dean_hasEsig true}}
+                            <img
+                          src='data:image/png;base64, {{dean_esigImg}}'
+                          style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                        />
+                          {{else}}
+                          {{/ifCond}}
+                        </span>
+                        <br>
+                       <u style="text-transform: uppercase;"> <strong>{{dean.name}}</strong></u><br>Immediate Head/Supervisor</div>
+                        <div align="center">
+                            <span>  
+                          {{#ifCond esig_exist.vp_hasEsig true}}
+                            <img
+                          src='data:image/png;base64, {{vp_esigImg}}'
+                          style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                        />
+                          {{else}}
+                          {{/ifCond}}
+                        </span>
+                        <br>
+                         <u style="text-transform: uppercase;"> <strong>{{vp.name}}</strong></u><br>Vice President</div>
+                        <div align="center" >
+                               <span>  
+                          {{#ifCond esig_exist.pres_hasEsig true}}
+                            <img
+                          src='data:image/png;base64, {{pres_esigImg}}'
+                          style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                        />
+                          {{else}}
+                          {{/ifCond}}
+                        </span>
+                        <br>
+                        <u style="text-transform: uppercase;">
+                          <strong> {{pres.name}}</strong></u> <br> President</div>
+                      </div>
+                  </td> --}}
+                </tr>
+                        
+              </tbody>
+            </table>
+          </div>
+
+        
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

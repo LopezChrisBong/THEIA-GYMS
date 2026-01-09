@@ -1,0 +1,448 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ body { font-family: 'Arial
+      Narrow'; } #header{ position: fixed; top : 0; } #footer{ position: fixed;
+      bottom: 0; } .strong { font-weight: bold; } .bordered { border: 1px solid
+      black; } .font-10 { font-size: 10px; } .font-12 { font-size: 12px; }
+      .font-14 {font-size: 14px; } .font-16 { font-size: 16px; } .font-18 {
+      font-size:18px; }.font-24 { font-size:24px; } #pcr_table tbody td {
+      border: 1px solid black;} .collapse{ border-collapse: collapse; }
+
+    </style>
+  </head>
+
+  <body>
+
+    {{!-- {{#TO}}--}}
+    <div id='header'>
+      <img src='data:image/png;base64, {{header_img}}' width='100%' alt='' />
+    </div>
+    <div id='footer'>
+      <img src='data:image/png;base64, {{footer_img}}' width='100%' alt='' />
+    </div>
+    {{#ea}}
+      <div style='width: 100%;'>
+        <table style='table-layout: fixed; width: 100%; page-break-inside:auto'>
+          {{! // Add this css to make main table fixed, child tables will still scroll }}
+          <thead>
+            <tr>
+              <td colspan='2'>
+                <div style='height: 100px;'></div>
+
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td height='100' colspan='2' align='center'><h3>EMPLOYEE
+                  ASSESSMENT FORM
+                  <br />
+                  (After 3-4 months attendance to Seminar/Trainings)</h3></td>
+            </tr>
+            <tr>
+              <td colspan='2'><div style='display:flex'><div
+                    class='strong'
+                    style='width:30%'
+                  >NAME OF SUPERVISOR/RATER:</div><div
+                    style='width:70%;border-bottom: 1px solid black;'
+                  >{{rater_name}}</div></div></td>
+            </tr>
+            <tr>
+              <td colspan='2'></td>
+            </tr>
+            <tr>
+              <td colspan='2'><div style='display:flex'><div
+                    class='strong'
+                    style='width:30%'
+                  >POSITION/DESIGNATION:</div><div
+                    style='width:70%;border-bottom: 1px solid black;'
+                  >{{rater_position}}</div></div></td>
+            </tr>
+
+            <tr><td colspan='2' height='20'></td></tr>
+            <tr><td><div>Dear Rater,</div></td></tr>
+            <tr><td colspan='2' height='20'></td></tr>
+            <tr><td colspan='2' height='20'>In order to continue and improve the
+                quality of service, the HUMAN RESOURCE MANAGEMENT OFFICE, would
+                appreciate you taking a few minutes of your time to complete
+                this assessment.</td></tr>
+            <tr><td colspan='2' height='20'></td></tr>
+            <tr><td colspan='2' height='20'>Please rate the employee's
+                performance if there are improvement or none to his/her assigned
+                responsibilities after attending the seminar or training.
+                (Please check the blank space)</td></tr>
+            <tr><td colspan='2' height='20'></td></tr>
+            <tr>
+              <td colspan='2'><div style='display:flex'><div
+                    style='width:30%'
+                  >EMPLOYEE NAME:</div><div
+                    style='width:70%;border-bottom: 1px solid black;'
+                  >{{assessed_name}}</div></div></td>
+            </tr>
+            <tr>
+              <td colspan='2'><div style='display:flex'><div
+                    style='width:30%'
+                  >POSITION/DESIGNATION:</div><div
+                    style='width:70%;border-bottom: 1px solid black;'
+                  >{{assessed_position}}</div></div></td>
+            </tr>
+            <tr>
+              <td colspan='2'><div style='display:flex'><div
+                    style='width:30%'
+                  >TITLE OF SEMINAR/TRAINING ATTENDED:</div><div
+                    style='width:70%;border-bottom: 1px solid black;'
+                  >{{title}}</div></div></td>
+            </tr>
+            <tr>
+              <td colspan='2'><div style='display:flex'><div
+                    style='width:30%'
+                  >SPONSORING AGENCY:</div><div
+                    style='width:70%;border-bottom: 1px solid black;'
+                  >{{sponsoring_agency}}</div></div></td>
+            </tr>
+            <tr>
+              <td colspan='2'><div style='display:flex'><div
+                    style='width:30%'
+                  >DATE ATTENDED:</div><div
+                    style='width:70%;border-bottom: 1px solid black;'
+                  >{{formatAlphanumericDate travel_date_from}}
+                    -
+                    {{formatAlphanumericDate travel_date_to}}</div></div></td>
+            </tr>
+
+            {{!-- <tr>
+            <td colspan='2' style='page-break-inside: auto;'>
+              <div>
+                <div style='width: 100%; display:flex' class='bordered'>
+                  <div
+                    style='width:70%; text-align:center; border-right:1px solid black'
+                  >Performance Category</div>
+                  <div style='width:30%; text-align:center'>Rating</div>
+                </div>
+                {{#for 0 10 1}}
+                  <div style='width: 100%; display:flex' class='bordered'>
+                    <div
+                      style='width:70%;padding:2px; border-right:1px solid black'
+                    >
+                      <div class='strong'>Quality of Work</div>
+                      <div>Work is completed accurately (few or no errors),
+                        efficiently and within deadlines with minimal
+                        supervision.</div>
+                    </div>
+                    <div style='width:30%;padding:2px; '>
+                      <div style='flex'><input type='checkbox' />
+                        <label for=''>Exceeds Expectations</label></div>
+                      <div style='flex'><input type='checkbox' />
+                        <label for=''>Meets Expectations</label></div>
+                      <div style='flex'><input type='checkbox' />
+                        <label for=''>Needs Expectations</label></div>
+                      <div style='flex'><input type='checkbox' />
+                        <label for=''>Unacceptable</label></div>
+
+                    </div>
+                  </div>
+                {{/for}}
+              </div>
+            </td>
+          </tr> --}}
+
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan='2'>
+                <div style='height: 80px;'></div>
+
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <table
+          id='pcr_table'
+          class='collapse'
+          style='margin-top:-150px;  width: 100%; page-break-inside:auto'
+        >
+          {{! // Add this css to make main table fixed, child tables will still scroll }}
+          <thead>
+            <tr>
+              <td colspan='2'>
+                <div style='height: 100px;'></div>
+
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                style='width: 70%;padding:5px'
+                align='center'
+                class='strong'
+              >Performance Category</td>
+              <td
+                style='width: 30%;padding:5px'
+                align='center'
+                class='strong'
+              >Rating</td>
+            </tr>
+            {{#pcr}}
+              <tr>
+                <td style='width: 70%;' class='padding:2px'>
+                  <div
+                    class='strong'
+                    style='padding:0 0 2px 5px; margin-top:-50px'
+                  >{{header}}</div>
+                  <div style='padding:10px 0 2px 5px'>{{details}}</div>
+                </td>
+                <td style='width: 30%;' class='padding:5px'>
+                  {{#ifCond rating 4}}
+                    <div
+                      style='display:flex;padding:2px; margin-top:20px'
+                    ><input type='checkbox' checked />&nbsp;&nbsp;&nbsp;
+                      <label for=''>Exceeds Expectations</label></div>
+                    <div style='display:flex;padding:2px'><input
+                        type='checkbox'
+                      />&nbsp;&nbsp;&nbsp;
+                      <label for=''>Meets Expectations</label></div>
+                    <div style='display:flex;padding:2px'><input
+                        type='checkbox'
+                      />&nbsp;&nbsp;&nbsp;
+                      <label for=''>Needs Expectations</label></div>
+                    <div style='display:flex;padding:2px'><input
+                        type='checkbox'
+                      />&nbsp;&nbsp;&nbsp;
+                      <label for=''>Unacceptable</label></div>
+                  {{else}}
+                    {{#ifCond rating 3}}
+                      <div
+                        style='display:flex;padding:2px; margin-top:20px'
+                      ><input type='checkbox' />&nbsp;&nbsp;&nbsp;
+                        <label for=''>Exceeds Expectations</label></div>
+                      <div style='display:flex;padding:2px'><input
+                          type='checkbox'
+                          checked
+                        />&nbsp;&nbsp;&nbsp;
+                        <label for=''>Meets Expectations</label></div>
+                      <div style='display:flex;padding:2px'><input
+                          type='checkbox'
+                        />&nbsp;&nbsp;&nbsp;
+                        <label for=''>Needs Expectations</label></div>
+                      <div style='display:flex;padding:2px'><input
+                          type='checkbox'
+                        />&nbsp;&nbsp;&nbsp;
+                        <label for=''>Unacceptable</label></div>
+                    {{else}}
+                      {{#ifCond rating 2}}
+                        <div
+                          style='display:flex;padding:2px; margin-top:20px'
+                        ><input type='checkbox' />&nbsp;&nbsp;&nbsp;
+                          <label for=''>Exceeds Expectations</label></div>
+                        <div style='display:flex;padding:2px'><input
+                            type='checkbox'
+                          />&nbsp;&nbsp;&nbsp;
+                          <label for=''>Meets Expectations</label></div>
+                        <div style='display:flex;padding:2px'><input
+                            type='checkbox'
+                            checked
+                          />&nbsp;&nbsp;&nbsp;
+                          <label for=''>Needs Expectations</label></div>
+                        <div style='display:flex;padding:2px'><input
+                            type='checkbox'
+                          />&nbsp;&nbsp;&nbsp;
+                          <label for=''>Unacceptable</label></div>
+                      {{else}}
+                        <div
+                          style='display:flex;padding:2px; margin-top:20px'
+                        ><input type='checkbox' />&nbsp;&nbsp;&nbsp;
+                          <label for=''>Exceeds Expectations</label></div>
+                        <div style='display:flex;padding:2px'><input
+                            type='checkbox'
+                          />&nbsp;&nbsp;&nbsp;
+                          <label for=''>Meets Expectations</label></div>
+                        <div style='display:flex;padding:2px'><input
+                            type='checkbox'
+                          />&nbsp;&nbsp;&nbsp;
+                          <label for=''>Needs Expectations</label></div>
+                        <div style='display:flex;padding:2px'><input
+                            type='checkbox'
+                            checked
+                          />&nbsp;&nbsp;&nbsp;
+                          <label for=''>Unacceptable</label></div>
+                      {{/ifCond}}
+                    {{/ifCond}}
+                  {{/ifCond}}
+
+                </td>
+              </tr>
+            {{/pcr}}
+
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan='2'>
+                <div style='height: 80px;'></div>
+
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+        {{!-- <table
+        id='pcr_table'
+        class='collapse'
+        style='margin-top:-150px;  width: 100%; page-break-inside:auto'
+      >
+        {{! // Add this css to make main table fixed, child tables will still scroll }}
+        <thead>
+          <tr>
+            <td colspan='2'>
+              <div style='height: 100px;'></div>
+
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td
+              style='width: 70%;padding:5px'
+              align='center'
+              class='strong'
+            >Performance Category</td>
+            <td
+              style='width: 30%;padding:5px'
+              align='center'
+              class='strong'
+            >Rating</td>
+          </tr>
+          {{#for 0 7 1}}
+            <tr>
+              <td style='width: 70%;' class='padding:2px'>
+                <div class='strong' style='padding:0 0 2px 5px'>Quality of Work</div>
+                <div style='padding:10px 0 2px 5px'>Work is completed accurately
+                  (few or no errors), efficiently and within deadlines with
+                  minimal supervision.</div>
+              </td>
+              <td style='width: 30%;' class='padding:5px'>
+                <div style='display:flex;padding:2px; margin-top:20px'><input
+                    type='checkbox'
+                  />&nbsp;&nbsp;&nbsp;
+                  <label for=''>Exceeds Expectations</label></div>
+                <div style='display:flex;padding:2px'><input
+                    type='checkbox'
+                  />&nbsp;&nbsp;&nbsp;
+                  <label for=''>Meets Expectations</label></div>
+                <div style='display:flex;padding:2px'><input
+                    type='checkbox'
+                  />&nbsp;&nbsp;&nbsp;
+                  <label for=''>Needs Expectations</label></div>
+                <div style='display:flex;padding:2px'><input
+                    type='checkbox'
+                  />&nbsp;&nbsp;&nbsp;
+                  <label for=''>Unacceptable</label></div>
+              </td>
+            </tr>
+          {{/for}}
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan='2'>
+              <div style='height: 80px;'></div>
+
+            </td>
+          </tr>
+        </tfoot>
+      </table> --}}
+
+        <table style='margin-top:-150px;   width: 100%; page-break-inside:auto'>
+          {{! // Add this css to make main table fixed, child tables will still scroll }}
+          <thead>
+            <tr>
+              <td colspan='2'>
+                <div style='height: 100px;'></div>
+
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr><td colspan='2' height='20'><span class='strong'>COMMENT AND
+                  SUGGESTIONS<br />(Please assess if there are improvement or
+                  none to the performance of the concerned employee/s after
+                  attending the seminar or training. You can also include
+                  suggestions for the future development of the concerved
+                  employee under our unit or office).</span></td></tr>
+            <tr>
+              <td colspan='2' height='20'></td>
+            </tr>
+            <tr>
+              <td colspan='2'>
+                {{#isNotNull comment_sgt}}
+                  <div
+                    style='border-bottom: 1px solid black;'
+                  >{{comment_sgt}}</div>
+                {{else}}
+                  <div style='border-bottom: 1px solid black;'></div>
+                  <div
+                    style='margin-top:20px;border-bottom: 1px solid black;'
+                  ></div>
+                  <div
+                    style='margin-top:20px;border-bottom: 1px solid black;'
+                  ></div><div
+                    style='margin-top:20px;border-bottom: 1px solid black;'
+                  ></div>
+                {{/isNotNull}}
+
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan='2' height='80'></td>
+            </tr>
+            <tr>
+              <td style='width: 50%;' height='20'>
+                <div style='border-bottom: 1px solid black;'>{{toUpperCase
+                    rater_name
+                  }}</div>
+                <div class='font-14'>Signature over Printed Name of
+                  Supervisor/Rater</div>
+              </td>
+              <td style='width: 50%;'></td>
+            </tr>
+            <tr>
+              <td colspan='2' height='10'></td>
+            </tr>
+            <tr>
+              <td style='width: 100%;display:flex' height='20'>
+
+                <div class='font-14' style='width:10%'>Date:
+                </div>
+                <div
+                  class='font-14'
+                  style='width:90%;border-bottom: 1px solid black;'
+                >{{formatAlphanumericDate date_rated}}</div>
+              </td>
+              <td style='width: 50%;'></td>
+            </tr>
+
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan='2'>
+                <div style='height: 80px;'></div>
+
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      {{!--  {{/TO}} --}}
+    {{/ea}}
+  </body>
+
+</html>

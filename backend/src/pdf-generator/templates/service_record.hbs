@@ -1,0 +1,250 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 100px; } body { font-family: 'Arial Narrow' } .table,
+      .td { width: 80%; page-break-inside: auto; border-collapse: collapse;
+      border:1px solid black } .strong { font-weight: bold; } .bordered {
+      border: 1px solid black; } .font-10 { font-size: 10px; } .font-12 {
+      font-size: 12px; } .font-14 {font-size: 14px; } .font-16 { font-size:
+      16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px; }
+      .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .content{page-break-inside: auto; margin-top: 160px; margin-left: }
+      .to_number{margin-right: 100px;} .employee_table{ }.recommending_approval{
+      display: flex; justify-content: space-between; }.font-tnr{ font-family:
+      'Times New Roman', Times, serif; } .line_border{ border-bottom: 1px solid
+      black; } #sr_table table, #sr_table td { border: 1px solid black; }
+      #sr_table{border-collapse: collapse; text-align: center;page-break-inside:
+      auto;}.bold{font-weight: bold;}.no-border{border:none}
+
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='header'>
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='100%'
+            alt=''
+          />
+          <hr style='padding: 1px; background-color:black' />
+          <h3 style='text-align: center;' class='font-tnr'>SERVICE RECORD</h3>
+        </div>
+        <div class='footer'>
+
+          <img
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            alt=''
+          />
+        </div>
+
+        {{!-- {{#TO}}--}}
+        <div class='content'>
+          {{#userdetail}}
+            <div>
+              <table>
+                <tr>
+                  <td class='font-12' width='5%'>Name:</td>
+                  <td class='font-12 line_border' width='20%'>{{toUpperCase
+                      lname
+                    }}</td>
+                  <td class='font-12 line_border' width='20%'>{{toUpperCase
+                      fname
+                    }}</td>
+                  <td class='font-12 line_border' width='15%'>{{toUpperCase
+                      mname
+                    }}</td>
+                  <td class='font-12' width='5%'></td>
+                  <td class='font-12' width='35%'>(If married woman, give also
+                    full maiden name)</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class='font-12'>Surname</td>
+                  <td class='font-12'>Given Name</td>
+                  <td class='font-12'>Middle name</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td
+                    colspan='6'
+                    class='font-12'
+                    style='visibility: hidden;'
+                  >XX</td>
+                </tr>
+                <tr>
+                  <td class='font-12' width='5%'>Birth:</td>
+                  <td
+                    class='font-12 line_border'
+                    width='30%'
+                    colspan='2'
+                  >{{formatAlphanumericDate bdate}}</td>
+                  <td class='font-12' width='2%'></td>
+                  <td class='font-12' width='60%' colspan='2' rowspan='2'>( Date
+                    herein should be checked from birth or baptismal certificate
+                    or some other reliable materials. )</td>
+                </tr>
+                <tr>
+                  <td class='font-12' width='5%'>Place:</td>
+                  <td
+                    class='font-12 line_border'
+                    width='30%'
+                    colspan='2'
+                  >{{birth_place}}</td>
+                  <td class='font-12' width='2%'></td>
+
+                </tr>
+                <tr>
+                  <td
+                    colspan='6'
+                    class='font-12'
+                    style='visibility: hidden;'
+                  >XX</td>
+                </tr>
+                <tr>
+                  <td colspan='6' class='font-12'>This is to certify that the
+                    employe named hereabove actually rendered services in this
+                    office as shown by the service record below, each line of
+                    which is supported by appointment and other papers issued by
+                    this Office and approved by the Authorities concerned.</td>
+                </tr>
+              </table>
+            </div>
+          {{/userdetail}}
+          <br />
+          <div>
+            <table id='sr_table'>
+              <tr>
+                <td
+                  colspan='2'
+                  class='font-14'
+                  style='border-bottom: none;'
+                  width='20%'
+                ><span class='bold'>Service</span>
+
+                </td>
+                <td colspan='3' class='font-14 bold' width='30%'>RECORD OF
+                  APPOINTMENT</td>
+                <td class='font-14 bold' width='30%'>OFFICE/ENTITY/DIVISION</td>
+                <td class='font-12' width='10%' rowspan='3'>Leave of absence w/o
+                  pay</td>
+                <td class='font-12' width='10%' rowspan='3'>Remarks</td>
+              </tr>
+              <tr>
+                <td
+                  class='font-12'
+                  style='border-top: none;'
+                  colspan='2'
+                >(Inclusive years)</td>
+                <td class='font-12' rowspan='2'>Designation</td>
+                <td class='font-12' rowspan='2'>Status</td>
+                <td class='font-12' rowspan='2'>Salary <br />(p.a)</td>
+                <td class='font-12' rowspan='2'>Station/Place
+                  <br />of Employment</td>
+              </tr>
+              <tr>
+                <td class='font-12'>From</td>
+                <td class='font-12'>To</td>
+              </tr>
+              {{#work_exp}}
+                <tr>
+                  <td class='font-12'>{{formatDate date_from}}</td>
+                  {{#ifCond is_present_date_to 1}}
+                    <td class='font-12'>{{getPresentDate}}</td>
+
+                  {{else}}
+                    <td class='font-12'>{{formatDate date_to}}</td>
+
+                  {{/ifCond}}
+                  <td class='font-12'>{{position}}</td>
+                  <td class='font-12'>{{appointment_status}}</td>
+                  {{#ifCond appointment_status 'Coterminous'}}
+                    <td class='font-12'>{{formatAmount rate_per_day}}/day</td>
+                  {{else}}
+                    {{#ifCond appointment_status 'Job Order'}}
+                      <td class='font-12'>{{formatAmount rate_per_day}}/day</td>
+                    {{else}}
+                      <td class='font-12'>{{formatAmount
+                          (getAnnual month_salary)
+                        }}</td>
+                    {{/ifCond}}
+
+                  {{/ifCond}}
+
+                  <td class='font-12'>{{company}}</td>
+                  <td class='font-12'>none</td>
+                  <td class='font-12'>{{remarks}}</td>
+                </tr>
+              {{/work_exp}}
+              <tr>
+                <td
+                  colspan='8'
+                  class='font-12'
+                  style='text-align: center; border-top:none'
+                ><i>(nothing follows)</i></td>
+              </tr>
+            </table>
+            <div class='font-14'>Issued in compliance with Executive Order No.
+              54 dated August 10, 1954 and in accordance with Circular No. 59
+              dated August 10, 1954 of the System</div>
+          </div>
+          <br /><br /><br /><br /><br />
+          <div style='display: flex; width:100%'>
+            <div style='width:50%'>
+              <div style='display: grid; width:30%;'>
+                <div class='font-12' style='visibility: hidden;'>XX</div>
+                <br />
+                <br />
+                <div
+                  class='font-14'
+                  style='text-align: center;border-bottom:1px solid black'
+                >{{getPresentDate}}</div>
+                <div class='font-12' style='text-align: center;'>Date</div>
+              </div>
+
+            </div>
+            <div style='display: grid; width:50%'>
+              <div class='font-12'>Certified correct:</div>
+              <br />
+              <br />
+              {{#ifCond empStatus 3}}
+                <div class='font-14 bold'>RAQUEL J. EDJEC</div>
+                <div class='font-14'>Admin Officer V (HRMO III)</div>
+              {{else}}
+                {{#ifCond empStatus 5}}
+                  <div class='font-14 bold'>RAQUEL J. EDJEC</div>
+                  <div class='font-14'>Admin Officer V (HRMO III)</div>
+                {{else}}
+
+                  <div class='font-14 bold'>REIR ERLINDA E. CUTAD</div>
+                  <div class='font-14'>VP Admin and Finance</div>
+                {{/ifCond}}
+              {{/ifCond}}
+
+            </div>
+          </div>
+
+        </div>
+        {{!--  {{/TO}} --}}
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

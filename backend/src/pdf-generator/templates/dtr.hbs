@@ -1,0 +1,425 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } body { font-family: 'Arial Narrow' } .strong {
+      font-weight: bold; } .font-10 { font-size: 10px; } .font-11 { font-size:
+      11px; } .font-13 { font-size: 13px; } .font-8 { font-size: 8px; } .font-12
+      {font-size: 12px; } .font-14 {font-size: 14px; } .font-15 {font-size:
+      15px; } .font-17 {font-size: 17px; } .font-16 { font-size:16px; } .font-18
+      { font-size:18px; } .font-24 { font-size:24px; } table { width: 100%; } td
+      { padding: 3px; } table, td { border-collapse: collapse !important;
+      border: 1px solid grey; }
+
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='font-12' style='text-align: right; margin-top:40px'>
+          {{curDate 'alphanumeric'}}
+        </div>
+        <div style='text-align: center;  line-height: 1.3;'>
+          <div class='font-15 strong'>
+            Davao del Norte State College
+          </div>
+          <div class='font-12'>
+            Brgy. New Visayas, Panabo City, Philippines 8105
+          </div>
+          <div class='font-12'>
+            Website:
+            <span style='color:blue'>www.dnsc.edu.ph</span>
+            | Email:
+            <span style='color:blue'>hrmo@dnsc.edu.ph</span>
+          </div>
+          <div class='font-14 strong' style='margin-top: 20px;'>
+            Daily Time Record for the period of
+            {{periodDate}}
+
+          </div>
+          <div style='display: flex; margin-top:20px'>
+            <div
+              style='font-size:12px;width:17%; text-align:left'
+              class='strong'
+            >
+              Legend
+            </div>
+            <div
+              style='font-size:12px;width:80%;display: flex; justify-content:space-between'
+              class='font-weight-bold'
+            >
+              <div style='font-size:12px;' class='font-weight-bold'>
+                <span class='strong'>AHW</span>
+                - Actual Hours Worked
+              </div>
+              <div style='font-size:12px;' class='font-weight-bold'>
+                <span class='strong'>OHW</span>
+                - Official Hours Worked
+              </div>
+              <div style='font-size:12px; ' class='font-weight-bold'>
+                <span class='strong'>OT</span>
+                - Overtime
+              </div>
+              <div style='font-size:12px; ' class='font-weight-bold'>
+                <span class='strong'>LT</span>
+                - Lates
+              </div>
+              <div style='font-size:12px; ' class='font-weight-bold'>
+                <span class='strong'>UT</span>
+                - Undertime
+              </div>
+
+            </div>
+          </div>
+          <div style='display: flex; margin-top:20px'>
+            <div style='font-size:12px;width:40%;text-align:left'>
+              Employee No. &nbsp; &nbsp; &nbsp;<span
+                class='strong font-14'
+              >{{employee_id}}</span>
+            </div>
+            <div
+              style='font-size:12px;width:70%; display:flex; justify-content:space-between'
+            >
+              <div style='font-size:12px;' class=''>
+                Name: &nbsp; &nbsp; &nbsp;
+                <span style='margin-left: 5px;' class='strong font-14'>
+                  {{toUpperCase name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style='margin-top: 5px;'>
+          <table>
+            <tr>
+              <td rowspan='2' width='6%' align='center' class='font-12 strong'>
+                Date
+              </td>
+              <td rowspan='2' width='6%' align='center' class='font-12 strong'>
+                Day
+              </td>
+              <td rowspan='2' width='6%' align='center' class='font-11 strong'>
+                In
+              </td>
+              <td colspan='2' width='10%' align='center' class='font-11 strong'>
+                Break
+              </td>
+              <td rowspan='2' width='6%' align='center' class='font-11 strong'>
+                Out
+              </td>
+              <td colspan='2' width='10%' align='center' class='font-11 strong'>
+                Overtime
+              </td>
+              <td rowspan='2' width='6%' align='center' class='font-11 strong'>
+                AHW
+              </td>
+              <td rowspan='2' width='6%' align='center' class='font-11 strong'>
+                OHW
+              </td>
+              <td rowspan='2' width='6%' align='center' class='font-11 strong'>
+                OT
+              </td>
+
+              <td rowspan='2' width='6%' align='center' class='font-11 strong'>
+                LT
+              </td>
+              <td rowspan='2' width='6%' align='center' class='font-11 strong'>
+                UT
+              </td>
+              <td
+                rowspan='2'
+                colspan='2'
+                width='18%'
+                align='center'
+                class='font-11 strong'
+              >
+                Remarks
+              </td>
+            </tr>
+            <tr>
+              <td width='6%' align='center' class='font-12 strong'>
+                Out
+              </td>
+              <td width='6%' align='center' class='font-12 strong'>
+                In
+              </td>
+              <td width='6%' align='center' class='font-12 strong'>
+                In
+              </td>
+              <td width='6%' align='center' class='font-12 strong'>
+                Out
+              </td>
+            </tr>
+            {{#each dtr}}
+              {{#this}}
+                <tr>
+
+                  <td height='15' align='center' class='font-10'>
+                    {{date_no}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{day_of_week}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{amIn}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{amOut}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{pmIn}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{pmOut}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{otIn}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{otOut}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{#isNotNull HW}}
+                      {{formatAmount HW}}
+                    {{else}}
+                      {{HW}}
+                    {{/isNotNull}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+                    {{#isNotNull OHW}}
+                      {{formatAmount OHW}}
+                    {{else}}
+                      {{OHW}}
+                    {{/isNotNull}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+
+                    {{#isNotNull OT}}
+                      {{#ifCond OT '0.00'}}{{else}}
+                        {{formatAmount OT}}
+                      {{/ifCond}}
+
+                    {{else}}
+
+                    {{/isNotNull}}
+                  </td>
+
+                  <td height='15' align='center' class='font-10'>
+
+                    {{#isNotNull LATE}}
+
+                      {{#ifCond LATE '0.00'}}{{else}}
+                        {{formatAmount LATE}}
+                      {{/ifCond}}
+                    {{else}}
+                      {{!-- {{LATE}} --}}
+                    {{/isNotNull}}
+                  </td>
+                  <td height='15' align='center' class='font-10'>
+
+                    {{#isNotNull UT}}
+
+                      {{#ifCond UT '0.00'}}{{else}}
+                        {{formatAmount UT}}
+                      {{/ifCond}}
+                    {{else}}
+                      {{!-- {{UT}} --}}
+                    {{/isNotNull}}
+                  </td>
+                  <td
+                    height='15'
+                    colspan='2'
+                    align='center'
+                    class='font-10'
+                  ></td>
+
+                </tr>
+              {{/this}}
+            {{/each}}
+            <tr>
+              <td
+                height='15'
+                colspan='14'
+                align='center'
+                class='font-11 strong'
+              >
+                Gross
+              </td>
+            </tr>
+
+            <tr>
+              <td height='15' align='center' colspan='5' class='font-10'>
+                Actual Hours Worked (AHW):
+              </td>
+              <td height='15' colspan='3' align='center' class='font-11 strong'>
+                {{formatAmount gross_AHW}}
+              </td>
+              <td align='center' colspan='5' class='font-10'>
+                Late (LT):
+              </td>
+              <td height='15' align='center' class='font-11 strong'>
+                {{formatAmount gross_LT}}
+              </td>
+            </tr>
+            <tr>
+              <td height='15' align='center' colspan='5' class='font-10'>
+                Official Hours Worked (OHW):
+              </td>
+              <td colspan='3' align='center' class='font-11 strong'>
+                {{formatAmount gross_OHW}}
+              </td>
+              <td height='15' align='center' colspan='5' class='font-10'>
+                Undertime (UT)
+              </td>
+              <td height='15' align='center' class='font-11 strong'>
+                {{formatAmount gross_UT}}
+              </td>
+            </tr>
+            <tr>
+              <td height='15' align='center' colspan='5' class='font-10'>
+                Overtime (OT):
+              </td>
+              <td height='15' colspan='3' align='center' class='font-11 strong'>
+                {{formatAmount gross_OT}}
+              </td>
+              <td height='15' align='center' colspan='5' class='font-10'>
+                Days Present (DP)
+              </td>
+              <td height='15' align='center' class='font-11 strong'>
+                {{formatAmount gross_DaysPresent}}
+              </td>
+            </tr>
+            <tr>
+              <td
+                height='15'
+                colspan='14'
+                align='center'
+                class='font-11 strong'
+              >
+                Net
+              </td>
+            </tr>
+            <tr>
+              <td height='15' align='center' colspan='3' class='font-10'>
+                Total Hours Worked
+                {{#ifCond employee_status 1}}
+                  (OHW + OT)
+                {{else}}
+                  {{#ifCond employee_status 2}}
+                    (OHW + OT)
+                  {{else}}
+                    [(DP x 8)+OT]
+                  {{/ifCond}}
+                {{/ifCond}}
+
+              </td>
+              <td height='15' colspan='2' align='center' class='font-12 strong'>
+                {{formatAmount total_HW}}
+              </td>
+              <td height='15' align='center' colspan='3' class='font-10'>
+                Total Deductions (LT+UT)
+              </td>
+              <td height='15' colspan='2' align='center' class='font-12 strong'>
+                {{formatAmount total_deductions}}
+              </td>
+              <td height='15' align='center' colspan='3' class='font-10'>
+                Total Days Present
+              </td>
+              <td height='15' align='center' class='font-12 strong'>
+                {{formatAmount total_days_present}}
+              </td>
+            </tr>
+
+            <tr>
+              <td height='15' colspan='14' align='left' class='font-11 strong'>
+                Remarks
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div style='margin-top: 15px;'>
+          <div class='font-12'>
+            <span class='strong'>Approved Coretime:</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>
+              {{#coretime}}
+
+                {{formatAlphanumericDate AY_FROM}}
+                &nbsp;&nbsp;to&nbsp;&nbsp;
+                {{formatAlphanumericDate AY_TO}}
+
+              {{/coretime}}</span>
+          </div>
+          <div class='font-11' style='margin-top: 3px;'>
+            {{#coretime}}
+              {{#sched}}
+                <span class='strong'>{{core_day}}</span>
+                <span style='visibility:hidden;'>x</span>
+                {{core_time}};
+                <span style='visibility:hidden;'>x</span>
+
+              {{/sched}}
+
+            {{/coretime}}
+
+          </div>
+          {{!-- <div class='font-12' style='margin-top: 3px;'>
+            {{#coretime}}
+
+              {{formatAlphanumericDate AY_FROM}}
+              To
+              {{formatAlphanumericDate AY_TO}}
+
+            {{/coretime}}
+
+          </div> --}}
+
+          {{!-- <div class="text-caption">
+                  {{ formatDate(coretime.AY_FROM) }} To
+                  {{ formatDate(coretime.AY_TO) }}
+                </div> --}}
+        </div>
+
+        <div style='margin-top: 30px;'>
+          <div style='text-align: center;' class='font-12'>
+            I certify that the entries on this record, which were made by myself
+            daily at the time of arrival at and departure from office are true
+            and correct.
+          </div>
+
+          <div
+            style='display:flex; justify-content:space-around ;margin-top:65px'
+          >
+            <div style='width:40%; text-align:center'>
+              <div
+                style='border-bottom:1px solid black; margin-bottom:5px'
+              ></div>
+              <div class='font-12'>
+                Employee's Signature
+              </div>
+            </div>
+
+            <div style='width:40%;text-align:center'>
+              <div
+                style='border-bottom:1px solid black; margin-bottom:5px'
+              ></div>
+              <div class='font-12'>
+                Authorized Official
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

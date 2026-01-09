@@ -1,0 +1,385 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px;} body { font-family: 'Arial' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 60px; } 
+      
+       thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ margin-top: 0px;}.to_title_div{ text-align: center; }
+      .to_content{page-break-inside: auto; margin-top: 120px; margin-left: 40px;
+      margin-right: 40px; } .to_number{margin-right: 100px;} .employee_table{
+      }.recommending_approval{ display: flex; justify-content: space-between; }
+      .underline{ border-bottom:1px solid black } #eval_table tr td, #eval_table
+      tr th{ padding: 8px; } #eval_table,{ page-break-after: always; } #f_table
+      th,#f_table td,#eval_table th,#eval_table td{ border: 1px solid black; }
+      #f_table,#eval_table{ border-collapse: collapse; } #eval_table,
+       #empTable{
+      border: 1px solid black; } .to_title{ letter-spacing: 5px; } #empTable{
+      border-collapse: collapse; } #empTable td{ border: 1px solid black; }
+     .text-center{
+        text-align: center;
+     }
+     .employee_tbl_row_padding{
+      padding: 5px;
+     }
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='header' style="background-color: white; height:110px" >
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='100%'
+            alt=''
+          />
+
+        </div>
+        <div class='footer' style="background-color: white; height:110px;padding-bottom:7px" >
+          <p style='font-size: 10; margin-left:40px; margin-right:40px;'><i
+            >Note: Travel is only considered
+              <span style='text-decoration: underline;'>AUTHORIZED</span>
+              upon completion of this form. Faculty/staff are advised not to
+              travel w/o proper order or authorization from the Head. For record
+              purposes, submit one (1) copy of approved order before traveling
+              and upon return, submit Travel Accomplishment Report with attached
+              Certificate of Appearance/Participation to the HRM Office. Process
+              your financial claim/report to the concerned offices.</i></p>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            alt=''
+          />
+        </div>
+
+        <div style='width: 100%'>
+          <table
+            style='table-layout: fixed;margin:0 auto; width: 100%; page-break-inside:auto'
+          >
+            {{! // Add this css to make main table fixed, child tables will still scroll }}
+            <thead >
+              <tr>
+                <td colspan='2'>
+                  <div style='height: 120px;'></div>
+                </td>
+              </tr>
+            </thead>
+            <tfoot  >
+              <tr>
+                <td colspan='2'>
+                  <div style='height: 120px;'></div>
+
+                </td>
+              </tr>
+            </tfoot>
+            {{#TO}}
+              <tbody>
+
+                <tr>
+                  <td height='100' colspan='2' align='center'>
+                    <div class='to_title_div'>
+                      <h3 class='to_title font-18'>TRAVEL ORDER</h3>
+                      <p class='to_number font-14'>T.O. Number: &nbsp;<span
+                          style='text-decoration: underline; font-weight:bold'
+                        >{{travel_order_num}}</span>
+                      </p>
+                    </div>
+                    <div class='to_date' style='float: left;'>
+                      <p class='font-16'>Date :
+                        <span
+                          style='font-weight: bold; text-decoration:underline'
+                        >{{formatAlphanumericDate createdAt}}</span>
+                      </p>
+                    </div>
+
+                  </td>
+                </tr>
+                <tr >
+                  <td colspan='2'>
+                    {{!-- <table id='empTable' style="background-color: green;">
+                      <tbody>
+                      <tr>
+                        <td
+                          width='35%'
+                          align='center'
+                          class='font-14'
+                        >Employee</td>
+                        <td
+                          width='35%'
+                          align='center'
+                          class='font-14'
+                        >Position</td>
+                        <td width='30%' align='center' class='font-14'>Unit</td>
+                      </tr>
+                      {{#employeeSelected}}
+
+                        <tr>
+                          <td align='center' class='font-14'>{{toTitleCase name}}</td>
+                          <td align='center' class='font-14'>{{position}}</td>
+                          <td align='center' class='font-14'>{{office}}</td>
+                        </tr>
+                      {{/employeeSelected}}
+                      </tbody>
+                    </table> --}}
+                    <div style="width: 100%; border:1px solid black">
+                      <div style="display: flex;justify-content:space-between">
+                        <div class="font-14 bordered text-center employee_tbl_row_padding" style="width: 100%;">Employee</div>
+                        <div class="font-14 bordered text-center employee_tbl_row_padding" style="width: 100%;">Position</div>
+                        <div class="font-14 bordered text-center employee_tbl_row_padding" style="width: 100%;">Unit</div>
+                      </div>
+                    {{#employeeSelected}}
+                       <div style="display: flex;justify-content:space-between">
+                        <div class="font-14 bordered text-center employee_tbl_row_padding" style="width: 100%;">{{toTitleCase name}}</div>
+                        <div class="font-14 bordered text-center employee_tbl_row_padding" style="width: 100%;">{{position}}</div>
+                        <div class="font-14 bordered text-center employee_tbl_row_padding" style="width: 100%;">{{office}}</div>
+                      </div>
+                    {{/employeeSelected}}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                    <div style='display: flex; margin-top:20px'>
+                      <div style='width: 30%;' class='font-16'>DATE/S OF TRAVEL
+                        :</div>
+                      <div style='width: 70%; border-bottom:1px solid black'>
+                        {{travelDates}}
+                        {{!-- {{formatAlphanumericDate travel_date_from}}
+                        -
+                        {{formatAlphanumericDate travel_date_to}} --}}
+                      </div>
+
+                    </div>
+                    <div style='display: flex; margin-top:20px'>
+                      <div style='width: 30%;' class='font-16'>PLACE/S OF TRAVEL
+                        :</div>
+                      <div
+                        style='width: 70%; border-bottom:1px solid black'
+                      >{{travel_place}}</div>
+                    </div>
+                    <div style='display: flex; margin-top:20px'>
+
+                      <div style='width: 30%;' class='font-16'>PURPOSE OF TRAVEL
+                        :</div>
+                      <div
+                        style='width: 70%; border-bottom:1px solid black'
+                      >{{travel_purpose}}</div>
+                    </div>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                    <div
+                      class='recommending_approval'
+                      style='display: grid;  grid-template-columns: auto auto auto; grid-row-gap: 50px; margin-top:40px'
+                    >
+
+                      {{!-- {{#recommending_approval_list}}
+                <div style='display: grid; '>
+                  <div class='font-16'>Recommending Approval:</div>
+                  <br />
+
+                  {{#ifCond hasEsig true}}
+                    <div>
+                      <div style='text-decoration: underline;position:relative'>
+                        <img
+                          src='data:image/png;base64, {{esig}}'
+                          style='position:absolute; top:-40px; left:50px;width: 60px; height : 80px;'
+                        />
+                        <span class='font-16'>{{toUpperCase name}}</span>
+                      </div>
+                      <div class='font-14'>{{position}}</div>
+                    </div>
+
+                  {{else}}
+                    <div>
+
+                      <div
+                        class='font-12'
+                        style='text-align:center; width:100%;top:10px; border-bottom:1px solid black'
+                      >
+                        <span class='font-16'>{{toUpperCase name}}</span>
+                      </div>
+                      <div class='font-14'>{{position}}</div>
+                    </div>
+                  {{/ifCond}}
+                </div>
+              {{/recommending_approval_list}} --}}
+                      {{#dump_recommending}}
+                        <div style='display: grid; '>
+                          <div class='font-16'>Recommending Approval:</div>
+                          <br />
+
+                          {{#ifCond hasEsig true}}
+                            <div>
+                              <div
+                                style='text-decoration: underline;position:relative'
+                              >
+                                {{#ifCond approveStatus 2}}
+                                  <img
+                                    src='data:image/png;base64, {{esig}}'
+                                    style='position:absolute; top:-30px; left:50px;width: 70px; height : 50px;'
+                                  />
+                                {{else}}
+                                {{/ifCond}}
+
+                                <span
+                                  class='font-16'
+                                  style=' font-weight:bold'
+                                >{{toUpperCase name}}</span>
+                              </div>
+                              <div class='font-14'>{{position}}</div>
+                            </div>
+
+                          {{else}}
+                            <div>
+
+                              <div
+                                class='font-12'
+                                style='text-align:center; width:100%;top:10px; border-bottom:1px solid black'
+                              >
+                                <span
+                                  class='font-16'
+                                  style=' font-weight:bold'
+                                >{{toUpperCase name}}</span>
+                              </div>
+                              <div class='font-14'>{{position}}</div>
+                            </div>
+                          {{/ifCond}}
+                        </div>
+                      {{/dump_recommending}}
+
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                     <div class='finance_dir'  style="margin-top: 30px;">
+              {{#finance_dir}}
+                <div style='display: grid; '>
+                  <div class='font-16'>Funds Available: 
+                    {{#ifCond ../is_fund_available 1}}
+                     <b> N/A</b>
+                    {{/ifCond}}
+                  </div>
+                  <br />
+                  {{#ifCond hasEsig true}}
+                    <div>
+                      <div style='text-decoration: underline;position:relative'>
+                        {{#ifCond ../is_finance_dir_approved 2}}
+                         <img
+                          src='data:image/png;base64, {{esig}}'
+                          style='position:absolute; top:-40px; left:50px;width: 70px; height : 50px;'
+                        />
+                        {{else}}
+                        {{/ifCond}}
+                       
+                        <span class='font-16' style=" font-weight:bold">{{toUpperCase name}}</span>
+                      </div>
+                      <div class='font-14'>{{position}}</div>
+                    </div>
+                  {{else}}
+                    <div
+                      class='font-16'
+                      style='text-decoration: underline;  font-weight:bold'
+                    >{{toUpperCase name}}</div>
+                    <div class='font-14'>{{position}}</div>
+                  {{/ifCond}}
+
+                </div>
+              {{/finance_dir}}
+            </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                    <div style="display: flex;margin-top: 30px;" >
+                
+            
+                    <div class='presidnet' style="width:60%;">
+                      <center>
+                        {{#president}}
+                          <div style='display: grid; float:right'>
+                            <div class='font-16'>Approved:</div>
+                          
+
+                            {{#ifCond hasEsig true}}
+                              <div>
+                                <div
+                                  style='text-decoration: underline;position:relative'
+                                >
+                              
+                                {{#ifCond ../is_president_approved 2}}
+                              <img
+                                    src='data:image/png;base64, {{esig}}'
+                                  style='position:absolute; top:-10px; left:35px;width: 70px; height : 50px;'
+                                  />
+                              {{else}}
+                              {{/ifCond}}
+                                
+                                  <br>
+                                  <span class='font-16' style="margin-left:0px; font-weight:bold">{{toUpperCase name}}</span>
+                                </div>
+                                <div class='font-14'>{{position}}</div>
+                              </div>
+                            {{else}}
+                              <div
+                                class='font-16'
+                                style='text-decoration: underline; font-weight:bold'
+                              >{{toUpperCase name}}</div>
+                              <div class='font-14'>{{position}}</div>
+                            {{/ifCond}}
+
+                          </div>
+                        {{/president}}
+                      </center>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end ;width:40%">
+                      {{#ifCond president_remarks null}}
+                      {{else}}
+                      <div class="font-12" style="width:300px; height:300px padding:10px;margin-left:25px;text-align: justify;">
+                      {{president_remarks}}
+                      </div>
+                      {{/ifCond}}
+                    
+                    </div>
+
+                  </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan='2'>
+
+                  </td>
+                </tr>
+
+              </tbody>
+            {{/TO}}
+          </table>
+        </div>
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

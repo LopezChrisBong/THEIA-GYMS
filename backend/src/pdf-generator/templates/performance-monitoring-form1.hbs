@@ -1,0 +1,274 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Arial' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ margin-top: 0px;}.to_title_div{ text-align: center; }
+      .to_content{page-break-inside: auto; margin-top: 120px; margin-left: 40px;
+      margin-right: 40px; } .to_number{margin-right: 100px;} .employee_table{
+      }.recommending_approval{ display: flex; justify-content: space-between; }
+      .underline{ border-bottom:1px solid black } #pmForm1 tr td, #pmForm1
+      tr th{ padding: 5px; } #pmForm1{ page-break-after: always; } #f_table
+      th,#f_table td,#pmForm1 th,#pmForm1 td{ border: 1px solid black; }
+      #f_table,#pmForm1, #applicant{ border-collapse: collapse; } 
+      #pmForm1{ border: 1px solid black; } #applicant  td{ border:
+      1px solid black; padding: 2px;width:  11.11%;} 
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='header'>
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='100%'
+            alt=''
+          />
+
+        </div>
+        <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            alt=''
+          />
+        </div>
+
+        
+          <div style='width: 100%;'>
+            <table
+              style='margin:0 auto; width: 100%; page-break-inside:auto; table-layout:fixed'
+            >
+              {{! // Add this css to make main table fixed, child tables will still scroll }}
+              <thead>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 120px;'></div>
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+
+                  </td>
+                </tr>
+              </tfoot>
+        
+              <tbody class="">  
+                {{#quarter_desc}}
+                          <tr>
+                                 <td colspan="12"><p style=" direction: rtl;"><i>PMC Form 1</i></p></td>
+                          </tr>
+                  
+                        <tr>
+                           <td class="font-20" colspan="12"><p style="text-align: center;"> <b>PERFORMANCE MONITORING AND COACHING JOURNAL
+                                                    C.Y. <u>{{year}}</u>
+                                                    </b></p></td>     
+                        </tr>
+                
+                        <tr >
+                          <td colspan="12">
+                            <div style="display: flex; justify-content:space-between; margin-top:20px ; margin-right:20px">
+
+                            <div>
+                            </div>
+                            <div>
+                                    <table id="pmForm1" >
+                                        <tbody style="font-size: 12px;">
+                                              <tr>
+                                                  {{#ifCond description 'Quarter 1'}}
+                                                    <td align="center"><input type="checkbox" checked style="accent-color: #34495e;"></td>
+                                                     {{else}}
+                                                    <td style="width: 30px"></td>
+                                                    {{/ifCond}}
+                                               
+                                                <td style="width: 30px">1 <sup>st</sup></td>
+                                                <td rowspan="4" style="width: 20px"><b style="writing-mode: vertical-rl;text-orientation: upright">QUARTER</b></td>
+                                              </tr>
+                                              <tr>
+                                                    {{#ifCond description 'Quarter 2'}}
+                                                    <td align="center"><input type="checkbox" checked style="accent-color: #34495e;"></td>
+                                                     {{else}}
+                                                    <td style="width: 30px"></td>
+                                                    {{/ifCond}}
+                                                <td>2 <sup>nd</sup></td>
+                                              </tr>
+                                              <tr>
+                                                     {{#ifCond description 'Quarter 3'}}
+                                                    <td align="center"><input type="checkbox" checked style="accent-color: #34495e;"></td>
+                                                     {{else}}
+                                                    <td style="width: 30px"></td>
+                                                    {{/ifCond}}
+                                                <td>3 <sup>rd</sup></td>
+                                              </tr>
+                                              <tr>
+                                                     {{#ifCond description 'Quarter 4'}}
+                                                    <td align="center"><input type="checkbox" checked style="accent-color: #34495e;"></td>
+                                                     {{else}}
+                                                    <td style="width: 30px"></td>
+                                                    {{/ifCond}}
+                                                <td>4 <sup>th</sup></td>
+                                              </tr>
+                                      </tbody>
+                                    </table>
+                            </div>
+                          </div>
+                          </td>
+                        </tr>
+                     {{/quarter_desc}}
+                    <tr>
+                      <td colspan="12">
+                          <p style="margin-top: 10px; margin-left:20px; font-size:14px">Name of the Office/Unit : {{office_name.name}}</p>
+                      </td>
+                    </tr>
+                        <tr>
+                      <td colspan="12">
+                          <p style="margin-top: 10px;margin-left:20px; font-size:14px">Office/Unit Head: {{empDetail.name}}</p>
+                      </td>
+                    </tr>
+                        <tr>
+                      <td colspan="12">
+                          <p style="margin-top: 10px;margin-left:20px; font-size:14px">Number of Personel in the Office/Unit: {{no_emp.no_employee}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="12">
+                        <table id="pmForm1" style="margin-top: 20px; " width='100%'>
+                          <thead style="text-align: center; font-size: 12px">
+                            <tr>
+                              <td rowspan="3" width="10%">Issue</td>
+                              <td colspan="4" witd="80%">Mechanism/s</td>
+                              <td rowspan="3" with="10%">Remarks</td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" width="30%">Meeting</td>
+                              <td rowspan="2" width="20%">Others(Specify)</td>
+                              <td rowspan="2" width="30%">Description of Monitoring</td>
+                            </tr>
+                            <tr>
+                              <td width="15%">One-in-one</td>
+                              <td width="15%">Group</td>
+                            </tr>
+                          </thead>
+                          <tbody style="font-size: 12px;">
+                            <tr>
+                              <td align="center" height="100px">
+                                Monitoring
+                              </td>
+                              <td style="vertical-align: top;">
+                                {{#ifCond quarter.meeting_type 1}}
+                                {{#employee}}
+                                <span>{{name}},<br></span>
+                                {{/employee}}
+                                   {{else}}
+                                {{/ifCond}}
+                              </td>
+                              <td  style="vertical-align: top;">
+                                  {{#ifCond quarter.meeting_type 2}}
+                                {{#employee}}
+                                <span>{{name}},<br></span>
+                                {{/employee}}
+                                   {{else}}
+                                {{/ifCond}}
+                              </td>
+                              <td >{{quarter.ot_monitoring}}</td>
+                              <td >{{quarter.monitoring_description}}</td>
+                              <td >{{quarter.monitoring_remarks}}</td>
+                            </tr>
+                            <tr>
+                              <td align="center"  height="100px">Coaching</td>
+                              <td></td>
+                              <td></td>
+                              <td>{{quarter.ot_coaching}}</td>
+                              <td>{{quarter.coaching_description}}</td>
+                              <td>{{quarter.coaching_remarks}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="12">
+                        <p style="font-size: 12px; margin:50px 0px 15px 0px"> Please indicate the date in the appropriate box when the monitoring was conducted.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="12">
+                        <table id="pmForm1" style="font-size: 12px;">
+                          <tbody>
+                            <tr>
+                              <td>
+                                Conducted by:
+                              </td>
+                              <td>
+                                Date:
+                              </td>
+                              <td>
+                                Noted by:
+                              </td>
+                              <td>
+                                Date:
+                              </td>
+
+                            </tr>
+                            <tr>
+                              <td height="100px" align="center" style="vertical-align: bottom;">
+                                    {{!-- <img
+                                    src='data:image/png;base64, {{HRHead_esigImg}}'
+                                    style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                                    /> --}}
+                                <u style="margin-top:20px">{{toUpperCase empDetail.name}}</u><br>
+                                    Immediate Supervisor
+                              </td
+                              {{#quarter_desc}}>
+                              <td align="center">{{formatAlphanumericDate date_submitted}}</td>
+                              {{/quarter_desc}}
+                               <td height="100px" align="center" style="vertical-align: bottom;">
+                                  {{!-- <img
+                                    src='data:image/png;base64, {{imm_esigImg}}'
+                                    style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                                    /> --}}
+                                <u style="margin-top:20px">{{toUpperCase head_desc.name}}</u><br>
+                                    Head of Office
+                              </td>
+                                  {{#quarter_desc}}
+                              <td align="center">{{formatAlphanumericDate date_approved}}</td>
+                              {{/quarter_desc}}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                        
+              </tbody>
+            </table>
+          </div>
+
+        
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

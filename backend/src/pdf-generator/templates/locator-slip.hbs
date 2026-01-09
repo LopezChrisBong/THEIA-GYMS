@@ -1,0 +1,287 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 10px; left: 0px;
+      right: 0px; height: 100px; } body { font-family: 'Arial Narrow' } table,
+      td { width: 80%; page-break-inside: auto; border-collapse: collapse;
+      border:1px solid black } .strong { font-weight: bold; } .bordered {
+      border: 1px solid black; } .font-10 { font-size: 10px; } .font-12 {
+      font-size: 12px; } .font-14 {font-size: 14px; } .font-16 { font-size:
+      16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px; }
+      .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ letter-spacing: 5px; margin-top: 40px;}.to_title_div{
+      text-align: center; } .to_content{page-break-inside: auto; margin-top:
+      150px; margin-left: 40px; margin-right: 40px; } .to_number{margin-right:
+      100px;} .employee_table{ }.recommending_approval{ display: flex;
+      justify-content: space-between; }
+
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+      <div class='container'>
+        <div style='display: flex;'>
+          {{#for 0 2 1}}
+            <div style='width: 50%; border:1px solid black'>
+              <div>
+                <img
+                  src='data:image/png;base64, {{../header_img}}'
+                  width='100%'
+                  alt=''
+                />
+              </div>
+              <div
+                style='text-align:center;margin :10px 0'
+                class='font-12 strong'
+              >LOCATOR SLIP</div>
+              <div
+                style='display:flex; justify-content:space-around;margin:10px 0'
+              >
+                <div style=''>
+                  {{#ifCond ../locator_type 1}}
+                    <input type='checkbox' checked />
+                  {{else}}
+                    <input type='checkbox' />
+                  {{/ifCond}}
+                  <label for='' class='font-12'>Personal Transaction</label>
+                </div>
+                <div>
+                  {{#ifCond ../locator_type 3}}
+                    <input type='checkbox' checked />
+                  {{else}}
+                    <input type='checkbox' />
+                  {{/ifCond}}
+                  <label for='' class='font-12'>Official Business</label>
+                </div>
+              </div>
+
+              <div style='display: flex; padding:5px 10px'>
+                <div class='font-12' style='width: 20%;'>Name:</div>
+                <div
+                  class='font-12'
+                  style='width: 80%; border-bottom:1px solid black'
+                >{{../name}}</div>
+              </div>
+
+              <div style='display: flex; padding:10px'>
+                <div class='font-12' style='width: 20%;'>Position:</div>
+                <div
+                  class='font-12'
+                  style='width: 80%; border-bottom:1px solid black'
+                >{{../position}}</div>
+              </div>
+              <div style='display: flex; padding:10px'>
+                <div class='font-12' style='width: 20%;'>Destination:</div>
+                <div
+                  class='font-12'
+                  style='width: 80%; border-bottom:1px solid black'
+                >{{../destination}}</div>
+              </div>
+              <div style='display: flex; padding:10px'>
+                <div class='font-12' style='width: 20%;'>Purpose:</div>
+                <div
+                  class='font-12'
+                  style='width: 80%; border-bottom:1px solid black'
+                >{{../purpose}}</div>
+              </div>
+              <div style='display: flex; padding:10px'>
+                <div class='font-12' style='width: 20%;'>Inclusive Date:</div>
+                <div
+                  class='font-12'
+                  style='width: 80%; border-bottom:1px solid black'
+                >{{formatAlphanumericDate ../inclusive_date}}</div>
+              </div>
+              <div style='display: flex; padding:10px'>
+                <div class='font-12' style='width: 20%;'>Out:</div>
+                <div
+                  class='font-12'
+                  style='width: 80%; border-bottom:1px solid black'
+                >{{../out}}</div>
+                <div class='font-12' style='width: 20%;'>In:</div>
+                <div
+                  class='font-12'
+                  style='width: 80%; border-bottom:1px solid black'
+                >{{../in}}</div>
+              </div>
+              <div style='display: flex; padding:10px'>
+                <div class='font-12' style='width: 20%;'>Requested By:</div>
+
+                <div style='position:relative; width:80%;'>
+                  <img
+                    src='data:image/png;base64, {{../userEsig}}'
+                    style='position:absolute; top:-25px; left:110px;width: 60px; height : 60px;'
+                  />
+                  <div
+                    class='font-12'
+                    style='text-align:center; width:100%;position:absolute;top:10px; border-bottom:1px solid black'
+                  >
+                    {{toTitleCase ../name}}
+                  </div>
+                </div>
+              </div>
+              <div style='display: flex; padding:10px'>
+                <div class='font-12' style='width: 20%;'>Approved:</div>
+
+                <div style='position:relative; width:80%;'>
+                  <img
+                    src='data:image/png;base64, {{../appUserEsig}}'
+                    style='position:absolute; top:-25px; left:110px;width: 60px; height : 60px;'
+                  />
+                  <div
+                    class='font-12'
+                    style='text-align:center; width:100%;position:absolute;top:10px; border-bottom:1px solid black'
+                  >
+                    {{toTitleCase ../approvingUser}}
+                  </div>
+                </div>
+              </div>
+              <div style='display: flex;'>
+                <div style='width: 40%; visibility:hidden'>xx</div>
+                <div style='width: 60%; ' class='font-12'>
+                  President/VPAR/VPAF/Dean/Director</div>
+
+              </div>
+            </div>
+          {{/for}}
+          {{!end of left div  }}
+
+          {{!-- <div style='width: 50%; border:1px solid black'>
+            <div>
+              <img
+                src='data:image/png;base64, {{header_img}}'
+                width='100%'
+                alt=''
+              />
+            </div>
+            <div
+              style='text-align:center;margin :10px 0'
+              class='font-12 strong'
+            >LOCATOR SLIP</div>
+            <div
+              style='display:flex; justify-content:space-around;margin:10px 0'
+            >
+              <div style=''>
+                {{#ifCond locator_type 1}}
+                  <input type='checkbox' checked />
+                {{else}}
+                  <input type='checkbox' />
+                {{/ifCond}}
+                <label for='' class='font-12'>Personal Transaction</label>
+
+              </div>
+              <div>
+                {{#ifCond locator_type 3}}
+                  <input type='checkbox' checked />
+                {{else}}
+                  <input type='checkbox' />
+                {{/ifCond}}
+
+                <label for='' class='font-12'>Official Business</label>
+              </div>
+            </div>
+
+            <div style='display: flex; padding:5px 10px'>
+              <div class='font-12' style='width: 20%;'>Name:</div>
+              <div
+                class='font-12'
+                style='width: 80%; border-bottom:1px solid black'
+              >{{name}}</div>
+            </div>
+
+            <div style='display: flex; padding:10px'>
+              <div class='font-12' style='width: 20%;'>Position:</div>
+              <div
+                class='font-12'
+                style='width: 80%; border-bottom:1px solid black'
+              >{{position}}</div>
+            </div>
+            <div style='display: flex; padding:10px'>
+              <div class='font-12' style='width: 20%;'>Destination:</div>
+              <div
+                class='font-12'
+                style='width: 80%; border-bottom:1px solid black'
+              >{{destination}}</div>
+            </div>
+            <div style='display: flex; padding:10px'>
+              <div class='font-12' style='width: 20%;'>Purpose:</div>
+              <div
+                class='font-12'
+                style='width: 80%; border-bottom:1px solid black'
+              >{{purpose}}</div>
+            </div>
+            <div style='display: flex; padding:10px'>
+              <div class='font-12' style='width: 20%;'>Inclusive Date:</div>
+              <div
+                class='font-12'
+                style='width: 80%; border-bottom:1px solid black'
+              >{{formatAlphanumericDate inclusive_date}}</div>
+            </div>
+            <div style='display: flex; padding:10px'>
+              <div class='font-12' style='width: 20%;'>Out:</div>
+              <div
+                class='font-12'
+                style='width: 80%; border-bottom:1px solid black'
+              >{{out}}</div>
+              <div class='font-12' style='width: 20%;'>In:</div>
+              <div
+                class='font-12'
+                style='width: 80%; border-bottom:1px solid black'
+              >{{in}}</div>
+            </div>
+            <div style='display: flex; padding:10px'>
+              <div class='font-12' style='width: 20%;'>Requested By:</div>
+
+              <div style='position:relative; width:80%;'>
+                <img
+                  src='data:image/png;base64, {{userEsig}}'
+                  style='position:absolute; top:-25px; left:110px;width: 60px; height : 60px;'
+                />
+                <div
+                  class='font-12'
+                  style='text-align:center; width:100%;position:absolute;top:10px; border-bottom:1px solid black'
+                >
+                  {{name}}
+                </div>
+              </div>
+            </div>
+            <div style='display: flex; padding:10px'>
+              <div class='font-12' style='width: 20%;'>Approved:</div>
+
+              <div style='position:relative; width:80%;'>
+                <img
+                  src='data:image/png;base64, {{appUserEsig}}'
+                  style='position:absolute; top:-25px; left:110px;width: 60px; height : 60px;'
+                />
+                <div
+                  class='font-12'
+                  style='text-align:center; width:100%;position:absolute;top:10px; border-bottom:1px solid black'
+                >
+                  {{approvingUser}}
+                </div>
+              </div>
+            </div>
+            <div style='display: flex;'>
+              <div style='width: 40%; visibility:hidden'>xx</div>
+              <div style='width: 60%; ' class='font-12'>
+                President/VPAR/VPAF/Dean/Director</div>
+
+            </div>
+          </div> --}}
+          {{! en of right div }}
+        </div>
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

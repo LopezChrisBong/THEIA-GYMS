@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header {
+            position: relative;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+
+            height: 100px;
+            border: 1px solid black
+        }
+
+        body {
+            font-family: 'Arial Narrow'
+
+        }
+           /**body { font-family: 'Liberation Sans'; }*/ 
+
+        .table {
+            width: 100%;
+            page-break-inside: auto;
+            border-collapse: collapse;
+        }
+
+        .strong {
+            font-weight: bold;
+        }
+
+        .bordered {
+            border: 1px solid black;
+        }
+
+        .font-10 {
+            font-size: 10px;
+        }
+
+        .font-12 {
+            font-size: 12px;
+        }
+
+        .font-14 {
+            font-size: 14px;
+        }
+
+        .font-16 {
+            font-size: 16px;
+        }
+
+        .font-18 {
+            font-size: 18px;
+        }
+
+
+
+        .extra-spacing-tr {
+            height: 20px;
+        }
+
+        .header {
+            height: 60px;
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+        }
+
+        .doctorate {
+            background-color: #ffe699;
+        }
+
+        .pursuing_doctorate {
+            background-color: #d0cece;
+        }
+
+        .masters {
+            background-color: #f8cbad;
+        }
+
+        .pursuing_masters {
+            background-color: #b4c6e7;
+        }
+
+        .undergraduate {
+            background-color: #c6e0b4;
+        }
+
+        .colvoc {
+            background-color: #d98f8f;
+        }
+
+        .highschool {
+            background-color: #faa158;
+        }
+    </style>
+</head>
+
+<body>
+    {{#each this}}
+
+    <div class="container">
+
+        <table class="table">
+            <thead>
+                <tr class="header">
+                    <td colspan="11" align="center">
+
+                        <img src="data:image/png;base64, {{img}}" width="75%" alt="">
+
+                    </td>
+                </tr>
+
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="11" align="center" style="visibility: hidden;">XX</td>
+                </tr>
+            </tfoot>
+            <tr>
+                <td colspan="11" align="center">
+                    <h3>{{fileheader}} as of
+                        {{curDate "alphanumeric"}}</h3>
+                </td>
+            </tr>
+           
+            <tr style="background-color: rgb(198, 144, 237);">
+                {{!-- <td rowspan="2" align="center" width="5%" class="bordered font-12 strong">NO.</td> --}}
+                <td rowspan="2" align="center" width="25%" class="bordered font-12 strong">NAME</td>
+                <td rowspan="2" align="center" width="5%" class="bordered font-12 strong">SEX</td>
+                <td rowspan="2" align="center" width="10%" class="bordered font-12 strong">BDAY</td>
+                <td rowspan="2" align="center" width="5%" class="bordered font-12 strong">AGE</td>
+                <td rowspan="2" align="center" width="10%" class="bordered font-12 strong">DATE HIRED</td>
+                {{#ifCond profType '3'}}
+                 <td rowspan="2" align="center" width="10%" class="bordered font-12 strong">ASSIGNMENT</td>
+                {{else}}
+                {{/ifCond}}
+                <td rowspan="2" align="center" width="10%" class="bordered font-12 strong">POSITION/DESIGNATION</td>
+                <td class="bordered font-12 strong" align="center" width="25%" colspan="3">EDUCATIONAL BACKGROUND
+                </td>
+                <td rowspan="2" align="center" width="10%" class="bordered font-12 strong">CONTACT <br>NUMBER</td>
+                <td rowspan="2" align="center" width="10%" class="bordered font-12 strong">EMAIL</td>
+            </tr>
+            <tr style="background-color: rgb(198, 144, 237);">
+                <td align="center" class="bordered font-12 strong">UNDERGRADUATE</td>
+                <td align="center" class="bordered font-12 strong">GRADUATE</td>
+                <td align="center" class="bordered font-12 strong">POST GRADUATE</td>
+
+            </tr>
+
+            {{#each datas}}
+            <tr>
+               {{#ifCond ../profType '3'}}
+               <td height="25" colspan="12" class="bordered ">
+               {{else}}
+               <td height="25" colspan="11" class="bordered ">
+               {{/ifCond}}
+                
+            <p style="margin-left: 10px" class="font-14 strong">{{position}}  </p>
+
+                </td>
+            </tr>
+
+            {{#groupData}}
+            {{#data}}
+
+            {{#ifCond highestEd 'doctorate'}}
+            <tr class="doctorate">
+                {{else}}
+                {{#ifCond highestEd 'pursuing doctorate'}}
+            <tr class="pursuing_doctorate">
+                {{else}}
+                {{#ifCond highestEd 'masters'}}
+            <tr class="masters">
+                {{else}}
+                {{#ifCond highestEd 'pursuing masters'}}
+            <tr class="pursuing_masters">
+                {{else}}
+                {{#ifCond highestEd 'undergraduate'}}
+            <tr class="undergraduate">
+                {{else}}
+                {{#ifCond highestEd 'colvoc'}}
+            <tr class="colvoc">
+                {{else}}
+                {{#ifCond highestEd 'highschool'}}
+            <tr class="highschool">
+                {{else}}
+            <tr>
+                {{/ifCond}}
+                {{/ifCond}}
+                {{/ifCond}}
+                {{/ifCond}}
+                {{/ifCond}}
+                {{/ifCond}}
+                {{/ifCond}}
+
+                {{!-- <td height="50%" align="center" width="5%" class="bordered font-12 strong">1</td> --}}
+                <td height="45" align="left" class="bordered font-12 ">&nbsp;&nbsp;&nbsp;{{formatName fname mname
+                    lname}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{sexFormat sex}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{dateFormat bdate}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{calcAge bdate}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{dateFormat date_hired}}</td>
+                 {{#ifCond ../../../profType '3'}}
+                  <td height="45" align="center" class="bordered font-12 ">{{office}}</td>
+                {{else}}
+                {{/ifCond}}
+                <td height="45" align="center" class="bordered font-12 ">{{position}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{undergrad}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{graduate}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{post_grad}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{mobile_no}}</td>
+                <td height="45" align="center" class="bordered font-12 ">{{email}}</td>
+
+            </tr>
+            {{/data}}
+            {{#total}}
+            <tr style="background-color: rgb(255, 251, 0);">
+                <td colspan="1" rowspan="2" width="25" class="bordered strong font-12" align="center">TOTAL</td>
+                <td colspan="4" width="25" class="bordered strong font-12" align="center">M</td>
+                <td width="25" class="bordered strong" align="center">{{m}}</td>
+                <td colspan="6" width="25" class="bordered strong"></td>
+            </tr>
+            <tr style="background-color: rgb(251, 251, 0);">
+
+                <td colspan="4" width="25" class="bordered strong font-12" align="center">F</td>
+                <td width="25" class="bordered strong" align="center">{{f}}</td>
+                <td colspan="6" width="25" class="bordered strong"></td>
+            </tr>
+            {{/total}}
+
+            {{/groupData}}
+
+            {{/each}}
+
+        </table>
+
+
+        <table style="width:40%;border-collapse:collapse; transform:translateX(150%); page-break-inside:avoid;">
+            <tr class="doctorate">
+                <td class="font-12 bordered">&nbsp;&nbsp;&nbsp;Doctorate Degree</td>
+                <td align="right" class="font-12 bordered">{{docCnt}}&nbsp;&nbsp;</td>
+                <td align="right" class="font-12 bordered">{{getPercentage docCnt totalCnt}}%&nbsp;&nbsp;</td>
+            </tr>
+            <tr class="pursuing_doctorate">
+                <td class="font-12 bordered">&nbsp;&nbsp;&nbsp;Pursuing Doctorate Degree</td>
+                <td align="right" class="font-12 bordered">{{pursDocCnt}}&nbsp;&nbsp;</td>
+                <td align="right" class="font-12 bordered">{{getPercentage pursDocCnt totalCnt}}%&nbsp;&nbsp;</td>
+            </tr>
+            <tr class="masters">
+                <td class="font-12 bordered">&nbsp;&nbsp;&nbsp;Masters Degree</td>
+                <td align="right" class="font-12 bordered">{{mastCnt}}&nbsp;&nbsp;</td>
+                <td align="right" class="font-12 bordered">{{getPercentage mastCnt totalCnt}}%&nbsp;&nbsp;</td>
+            </tr>
+            <tr class="pursuing_masters">
+                <td class="font-12 bordered">&nbsp;&nbsp;&nbsp;Pursuing Masters Degree</td>
+                <td align="right" class="font-12 bordered">{{pursMastCnt}}&nbsp;&nbsp;</td>
+                <td align="right" class="font-12 bordered">{{getPercentage pursMastCnt totalCnt}}%&nbsp;&nbsp;</td>
+            </tr>
+            <tr class="undergraduate">
+                <td class="font-12 bordered">&nbsp;&nbsp;&nbsp;Bachelors Degree</td>
+                <td align="right" class="font-12 bordered">{{bachCnt}}&nbsp;&nbsp;</td>
+                <td align="right" class="font-12 bordered">{{getPercentage bachCnt totalCnt}}%&nbsp;&nbsp;</td>
+            </tr>
+            <tr class="colvoc">
+                <td class="font-12 bordered">&nbsp;&nbsp;&nbsp;College level/ Vocational Grad</td>
+                <td align="right" class="font-12 bordered">{{colVocCnt}}&nbsp;&nbsp;</td>
+                <td align="right" class="font-12 bordered">{{getPercentage colVocCnt totalCnt}}%&nbsp;&nbsp;</td>
+            </tr>
+            <tr class="highschool">
+                <td class="font-12 bordered">&nbsp;&nbsp;&nbsp;HS Grad/level</td>
+                <td align="right" class="font-12 bordered">{{hsCnt}}&nbsp;&nbsp;</td>
+                <td align="right" class="font-12 bordered">{{getPercentage hsCnt totalCnt}}%&nbsp;&nbsp;</td>
+            </tr>
+            <tr style="background-color: #ff66ff;">
+                <td class="font-12 bordered">&nbsp;&nbsp;&nbsp;Total</td>
+                <td align="right" class="font-12 bordered">{{totalCnt}}&nbsp;&nbsp;</td>
+                <td align="right" class="font-12 bordered">{{getPercentage totalCnt totalCnt}}%&nbsp;&nbsp;</td>
+            </tr>
+
+
+        </table>
+        <table style=" page-break-inside:avoid;">
+            <tr>
+                <td class="font-12" height="75">Prepared by:</td>
+            </tr>
+
+            <tr>
+                <td class="font-12 strong">RAQUEL J. EDJEC</td>
+            </tr>
+            <tr>
+                <td class="font-12 ">Administrative Officer V(HRMO)</td>
+            </tr>
+        </table>
+
+    </div>
+
+    {{/each}}
+</body>
+
+</html>

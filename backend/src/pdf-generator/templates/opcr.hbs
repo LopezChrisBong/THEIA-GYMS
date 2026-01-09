@@ -1,0 +1,497 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Arial Narrow' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 80px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .underline{ border-bottom:1px solid black } #eval_table tr td, #eval_table
+      tr th{ padding: 8px; } #eval_table{ page-break-after: always; } #f_table
+      th,#f_table td,#eval_table th,#eval_table td{ border: 1px solid black; }
+      #f_table,#eval_table, #target{ border-collapse: collapse; } 
+      #eval_table{ border: 1px solid black; } #target td{ border:
+      1px solid black; padding: 2px;} 
+      #corefunction{ border-collapse: collapse; } #corefunction td{ border:
+      1px solid black; padding: 2px; width: 11.11%;} 
+      #corefunction1{ border-collapse: collapse; } #corefunction1 td{ border:
+      1px solid black; padding: 5px; width: 11.11%;} 
+
+      #header-form{ border-collapse: collapse; width: 15%; height: 10px;} #header-form td{ border:
+      1px solid black; } 
+      
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+   <div class='header' style="display: flex;" >
+        <div style="width: 5%;">
+        </div>
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='70%'
+            height="110px"
+            alt=''
+          />
+        <div style="width: 5%;">
+
+        </div>
+         
+            <table id="header-form" class="font-10" >
+                <tr>
+                    <td>Form No.</td>
+                    <td>FM-DNSC-PPE-02</td>
+                </tr>
+                <tr>
+                    <td>Issue Status</td>
+                    <td>06</td>
+                </tr>
+                <tr>
+                    <td>Revision No.</td>
+                    <td>08</td>
+                </tr>
+                <tr>
+                    <td>Effective Date:</td>
+                    <td>06 June 2024</td>
+                </tr>
+                <tr>
+                    <td>Approved by:</td>
+                    <td>President</td>
+                </tr>
+            </table>
+          
+            
+        </div>
+        <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            height="80px"
+            alt=''
+          />
+        </div>
+        
+          <div style='width: 100%;'>
+            <table
+              style='margin:0 auto; width: 100%; page-break-inside:auto; table-layout:fixed;'
+            >
+              {{! // Add this css to make main table fixed, child tables will still scroll }}
+              <thead>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 100px;'></div>
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+                  </td>
+                </tr>
+              </tfoot>
+        
+              <tbody class="" > 
+                 <tr >
+                    <td colspan="2" >
+                   <table id="target-header" style="width:100%; margin-left:20px; margin-right:20px; " class="font-12">
+                        <tr>
+                           <td class="font-12" ><p style="text-align: center;"><b>OFFICE PERFORMANCE COMMITMENT AND REVIEW (OPCR)</b></p></td>     
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                             <td class="font-12" ><p style="text-align: center;">I, <b style="text-transform: uppercase;"><u>{{userData.name}}</u></b>, (Designated) of the <b style="text-transform: uppercase;"><u>{{emp_office.name}}</u></b>, commit to deliver and agree to be rated on the attainment of the following targets in accordance with the indicated measures for the period <b>_________________ to ________</b>.</p></td>  
+                        </tr>
+                        <tr >
+                            <td ><br> <p dir="rtl" style="">___________________________ </p></td>
+                        </tr>
+                        <tr>
+                               <td ><p dir="rtl" style="margin-right:60px">(Signature)</p></td>
+                        </tr>
+                        <tr>
+                               {{!-- <td > <p dir="rtl" style="margin-right:30px; margin-top:5px">Date:__________________</p></td> --}}
+                               <td > <p dir="rtl" style="margin-right:30px; margin-top:5px">__________________:Date</p></td>
+                        </tr>
+                    </table>     
+                    </td>
+                    
+                   
+                </tr>
+                <tr>
+                    <td colspan="2">
+                      <table id="target" style="width:100%" class="font-12">
+                        <tr>
+                            <td style="width: 25%;">
+                              <b> Reviewed by:</b> 
+                            </td>
+                            <td style="width: 10%;">
+                               <b> Date:</b>
+                            </td>
+                            <td style="width: 25%;">
+                               <b> Approved by:</b>
+                            </td>
+                            <td style="width: 10%;">
+                               <b> Date:</b>  
+                            </td>
+                            <td colspan="2" style="width: 15%;" align="center">
+                              <b>  Rating Legend</b>
+                            </td>
+                            <td colspan="2" style="width: 15%;" align="center">
+                              <b>  Scale and Description</b>
+                            </td>
+                        </tr>
+                         {{!-- {{#signatory}} --}}
+                       
+                        <tr >
+                           
+                            <td rowspan="5" align="center">
+                         <span> <b><u>
+                            {{!-- {{assesedBy}} --}}
+                            ______________________________
+                            </u></b></span>
+                            
+                            {{!-- {{assesedByPosition}} --}}
+                            <br><b>College Performance Management Team</b>
+                            </td>
+                            <td rowspan="5" align="center"></td>
+                            <td rowspan="5" align="center"><span class="strong"><u>
+                                {{!-- {{finalRatingBy}} --}}
+                                JOY M. SORROSA
+                                </u></span>
+                             
+                               {{!-- {{finalRatingByPosition}} --}}
+                               <br> <b>College President</b></td>
+                            <td rowspan="5" align="center"></td> 
+                            <td style="width: 5%;" align="center"><b>E</b></td>    
+                            <td style="width: 10%;" align="center">Efficiency</td>    
+                            <td style="width: 5%;" align="center"><b>5</b></td>    
+                            <td style="width: 10%;" align="center">Outstanding</td>    
+                        </tr>
+                        {{!-- {{/signatory}} --}}
+                        <tr>
+                            <td align="center"><b>Q</b></td>
+                            <td align="center">Quality</td>
+                            <td align="center"><b>4</b></td>
+                            <td align="center">Very Satisfactory</td>
+                        </tr>
+                        <tr>
+                            <td align="center"><b>T</b></td>
+                            <td align="center">Timeliness</td>
+                            <td align="center"><b>3</b></td>
+                            <td align="center">Satisfactory</td>
+                        </tr>
+                       <tr>
+                            <td align="center"><b>NR</b></td>
+                            <td align="center">Not Rated</td>
+                            <td align="center"><b>2</b></td>
+                            <td align="center">Unsatisfactory</td>
+                        </tr>
+                        <tr>
+                            <td align="center"><b>A</b></td>
+                            <td align="center">Average</td>
+                            <td align="center"><b>1</b></td>
+                            <td align="center">Poor</td>
+                        </tr>
+                    </table>   
+                    </td>
+                   
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                     <table id="corefunction" style="width: 100%; margin-top: 5px;" class="font-12">
+                        <tr>
+                            
+                            <td rowspan="2" colspan="3" style="width:15%" align="center"><b>Major Final Output (MFO)</b></td>
+                            <td rowspan="2" style="width:15%" align="center"><b>SUCCESS INDICATORS <br> (Target +Measure)</b></td>
+                            <td rowspan="2" style="width:15%" align="center"><b>ALLOTTED BUDGET</b></td>
+                            <td rowspan="2" style="width:15%" align="center"><b>ACTUAL<br> ACCOMPLISHMENT</b></td>
+                            <td colspan="4" style="width:20%" align="center"><b>RATING</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>REMARKS</b></td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" align="center"><b>E</b></td>
+                            <td style="width:5%" align="center"><b>Q</b></td>
+                            <td style="width:5%" align="center"><b>T</b></td>
+                            <td style="width:5%" align="center"><b>A</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="width: 2%;" align="center"> <b>CODE</b></td>
+                            <td colspan="10" style="width: 95%;"> <b>CORE FUNCTIONS</b></td>
+                        </tr>
+                         {{#opcrData}}
+                        {{#each core_function}}
+                        <tr>
+                            <td style="width: 2%;" align="center">{{code}}</td>
+                            <td style="width: 3%;" align="center">CF{{inc @index}}</td>
+                            <td style="width: 16%; text-align: justify;text-justify: inter-word; padding:7px" align="center">{{mfo}}</td>
+                            <td style="width: 16%; text-align: justify;text-justify: inter-word;" align="center padding:7px">{{success_indicator}}</td>
+                            <td style="width: 7%;" align="center">{{alloted_budget}}</td>
+                            <td style="width: 16%; text-align: justify;text-justify: inter-word; padding:7px" align="center">{{actual_accomplishment}}</td>
+                            <td style="width: 5%;" align="center">{{efficiency_rate}}</td>
+                            <td style="width: 5%;" align="center">{{qly_rate}}</td>
+                            <td style="width: 5%;" align="center">{{timeliness_rate}}</td>
+                            <td style="width: 5%;" align="center">{{getCFSP_Avg this}}</td>
+                            <td align="center"></td>
+                        </tr>
+                         {{/each}}
+                        {{/opcrData}} 
+
+                        <tr class="strong">
+                            <td colspan="9" dir="rtl"> <b>Total CORE Functions</b>  </td>
+                            <td style="width: 5%;" align="center"><b>{{totalData.coreAverage}}</b></td>
+                            <td></td>
+                        </tr>
+                    </table>    
+                    </td>
+                   
+                </tr>
+
+                {{!-- Strategic Priority --}}
+                <tr>
+                    <td colspan="2">
+                     <table id="corefunction" style="width: 100%; margin-top: 5px;" class="font-12">
+                        <tr>
+                            
+                            <td rowspan="2" colspan="3" style="width:15%" align="center"><b>Major Final Output (MFO)</b></td>
+                            <td rowspan="2" style="width:15%" align="center"><b>SUCCESS INDICATORS <br> (Target +Measure)</b></td>
+                            <td rowspan="2" style="width:15%" align="center"><b>ALLOTTED BUDGET</b></td>
+                            <td rowspan="2" style="width:15%" align="center"><b>ACTUAL<br> ACCOMPLISHMENT</b></td>
+                            <td colspan="4" style="width:20%" align="center"><b>RATING</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>REMARKS</b></td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" align="center"><b>E</b></td>
+                            <td style="width:5%" align="center"><b>Q</b></td>
+                            <td style="width:5%" align="center"><b>T</b></td>
+                            <td style="width:5%" align="center"><b>A</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="width: 5%;" align="center"> <b>CODE</b></td>
+                            <td colspan="10" style="width: 95%;"> <b>STRATEGIC PRIORITY</b></td>
+                        </tr>
+                      {{#opcrData}}
+                        {{#each strategic_priority}}
+                        <tr>
+                            <td style="width: 2%;" align="center">{{code}}</td>
+                            <td style="width: 3%;" align="center">SP{{inc @index}}</td>
+                            <td style="width: 16%; text-align: justify;text-justify: inter-word;padding:7px" align="center">{{mfo}}</td>
+                            <td style="width: 16%; text-align: justify;text-justify: inter-word; padding:7px" align="center">{{success_indicator}}</td>
+                            <td style="width: 7%;" align="center">{{alloted_budget}}</td>
+                            <td style="width: 16%; text-align: justify;text-justify: inter-word; padding:7px" align="center">{{actual_accomplishment}}</td>
+                            <td style="width: 5%;" align="center">{{efficiency_rate}}</td>
+                            <td style="width: 5%;" align="center">{{qly_rate}}</td>
+                            <td style="width: 5%;" align="center">{{timeliness_rate}}</td>
+                            <td style="width: 5%;" align="center">{{getCFSP_Avg this}}</td>
+                            <td align="center"></td>
+                        </tr>
+                         {{/each}}
+                        {{/opcrData}} 
+
+                        <tr class="strong">
+                            <td colspan="9" dir="rtl"> <b>Total Strategic Priority</b> </td>
+                            <td style="width: 5%;" align="center"><b>{{totalData.strategicAverage}}</b></td>
+                            <td></td>
+                        </tr>
+                    </table>    
+                    </td>
+                   
+                </tr>
+           
+                  {{!-- Support Function --}}
+               <tr>
+                    <td colspan="2">
+                     <table id="corefunction" style="width: 100%; margin-top: 5px;" class="font-12">
+                        <tr>
+                            
+                            <td rowspan="2" colspan="3" style="width:20%" align="center"><b>Major Final Output (MFO)</b></td>
+                            <td rowspan="2" style="width:15%" align="center"><b>SUCCESS INDICATORS <br> (Target +Measure)</b></td>
+                            <td rowspan="2" style="width:5%" align="center"><b>ALLOTTED BUDGET</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>ACTUAL<br> ACCOMPLISHMENT</b></td>
+                            <td colspan="4" style="width:20%" align="center"><b>RATING</b></td>
+                            <td rowspan="2" style="width:20%" align="center"><b>REMARKS</b></td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" align="center"><b>E</b></td>
+                            <td style="width:5%" align="center"><b>Q</b></td>
+                            <td style="width:5%" align="center"><b>T</b></td>
+                            <td style="width:5%" align="center"><b>A</b></td>
+                        </tr>
+                        <tr>
+                               <td colspan="1" style="width: 2%;" align="center"> <b>CODE</b></td>
+                            <td colspan="10" style="width: 98%;"> <b>SUPPORT FUNCTIONSwdda</b></td>
+                        </tr>
+                         {{#opcrData}}
+                        {{#each support_function}}
+                        <tr>
+                            <td style="width: 2%;" align="center">{{code}}</td>
+                            <td style="width: 5%;" align="center">SF{{inc @index}}</td>
+                            <td style="width: 10%; text-align: justify;text-justify: inter-word; padding:7px" align="center">{{mfo}}</td>
+                            <td style="width: 15%; text-align: justify;text-justify: inter-word; padding:7px" align="center">{{success_indicator}}</td>
+                            <td style="width: 15%;" align="center"></td>
+                            <td style="width: 15%; text-align: justify;text-justify: inter-word; padding:7px" align="center">{{actual_accomplishment}}</td>
+                            <td style="width: 5%;" align="center">{{efficiency_rate}}</td>
+                            <td style="width: 5%;" align="center">{{qly_rate}}</td>
+                            <td style="width: 5%;" align="center">{{timeliness_rate}}</td>
+                            <td style="width: 5%;" align="center">{{getSFAvg this}}</td>
+                            <td align="center" style="width: 23%;"></td>
+                        </tr>
+                         {{/each}}
+                        {{/opcrData}}
+
+                        <tr class="strong">
+                            <td colspan="9" dir="rtl"> Total Support Functions  </td>
+                            <td style="width: 5%;" align="center">{{totalData.supportAverage}}</td>
+                            <td></td>
+                        </tr>
+                    </table>    
+                    </td>
+                   
+                </tr>
+          
+                <tr >
+                    <td colspan="2">
+                        <table id="corefunction1" class="font-12">
+                            <tr>
+                                <td colspan="1" style="width: 30%;">
+                                    <b>CATEGORY</b>
+                                </td>
+                                {{!-- <td align="center" style="width: 15%;">
+                                    Total
+                                </td> --}}
+                                <td align="center" style="width: 30%;">
+                                  <b>  MFO</b>
+                                </td>
+                                {{!-- <td align="center" style="width: 15%;">
+                                    Percentage (%)
+                                </td> --}}
+                                <td align="center" style="width: 40%;">
+                                   <b>RATING</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="1" >Core Functions</td>
+                                {{!-- <td align="center">{{coreFunction.total}}</td> --}}
+                                <td align="center">{{totalData.coreLegnth}}</td>
+                                {{!-- <td align="center">{{c_percentage}}</td> --}}
+                                <td align="center">{{totalData.coreTotalRating}}</td>
+                            </tr>
+                             <tr>
+                                <td colspan="1">Strategic Priority </td>
+                                 {{!-- <td align="center">{{strategicPriority.total}}</td> --}}
+                                <td align="center">{{totalData.strategicLegnth}}</td>
+                                {{!-- <td align="center">{{s_percentage}}</td> --}}
+                                <td align="center">{{totalData.strategicTotalRating}}</td>
+                            </tr>
+                               <tr>
+                                <td colspan="1" >Support Functions  </td>
+                                {{!-- <td align="center">{{supportFunction.data.ipcrTotal}}</td> --}}
+                                <td align="center">{{totalData.supportLegnth}}</td>
+                                {{!-- <td align="center">10%</td> --}}
+                                <td align="center">{{totalData.supportTotalRating}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="1" >Total/Final Overall Rating</td>
+                                <td></td>
+                                <td align="center">{{totalData.overAllRating}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="1">Final Average Rating (by PMT)</td>
+                                <td></td>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="1">Adjectival Rating:</td>
+                                <td></td>
+                                <td align="center"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center"> <b>Adjectival Rating Equivalence</b></td>
+                                <td colspan="6" rowspan="6" style="vertical-align: super;"><p>Comments and Recommendations for Development Purposes: </p></td>
+                            </tr>
+                          
+                            <tr>
+                                <td align="center"><b>5.00</b></td>
+                                <td align="center"><b>Outstanding</b></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><b>4.0 – 4.9</b></td>
+                                <td align="center"><b>Very Satisfactory</b></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><b>3.0 – 3.9</b></td>
+                                <td align="center"><b>Satisfactory</b></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><b>2.0 – 2.9</b></td>
+                                <td align="center"><b>Unsatisfactory</b></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><b>1.0- 1.9</b></td>
+                                <td align="center"><b>Poor</b></td>
+                            </tr>
+                         
+
+                        </table>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2">
+                        <table id="corefunction1" style="width: 100%; margin-top:20px" class="font-12">
+                               <tr>
+                                <td colspan="2">Discussed with:</td>
+                                <td colspan="2">Assessed by:</td>
+                                <td colspan="2">Final Rating by:</td>
+                            </tr>
+                            <tr>
+                          
+                                <td rowspan="2" align="center" style="width: 25%;">
+                                ____________________ <br>
+                               <b> Planning and Resource Management Office</b> 
+                                </td>
+                                <td  style="vertical-align: super; width:12%" >Date:</td>
+
+
+                                <td align="center" style="padding: 25px 10px 25px 10px; width:25%">_________________<br>
+                                <b>Head of the Performance Management Team </b><br></td>
+                                <td  style="vertical-align: super; width:12%">Date: </td>
+
+
+                                <td align="center" style="width: 25%;"><u><b>JOY M. SORROSA</b></u> <br>
+                                     <b>College President</b> <br>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+
+        
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

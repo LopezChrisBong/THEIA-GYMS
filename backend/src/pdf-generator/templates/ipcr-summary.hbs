@@ -1,0 +1,320 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 120px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Arial' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 80px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ margin-top: 0px;}.to_title_div{ text-align: center; }
+      .to_content{page-break-inside: auto; margin-top: 120px; margin-left: 40px;
+      margin-right: 40px; } .to_number{margin-right: 100px;} .employee_table{
+      }.recommending_approval{ display: flex; justify-content: space-between; }
+      .underline{ border-bottom:1px solid black } #eval_table tr td, #eval_table
+      tr th{ padding: 8px; } #eval_table{ page-break-after: always; } #f_table
+      th,#f_table td,#eval_table th,#eval_table td{ border: 1px solid black; }
+      #f_table,#eval_table, #target{ border-collapse: collapse; } 
+      #eval_table{ border: 1px solid black; } #target td{ border:
+      1px solid black; padding: 2px;} 
+      #corefunction{ border-collapse: collapse; } #corefunction td{ border:
+      1px solid black; padding: 5px; width: 11.11%;} 
+      #header-form{ border-collapse: collapse; width: 15%; height: 10px;} #header-form td{ border:
+      1px solid black; } 
+      
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+   <div class='header' style="display: flex; background-color:white" >
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='80%'
+            height="140px"
+            alt=''
+          />
+          <div style="width: 5%;">
+
+          </div>
+            <table id="header-form" class="font-10">
+                <tr>
+                    <td>Form No.</td>
+                    <td>FM-DNSC-PPE-01</td>
+                </tr>
+                <tr>
+                    <td>Issue Status</td>
+                    <td>06</td>
+                </tr>
+                <tr>
+                    <td>Revision No.</td>
+                    <td>08</td>
+                </tr>
+                <tr>
+                    <td>Effective Date:</td>
+                    <td>06 June 2024</td>
+                </tr>
+                <tr>
+                    <td>Approved by:</td>
+                    <td>President</td>
+                </tr>
+            </table>
+        </div>
+        <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            height="80px"
+            alt=''
+          />
+        </div>
+        
+          <div style='width: 100%;'>
+            <table
+              style='margin:0 auto; width: 100%; page-break-inside:auto; table-layout:fixed'
+            >
+              {{! // Add this css to make main table fixed, child tables will still scroll }}
+              <thead>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+                  </td>
+                </tr>
+              </tfoot>
+        
+              <tbody class=""> 
+                <tr>
+                    <td colspan="2">
+                   <table id="target-header" style="width:100%" class="font-12">
+                        <tr>
+                           <td class="font-14" ><p style="text-align: center;"> <b>SUMMARY OF ACCOMPLISHMENTS</b></p></td>     
+                        </tr>
+                        <tr>
+                             <td class="font-14" ><p style="text-align: center; text-transform:uppercase"> <b>{{ipcrPeriod}} {{year}}</b>.</p></td>  
+                        </tr>
+                    </table>     
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="font-12">
+                            <p>Name: <b>{{user.name}}</b></p>
+                            <p>Position: <b>{{user.position}}</b></p>
+                            <p>Unit: <b>{{user.office_name}}</b></p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table id="corefunction" style="width: 100%;" class="font-12">
+                            <tr>
+                                <td rowspan="2" align="center" style="width: 10%;"><b>MAJOR FINAL OUTPUT</b></td>
+                                <td rowspan="2" align="center" style="width: 10%;"><b>SUCCESS INDICATOR</b></td>
+                                <td colspan="23" align="center" style="width: 70%;"><b>ACTUAL ACCOMPLISHMENT</b></td>
+                                <td rowspan="2" align="center" style="width: 10%;"><b>REMARKS</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" align="center" style="width: 25%;"><b>QUANTITY (E)</b></td>
+                                <td colspan="8" align="center" style="width: 25%;"><b>QUALITY (Q)</b></td>
+                                <td colspan="8" align="center" style="width: 25%;"><b>TIMELINESS (T)</b></td>
+                            </tr>
+                            {{#spanHeader}}
+                            <tr>
+                              {{#expandHeaders}}
+                                <td align="center" style="width: 3%;" >{{.}}</td>
+                                 {{/expandHeaders}}
+                            </tr>
+                            
+                            {{/spanHeader}}
+                            
+                            {{!-- CORE FUNCTION --}}
+                            <tr>
+                                <td colspan="26" ><b>I-CORE FUNCTIONS</b></td>
+                            </tr>
+                            {{#coreFunctionSummaryData}}
+                            <tr>
+                                <td >{{mfo}}</td>
+                                <td >{{success_indicator}}</td>
+                                {{#mporSummary}}
+                                <td align="center" style="width: 3%;">{{value}}</td>
+                                {{/mporSummary}}
+                                <td></td>
+                            </tr>
+                            {{/coreFunctionSummaryData}}
+
+
+                                {{!-- STRATEGIC PRIORITY --}}
+                            <tr>
+                                <td colspan="26" ><b>II-STRATEGIC PRIORITY</b></td>
+                            </tr>
+                            {{#strategicPrioritySummaryData}}
+                             <tr>
+                                <td >{{mfo}}</td>
+                                <td >{{success_indicator}}</td>
+                                {{#mporSummary}}
+                                <td align="center" style="width: 3%;">{{value}}</td>
+                                {{/mporSummary}}
+                                <td></td>
+                            </tr>
+                            {{/strategicPrioritySummaryData}}
+                                {{!-- SUPPORT FUNCTION --}}
+                              <tr>
+                                <td colspan="26" ><b>III-SUPPORT FUNCTION</b></td>
+                               
+                            </tr>
+                            {{#supportFunctionSummaryData.groupedSummary}}
+                            {{#items}}
+                            <tr>
+                                {{#ifCond @index 0}} 
+                                {{#ifCond type 'Institutional Obligations'}}
+                                <td rowspan="{{../len}}" align="center" style=" text-align: justify;text-justify: inter-word;"><b>Institutional Obligations</b></td>
+                                {{else}}
+                                <td rowspan="{{../len}}" align="center" style=" text-align: justify;text-justify: inter-word;"><b>Intervening Function</b></td>
+                                {{/ifCond}}
+                                {{/ifCond}} 
+ 
+                                {{#ifCond type 'Institutional Obligations'}}
+                                <td >{{success_indicator}}</td>
+                                {{else}}
+                                <td >{{suc_ind}}</td>
+                                {{/ifCond}} 
+                                
+                                {{#ifCond eff_is_rated 1}}
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                {{else}}
+                                <td colspan="7" align="center" style="width: 3%;"> <b>Not to be Rated</b></td>
+                                {{/ifCond}}
+                              {{#ifCond qly_is_rated 1}}
+                                 <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                {{else}}
+                                <td colspan="8" align="center" style="width: 3%;"><b>Not to be Rated</b></td>
+                                {{/ifCond}}
+                                 {{#ifCond timeliness_is_rated 1}}
+                               <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                <td  align="center" style="width: 3%;"></td>
+                                {{else}}
+                                <td colspan="8" align="center" style="width: 3%;"><b>Not to be Rated</b></td>
+                                {{/ifCond}}
+                                <td></td>
+                            </tr>
+                            {{/items}}
+                            {{/supportFunctionSummaryData.groupedSummary}}
+                            {{!-- ------------------- --}}
+                            <tr>
+                                <td colspan="26" style="padding:10px 0px 10px 10px"><b>Observation and Remarks:</b> <br>
+                                {{ipcrSumRating.comments}}</td>
+                            </tr>
+                            {{!-- <tr>
+                                <td colspan="26" style="padding:10px 0px 10px 10px">Confirmed by: <br>(Ratee)</td>
+                            </tr> --}}
+                        
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                       <table class="font-12 strong" style="margin: 20px 0px 0px 20px; "> 
+                        <tr>
+                            <td>
+                                    <div>
+                                        Above entries are true and correct: <br>
+                                        <div style="position: relative; height: 50px;">   
+                                            {{#ifCond esignHas.user_hasEsig true}}
+                                            <img 
+                                                src="data:image/png;base64, {{user_esigImg}}"
+                                                style="
+                                                    position: absolute;
+                                                    top: 5px;
+                                                    left: 10%;
+                                                    transform: translateX(-50%);
+                                                    width: 70px;
+                                                    height: 50px;
+                                                "
+                                            />
+                                            {{/ifCond}}
+                                        </div>
+                                       <u> {{toUpperCase user.name}} </u><br>
+                                        Name & Signature of Employee <br>
+                                        Date Signed:{{ipcrSumRating.date_submitted}}
+                                    </div>
+                            </td>
+                            <td>
+                                    <div>
+                                        Noted: <br>
+                                             <div style="position: relative; height: 50px;">   
+                                            {{#ifCond esignHas.asessed_hasEsign true}}
+                                            <img 
+                                                src="data:image/png;base64, {{assesed_esignImg}}"
+                                                style="
+                                                    position: absolute;
+                                                    top: 5px;
+                                                    left: 10%;
+                                                    transform: translateX(-50%);
+                                                    width: 70px;
+                                                    height: 50px;
+                                                "
+                                            />
+                                            {{/ifCond}}
+                                        </div>
+                                        <u>{{toUpperCase signatory.assesedBy}} </u><br>
+                                        Name & Signature of Immediate Supervisor <br>
+                                        Date Signed:{{ipcrSumRating.assesed_by_date_approved}}
+                                    </div>
+                            </td>
+                        </tr>
+                       </table> 
+                    </td>
+                </tr>
+              
+              </tbody>
+            </table>
+          </div>
+
+        
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

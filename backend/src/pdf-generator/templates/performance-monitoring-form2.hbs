@@ -1,0 +1,225 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Arial' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ margin-top: 0px;}.to_title_div{ text-align: center; }
+      .to_content{page-break-inside: auto; margin-top: 120px; margin-left: 40px;
+      margin-right: 40px; } .to_number{margin-right: 100px;} .employee_table{
+      }.recommending_approval{ display: flex; justify-content: space-between; }
+      .underline{ border-bottom:1px solid black } #pmForm2 tr td, #pmForm2
+      tr th{ padding: 5px; } #pmForm2{ page-break-after: always; } #f_table
+      th,#f_table td,#pmForm2 th,#pmForm2 td{ border: 1px solid black; }
+      #f_table,#pmForm2, #applicant{ border-collapse: collapse; } 
+      #pmForm2{ border: 1px solid black; } #applicant  td{ border:
+      1px solid black; padding: 2px;width:  11.11%;} 
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='header'>
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='100%'
+            alt=''
+          />
+
+        </div>
+        <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            alt=''
+          />
+        </div>
+
+        
+          <div style='width: 100%;'>
+            <table
+              style='margin:0 auto; width: 100%; page-break-inside:auto; table-layout:fixed'
+            >
+              {{! // Add this css to make main table fixed, child tables will still scroll }}
+              <thead>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 120px;'></div>
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+
+                  </td>
+                </tr>
+              </tfoot>
+        
+              <tbody class="">  
+                   <tr>
+                      <td colspan="12"><p style=" direction: rtl; font-size:12px"><i>PMC Form 2</i></p></td>
+                   </tr>
+                   <tr >
+                      <td colspan="12"  align="center"><b>PERFORMANCE MONITORING</b></td>
+                    </tr>
+                    <tr>
+                    <td colspan="12" align="center" style="font-size:12px">(Illustration showing a Sample Tracking Tool for Monitoring Targets)</td>
+                    </tr>
+                    <tr>
+                    <td colspan="12" align="center" style="font-size: 13px;"><b>For the Month of <u>{{month.description}}</u></b></td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="12" align="center" style="font-size: 14px;" ><br><br><span ><u>{{office.name}}</u></span><br><b>Office / Unit</b></td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="12">
+                        <table id="pmForm2" style="margin-top: 25px;" width="100%">
+                          <thead style="font-size: 12px;">
+                            <tr>
+                              <td align="center" rowspan="2" width="20%">Major Final Output</td>
+                              <td align="center" rowspan="2" width="25%">Task</td>
+                              <td align="center" rowspan="2" width="10%">Assigned to</td>
+                              <td align="center" rowspan="2" width="10%">Duration</td>
+                              <td align="center" colspan="4" width="20%">Task Status</td>
+                              <td align="center" rowspan="2" width="15%">Remarks</td>
+                            </tr>
+                            <tr>
+                              <td align="center" width="5%">Week 1</td>
+                              <td align="center" width="5%">Week 2</td>
+                              <td align="center" width="5%">Week 3</td>
+                              <td align="center" width="5%">Week 4</td>
+                            </tr>
+                          </thead>
+                          <tbody style="font-size: 12px;">
+                            {{#bodyData}}
+                            <tr>
+                              {{#ifCond mfo ''}}
+                                 {{else}}
+                                  <td rowspan="{{countTask}}">{{mfo}}</td>
+                                   {{/ifCond}}
+                              <td>{{task.success_indicator}}</td>
+                              <td align="center">{{#employee}}
+                                  {{name}}
+                                  {{/employee}}
+                              </td>
+                              <td align="center">
+                                {{formatAlphanumericDate duration}}
+                              </td>
+                               {{#ifCond task.taskStatus 1}}
+                              <td align="center"><input type="checkbox" checked  style="accent-color: #34495e;"></td>
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" ></td>
+                               {{else}}
+                                {{#ifCond task.taskStatus 2}}
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" checked  style="accent-color: #34495e;"></td>
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" ></td>
+                               {{else}}
+                                  {{#ifCond task.taskStatus 3}}
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" checked style="accent-color: #34495e;"></td>
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" ></td>
+                               {{else}}
+                                  {{#ifCond task.taskStatus 4}}
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" ></td>
+                              <td align="center"><input type="checkbox" checked  style="accent-color: #34495e;"></td>
+                               {{else}}
+                                   {{/ifCond}}
+                                   {{/ifCond}}
+                                   {{/ifCond}}
+                                   {{/ifCond}}
+
+                              <td>{{remarks}}</td>
+                            </tr>
+                            {{/bodyData}}
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                      <tr>
+                      <td colspan="12">
+                        <p style="font-size: 12px; margin:50px 0px 15px 0px"> Please indicate the date in the appropriate box when the monitoring was conducted.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="12">
+                        <table id="pmForm2" style="font-size: 12px;">
+                          <tbody>
+                            <tr>
+                              <td>
+                                Conducted by:
+                              </td>
+                              <td>
+                                Date:
+                              </td>
+                              <td>
+                                Noted by:
+                              </td>
+                              <td>
+                                Date:
+                              </td>
+
+                            </tr>
+                            <tr>
+                              <td height="100px" align="center" style="vertical-align: bottom;">
+                                    {{!-- <img
+                                    src='data:image/png;base64, {{HRHead_esigImg}}'
+                                    style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                                    /> --}}
+                                <b><u style="margin-top:20px">{{toUpperCase employee.fname}} {{toUpperCase employee.mname}} {{toUpperCase employee.lname}}  </u></b><br>
+                                    Immediate Supervisor
+                              </td>
+                              <td align="center">{{formatAlphanumericDate month.date_submitted}}</td>
+                               <td height="100px" align="center" style="vertical-align: bottom;">
+                                  {{!-- <img
+                                    src='data:image/png;base64, {{imm_esigImg}}'
+                                    style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                                    /> --}}
+                                <b><u style="margin-top:20px">{{toUpperCase head_detail.fname}} {{toUpperCase head_detail.mname}} {{toUpperCase head_detail.lname}}</u></b><br>
+                                    Head of Office
+                              </td>
+                              <td align="center">{{formatAlphanumericDate month.date_approved}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                        
+              </tbody>
+            </table>
+          </div>
+
+        
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

@@ -1,0 +1,213 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Arial' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ margin-top: 0px;}.to_title_div{ text-align: center; }
+      .to_content{page-break-inside: auto; margin-top: 120px; margin-left: 40px;
+      margin-right: 40px; } .to_number{margin-right: 100px;} .employee_table{
+      }.recommending_approval{ display: flex; justify-content: space-between; }
+      .underline{ border-bottom:1px solid black } #eval_table tr td, #eval_table
+      tr th{ padding: 8px; } #eval_table{ page-break-after: always; } #f_table
+      th,#f_table td,#eval_table th,#eval_table td{ border: 1px solid black; }
+      #f_table,#eval_table, #applicant{ border-collapse: collapse; } 
+      #eval_table{ border: 1px solid black; } #applicant  td{ border:
+      1px solid black; padding: 2px;width:  11.11%;} 
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='header'>
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='100%'
+            alt=''
+          />
+
+        </div>
+        <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            alt=''
+          />
+        </div>
+
+        
+          <div style='width: 100%;'>
+            <table
+              style='margin:0 auto; width: 100%; page-break-inside:auto; table-layout:fixed'
+            >
+              {{! // Add this css to make main table fixed, child tables will still scroll }}
+              <thead>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 120px;'></div>
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+
+                  </td>
+                </tr>
+              </tfoot>
+        
+              <tbody class=""> 
+                <tr>
+                    <td colspan="">
+                        <tr class="strong" >
+                     
+                       
+                        <td class="font-12">Position title:&nbsp;<u>{{position}}</u></td>
+
+                        </tr>
+                             <tr class="strong" >
+                     
+                       
+                      
+                        <td class="font-12">Department unit: &nbsp;<u>{{unit_department}}</u></td>
+
+                        </tr>
+                    
+                    </td>
+                </tr>
+               
+
+                <tr>
+                  <td colspan='2'>
+                    <table id="applicant" style="width:100%">
+                  <tr>
+                  <td > </td> 
+                  {{#ifCond position 'All'}}
+                     <td></td>
+                     {{else}}
+                      {{/ifCond}}
+                  <td > </td>
+                  <td > </td>
+                  <td > </td>
+                  <td > </td>
+                  <td colspan="3" style="text-align: center;"> Appointee’s Qualification</td>
+                  <td > </td>
+
+                    <tr>
+                    <td    align='center' class="font-12">Fullname</td>
+                    <td    align='center' class="font-12">Gender</td>
+                     {{#ifCond position 'All'}}
+                     <td    align='center' class="font-12">Position</td>
+                     {{else}}
+                      {{/ifCond}}
+                    
+                    
+                    <td    align='center' class="font-12">Birth Date</td>
+                    
+                    <td    align='center' class="font-12">Latest Position</td>
+                    
+                    
+                    <td    align='center' class="font-12">Education</td>
+                    <td    align='center' class="font-12">Work Experience</td>
+                    <td    align='center' class="font-12">Eligibility</td>
+                    <td    align='center' class="font-12">Address</td>
+                    <td    align='center' class="font-12">Phone Number</td>
+                    
+                </tr>
+                {{#applicant}}
+                <tr>
+                  <td   align='center'  class="font-12" >{{toTitleCase fullname}}</td>
+                   <td   align='center' class="font-12">{{gender}}</td>
+                  {{#ifCond ../position 'All'}}
+                  <td   align='center' class="font-12">{{position}}</td>
+                    {{else}}
+                      {{/ifCond}}
+                    
+                  <td   align='center' class="font-12">{{birth}}</td>
+                  <td   align='center' class="font-12">{{present_position}}</td>
+                  <td   align='center' class="font-12">{{education}}</td>
+
+                   {{#ifCond inclusive_from  ''}}  
+                   <td   align='center' class="font-12">{{company_agency}}, {{status_employment}} </td>
+{{else}}
+<td   align='center' class="font-12">{{company_agency}}, {{status_employment}} from {{inclusive_from}}-{{inclusive_to}} </td>
+                      {{/ifCond}}
+
+                   {{#ifCond work_eligibility 'None Required'}}   
+                   <td   align='center' class="font-12"></td>
+{{else}}
+<td   align='center' class="font-12">{{eligibility_form}}</td>
+                      {{/ifCond}}
+                    <td   align='center' class="font-12">{{address}}</td>
+                  <td   align='center' class="font-12">{{phone_number}}</td>
+                  {{!-- <td   align='center' class="font-12">
+                     {{#if pregnant_check}}
+                    <input type="checkbox" checked>
+                    {{else}}
+                    <input type="checkbox">
+                    {{/if}}
+                  </td>
+                  <td   align='center' class="font-12">
+                    {{#if indigenous_value}}
+                    <span>{{indigenous_value}}</span>
+                    {{else}}
+                    {{/if}}
+                  </td>
+                  <td   align='center' class="font-12"> 
+                    {{#if pwd_value}}
+                    <span>{{pwd_value}}</span>
+                    {{else}}
+                    {{/if}}
+                    </td>
+                  <td   align='center' class="font-12">
+                    {{#if sogie_check}}
+                    <input type="checkbox" checked>
+                    {{else}}
+                    <input type="checkbox">
+                    {{/if}}
+                    
+                    </td> --}}
+                </tr>
+                {{/applicant}}
+                    </table>
+                </td>
+                </tr>
+
+                <tr class="font-12"> 
+                    <td>
+                      <div style="margin-top: 35px;">
+                        Prepared by:____________________
+                      </div>
+                    </td>
+                </tr>
+             
+              </tbody>
+            </table>
+          </div>
+
+        
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

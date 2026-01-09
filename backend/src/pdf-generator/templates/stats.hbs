@@ -1,0 +1,401 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+         /**body { font-family: 'Liberation Sans'; }*/ 
+      header { position: relative; top: 0px; left: 0px; right: 0px; height:
+      100px; border: 1px solid black } body { font-family: 'Arial Narrow' }
+      .table { width: 100%; page-break-inside: auto; border-collapse: collapse;
+      } .strong { font-weight: bold; } .bordered { border: 1px solid black; }
+      .font-10 { font-size: 10px; } .font-12 { font-size: 12px; } .font-14 {
+      font-size: 14px; } .font-16 { font-size: 16px; } .font-18 { font-size:
+      18px; }.font-24 { font-size:
+      24px; } .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr {
+      page-break-inside: avoid; page-break-after: auto; } thead { display:
+      table-header-group; } tfoot { display: table-footer-group; } .doctorate {
+      background-color: #ffe699; } .pursuing_doctorate { background-color:
+      #d0cece; } .masters { background-color: #f8cbad; } .pursuing_masters {
+      background-color: #b4c6e7; } .undergraduate { background-color: #c6e0b4; }
+      .colvoc { background-color: #d98f8f; } .highschool { background-color:
+      #faa158; } .prepared_by{  }
+    </style>
+  </head>
+
+  <body>
+    {{!-- {{#each this}} --}}
+
+    <div class='container'>
+
+      <table class='table'>
+        {{!-- <thead>
+                <tr class="header">
+                    <td colspan="11" align="center">
+
+                        <img src="{{img}}" width="75%" alt="">
+
+                    </td>
+                </tr>
+
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="11" align="center" style="visibility: hidden;">XX</td>
+                </tr>
+            </tfoot> --}}
+        <tr>
+          <td colspan='15' height='30' class='bordered' align='center'>
+            <strong class='font-18'> {{month}}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='15' class='bordered' height='30' align='center'>
+            <strong class='font-18'>
+              Agency Personnel Complement(Based on Updated Plantilla of
+              Personnel)</strong>
+
+          </td>
+        </tr>
+
+        <tr>
+          {{! <td rowspan="2" align="center" width="5%" class="bordered font-12 strong">NO.</td> }}
+          <td
+            rowspan='5'
+            align='center'
+            class='bordered font-24 strong'
+          >AUTHORIZED POSITIONS</td>
+          <td
+            rowspan='3'
+            colspan='2'
+            align='center'
+            class='bordered font-12 strong'
+          >1st Level</td>
+          <td colspan='4' align='center' class='bordered font-12'>2nd Level</td>
+          <td colspan='2' align='center' class='bordered font-12'>3rd Level</td>
+          <td
+            colspan='2'
+            align='center'
+            rowspan='3'
+            class='bordered font-12'
+          >Elective <br />Officials</td>
+          <td
+            colspan='4'
+            align='center'
+            rowspan='3'
+            class='bordered font-12'
+          >Total</td>
+
+        </tr>
+        <tr>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Professional/
+            <br />Technical
+          </td>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Executive/
+            <br />Managerial
+          </td>
+          <td colspan='2' rowspan='2' align='center' class='bordered font-12'>
+            Presidential
+            <br />Appointees
+          </td>
+
+        </tr>
+        <tr>
+          <td colspan='2' align='center' class='bordered font-12'>
+            (up to SG-24)
+          </td>
+          <td colspan='2' align='center' class='bordered font-12'>
+            (SG-25 and above)
+          </td>
+
+        </tr>
+
+        <tr>
+          <td align='center' colspan='2' class='bordered font-12' height="20">
+           {{_1st_lvl}}
+          </td>
+          <td colspan='2' align='center' class='bordered font-12' height="20">
+            {{_2nd_lvlSG24}}
+          </td>
+          <td colspan='2' align='center' class='bordered font-12' height="20">
+         {{_2nd_lvlSG25}}
+          </td>
+          </td>
+          <td colspan='2' align='center' class='bordered font-12' height="20">
+           {{_3rd_lvl}}
+          </td>
+          </td>
+          <td colspan='2' align='center' class='bordered font-12' height="20">
+            {{electiveCnt}}
+          </td>
+          <td colspan='4' align='center' class='bordered font-12' height="20">
+            {{total}}
+          </td>
+
+        </tr>
+
+        <tr>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+          <td align='center' height='10' class='bordered font-12'></td>
+
+          <td
+            align='center'
+            colspan='5'
+            height='10'
+            class='bordered font-12'
+          ></td>
+
+        </tr>
+
+        <tr>
+          <td align='center' rowspan='3' class='bordered font-24 strong'>FILLED
+            POSITIONS as of {{month}} {{year}}</td>
+          <td align='center' colspan='14' height="20" class='bordered font-12'>Status of
+            Employment</td>
+        </tr>
+
+        <tr>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Permanent
+          </td>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Temporary
+          </td>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Coterminous
+          </td>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Casuals
+          </td>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Contract of Service
+          </td>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Elective
+          </td>
+          <td colspan='2' align='center' class='bordered font-12'>
+            Job Orders
+          </td>
+
+        </tr>
+        <tr>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Male
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Female
+          </td>
+          <td align='center' width='5%' class='bordered font-12'>
+            Male
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Female
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Male
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Female
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Male
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Female
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Male
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Female
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Male
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Female
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Male
+          </td>
+          <td align='center' width='5%' height="20" class='bordered font-12'>
+            Female
+          </td>
+
+        </tr>
+        {{! 1st level SG-1 to SG 10 }}
+        <tr>
+          <td align='left' class='bordered font-12' height="20" style='padding-left:5px ;'>
+            1st Level
+          </td>
+          <td align='center' class='bordered font-12' height="20">{{permanent_male_1}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{permanent_female_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{temp_male_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{temp_female_1}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{coterminous_male_1}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{coterminous_female_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{casual_male_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{casual_female_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{cos_male_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{cos_female_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{elective_male_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{elective_female_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{jo_male_1}}</td>
+          <td align='center' class='bordered font-12' height="20">{{jo_female_1}}</td>
+        </tr>
+
+        {{! 1st level SG-11 to SG 24 }}
+        <tr>
+          <td align='left' class='bordered font-12' style='padding-left:5px ;' height="20">
+            2nd Level (up to SG-24)
+          </td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{permanent_male_sg24}}</td>
+          <td
+            align='center'
+            class='bordered font-12'
+          >{{permanent_female_sg24}}</td>
+          <td align='center' class='bordered font-12' height="20">{{temp_male_sg24}}</td>
+          <td align='center' class='bordered font-12' height="20">{{temp_female_sg24}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{coterminous_male_sg24}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{coterminous_female_sg24}}</td>
+          <td align='center' class='bordered font-12' height="20">{{casual_male_sg24}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{casual_female_sg24}}</td>
+          <td align='center' class='bordered font-12' height="20">{{cos_male_sg24}}</td>
+          <td align='center' class='bordered font-12' height="20">{{cos_female_sg24}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{elective_male_sg24}}</td>
+          <td
+            align='center'
+            class='bordered font-12'
+          >{{elective_female_sg24}}</td>
+          <td align='center' class='bordered font-12' height="20">{{jo_male_sg24}}</td>
+          <td align='center' class='bordered font-12' height="20">{{jo_female_sg24}}</td>
+        </tr>
+
+        {{! 1st level SG-25 and up }}
+        <tr>
+          <td align='left' class='bordered font-12' style='padding-left:5px ;' height="20">
+            2nd Level (SG-25 and above)
+          </td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{permanent_male_sg25}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{permanent_female_sg25}}</td>
+          <td align='center' class='bordered font-12' height="20">{{temp_male_sg25}}</td>
+          <td align='center' class='bordered font-12' height="20">{{temp_female_sg25}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{coterminous_male_sg25}}</td>
+          <td
+            align='center'
+            class='bordered font-12'
+          >{{coterminous_female_sg25}}</td>
+          <td align='center' class='bordered font-12' height="20">{{casual_male_sg25}}</td>
+          <td
+            align='center'
+            class='bordered font-12'
+          >{{casual_female_sg25}}</td>
+          <td align='center' class='bordered font-12' height="20">{{cos_male_sg25}}</td>
+          <td align='center' class='bordered font-12' height="20">{{cos_female_sg25}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{elective_male_sg25}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{elective_female_sg25}}</td>
+          <td align='center' class='bordered font-12' height="20">{{jo_male_sg25}}</td>
+          <td align='center' class='bordered font-12' height="20">{{jo_female_sg25}}</td>
+        </tr>
+        <tr>
+          <td align='left' class='bordered font-12' height="20" style='padding-left:5px ;'>
+            3rd Level (Presential Appointees)
+          </td>
+          <td align='center' class='bordered font-12' height="20">{{permanent_male_3}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{permanent_female_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{temp_male_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{temp_female_3}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{coterminous_male_3}}</td>
+          <td
+            align='center'
+            class='bordered font-12' height="20"
+          >{{coterminous_female_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{casual_male_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{casual_female_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{cos_male_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{cos_female_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{elective_male_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{elective_female_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{jo_male_3}}</td>
+          <td align='center' class='bordered font-12' height="20">{{jo_female_3}}</td>
+        </tr>
+      </table>
+
+
+      <div class="prepared_by" >
+         <table style=" page-break-inside:avoid;" >
+            <tr>
+                <td class="font-12" height="75">Prepared by:</td>
+            </tr>
+
+            <tr>
+                <td class="">_____________________</td>
+            </tr>
+           
+        </table>
+        
+      </div>
+
+    </div>
+
+    {{!-- {{/each}} --}}
+  </body>
+
+</html>

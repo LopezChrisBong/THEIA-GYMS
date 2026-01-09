@@ -1,0 +1,824 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Liberation Sans' } table{ width:
+      100%; } table,th, td { page-break-inside: auto; } .strong { font-weight:
+      bold; } .bordered { border: 1px solid black; } .font-10 { font-size: 10px;
+      } .font-12 { font-size: 12px; } .font-14 {font-size: 14px; } .font-16 {
+      font-size: 16px; } .font-18 { font-size:18px; }.font-24 { font-size:24px;
+      } .extra-spacing-tr { height: 20px; } .header { height: 60px; } tr
+      {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ margin-top: 0px;}.to_title_div{ text-align: center; }
+      .to_content{page-break-inside: auto; margin-top: 120px; margin-left: 40px;
+      margin-right: 40px; } .to_number{margin-right: 100px;} .employee_table{
+      }.recommending_approval{ display: flex; justify-content: space-between; }
+      .underline{ border-bottom:1px solid black } #eval_table tr td, #eval_table
+      tr th{ padding: 8px; } #eval_table{ page-break-after: always; } #f_table
+      th,#f_table td,#eval_table th,#eval_table td{ border: 1px solid black; }
+      #f_table,#eval_table{ border-collapse: collapse; } #eval_table{ border:
+      1px solid black; }
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='header'>
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='100%'
+            alt=''
+          />
+
+        </div>
+        <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            alt=''
+          />
+        </div>
+        {{#tar}}
+          <div style='width: 100%;'>
+            <table
+              style='table-layout: fixed;margin:0 auto; width: 95%; page-break-inside:auto'
+            >
+              {{! // Add this css to make main table fixed, child tables will still scroll }}
+              <thead>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 120px;'></div>
+                  </td>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan='2'>
+                    <div style='height: 80px;'></div>
+
+                  </td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr>
+                  <td height='100' colspan='2' align='center'>
+                    {{!-- <h3>EMPLOYEE
+                      ASSESSMENT FORM --}}
+                      <h3>TRAVEL ACCOMPLISHMENT REPORT
+                      <br />
+                      {{!-- (After 3-4 months attendance to Seminar/Trainings) --}}
+                      </h3></td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                    <div style='margin-top: -30px;'>
+                      <div style='display: flex;'>
+                        <div style='width:55%'>
+                          <div style='display: flex;margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='width: 20%;'
+                            >Employee:</div>
+                            <div
+                              class='font-14 underline'
+                              style='width: 65%;'
+                            >{{name}}</div>
+                          </div>
+                          <div style='display: flex;margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='text-align:justify;'
+                            >Unit:
+                              <span
+                                style='text-decoration: underline; line-height: 1.3;'
+                              >{{office}}</span></div>
+                            {{!-- <div
+                              class='font-14 underline'
+                              style='width: 65%;'
+                            >{{office}}</div> --}}
+                          </div>
+                          <div style='margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='text-align:justify; margin-right:10px'
+                            >Title of Activity:
+                              <span
+                                style='text-decoration: underline; line-height: 1.3;'
+                              >{{title}}</span></div>
+
+                          </div>
+                        </div>
+                        <div style='width:45%'>
+                          <div style='display: flex;margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='width: 35%;'
+                            >Position:</div>
+                            <div
+                              class='font-14 underline'
+                              style='width: 60%;'
+                            >{{position}}</div>
+                          </div>
+                          <div style='display: flex;margin-top:3px'>
+                            <div class='font-14' style='width: 35%;'>Travel
+                              Order No.:</div>
+                            <div
+                              class='font-14 underline'
+                              style='width: 60%;'
+                            >{{travel_order_num}}</div>
+                          </div>
+                          <div style='display: flex;margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='width: 35%;'
+                            >Venue:</div>
+                            <div
+                              class='font-14 strong'
+                              style='width: 60%;text-decoration:underline'
+                            >{{travel_place}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style='display: flex; margin-top:3px'>
+                        <div class='font-14'>Date of Activity:</div>
+                        <div
+                          class='font-14 underline strong'
+                        >{{travelDates}}</div>
+                      </div>
+                      <div style='margin-top:3px'>
+                        <div class='font-14'>Purpose:
+                          <span
+                            style='text-decoration:underline;line-height:1.3'
+                          >{{travel_purpose}}</span></div>
+
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                    <div class='' style='margin-top: 10px;'>
+                      <table id='f_table'>
+                        <tr>
+                          <td colspan='2' style='padding:10px'>
+                            <div class='font-14 strong'>ACCOMPLISHMENTS:</div>
+                            {{#hasData accomplishmentsList 0}}
+                              <ul>
+                                {{#accomplishmentsList}}
+                                  <li class='font-12'>
+                                    {{this}}
+                                  </li>
+                                {{/accomplishmentsList}}
+                              </ul>
+                            {{else}}
+
+                            {{/hasData}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style='width:50%;padding:10px'>
+                            <div class='font-14 strong'>PLAN OF ACTION:</div>
+                            {{#hasData planOfActionList 0}}
+                              <ul>
+                                {{#planOfActionList}}
+                                  <li class='font-12'>
+                                    {{this}}
+                                  </li>
+                                {{/planOfActionList}}
+                              </ul>
+                            {{else}}
+
+                            {{/hasData}}
+                          </td>
+                          <td style='width:50%;padding:10px'>
+                            <div class='font-14 strong'>TIMELINE OF ACTION:</div>
+                            {{#hasData timelineOfActionList 0}}
+                              <ul>
+                                {{#timelineOfActionList}}
+                                  <li class='font-12'>
+                                    {{this}}
+                                  </li>
+                                {{/timelineOfActionList}}
+                              </ul>
+                            {{else}}
+
+                            {{/hasData}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style='width:50%;padding:10px'>
+                            <div class='font-14'><span class='strong'>HOW TO BE
+                                EVALUATED</span>
+                              (After 3-4 months):</div>
+                            {{#hasData evaluationList 0}}
+                              <ul>
+                                {{#evaluationList}}
+                                  <li class='font-12'>
+                                    {{this}}
+                                  </li>
+                                {{/evaluationList}}
+                              </ul>
+                            {{else}}
+
+                            {{/hasData}}
+                          </td>
+                          <td style='width:50%;padding:10px'>
+                            <div class='font-14 strong'>NAME OF EVALUATOR:</div>
+                            <br /><br />
+                            <div class='font-14 strong'>{{imm_name}}</div>
+                            <div class='font-14 strong'>{{imm_position}}
+                              ({{imm_office}})</div>
+
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                    <div style='margin-top: 20px;'>
+                      <div class='font-16 strong'>EVALUATION</div>
+                      <div style='margin-top: 10px;' class='font-14'>Kindly
+                        answer each question below by checking (/) the column
+                        that matches your judgment. Please rate these questions
+                        on a 1 to 5 scale, one (1) being the lowest score and
+                        five (5) being the highest score. The column headings
+                        have these meanings:</div>
+                      <div
+                        class='font-14'
+                        style='display: flex; justify-content:space-evenly'
+                      >
+                        <div>(5) Excellent</div>
+                        <div>(4) Good</div>
+                        <div>(3) Fair</div>
+                        <div>(2) Needs Improvement</div>
+                        <div>(1) Poor</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                    <div>
+                      <table id='eval_table' style='margin-top:10px'>
+                        <tr>
+                          <th width='5%' class='font-12' align='center'>#</th>
+                          <th
+                            width='60%'
+                            class='font-12'
+                            align='center'
+                          >Area(s)</th>
+                          <th width='5%' class='font-12' align='center'>5</th>
+                          <th width='5%' class='font-12' align='center'>4</th>
+                          <th width='5%' class='font-12' align='center'>3</th>
+                          <th width='5%' class='font-12' align='center'>2</th>
+                          <th width='5%' class='font-12' align='center'>1</th>
+                        </tr>
+                        <tr>
+                          <td class='font-12'>1</td>
+                          <td class='font-12'>To what extent has the activity
+                            awakened your awareness?</td>
+                          <td class='font-12'>
+                            {{#ifCond eval1 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval1 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval1 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval1 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval1 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class='font-12'>2</td>
+                          <td class='font-12'>To what extent has the activity
+                            met your expectations?</td>
+                          <td class='font-12'>
+                            {{#ifCond eval2 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval2 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval2 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval2 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval2 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class='font-12'>3</td>
+                          <td class='font-12'>Were the objectives of the said
+                            activity attained?</td>
+                        
+                             <td class='font-12'>
+                            {{#ifCond eval3 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval3 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval3 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval3 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval3 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class='font-12'>4</td>
+                          <td class='font-12'>How much did the seminar help you
+                            became a well-oriented DNSC employee?</td>
+                           <td class='font-12'>
+                            {{#ifCond eval4 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval4 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval4 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval4 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval4 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'></td>
+                          <td style='border: none;' class='font-12'>How much did
+                            you learn from:</td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'></td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'></td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'></td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'></td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'></td>
+                        </tr>
+                        <tr>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'></td>
+                          <td style='border: none;' class='font-12'>1.1 Being
+                            well informed?</td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval411 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval411 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval411 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval411 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval411 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'></td>
+                          <td style='border: none;' class='font-12'>1.2 Proper
+                            observance?</td>
+                           <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval412 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval412 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval412 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval412 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td style='border-top: none;border-bottom: none;' class='font-12'>
+                            {{#ifCond eval412 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class='font-12'></td>
+                          <td class='font-12'>Rate the timeliness of this event.</td>
+                          <td class='font-12'>
+                            {{#ifCond eval5 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval5 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval5 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval5 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval5 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        <tr>
+                          <td class='font-12'></td>
+                          <td class='font-12'>Rate the speaker(s).</td>
+                          <td class='font-12'>
+                            {{#ifCond eval6 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval6 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval6 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval6 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval6 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class='font-12'></td>
+                          <td class='font-12'>Rate the location of the event.</td>
+                           <td class='font-12'>
+                            {{#ifCond eval7 5}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval7 4}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval7 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval7 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                          <td class='font-12'>
+                            {{#ifCond eval7 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                          </td>
+                        </tr>
+
+                      </table>
+
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                    <div>
+                      <div class='font-14'>
+                        What kind of other activity/seminar/trainings or service
+                        would you like to suggest?
+                      </div>
+                      <div
+                        class='font-14'
+                        style='margin-top: 10px;text-decoration:underline'
+                      >{{suggestedActivity}}</div>
+                    </div>
+                    <div class='font-14' style='margin-top: 20px;'>
+                      The seminar/training conducted enhanced and developed
+                      myself especially my potentials (skills, talents, etc.) or
+                      leadership expertise.
+                    </div>
+                    <div
+                      style='margin-top: 10px;display:flex;justify-content:space-evenly'
+                    >
+                      <div style='display: flex; align-items: center'>
+                        <div style="margin-right: 5px;">
+                            {{#ifCond expertiseRating 1}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                        </div>
+                        <div class='font-14 strong'>Substantially</div>
+                      </div>
+                      <div style='display: flex; align-items: center'>
+                         <div style="margin-right: 5px;">
+                            {{#ifCond expertiseRating 2}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                        </div>
+                        <div class='font-14 strong'>Somewhat</div>
+                      </div>
+                      <div style='display: flex; align-items: center'>
+                         <div style="margin-right: 5px;">
+                            {{#ifCond expertiseRating 3}}
+                              <input type='checkbox' checked />
+                            {{else}}
+                              <input type='checkbox' />
+                            {{/ifCond}}
+                        </div>
+                        <div class='font-14 strong'>Not at all</div>
+                      </div>
+                    </div>
+
+                    <div style='margin-top: 40px;'>
+                      <div class='strong font-14'>COMMENT/SUGGESTIONS:</div>
+                      <div class="font-14" style='text-decoration: underline; margin-top:10px'>{{commentSuggestion}}</div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan='2'>
+                    <div style='display: flex;margin-top:40px'>
+                      <div style='width: 50%;'>
+                        <div class='font-14'>Prepared and submitted by:</div>
+                        <br /><br />
+                         <div style='position:relative'>
+                        {{#ifCond user_hasEsig true}}
+                         <img
+                          src='data:image/png;base64, {{user_esign}}'
+                          style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                        />
+                        {{else}}
+                        {{/ifCond}}
+                       
+                       <div class='font-14 underline' style='width: 80%;'>{{name}}</div>
+                      </div>
+                        
+                        <div class='font-14'>(Signature over printed name of the
+                          Employee)</div>
+                      </div>
+                      <div style='width: 50%;'>
+                        <div class='font-14'>Date submitted:</div>
+                        <br /><br />
+                        <div class='font-14 underline' style='width: 80%;'>{{formatAlphanumericDate created_at}}</div>
+
+                      </div>
+                    </div>
+                    <div style='display: flex;margin-top:40px'>
+                      <div style='width: 50%;line-height:1.3'>
+                        <div class='font-14'>Approved by:</div>
+                        <br /><br />
+                         <div style='position:relative'>
+                        {{#ifCond imm_hasEsig true}}
+                         {{#ifCond immHead_approval_status 2}}
+                             <img
+                          src='data:image/png;base64, {{imm_esign}}'
+                          style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                        />
+                            {{else}}
+                            {{/ifCond}}
+                        
+                        {{else}}
+                        {{/ifCond}}
+                       
+                       <div class='font-14 underline' style='width: 80%;'>{{imm_name}}</div>
+                      </div>
+                        <div class='font-14'>Immediate Head</div>
+                        <div class='font-14'>Date Signed:
+                          <span style='text-decoration: underline;'>{{formatAlphanumericDate immHead_approve_date}}</span></div>
+                      </div>
+                      <div style='width: 50%;line-height:1.3'>
+                        <div class='font-14'>Noted by:</div>
+                        <br /><br />
+                          <div style='position:relative'>
+                        {{#ifCond HRHead_hasEsig true}}
+                             
+                            {{#ifCond hr_approval_status 2}}
+
+                             <img
+                            src='data:image/png;base64, {{HRHead_esign}}'
+                            style='position:absolute; top:-30px; left:20px;width: 70px; height : 50px;'
+                            />
+                            {{else}}
+                            {{/ifCond}}
+                        
+                        {{else}}
+                        {{/ifCond}}
+                       {{#ifCond hrmo_name null}}
+                          <div class='font-14 underline' style='width: 80%;'>RAQUEL J. EDJEC</div>
+                       {{else}}
+                          <div class='font-14 underline' style='width: 80%;'>{{hrmo_name}}</div>
+                       {{/ifCond}}
+                    
+                      </div>
+                        <div class='font-14'>HRMO</div>
+                        <div class='font-14'>Date Signed:
+                             {{#ifCond HRM_approve_date null}}
+                          <span style='text-decoration: underline;'>{{formatAlphanumericDate hr_approve_date}}</span></div>
+                       {{else}}
+                           <span style='text-decoration: underline;'>{{formatAlphanumericDate HRM_approve_date}}</span></div>
+                       {{/ifCond}}
+                         
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+        {{/tar}}
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

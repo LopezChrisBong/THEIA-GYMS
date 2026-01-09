@@ -1,0 +1,127 @@
+html {
+  overflow: auto !important;
+  overflow-x: hidden !important;
+}
+
+.v-toolbar__title {
+  padding: 0 !important;
+  padding-left: 10px !important;
+}
+
+.card-style {
+  background: #ffffff !important;
+  border: 1px solid #ffffff !important;
+  box-sizing: border-box !important;
+  /* box-shadow: 0px 27px 51px rgba(0, 0, 0, 0.07) !important; */
+  border-radius: 16px !important;
+}
+
+.theme--light.v-navigation-drawer:not(.v-navigation-drawer--floating)
+  .v-navigation-drawer__border {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.notifDataTable tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Rounded table header */
+.rounded-table thead tr th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.rounded-table thead tr th:last-child {
+  border-top-right-radius: 12px;
+}
+
+/* Make sure background clips correctly */
+.rounded-table thead tr th {
+  background-color: #8e6e25; /* your orange */
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Optional: remove overflow issues */
+.rounded-table thead {
+  overflow: hidden;
+}
+
+/*.sidebar .v-list-item {
+    border-radius: 5px;
+    margin-left: 10px;
+    color: white
+}
+
+.sidebar .v-list-item:hover {
+ background-color: rgba(255, 247, 247, 0.949);
+    color: black;
+    border-radius: 10px;
+    transition: .5s;
+}
+
+.sidebar .v-list-item--active {
+    background-color: white !important;
+    color: #727375 !important;
+} */
+
+.doughnut-style {
+  width: 110px;
+  height: 110px;
+  margin: 7px;
+}
+
+.dt-container {
+  border-radius: 15px !important;
+}
+
+.dt-container thead th {
+  background-color: #8e6e25 !important;
+  color: white !important;
+}
+
+.dt-container thead th:first-child {
+  border-radius: 15px 0 0 0;
+}
+
+.dt-container thead th:last-child {
+  border-radius: 0 15px 0 0;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+  font-size: 12px !important;
+  font-family: "Roboto";
+}   
+
+.flex-items {
+  display: flex;
+  align-items: center;
+}
+
+.dialog-header {
+  background-color: #d6a89c !important;
+  color: #ffffff;
+}
+
+.text-gray-100 {
+  color: #3a3b3a;
+}
+
+.text-gray-200 {
+  color: #b1b1b3;
+}
+
+.text-green-519043 {
+  color: #519043;
+}
+
+.text-green-6DB249 {
+  color: #6db249;
+}
+
+.text-green-93CB5B {
+  color: #519043;
+}
+
+.text-yellow-F3FF67 {
+  color: #f3ff67;
+}

@@ -1,0 +1,1084 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto;page-break-after: always; } .header { position: fixed; top:
+      0px; left: 0px; right: 0px; height: 100px; } .footer { position: fixed;
+      bottom: 10px; left: 0px; right: 0px; height: 100px; } body { font-family:
+      'Arial Narrow' } table{ width: 100%; } table, td { page-break-inside:
+      auto; border-collapse: collapse; border:1px solid black } .strong {
+      font-weight: bold; } .bordered { border: 1px solid black; } .font-10 {
+      font-size: 10px; } .font-12 { font-size: 12px; } .font-14 {font-size:
+      14px; } .font-16 { font-size: 16px; } .font-18 { font-size:18px; }.font-24
+      { font-size:24px; } .extra-spacing-tr { height: 20px; } .header { height:
+      60px; } .underline{ border-bottom: 1px solid black; } .second_page{ page }
+
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+
+        <div class='font-10 strong'>
+          <div><i>Civil Service Form No. 6</i></div>
+          <div><i>Revised 2020</i></div>
+        </div>
+        {{! logo }}
+        <div style='display: flex; justify-content:space-around'>
+          <div style='transform:translateX(80%)'>
+            <img src='data:image/png;base64, {{dnsc_logo}}' alt='' />
+          </div>
+          <div style='text-align: center;'>
+            <div class='font-12'>Republic of the Philippines</div>
+            <div class='font-14'>DAVAO DEL NORTE STATE COLLEGE</div>
+            <div class='font-12'>New Visayas, Panabo City, Davao del Norte</div>
+          </div>
+          <div style='text-align: center; display:flex; align-items:center; '>
+            <div class='font-10'>Stamp of Date of Receipt</div>
+          </div>
+
+        </div>
+        {{! logo }}
+
+        <div
+          class='font-18 strong'
+          style='text-align: center; margin-top:10px'
+        >APPLICATION FOR LEAVE</div>
+        {{#leave}}
+        <table style='margin-top: 20px;position:relative'>
+          <tr>
+            <td colspan='2'>
+              <div style='display: flex;padding:10px;width:100%'>
+                <div style='width:28%'>
+                  <div class='font-12'>1. OFFICE/DEPARTMENT</div>
+                  <div class='font-12 underline' style='text-indent:10px'>{{office}}</div>
+                </div>
+                <div
+                  style='display: flex;justify-content:space-evenly;width:70%'
+                >
+                  <div style='width:35%'>
+                    <div class='font-12'>2. NAME &nbsp;&nbsp;&nbsp;&nbsp;(Last)</div>
+                    <div class='font-12 underline' style='text-indent:40px'>{{lname}}</div>
+                  </div>
+                  <div style='width:35%'>
+                    <div class='font-12'>(First)</div>
+                    <div class='font-12 underline'>{{fname}}</div>
+                  </div>
+                  <div style='width:30%'>
+                    <div class='font-12'>(Middle)</div>
+                    <div class='font-12 underline'>{{mname}}</div>
+                  </div>
+                </div>
+              </div>
+
+            </td>
+          </tr>
+          <tr>
+            <td colspan='2'>
+              <div style='display: flex;padding:10px;width:100%;'>
+                <div style='display: flex; width:30%'>
+                  <div class='font-12' style='width: 40%;'>3. DATE OF FILING</div>
+                  <div
+                    class='font-12 underline'
+                    style='text-indent:10px;width:60%'
+                  >  {{formatAlphanumericDate date_filed}}</div>
+                </div>
+                <div style='display: flex; width:40%'>
+                  <div class='font-12' style='width:30%'>4. POSITION</div>
+                  <div
+                    class='font-12 underline'
+                    style='text-indent:10px; width:70%'
+                  >{{position}}</div>
+                </div>
+                <div style='display: flex; width:30%'>
+                  <div class='font-12' style='width:30%'>5. SALARY</div>
+                  <div
+                    class='font-12 underline'
+                    style='text-indent:10px; width:63%'
+                  ></div>
+                </div>
+
+              </div>
+
+            </td>
+          </tr>
+          <tr>
+            <td colspan='2' style='text-align: center;padding:5px'>
+              <div class='font-14 strong'>6. DETAILS OF APPLICATION</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td style='width: 55%;padding:5px; position:relative; height:350px'>
+              <div class='font-12' style='position: absolute; top:5px'>6.A TYPE
+                OF LEAVE TO BE AVAILED</div>
+              <div style='margin-top: 5px;position:absolute; top:15px'>
+               
+                {{#../leave_type}}
+                
+                  <div style='display: flex; padding-top:2px;padding-left:5px'>
+                   {{#ifCond id ../type_of_leave_ID}}
+                    <div style=''>
+                      <input type='checkbox' checked />
+                    </div>
+                   {{else}}
+                    <div style=''>
+                      <input type='checkbox'  />
+                    </div>
+                   {{/ifCond}}
+                   
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12 strong'
+                    >{{description}}</div>
+                    {{#ifCond subdescription null}}{{else}}
+                      <div
+                        style='display:flex; justify-content:center;align-items:center;margin-left :2px; margin-top:2px'
+                        class='font-10'
+                      >({{subdescription}})</div>
+                    {{/ifCond}}
+
+                    {{!-- <input type='checkbox' name='{{id}}' />
+                    <div  style='display:flex; justify-content:center;align-items:center' class='font-12 strong'>{{description}}</div>
+                    {{#ifCond subdescription null}}{{else}}
+                      <div
+                        style='display: flex;align-items:center'
+                        class='font-10'
+                      >({{subdescription}})</div>
+                    {{/ifCond}} --}}
+
+                  </div>
+
+                {{/../leave_type}}
+
+                <div
+                  style='width:60%;margin-left:8px;margin-top:10px'
+                  class='underline'
+                ></div>
+              </div>
+            </td>
+            <td style='width: 45%;padding:5px; position:relative; height:350px'>
+              <div class='font-12' style='position: absolute; top:5px'>6.B
+                DETAILS OF LEAVE</div>
+              {{! vacation leave }}
+              <div style='position: absolute; top:20px'>
+                {{#ifCond type_of_leave_ID 1}}
+                     <div>
+                    <div
+                        class='font-12'
+                        style='padding-left: 8px;padding-top:2px'
+                    ><i>In case of Vacation/Special Privilege Leave:</i></div>
+                  {{#ifCond selected_details_of_leave 1}}
+                    <div style='display: flex;'>
+                        <div><input type='checkbox' checked/></div>
+                        <div
+                        style='display:flex; justify-content:center;align-items:center'
+                        class='font-12'
+                        >Within the Philippines &nbsp;&nbsp;&nbsp;&nbsp;<span style="text-decoration: underline;"
+                        >{{details_of_leave}}</span></div>
+
+                    </div>
+                  {{else}}
+                  <div style='display: flex;'>
+                    <div style=''>
+                      <input type='checkbox' /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >Within the Philippines &nbsp;&nbsp;&nbsp;&nbsp;<span
+                      >_______________________________</span></div>
+
+                  </div>
+                  {{/ifCond}}
+                  
+                   {{#ifCond selected_details_of_leave 2}}
+                    <div style='display: flex;'>
+                    <div style=''>
+                      <input type='checkbox' checked /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >Abroad (Specify) &nbsp;&nbsp;&nbsp;&nbsp;<span style="text-decoration: underline;"
+                      >{{details_of_leave}}</span></div>
+
+                  </div>
+                  {{else}}
+                   <div style='display: flex;'>
+                    <div style=''>
+                      <input type='checkbox'  /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >Abroad (Specify) &nbsp;&nbsp;&nbsp;&nbsp;<span
+                      >_______________________________</span></div>
+
+                  </div>
+                  {{/ifCond}}
+                 
+                </div>
+                {{else}}
+                   {{#ifCond type_of_leave_ID 6}}
+                        <div>
+                            <div
+                                class='font-12'
+                                style='padding-left: 8px;padding-top:2px'
+                            ><i>In case of Vacation/Special Privilege Leave:</i></div>
+                        {{#ifCond selected_details_of_leave 1}}
+                            <div style='display: flex;'>
+                                <div><input type='checkbox' checked/></div>
+                                <div
+                                style='display:flex; justify-content:center;align-items:center'
+                                class='font-12'
+                                >Within the the the Philippines &nbsp;&nbsp;&nbsp;&nbsp;<span style="text-decoration: underline;"
+                                >{{details_of_leave}}</span></div>
+
+                            </div>
+                        {{else}}
+                        <div style='display: flex;'>
+                            <div style=''>
+                            <input type='checkbox' /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >Within the Philippines &nbsp;&nbsp;&nbsp;&nbsp;<span
+                            >_______________________________</span></div>
+
+                        </div>
+                        {{/ifCond}}
+                        
+                        {{#ifCond selected_details_of_leave 2}}
+                            <div style='display: flex;'>
+                            <div style=''>
+                            <input type='checkbox' checked /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >Abroad (Specify) &nbsp;&nbsp;&nbsp;&nbsp;<span style="text-decoration: underline;"
+                            >{{details_of_leave}}</span></div>
+
+                        </div>
+                        {{else}}
+                        <div style='display: flex;'>
+                            <div style=''>
+                            <input type='checkbox'  /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >Abroad (Specify) &nbsp;&nbsp;&nbsp;&nbsp;<span
+                            >_______________________________</span></div>
+
+                        </div>
+                        {{/ifCond}}
+                        
+                        </div>
+                    {{else}}
+                     <div>
+                  <div
+                    class='font-12'
+                    style='padding-left: 8px;padding-top:2px'
+                  ><i>In case of Vacation/Special Privilege Leave:</i></div>
+                  <div style='display: flex;'>
+                    <div style=''>
+                      <input type='checkbox' /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >Within Philippines &nbsp;&nbsp;&nbsp;&nbsp;<span
+                      >_______________________________</span></div>
+
+                  </div>
+                  <div style='display: flex;'>
+                    <div style=''>
+                      <input type='checkbox' /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >Abroad (Specify) &nbsp;&nbsp;&nbsp;&nbsp;<span
+                      >_______________________________</span></div>
+
+                  </div>
+                </div>
+                    {{/ifCond}}
+                {{/ifCond}}
+               
+                {{! vacation leave }}
+                {{! sick leave }}
+                <div style='margin-top:5px'>
+                  <div class='font-12' style='padding-left: 8px;padding-top:2px' ><i>In case of Sick Leave:</i></div>  
+                    {{#ifCond type_of_leave_ID 3}}
+                        {{#ifCond selected_details_of_leave 1}}
+                             <div style='display: flex; margin-top:2px'>
+                            <div style=''>
+                            <input type='checkbox' checked /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >In Hospital (Specify Illness)&nbsp;&nbsp;<span style="text-decoration: underline;"
+                            >{{details_of_leave}}</span></div>
+
+                        </div>
+                        {{else}}
+                            <div style='display: flex; margin-top:2px'>
+                            <div style=''>
+                            <input type='checkbox' /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >In Hospital (Specify Illness)&nbsp;&nbsp;<span
+                            >_______________________</span></div>
+
+                        </div>
+                        {{/ifCond}}
+
+                        {{#ifCond selected_details_of_leave 2}}
+                         <div style='display: flex;margin-top:5px'>
+                            <div style=''>
+                            <input type='checkbox' checked /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >Out Patient (Specify Illness)&nbsp;&nbsp;<span style="text-decoration: underline;"
+                            >{{details_of_leave}}</span></div>
+
+                        </div>
+                        {{else}}
+                         <div style='display: flex;margin-top:5px'>
+                            <div style=''>
+                            <input type='checkbox' /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >Out Patient (Specify Illness)&nbsp;&nbsp;<span
+                            >_______________________</span></div>
+
+                        </div>
+                        {{/ifCond}}
+                    {{else}}
+                     
+                        <div style='display: flex; margin-top:2px'>
+                            <div style=''>
+                            <input type='checkbox' /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >In Hospital (Specify Illness)&nbsp;&nbsp;<span
+                            >_______________________</span></div>
+
+                        </div>
+                        <div style='display: flex;margin-top:5px'>
+                            <div style=''>
+                            <input type='checkbox' /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >Out Patient (Specify Illness)&nbsp;&nbsp;<span
+                            >_______________________</span></div>
+
+                        </div>
+
+                    {{/ifCond}}
+                 
+                </div>
+                {{! sick leave }}
+                {{! SPL FOR WOMEN }}
+                <div class='margin-top:8px'>
+                  <div
+                    class='font-12'
+                    style='padding-left: 8px;padding-top:10px'
+                  ><i>In case of Special Leave Benefits for Women:</i></div>
+                  <div style='display: flex;padding-left:8px; padding-top:2px'>
+                    {{#ifCond type_of_leave_ID 11}}
+                    <div
+                      class='font-12'
+                      style='text-align: justify;padding-right:10px;padding-left:10px'
+                    >(Specify Illness) &nbsp;&nbsp;<span
+                        style='text-decoration:underline;'
+                      >{{details_of_leave}} 
+                      </span></div>
+                    {{else}}
+                     <div
+                      class='font-12'
+                      style='padding-right:10px;padding-left:10px'
+                    >(Specify Illness) &nbsp;&nbsp;<span>_________________________________</span>
+                      <div>________________________________________________</div></div>
+                    {{/ifCond}}
+                   
+
+                  </div>
+
+                </div>
+                {{! SPL FOR WOMEN }}
+                {{! study leave }}
+                <div style='margin-top: 8px;'>
+
+                  <div
+                    class='font-12'
+                    style='padding-left: 8px;padding-top:2px'
+                  ><i>In case of Study Leave:</i></div>
+                  {{#ifCond type_of_leave_ID 8}}
+                    {{#ifCond selected_details_of_leave 1}}
+                        <div style='display: flex;'>
+                            <div style=''>
+                            <input type='checkbox' checked /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >Completion of Master's Degree</div>
+
+                        </div>
+                    {{else}}
+                         <div style='display: flex;'>
+                            <div style=''>
+                            <input type='checkbox' /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >Completion of Master's Degree</div>
+
+                        </div>
+                    {{/ifCond}}
+
+                    {{#ifCond selected_details_of_leave 2}}
+                         <div style='display: flex;margin-top:5px'>
+                            <div style=''>
+                            <input type='checkbox' checked /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >BAR/Board Examination Review</div>
+
+                        </div>
+                    {{else}}
+                        <div style='display: flex;margin-top:5px'>
+                            <div style=''>
+                            <input type='checkbox' /></div>
+                            <div
+                            style='display:flex; justify-content:center;align-items:center'
+                            class='font-12'
+                            >BAR/Board Examination Review</div>
+
+                        </div>
+                    {{/ifCond}}
+                  {{else}}
+                  <div style='display: flex;'>
+                    <div style=''>
+                      <input type='checkbox' /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >Completion of Master's Degree</div>
+
+                  </div>
+                  <div style='display: flex;margin-top:5px'>
+                    <div style=''>
+                      <input type='checkbox' /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >BAR/Board Examination Review</div>
+
+                  </div>
+                  {{/ifCond}}
+                </div>
+                {{! study leave }}
+                {{! other purpose }}
+                <div style='margin-top:8px'>
+                  <div
+                    class='font-12'
+                    style='padding-left: 8px;padding-top:2px'
+                  ><i>Other purpose:</i></div>
+                  {{#ifCond type_of_leave_ID 14}}
+                        {{#ifCond selected_details_of_leave 1}}
+                             <div style='display: flex;'>
+                                <div style=''>
+                                <input type='checkbox' checked /></div>
+                                <div
+                                style='display:flex; justify-content:center;align-items:center'
+                                class='font-12'
+                                >Monetization of Leave Credits</div>
+
+                            </div>
+                        {{else}}
+                              <div style='display: flex;'>
+                                <div style=''>
+                                <input type='checkbox' /></div>
+                                <div
+                                style='display:flex; justify-content:center;align-items:center'
+                                class='font-12'
+                                >Monetization of Leave Credits</div>
+
+                            </div>
+                        {{/ifCond}}
+
+                        {{#ifCond selected_details_of_leave 2}}
+                            <div style='display: flex;margin-top:5px'>
+                                <div style=''>
+                                <input type='checkbox' checked /></div>
+                                <div
+                                style='display:flex; justify-content:center;align-items:center'
+                                class='font-12'
+                                >Terminal Leave</div>
+
+                            </div>
+                        {{else}}
+                            <div style='display: flex;margin-top:5px'>
+                                <div style=''>
+                                <input type='checkbox' /></div>
+                                <div
+                                style='display:flex; justify-content:center;align-items:center'
+                                class='font-12'
+                                >Terminal Leave</div>
+
+                            </div>
+                        {{/ifCond}}
+                  {{else}}
+                    <div style='display: flex;'>
+                    <div style=''>
+                      <input type='checkbox' /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >Monetization of Leave Credits</div>
+
+                  </div>
+                  <div style='display: flex;margin-top:5px'>
+                    <div style=''>
+                      <input type='checkbox' /></div>
+                    <div
+                      style='display:flex; justify-content:center;align-items:center'
+                      class='font-12'
+                    >Terminal Leave</div>
+
+                  </div>
+                  {{/ifCond}}
+                  
+                </div>
+              </div>
+              {{! other purpose }}
+            </td>
+          </tr>
+          <tr>
+            <td style='width: 55%;height:150px;padding:10px; position:relative'>
+              <div
+                style='position: absolute; top:10px; width:90%; '
+                class='font-12'
+              >6.C NUMBER OF WORKING DAYS APPLIED FOR</div>
+              <div
+                style='margin-left: 18px;width:60%;height:10px;padding-bottom:5px; text-align:center'
+                class='underline font-12 '
+              >{{no_days_applied}}</div>
+              <div
+                class='font-12'
+                style='padding-left: 18px;margin-top:5px'
+              >INCLUSIVE DATES</div>
+              <div
+                style='margin-left: 18px;width:60%;height:25px; text-align:center;position:relative'
+                class='underline font-12'
+              >
+              <div style="position: absolute;bottom:0;left:50px">
+                {{inclusiveDateString}}
+                {{!-- {{#ifCond inclusive_date_from null}}
+              {{else}}
+              {{formatAlphanumericDate inclusive_date_from}} - {{formatAlphanumericDate inclusive_date_to}}
+              {{/ifCond}} --}}
+              </div>
+              
+              </div>
+            </td>
+            <td style='width: 45%; height:150px;padding:10px;position:relative'>
+              <div
+                class='font-12'
+                style='position: absolute; top:10px; width:90%; '
+              >6.D COMMUTATION</div>
+              <div style='position: absolute; top:40px; width:90%; '>
+                <div style='display: flex;margin-top:5px;'>
+                  <div style=''>
+                    {{#ifCond commutation 2}}
+                     <input type='checkbox' checked />
+                    {{else}}
+                     <input type='checkbox' />
+                    {{/ifCond}}
+                    </div>
+                  <div
+                    style='display:flex; justify-content:center;align-items:center'
+                    class='font-12'
+                  >Not Requested</div>
+                </div>
+
+                <div style='display: flex;margin-top:5px; margin-bottom:20px'>
+                  <div style=''>
+                    {{#ifCond commutation 1}}
+                     <input type='checkbox' checked />
+                    {{else}}
+                     <input type='checkbox' />
+                    {{/ifCond}}
+                    </div>
+                  <div
+                    style='display:flex; justify-content:center;align-items:center'
+                    class='font-12'
+                  >Requested</div>
+                </div>
+              </div>
+
+              <div
+                style='position: absolute; bottom:8px; width:90%; text-align:center;'
+              >
+              {{#ifCond ../app_has_esig true}}
+              <div style="position:  relative;">
+                  <img src='data:image/png;base64, {{../applicant_esig}}'
+                            style='position:absolute; top:-40px; left:100px;width: 80px; height : 80px;'
+                          />
+              </div>
+              {{else}}
+              {{/ifCond}}
+                <div style='height:20px' class='underline font-12'>{{toUpperCase applicant_name}}</div>
+                <div class='font-12'>(Signature of Applicant)</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='2' style='text-align: center;padding:5px'>
+              <div class='font-14 strong'>7. DETAILS OF ACTION ON APPLICATION</div>
+            </td>
+          </tr>
+          <tr>
+            <td style='width: 55%;height:200px;padding:5px; position:relative'>
+              <div
+                style='position: absolute; top:2px; width:90%; '
+                class='font-12'
+              >7.A CERTIFICATION OF LEAVE CREDITS</div>
+              <div
+                style='text-align: center;position:absolute;top:30px;width:90%'
+                class='font-12'
+              >
+
+                As of
+                <span style="text-decoration: underline;">{{formatAlphanumericDate date_filed}}</span></div>
+              <div
+                style='text-align: center;position:absolute;top:50px;width:95%'
+              >
+                <div style='display: flex; justify-content:center'>
+                  <table style='width:80%; '>
+                    <tr>
+                      <td style='width:40%'></td>
+                      <td
+                        style='width:30%'
+                        align='center'
+                        class='font-12'
+                      >Vacation Leave</td>
+                      <td style='width:30%' align='center' class='font-12'>Sick
+                        Leave</td>
+                    </tr>
+                    <tr>
+                      <td align='center' class='font-12'>Total Earned</td>
+                      <td align='center' class='font-12'>{{vl_total_earned}}</td>
+                      <td align='center' class='font-12'>{{sl_total_earned}}</td>
+                    </tr>
+                    <tr>
+                      <td align='center' class='font-12'>Less this Application</td>
+                      <td align='center' class='font-12'>{{vl_less}}</td>
+                      <td align='center' class='font-12'>{{sl_less}}</td>
+                    </tr>
+                    <tr>
+                      <td align='center' class='font-12'>Balance</td>
+                      <td align='center' class='font-12'>{{vl_balance}}</td>
+                      <td align='center' class='font-12'>{{sl_balance}}</td>
+                    </tr>
+                  </table>
+                </div>
+
+              </div>
+              <div
+                style='position: absolute; bottom:8px; width:90%; text-align:center;'
+              >
+              {{#ifCond ../hr_has_esig true}}
+              <div style="position:  relative;">
+                  <img src='data:image/png;base64, {{../hr_esig}}'
+                            style='position:absolute; top:-40px; left:180px;width: 80px; height : 80px;'
+                          />
+              </div>
+              {{else}}
+              {{/ifCond}}
+               
+                <div style='height:20px' class='underline font-12'>{{toUpperCase hr_name}}</div>
+                <div class='font-12'>(Authorized Officer)</div>
+              </div>
+            </td>
+            <td style='width: 45%; height:200px;padding:5px;position:relative'>
+              <div
+                class='font-12'
+                style='position: absolute; top:2px; width:90%; '
+              >7.B RECOMMEDATION</div>
+              <div style='position: absolute; top:20px; width:90%; '>
+
+                <div style='display: flex;margin-top:5px;'>
+                  <div style=''>
+                    {{#ifCond recommending_status 1}}
+                    <input type='checkbox' checked />
+                    {{else}}
+                    <input type='checkbox' />
+                    {{/ifCond}}
+                    </div>
+                  <div
+                    style='display:flex; justify-content:center;align-items:center'
+                    class='font-12'
+                  >For approval</div>
+                </div>
+
+                <div style='display: flex;margin-top:5px; margin-bottom:20px'>
+                  <div style='display:flex; '>
+                    <div style=''>
+                        
+                      {{#ifCond recommending_status 2}}
+                    <input type='checkbox' checked />
+                     </div>
+                    <div
+                      class='font-12'
+                      style='margin-top:2px; text-align:justify'
+                    >For disapproval due to
+                      <span style='text-decoration: underline;'>{{recommending_remarks}}</span>
+                    </div>
+                    {{else}}
+                    <input type='checkbox' />
+                     </div>
+                    <div
+                      class='font-12'
+                      style='margin-top:2px; '
+                    >For disapproval due to
+                      <span style=''>___________________________</span>
+                      <div>______________________________________________</div>
+                       <div>______________________________________________</div>
+                        <div>______________________________________________</div>
+                    </div>
+                    {{/ifCond}}
+                     
+                  </div>
+
+                </div>
+              </div>
+
+              <div
+                style='position: absolute; bottom:8px; width:90%; text-align:center;'
+              >
+              {{#ifCond ../rec_has_esig true}}
+              <div style="position:  relative;">
+                  <img src='data:image/png;base64, {{../rec_esig}}'
+                            style='position:absolute; top:-40px; left:100px;width: 80px; height : 80px;'
+                          />
+              </div>
+              {{else}}
+              {{/ifCond}}
+                <div style='height:20px' class='underline font-12'>{{toUpperCase rec_name}}</div>
+                <div class='font-12'>(Authorized Officer)</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style='width: 60%;height:150px;padding:5px; position:relative; border-right:none;border-bottom:none'
+            >
+
+              <div
+                class='font-12'
+                style='position: absolute; top:2px; width:90%; '
+              > 7.C APPROVED FOR:</div>
+              <div
+                style='position: absolute; top:20px; width:90%; padding-left:10px'
+              >
+                <div class='font-12' style="display: flex;"><div style="border-bottom:1px solid black;width:30px;text-align:center">{{app_days_w_pay}}</div> <div>days with pay</div></div>
+                <div class='font-12' style="display: flex;"><div style="border-bottom:1px solid black;width:30px;text-align:center">{{app_days_wo_pay}}</div> <div>days without pay</div></div>
+               <div class='font-12' style="display: flex;"><div style="border-bottom:1px solid black;width:30px;text-align:center"></div> <div>others (Specify)</div></div>
+               
+              
+              </div>
+            </td>
+            <td
+              style='width: 40%;height:150px;padding:10px; position:relative;border-left:none;border-bottom:none'
+            >
+              <div
+                class='font-12'
+                style='position: absolute; top:2px; width:90%; '
+              >7.D DISAPPROVED DUE TO:</div>
+              <div
+                style='padding-left: 10px;position: absolute; top:20px; width:90%; '
+              >
+                {{#ifCond is_final_approval_disapproved 1}}
+                    <div
+                  class='font-12'
+                  style='text-align:justify; text-decoration:underline; '
+                >{{final_approval_user_remarks}}
+                </div>
+                {{else}}
+                     <div>_____________________________________</div>
+                     <div>_____________________________________</div>
+                     <div>_____________________________________</div>
+                {{/ifCond}}
+                
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td
+              align='center'
+              colspan='2'
+              style='text-align: center;padding:10px; border-top:none;position:relative'
+            >
+              <div style='display: flex;justify-content:center'>
+                <div style='width: 40%;position:absolute;bottom:8px;'>
+                     {{#ifCond ../final_has_esig true}}
+              <div style="position:  relative;">
+                  <img src='data:image/png;base64, {{../final_esig}}'
+                            style='position:absolute; top:-40px; left:120px;width: 80px; height : 80px;'
+                          />
+              </div>
+              {{else}}
+              {{/ifCond}}
+                  <div
+                    class='font-12'
+                    style='border-bottom:1px solid black;padding-bottom:5px'
+                  >{{toUpperCase final_name}}</div>
+                  <div class='font-12 strong'>(Authorized Official)</div>
+                </div>
+              </div>
+
+            </td>
+          </tr>
+        </table>
+        {{/leave}}
+      </div>
+
+      <div class='second_page'>
+        <div
+          style='text-align: center; border:1px solid black;padding:5px;'
+          class='font-14'
+        >INSTRUCTION AND REQUIREMENTS</div>
+
+        <div style='width: 100%;height:600px;' class='font-12'>
+          <div style='column-count: 2; margin-top:20px;padding:10px'>
+            <div style='width:90%; margin:0 auto; text-align:justify'>
+              Application for any type of leave shall be made on this Form and
+              <span style='text-decoration: underline;'>to be accomplished at
+                least in duplicate</span>
+              with documentary requirements, as follows.
+            </div>
+            <br />
+            <ol>
+              <li class='strong'> Vacation Leave*</li>
+              <div style='text-align: justify;'>It shall filed five (5) days in
+                advance, whenever possible, of the effective date of such leave.
+                Vacation leave within the Philippines or abroad shall be
+                indicated in the form for purposes of securing travel authority
+                and completing clearance from money and work accountables.</div>
+              <br />
+              <li class='strong'> Mandatory/Forced Leave</li>
+              <div style='text-align: justify;'>Annual five-day vacation leave
+                shall be forfeited if not taken during the year. In case the
+                scheduled leave has been cancelled in the exigency of the
+                service by the head of agency, it shall no longer be deducted
+                from the accumulated vacation leave. Availment of one (1) day or
+                more Vacation Leave (VL) shall be considered for complying the
+                mandatory/forced leave subject to conditions under Section 25,
+                Rule XVI of the Omnibus Rules Implementing E.O. No. 292.</div>
+              <br />
+              <li class='strong'> Sick Leave</li>
+
+              <ul
+                style='list-style-type: disc;margin-left:-20px; text-align:justify'
+              >
+                <li>
+                  It shall be filed immediately upon employee's return from such
+                  leave</li>
+                <li>If filed in advance or exceeding five (5) days, application
+                  shall be accompanied by a
+                  <span style='text-decoration: underline;'>medical certificate</span>.
+                  In case medical consultation was not availed of, an
+                  <span style='text-decoration:underline'>affidavit</span>
+                  should be executed by an applicant.</li>
+
+              </ul>
+              <br />
+              <li class='strong'> Maternity leave* - 105 days</li>
+              <ul
+                style='list-style-type: disc;margin-left:-20px; text-align:justify'
+              >
+                <li>
+                  Proof of pregnancy e.g. ultrasound, doctor's certificate on
+                  the expected date of delivery</li>
+                <li>Accomplished Notice of Allocation of Maternity Leave Credits
+                  (CS Form No. 6a), if needed</li>
+                <li>Seconded female employees shall enjoy maternity leave with
+                  full pay in the recipient agency.</li>
+              </ul>
+              <br />
+              <li class='strong'> Paternity leave - 7 days</li>
+              <div style='text-align: justify;'>
+                Proof of a child's delivery e.g. birth certificate, medical
+                certificate and marriage contract.
+              </div>
+              <br />
+              <li class='strong'>Special Privilege leave - 3 days</li>
+              <div style='text-align: justify;'>
+                It shall be filed/approved for at least one (1) week prior to
+                availment, except on emergency cases. Special priviledge leave
+                within the Philippines or abroad shall be indicated in the form
+                for purposes of securing travel authority and completing
+                clearance from money and work accountabilities.
+              </div>
+              <br />
+              <li class='strong'>Solo Parent leave - 7 days</li>
+              <div style='text-align: justify;'>
+                it shall be filed in advance or whenever possible five (5) days
+                before going on such leave with updated Solo Parent
+                Identification Card.
+              </div>
+              <br />
+              <li class='strong'>Study leave* - up to 6 months</li>
+              <ul
+                style='list-style-type: disc;margin-left:-20px; text-align:justify'
+              >
+                <li>Shall meet the agency's internal requirements, if any;</li>
+                <li>Contract between the agency head or authorized
+                  representative and the employee concerned.</li>
+              </ul>
+
+              <br />
+
+              <li class='strong'>VAWC leave - 10 days</li>
+              <ul
+                style='list-style-type: disc;margin-left:-20px; text-align:justify'
+              >
+                <li>
+                  It shall be filed in advance or immediately upon the woman
+                  employee's return from such leave.</li>
+                <li>It shall be accompanied by any of the following supporting
+                  document:
+                  <ol style='list-style-type: lower-alpha;margin-left:-30px'>
+                    <li>Barangay Protection Order (BPO) obtained from the
+                      barangay;</li>
+                    <li>Temporary/Permanent Protection Order (TPO/PPO) obtained
+                      from the court;</li>
+                    <li>If the protection order is not yet issued by the
+                      barangay or the court, a certification issued by the
+                      Punong Barangay/Kagawad or Prosecutor or the Clerk or
+                      Court that the application for the BPO, TPO or PPO has
+                      been filed with the said office shall be sufficient to
+                      support the application for the ten-day leave; or</li>
+                    <li>In the absence of the BPO/TPO/PPO or the certification,
+                      a police report specifying the details of the occurence of
+                      the violence on the victim and a medical certificate may
+                      be considered, at the discretion of the immediate
+                      supervisor of the woman employee concerned.</li>
+                  </ol>
+                </li>
+
+              </ul>
+              <br />
+              <li class='strong'>Rehabilitation leave* - up to 6 months</li>
+              <ul
+                style='list-style-type: disc;margin-left:-20px; text-align:justify'
+              >
+                <li>
+                  Application shall be made within one (1) week from the time of
+                  the accident except when a longer period is warranted.</li>
+                <li>Letter request supported by the relevant reports such as the
+                  police report, if any.</li>
+                <li>Medical certificate on the nature of the injuries, the
+                  course of treatment involved, and the need to undergo rest,
+                  recuperation, and rehabilitation, as the case may be.</li>
+                <li>Written concurrence of a government physician should be
+                  obtained relative to the recommendation for rehabilitation if
+                  the attending physician is a private practitioner,
+                  particularly on the duration of the period of rehabilitation.</li>
+              </ul>
+              <br />
+              <li class='strong'>Special leave benefits for women* - up to 2
+                months</li>
+              <ul
+                style='list-style-type: disc;margin-left:-20px; text-align:justify'
+              >
+                <li>The application may be filed in advance, that is, at least
+                  five (5) days prior to the scheduled date of the gynecological
+                  surgery that will be undergone by the employee. In case of
+                  emergency, the application for special leave shall be filed
+                  immediately upon employee's return but during confinement the
+                  agency shall be notified of said surgery.</li>
+                <li>The application shall be accompanied by a medical
+                  certificate filled out by the proper medical authorities, e.g.
+                  the attending surgeon accompanied by a clinical summary
+                  reflecting the gynecological disorder which shall be addressed
+                  or was addressed by the said surgery; the histopathological
+                  report; the operative technique used for the surgery; the duration
+                  of the surgery including the peri-operative period (period of
+                  confinement around surgery); as well as the employees
+                  estimated period of recuperation for the same.</li>
+              </ul>
+              <br />
+              <li class='strong'>Special Emergency (Calamity) leave - up to 5
+                days</li>
+              <ul
+                style='list-style-type: disc;margin-left:-20px; text-align:justify'
+              >
+                <li>The special emergency leave can be applied for a maximum of
+                  five (5) straight working days or staggered basis within
+                  thirty (30) days from the actual occurrence of the nature
+                  calamity/disaster. Said priviledge shall be enjoyed once a
+                  year, not in every instance of calamity or disaster.</li>
+                <li>The head of office shall take full responsibility for the
+                  grant of special emergency leave and verification of the
+                  employee's eligibility to be granted thereof. Said
+                  verification shall include: validation of place of residence
+                  based on the latest available records of the affected
+                  employee; verification that the place of residence is covered
+                  in the declaration of calamity area by the proper government
+                  agency; and such other proofs as may be necessary.</li>
+              </ul>
+              <br />
+              <li class='strong'>Monetization of leave credits</li>
+              <div style='text-align: justify;'>Application for monetization of
+                fifty percent (50%) or more of the accumulated leave credits
+                shall be accompanied by the letter request to the head of the
+                agency stating the valid and justifiable reasons.</div>
+              <br />
+              <li class='strong'>Terminal Leave*</li>
+              <div style='text-align: justify;'>Proof of employee's resignation
+                or retirement or separation from the service.</div>
+              <br />
+              <li class='strong'>Adoption leave</li>
+              <ul
+                style='list-style-type: disc;margin-left:-20px; text-align:justify'
+              >
+                <li>Application for adoption leave shall be filed with an
+                  authenticated copy of the Pre-Adoptive Placement Authority
+                  issued by the Department of Social Welfare and Development
+                  (DSWD).</li>
+
+              </ul>
+
+            </ol>
+
+          </div>
+          
+          <br />
+          <div class='font-12'>*For leave of absence for thirty (30) calendar
+            days or more and terminal leave, application shall be accompanied by
+            a
+            <span style='text-decoration: underline;'>clearance form money,
+              property and work-related accountabilities</span>
+            (pursuant to CSC Memorandum Circular No. 2, s. 1985)
+          </div>
+
+        </div>
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>

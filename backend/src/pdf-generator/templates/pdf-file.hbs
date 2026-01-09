@@ -1,0 +1,5243 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <title>PDS</title>
+</head>
+<style>
+  @media print {
+    footer {
+      page-break-before: always;
+
+    }
+  }
+  
+
+  .pages {
+    page-break-after: always;
+    /* min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;*/
+  }
+  .questBg {
+    background-color: #e6e3e3;
+  }
+  .page {
+    counter-reset: page pages;
+  }
+
+  /*.page .pages{
+  display:block;
+}*/
+ .page .pages{
+    counter-increment: pages;
+  }
+  
+  .page .page-number:after {
+   
+    counter-increment: page;
+   /** content: counter(page) ' of ' counter(pages)*/
+   content: counter(page);
+  }
+
+
+ /** .page-number:after .totalPages {
+    content: counter(page);
+  }*/
+ 
+
+  .totalPages{
+    content: counter(total);
+  }
+
+
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  #educ,
+  #workExp,
+  #other_info {
+    page-break-after: always;
+  }
+
+  html {
+    padding: 1px
+  }
+
+  body {
+    /**font-family: 'Arial Narrow'*/
+ font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  }
+   /**body { font-family: 'Liberation Sans'; }*/ 
+  .legend_bg {
+    background-color: #808080;
+    color: white;
+    font-style: italic;
+  }
+
+
+
+  .table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+
+  }
+
+  .row::after {
+    display: table;
+    clear: both
+  }
+
+
+  td {
+    padding: 4px
+  }
+
+  .bordered {
+    border: 1px solid black
+  }
+
+  .pdsHeader {
+    text-align: center;
+
+  }
+
+  .pdsHeaderText {
+    font-weight: bolder;
+    margin-bottom: 20px;
+  }
+
+  .h10 {
+    font-size: 10px;
+
+  }
+
+  .h8 {
+    font-size: 8px;
+  }
+
+  .h8 {
+    font-size: 8px;
+  }
+
+  .h6 {
+    font-size: 6px;
+  }
+
+  .h12 {
+    font-size: 12px;
+  }
+</style>
+
+<body>
+  {{#each this}}
+  <div class="page">
+
+    <div class="pages">
+      <div>
+        <table class="table">
+          <tr>
+            <td><span class="h12">CS Form No. 212</span><br /><span class="h10">Revised 2017</span></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="pdsHeader">
+              {{!-- <p class="h20 pdsHeaderText">PERSONAL DATA SHEET</p> --}}
+              <h2 class="pdsHeaderText">PERSONAL DATA SHEET</h2>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <p class="h10"><strong><i>WARNING: Any misrepresentation made in the Personal Data Sheet and the Work
+                    Experience
+                    Sheet shall
+                    cause the filing of administrative/criminal case/s against the person concerned.</i></strong></p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <p class="h10"><strong><i>READ THE ATTACHED GUIDE TO FILLING OUT THE PERSONAL DATA SHEET (PDS) BEFORE
+                    ACCOMPLISHING THE PDS
+                    FORM.</i></strong></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="65%">
+              <p class=" h8">Print legibly. Tick the appropriate boxes (<input type="checkbox" style=" transform: scale(0.25); transform:translateY(20%);">) and use separate sheet
+                if
+                necessary. Indicate N/A if not applicable. <strong>DO NOT ABBREVIATE</strong>
+              </p>
+            </td>
+            <td width="10%" class="h8 questBg" style="border:1px solid black; align-item: bottom; margin-right:-10px">
+              1.
+              CSC ID
+              No.
+            </td>
+            <td width="25%" class="h8" style="border:1px solid black; margin-right:-10px" align="right">(Do not fill up.
+              For
+              CSC
+              use only)</td>
+          </tr>
+        </table>
+        {{!-- personl info and family background --}}
+        {{#userdetail}}
+        <table class="table">
+          <tr>
+            <td colspan="8" class="bordered h12 legend_bg">I. PERSONAL INFORMATION</td>
+          </tr>
+          <tr>
+            <td width="17%" class="questBg">
+              <p class="h10">2. SURNAME</p>
+            </td>
+            <td colspan="7" class="bordered">
+              <p class="h10">{{lname}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="questBg">
+              <p class="h10">&nbsp;&nbsp;&nbsp;&nbsp;FIRST NAME</p>
+            </td>
+            <td width="55%" colspan="6" class="bordered">
+              <p class="h10">{{fname}}</p>
+            </td>
+            <td align="left" class="bordered questBg">
+              <sup class="h6">NAME EXTENSION(JR, SR) </sup> <span class="h10">{{suffix}}</span>
+            </td>
+
+
+          </tr>
+          <tr>
+            <td class="questBg">
+              <p class="h10">&nbsp;&nbsp;&nbsp;&nbsp;MIDDLE NAME</p>
+            </td>
+            <td colspan="7" class="bordered">
+              <p class="h10">{{mname}}</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">3. DATE OF BIRTH <br />&nbsp;&nbsp;&nbsp;&nbsp;(mm/dd/yyyy) </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <p class="h10">{{dateFormat bdate}}</p>
+            </td>
+            <td class="bordered questBg" width="25%" rowspan="3" colspan="2">
+              <table style="width:90%">
+                <tr>
+                  <td colspan="2">
+                    <p class="h10">16. CITIZENSHIP</p>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table style="width: 90%;">
+                      <tr>
+                        <td>
+
+                        </td>
+                        <td align="right">
+                          <p class="h8">if holder of dual citizenship,</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table style="width: 90%;">
+                      <tr>
+                        <td></td>
+                        <td align="right">
+                          <p class="h8">please indicate the details</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td></td>
+                        <td align="right">
+                          <p style="visibility: hidden;" class="h8">please indicate the details</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="bordered" rowspan="3" colspan="3" width="50%">
+              <table>
+                <tr>
+                  <td width="30%">
+                    {{#ifCond citizenship 'Filipino'}}
+                    <input type="checkbox" checked> <label class="h8">Filipino</label>
+                    {{else}}
+                    <input type="checkbox"> <label class="h8">Filipino</label>
+                    {{/ifCond}}
+                  </td>
+                  <td width="70%">
+                    {{#ifCond is_dual_citizen 1}}
+                    <input type="checkbox" checked> <label class="h8">Dual Citizenship</label>
+                    {{else}}
+                    <input type="checkbox"> <label class="h8">Dual Citizenship</label>
+                    {{/ifCond}}
+
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table style="width: 150px;">
+                      {{!-- value 1 - by birth / 2-by naturalization --}}
+                      <tr>
+                        {{#ifCond is_dual_citizen 1}}
+                        <td width="100%">
+                          {{#ifCond citizenship_type 1}}
+                          <input type="checkbox" checked> <label class="h8">by birth</label>
+                          {{else}}
+                          <input type="checkbox"> <label class="h8">by birth</label>
+                          {{/ifCond}}
+
+                          {{#ifCond citizenship_type 2}}
+                          <input type="checkbox" checked> <label class="h8">by naturalization</label>
+                          {{else}}
+                          <input type="checkbox"> <label class="h8">by naturalization</label>
+                          {{/ifCond}}
+
+                        </td>
+                        {{!-- <td>
+                          {{#ifCond citizenship_type 2}}
+                          <input type="checkbox" checked> <label class="h8">by naturalization</label>
+                          {{else}}
+                          <input type="checkbox"> <label class="h8">by naturalization</label>
+                          {{/ifCond}}
+
+                        </td> --}}
+                        {{else}}
+                        <td width="100%">
+                          <input type="checkbox"> <label class="h8">by birth</label>&nbsp;<input type="checkbox"> <label
+                            class="h8">by naturalization</label>
+                        </td>
+                        {{!-- <td width="50%">
+
+                        </td> --}}
+                        {{/ifCond}}
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table>
+                      <tr>
+
+                        <td colspan="2">
+                          <p class="h10">Pls. indicate country</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="bordered">
+                  {{#ifCond is_dual_citizen 1}}
+                  <td colspan="2" class="bordered">
+                    <p class="h10">{{country}}</p>
+                  </td>
+                  {{else}}
+                  <td colspan="2" class="bordered">
+                    <p class="h10"></p>
+                  </td>
+                  {{/ifCond}}
+
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">4. PLACE OF BIRTH </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <p class="h10">{{birth_place}}</p>
+            </td>
+
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">5. SEX </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <table>
+                <tr>
+                  {{#ifCond sex 'Male'}}
+                  <td><input type="checkbox" checked><label class="h10">Male</label></td>
+                  {{else}}
+                  <td><input type="checkbox"><label class="h10">Male</label></td>
+                  {{/ifCond}}
+                  {{#ifCond sex 'Female'}}
+                  <td valign="right"><input type="checkbox" checked><label class="h10">Female</label></td>
+                  {{else}}
+                  <td valign="right"><input type="checkbox"><label class="h10">Female</label></td>
+                  {{/ifCond}}
+
+                </tr>
+              </table>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td class="bordered questBg" rowspan="2">
+              <p class="h10">6. CIVIL STATUS</p>
+            </td>
+            <td class="bordered" colspan="2" rowspan="2">
+              <div style="display:flex;   flex-direction: row; flex-wrap: wrap">
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Single'}}
+                  <input type="checkbox" checked> <label class="h10">Single</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Single</label>
+                  {{/ifCond}}
+
+                </div>
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Married'}}
+                  <input type="checkbox" checked> <label class="h10">Married</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Married</label>
+                  {{/ifCond}}
+
+                </div>
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Widowed'}}
+                  <input type="checkbox" checked> <label class="h10">Widowed</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Widowed</label>
+                  {{/ifCond}}
+
+                </div>
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Separated'}}
+                  <input type="checkbox" checked> <label class="h10">Separated</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Separated</label>
+                  {{/ifCond}}
+
+                </div>
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Others'}}
+                  <input type="checkbox" checked> <label class="h10">Other/s</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Other/s</label>
+                  {{/ifCond}}
+                </div>
+
+                {{#ifCond civil_status 'Others'}}
+                <div style="width: 50%; ">
+                  <p class="h10" style="width:100%; padding-left:5px;padding-bottom:1px; border-bottom:1px solid">
+                    {{civil_status_others}}</p>
+
+                </div>
+                {{/ifCond}}
+            </td>
+            <td rowspan="3" width="18%" class="questBg">
+              <table style="width: 100%;">
+                <tr>
+                  <td>
+                    <p class="h10">17. RESIDENTIAL ADDRESS</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx <span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px;">{{residential_house_no}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">House/Block/Lot No.</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px">{{residential_street}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Street</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px;">{{residential_subd}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Subdivision/Village</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px">{{residential_brgy}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Barangay</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">7. HEIGHT (m)</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{height}}</p>
+            </td>
+
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-bottom:-5px;">{{residential_city}}</p>
+              <p class="h8 " style=" border-top:1px ridge">City/Minicipality</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px">{{residential_prov}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Province</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">8. WEIGHT (kg)</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{weight}}</p>
+            </td>
+            <td colspan="1" align="center" class="bordered questBg" style="border-top:none">
+              <p class="h10">ZIP CODE</p>
+            </td>
+            <td colspan="4" width="20%" align="center" class="bordered" style="border-right:none">
+              <p class="h10">{{residential_zip}}</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">9. BLOOD TYPE</p>
+            </td>
+            <td class="bordered" colspan="2">
+              <p class="h10">{{blood_type}}</p>
+            </td>
+            <td rowspan="3" width="18%" class="questBg">
+              <table style="width: 100%;">
+                <tr>
+                  <td>
+                    <p class="h10">18. PERMANENT ADDRESS</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:2px;margin-bottom: -3px;">{{permanent_house_no}}</p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">House/Block/Lot No.</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:2px;margin-bottom:-3px">{{permanent_street}}</p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Street</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">10. GSIS ID NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{GSIS}}</p>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:0px;margin-bottom:-5px;">{{permanent_subd}}</p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Subdivision/Village</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:0px;margin-bottom:-5px">{{permanent_brgy}}</p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Barangay</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">11. PAG-IBIG ID NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{PAGIBIG}}</p>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-bottom:-5px;">{{permanent_city}}</p>
+              <p class="h8 " style=" border-top:1px ridge">City/Minicipality</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px">{{permanent_prov}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Province</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">12. PHILHEALTH NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{PHILHEALTH}}</p>
+            </td>
+            <td colspan="1" align="center" class="bordered questBg" style="border-top:none">
+              <p class="h10">ZIP CODE</p>
+            </td>
+            <td colspan="4" width="20%" align="center" class="bordered" style="border-right:none">
+              <p class="h10">{{permanent_zip}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">13. SSS NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{SSS}}</p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">19. TELEPHONE NO.</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10">{{tel_no}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">14. TIN NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{TIN}}</p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">20. MOBILE NO.</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10">{{mobile_no}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">15. AGENCY EMPLOYEE NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{agency_employee_num}}</p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">21. EMAIL ADDRESS (if any)</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10">{{email}}</p>
+            </td>
+          </tr>
+        </table>
+        {{/userdetail}}
+
+        {{!-- family background --}}
+        <table class="table">
+          <tr>
+            <td colspan="2 " class="legend_bg">
+              <p class="h12 ">II. FAMILY BACKGROUND</p>
+            </td>
+          </tr>
+        </table>
+        <div class="row">
+          {{#family_background}}
+          <table class="table" style=" width: 60%;float: left; ">
+            <tr>
+              <td class="bordered questBg" width="17%" style="border-bottom: none ;">
+                <p class="h10">22. SPOUSE'S SURNAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{spouse_lname}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="questBg">
+                <p class="h10">&nbsp;FIRST NAME</p>
+              </td>
+              <td class="bordered" width="50%">
+                <p class="h10">{{spouse_fname}}</p>
+              </td>
+              <td class="bordered questBg" width="33%">
+                <p class="h6">NAME EXTENSION(JR., SR) <span class="h10">{{spouse_suffix}}</span></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;MIDDLE NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{spouse_mname}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;OCCUPATION</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{occupation}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;EMPLOYER/BUSINESS NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{employer_name}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;BUSINESS ADDRESS</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{employer_address}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;TELEPHONE NO.</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{tel_no}}</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="bordered questBg" width="28%" style="border-bottom: none ;">
+                <p class="h10">24. FATHER'S SURNAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{father_lname}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="questBg">
+                <p class="h10">&nbsp;FIRST NAME</p>
+              </td>
+              <td class="bordered " width="40%">
+                <p class="h10">{{father_fname}}</p>
+              </td>
+              <td class="bordered questBg" width="20%">
+                <p class="h6">NAME EXTENSION(JR., SR) <span class="h10">{{father_suffix}}</span></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;MIDDLE NAME</p>
+              </td>
+              <td colspan="2" class="bordered ">
+                <p class="h10">{{father_mname}}</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="3" class="bordered questBg" width="28%" style="border-bottom: none ;">
+                <p class="h10">25. MOTHER'S MAIDEN NAME</p>
+              </td>
+
+            </tr>
+            <tr>
+              <td class="questBg">
+                <p class="h10">&nbsp;SURNAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{mother_lname}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="questBg">
+                <p class="h10">&nbsp;FIRST NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{mother_fname}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;MIDDLE NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10">{{mother_mname}}</p>
+              </td>
+            </tr>
+
+          </table>
+          {{/family_background}}
+          <table class="table" style="width: 40%;float: left; ">
+
+            <tr>
+              <td class="bordered questBg" width="62%">
+                <p class="h10">23. NAME OF CHILDREN <span class="h6">(Write full name and list all)</span></p>
+              </td>
+              <td class="bordered questBg" width="38%">
+                <p class="h10">DATE OF BIRTH <span class="h6">(mm/dd/yyyy)</span></p>
+              </td>
+            </tr>
+
+            {{#ifCond excessChild 12}}
+            <tr>
+              <td class="bordered">
+                <p class="h10">N/A</p>
+              </td>
+              <td class="bordered">
+                <p class="h10">N/A</p>
+              </td>
+            </tr>
+            {{#for 1 excessChild 1}}
+            <tr>
+              <td class="bordered">
+                <p class="h10"><span style="visibility: hidden;">E</span></p>
+              </td>
+              <td class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            {{/for}}
+            {{else}}
+
+            {{#children}}
+            <tr>
+              <td class="bordered">
+                <p class="h10">{{name}}</p>
+              </td>
+              <td class="bordered">
+                <p class="h10">{{dateFormat bdate}}</p>
+              </td>
+            </tr>
+            {{/children}}
+            {{#for 0 excessChild 1}}
+            <tr>
+              <td class="bordered">
+                <p class="h10"><span style="visibility: hidden;">E</span></p>
+              </td>
+              <td class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            {{/for}}
+            {{/ifCond}}
+            <tr>
+              <td class="bordered" colspan="2" align="center">
+                <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+              </td>
+
+            </tr>
+
+          </table>
+
+        </div>
+        {{!-- educational backgroud --}}
+        <table class="table">
+          <tr>
+            <td colspan="8" class="h12 legend_bg">III. EDUCATIONAL BACKGROUND</td>
+          </tr>
+          <tr>
+            <td rowspan="2" class="bordered questBg" width="17%">
+              <p class="h10">26. LEVEL</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="23%" align="center">
+              <p class="h10">NAME OF SCHOOL<br> (Write in full)</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="20%" align="center">
+              <p class="h10">BASIC EDUCATION/DEGREE/COURSE <br>(Write in full)</p>
+            </td>
+            <td class="bordered questBg" colspan="2" width="10%" align="center">
+              <p class="h10">PERIOD OF ATTENDANCE</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="5%" align="center">
+              <p class="h10">HIGHEST LEVEL/UNITS EARNED<br> (if not graduated)</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="5%" align="center">
+              <p class="h10">YEAR GRADUATED</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="10%" align="center">
+              <p class="h10">SCHOLARSHIP/ACADEMIC HONORS RECEIVED</p>
+            </td>
+
+          </tr>
+          <tr>
+            <td class="bordered questBg" width="5%" align="center">
+              <p class="h10">From</p>
+            </td>
+            <td class="bordered questBg" width="5%" align="center">
+              <p class="h10">To</p>
+            </td>
+          </tr>
+          {{#educ_background}}
+          <tr>
+            <td class="bordered" height="30">
+              {{#ifCond level 'Vocational'}}
+               <p class="h10">{{toUpperCase (concatenate level 'TRADE COURSE')}}</p>
+              {{else}}
+               <p class="h10">{{toUpperCase level}}</p>
+              {{/ifCond}}
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{school_name}}</p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{educ_course}}</p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{educ_from}}</p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{educ_to}}</p>
+              {{!-- {{#ifCond educ_to null}}
+              <p class="h10">Present</p>
+              {{else}}
+              <p class="h10">{{educ_to}}</p>
+              {{/ifCond}} --}}
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{units_earned}}</p>
+            </td>
+            <td class="bordered" height="30">
+              {{#ifCond year_graduated null}}
+              <p class="h10">N/A</p>
+              {{else}}
+              <p class="h10">{{year_graduated}}</p>
+              {{/ifCond}}
+
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{honors_received}}</p>
+            </td>
+
+          </tr>
+          {{/educ_background}}
+
+          {{#for 0 excessEducLength 1}}
+          <tr>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+
+          </tr>
+          {{/for}}
+          <tr>
+            <td class="bordered" colspan="8" align="center">
+              <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+            </td>
+
+          </tr>
+
+        </table>
+
+        {{!-- <footer> --}}
+          <table class="table ">
+            <tr>
+              <td class="bordered questBg" width="17" align="center">
+                <p class="h12"><i>SIGNATURE</i></p>
+              </td>
+              {{#ifCond hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+              <td colspan="2" width="20%" class="bordered questBg" align="center">
+                <p class="h12"><i>DATE</i></p>
+              </td>
+              <td width="30%" align="center" colspan="3" class="bordered">
+                <p class="h12">{{dateFormat dateToDisplay}}</p>
+                
+              </td>
+            </tr>
+          </table>
+          <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+              class="page-number"></span> / <span >{{numPage}}</span> </p>
+      </div>
+
+    </div>
+
+
+    {{!-- 1st page if number of child > 12 --}} 
+    {{#hasData children1 0}} 
+     {{#each children1}}
+    <div class="pages">
+     
+      <div style="margin-top: 10px">
+        <table class="table">
+          <tr>
+            <td><span class="h12">CS Form No. 212</span><br /><span class="h10">Revised 2017</span></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="pdsHeader">
+              {{!-- <p class="h20 pdsHeaderText">PERSONAL DATA SHEET</p> --}}
+              <h2 class="pdsHeaderText">PERSONAL DATA SHEET</h2>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <p class="h10"><strong><i>WARNING: Any misrepresentation made in the Personal Data Sheet and the Work
+                    Experience
+                    Sheet shall
+                    cause the filing of administrative/criminal case/s against the person concerned.</i></strong></p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <p class="h10"><strong><i>READ THE ATTACHED GUIDE TO FILLING OUT THE PERSONAL DATA SHEET (PDS) BEFORE
+                    ACCOMPLISHING THE PDS
+                    FORM.</i></strong></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="65%">
+              <p class=" h8">Print legibly. Tick the appropriate boxes (<input type="checkbox" style=" transform: scale(0.25); transform:translateY(20%)">) and use separate sheet
+                if
+                necessary. Indicate N/A if not applicable. <strong>DO NOT ABBREVIATE</strong>
+              </p>
+            </td>
+            <td width="10%" class="h8 questBg" style="border:1px solid black; align-item: bottom; margin-right:-10px">1.
+              CSC ID
+              No.
+            </td>
+            <td width="25%" class="h8" style="border:1px solid black; margin-right:-10px" align="right">(Do not fill up.
+              For
+              CSC
+              use only)</td>
+          </tr>
+        </table>
+        {{!-- personl info and family background --}}
+        {{!-- <table class="table">
+          <tr>
+            <td colspan="8" class="bordered h12 legend_bg">I. PERSONAL INFORMATION</td>
+          </tr>
+          <tr>
+            <td width="17%" class="questBg">
+              <p class="h10">2. SURNAME</p>
+            </td>
+            <td colspan="7" class="bordered">
+              <p class="h10"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="questBg">
+              <p class="h10">&nbsp;&nbsp;&nbsp;&nbsp;FIRST NAME</p>
+            </td>
+            <td width="55%" colspan="6" class="bordered">
+              <p class="h10"></p>
+            </td>
+            <td align="left" class="bordered questBg">
+              <sup class="h6">NAME EXTENSION(JR, SR) </sup>
+            </td>
+
+
+          </tr>
+          <tr>
+            <td class="questBg">
+              <p class="h10">&nbsp;&nbsp;&nbsp;&nbsp;MIDDLE NAME</p>
+            </td>
+            <td colspan="7" class="bordered">
+              <p class="h10"></p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">3. DATE OF BIRTH <br />&nbsp;&nbsp;&nbsp;&nbsp;(mm/dd/yyyy) </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered questBg" width="35%" rowspan="3" colspan="2">
+              <table style="width:100%">
+                <tr>
+                  <td colspan="2">
+                    <p class="h10">16. CITIZENSHIP</p>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table style="width: 100%;">
+                      <tr>
+                        <td>
+
+                        </td>
+                        <td align="right">
+                          <p class="h8">if holder of dual citizenship,</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table style="width: 100%;">
+                      <tr>
+                        <td></td>
+                        <td align="right">
+                          <p class="h8">please indicate details</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td></td>
+                        <td align="right">
+                          <p style="visibility: hidden;" class="h8">please indicate details</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="bordered" rowspan="3" colspan="3" width="35%">
+              <table>
+                <tr>
+                  <td>
+                    <input type="checkbox"> <label class="h8">Filipino</label>
+                  </td>
+                  <td>
+                    <input type="checkbox"> <label class="h8">Dual Citizenship</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td>
+                          <input type="checkbox"> <label class="h8">by birth</label>
+                        </td>
+                        <td>
+                          <input type="checkbox"> <label class="h8">by naturalization</label>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table>
+                      <tr>
+
+                        <td colspan="2">
+                          <p class="h10">Pls. indicate country</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="bordered">
+                  <td colspan="2" class="bordered">
+                    <p class="h10"></p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">4. PLACE OF BIRTH </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <p class="h10"></p>
+            </td>
+
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">5. SEX </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <table>
+                <tr>
+                  <td><input type="checkbox"><label class="h10">Male</label></td>
+                  <td valign="right"><input type="checkbox"><label class="h10">Female</label></td>
+                </tr>
+              </table>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td class="bordered questBg" rowspan="2">
+              <p class="h10">6. CIVIL STATUS</p>
+            </td>
+            <td class="bordered" colspan="2" rowspan="2">
+              <div style="display:flex;   flex-direction: row; flex-wrap: wrap">
+                <div style="width: 50%;">
+                  <input type="checkbox"> <label class="h10">Single</label>
+                </div>
+                <div style="width: 50%;">
+                  <input type="checkbox"> <label class="h10">Married</label>
+                </div>
+                <div style="width: 50%;">
+                  <input type="checkbox"> <label class="h10">Widowed</label>
+                </div>
+                <div style="width: 50%;">
+                  <input type="checkbox"> <label class="h10">Separated</label>
+                </div>
+                <div style="width: 50%;">
+                  <input type="checkbox"> <label class="h10">Other/s</label>
+                </div>
+              </div>
+            </td>
+            <td rowspan="3" width="18%" class="questBg">
+              <table style="width: 100%;">
+                <tr>
+                  <td>
+                    <p class="h10">17. RESIDENTIAL ADDRESS</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px;"></p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">House/Block/Lot No.</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px"> </p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Street</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px;"></p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Subdivision/Village</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px"></p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Barangay</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">7. HEIGHT (m)</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10"></p>
+            </td>
+
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-bottom:-5px;"> </p>
+              <p class="h8 " style=" border-top:1px ridge">City/Minicipality</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px"> </p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Province</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">8. WEIGHT (kg)</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10"></p>
+            </td>
+            <td colspan="1" align="center" class="bordered questBg" style="border-top:none">
+              <p class="h10">ZIP CODE</p>
+            </td>
+            <td colspan="4" width="20%" align="center" class="bordered" style="border-right:none">
+              <p class="h10"></p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">9. BLOOD TYPE</p>
+            </td>
+            <td class="bordered" colspan="2">
+              <p class="h10"></p>
+            </td>
+            <td rowspan="3" width="18%" class="questBg">
+              <table style="width: 100%;">
+                <tr>
+                  <td>
+                    <p class="h10">18. PERMANENT ADDRESS</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:2px;margin-bottom: -3px;"></p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">House/Block/Lot No.</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:2px;margin-bottom:-3px"> </p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Street</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">10. GSIS ID NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10"></p>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:0px;margin-bottom:-5px;"></p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Subdivision/Village</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:0px;margin-bottom:-5px"></p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Barangay</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">11. PAG-IBIG ID NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10"></p>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-bottom:-5px;"> </p>
+              <p class="h8 " style=" border-top:1px ridge">City/Minicipality</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px"> </p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Province</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">12. PHILHEALTH NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10"></p>
+            </td>
+            <td colspan="1" align="center" class="bordered questBg" style="border-top:none">
+              <p class="h10">ZIP CODE</p>
+            </td>
+            <td colspan="4" width="20%" align="center" class="bordered" style="border-right:none">
+              <p class="h10"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">13. SSS NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">19. TELEPHONE NO.</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">14. TIN NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">20. MOBILE NO.</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">15. AGENCY EMPLOYEE NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">21. EMAIL ADDRESS (if any)</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10"></p>
+            </td>
+          </tr>
+        </table> --}}
+          {{#../userdetail}}
+        <table class="table">
+          <tr>
+            <td colspan="8" class="bordered h12 legend_bg">I. PERSONAL INFORMATION</td>
+          </tr>
+          <tr>
+            <td width="17%" class="questBg">
+              <p class="h10">2. SURNAME</p>
+            </td>
+            <td colspan="7" class="bordered">
+              <p class="h10">{{lname}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="questBg">
+              <p class="h10">&nbsp;&nbsp;&nbsp;&nbsp;FIRST NAME</p>
+            </td>
+            <td width="55%" colspan="6" class="bordered">
+              <p class="h10">{{fname}}</p>
+            </td>
+            <td align="left" class="bordered questBg">
+              <sup class="h6">NAME EXTENSION(JR, SR) </sup> <span class="h10">{{suffix}}</span>
+            </td>
+
+
+          </tr>
+          <tr>
+            <td class="questBg">
+              <p class="h10">&nbsp;&nbsp;&nbsp;&nbsp;MIDDLE NAME</p>
+            </td>
+            <td colspan="7" class="bordered">
+              <p class="h10">{{mname}}</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">3. DATE OF BIRTH <br />&nbsp;&nbsp;&nbsp;&nbsp;(mm/dd/yyyy) </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <p class="h10">{{dateFormat bdate}}</p>
+            </td>
+            <td class="bordered questBg" width="25%" rowspan="3" colspan="2">
+              <table style="width:90%">
+                <tr>
+                  <td colspan="2">
+                    <p class="h10">16. CITIZENSHIP</p>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table style="width: 90%;">
+                      <tr>
+                        <td>
+
+                        </td>
+                        <td align="right">
+                          <p class="h8">if holder of dual citizenship,</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table style="width: 90%;">
+                      <tr>
+                        <td></td>
+                        <td align="right">
+                          <p class="h8">please indicate the details</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td></td>
+                        <td align="right">
+                          <p style="visibility: hidden;" class="h8">please indicate details</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="bordered" rowspan="3" colspan="3" width="50%">
+              <table>
+                <tr>
+                  <td width="30%">
+                    {{#ifCond citizenship 'Filipino'}}
+                    <input type="checkbox" checked> <label class="h8">Filipino</label>
+                    {{else}}
+                    <input type="checkbox"> <label class="h8">Filipino</label>
+                    {{/ifCond}}
+                  </td>
+                  <td width="70%">
+                    {{#ifCond is_dual_citizen 1}}
+                    <input type="checkbox" checked> <label class="h8">Dual Citizenship</label>
+                    {{else}}
+                    <input type="checkbox"> <label class="h8">Dual Citizenship</label>
+                    {{/ifCond}}
+
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table style="width: 150px;">
+                      {{!-- value 1 - by birth / 2-by naturalization --}}
+                      <tr>
+                        {{#ifCond is_dual_citizen 1}}
+                        <td width="100%">
+                          {{#ifCond citizenship_type 1}}
+                          <input type="checkbox" checked> <label class="h8">by birth</label>
+                          {{else}}
+                          <input type="checkbox"> <label class="h8">by birth</label>
+                          {{/ifCond}}
+
+                          {{#ifCond citizenship_type 2}}
+                          <input type="checkbox" checked> <label class="h8">by naturalization</label>
+                          {{else}}
+                          <input type="checkbox"> <label class="h8">by naturalization</label>
+                          {{/ifCond}}
+
+                        </td>
+                        {{!-- <td>
+                          {{#ifCond citizenship_type 2}}
+                          <input type="checkbox" checked> <label class="h8">by naturalization</label>
+                          {{else}}
+                          <input type="checkbox"> <label class="h8">by naturalization</label>
+                          {{/ifCond}}
+
+                        </td> --}}
+                        {{else}}
+                        <td width="100%">
+                          <input type="checkbox"> <label class="h8">by birth</label>&nbsp;<input type="checkbox"> <label
+                            class="h8">by naturalization</label>
+                        </td>
+                        {{!-- <td width="50%">
+
+                        </td> --}}
+                        {{/ifCond}}
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <table>
+                      <tr>
+
+                        <td colspan="2">
+                          <p class="h10">Pls. indicate country</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="bordered">
+                  {{#ifCond is_dual_citizen 1}}
+                  <td colspan="2" class="bordered">
+                    <p class="h10">{{country}}</p>
+                  </td>
+                  {{else}}
+                  <td colspan="2" class="bordered">
+                    <p class="h10"></p>
+                  </td>
+                  {{/ifCond}}
+
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">4. PLACE OF BIRTH </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <p class="h10">{{birth_place}}</p>
+            </td>
+
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">5. SEX </p>
+            </td>
+            <td class="bordered" width="25%" colspan="2">
+              <table>
+                <tr>
+                  {{#ifCond sex 'Male'}}
+                  <td><input type="checkbox" checked><label class="h10">Male</label></td>
+                  {{else}}
+                  <td><input type="checkbox"><label class="h10">Male</label></td>
+                  {{/ifCond}}
+                  {{#ifCond sex 'Female'}}
+                  <td valign="right"><input type="checkbox" checked><label class="h10">Female</label></td>
+                  {{else}}
+                  <td valign="right"><input type="checkbox"><label class="h10">Female</label></td>
+                  {{/ifCond}}
+
+                </tr>
+              </table>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td class="bordered questBg" rowspan="2">
+              <p class="h10">6. CIVIL STATUS</p>
+            </td>
+            <td class="bordered" colspan="2" rowspan="2">
+              <div style="display:flex;   flex-direction: row; flex-wrap: wrap">
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Single'}}
+                  <input type="checkbox" checked> <label class="h10">Single</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Single</label>
+                  {{/ifCond}}
+
+                </div>
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Married'}}
+                  <input type="checkbox" checked> <label class="h10">Married</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Married</label>
+                  {{/ifCond}}
+
+                </div>
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Widowed'}}
+                  <input type="checkbox" checked> <label class="h10">Widowed</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Widowed</label>
+                  {{/ifCond}}
+
+                </div>
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Separated'}}
+                  <input type="checkbox" checked> <label class="h10">Separated</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Separated</label>
+                  {{/ifCond}}
+
+                </div>
+                <div style="width: 50%;">
+                  {{#ifCond civil_status 'Others'}}
+                  <input type="checkbox" checked> <label class="h10">Other/s</label>
+                  {{else}}
+                  <input type="checkbox"> <label class="h10">Other/s</label>
+                  {{/ifCond}}
+                </div>
+
+                {{#ifCond civil_status 'Others'}}
+                <div style="width: 50%; ">
+                  <p class="h10" style="width:100%; padding-left:5px;padding-bottom:1px; border-bottom:1px solid">
+                    {{civil_status_others}}</p>
+
+                </div>
+                {{/ifCond}}
+            </td>
+            <td rowspan="3" width="18%" class="questBg">
+              <table style="width: 100%;">
+                <tr>
+                  <td>
+                    <p class="h10">17. RESIDENTIAL ADDRESS</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx <span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px;">{{residential_house_no}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">House/Block/Lot No.</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px">{{residential_street}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Street</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px;">{{residential_subd}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Subdivision/Village</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px">{{residential_brgy}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Barangay</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">7. HEIGHT (m)</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{height}}</p>
+            </td>
+
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-bottom:-5px;">{{residential_city}}</p>
+              <p class="h8 " style=" border-top:1px ridge">City/Minicipality</p>
+            </td>
+            <td colspan="2" width="25%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px">{{residential_prov}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Province</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">8. WEIGHT (kg)</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{weight}}</p>
+            </td>
+            <td colspan="1" align="center" class="bordered questBg" style="border-top:none">
+              <p class="h10">ZIP CODE</p>
+            </td>
+            <td colspan="4" width="20%" align="center" class="bordered" style="border-right:none">
+              <p class="h10">{{residential_zip}}</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">9. BLOOD TYPE</p>
+            </td>
+            <td class="bordered" colspan="2">
+              <p class="h10">{{blood_type}}</p>
+            </td>
+            <td rowspan="3" width="18%" class="questBg">
+              <table style="width: 100%;">
+                <tr>
+                  <td>
+                    <p class="h10">18. PERMANENT ADDRESS</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="h10" style="visibility: hidden;">xx</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:2px;margin-bottom: -3px;">{{permanent_house_no}}</p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">House/Block/Lot No.</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:2px;margin-bottom:-3px">{{permanent_street}}</p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Street</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">10. GSIS ID NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{GSIS}}</p>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:0px;margin-bottom:-5px;">{{permanent_subd}}</p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Subdivision/Village</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:0px;margin-bottom:-5px">{{permanent_brgy}}</p>
+              <p class="h8 " style="margin-bottom:0px; border-top:1px ridge">Barangay</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">11. PAG-IBIG ID NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{PAGIBIG}}</p>
+            </td>
+
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-bottom:-5px;">{{permanent_city}}</p>
+              <p class="h8 " style=" border-top:1px ridge">City/Minicipality</p>
+            </td>
+            <td colspan="2" width="20%" align="center" class="bordered" style="border-right:none; padding: 0px">
+              <p class="h10 " style=" margin-top:-5px;margin-bottom:-5px">{{permanent_prov}}</p>
+              <p class="h8 " style="margin-bottom:-5px; border-top:1px ridge">Province</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">12. PHILHEALTH NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{PHILHEALTH}}</p>
+            </td>
+            <td colspan="1" align="center" class="bordered questBg" style="border-top:none">
+              <p class="h10">ZIP CODE</p>
+            </td>
+            <td colspan="4" width="20%" align="center" class="bordered" style="border-right:none">
+              <p class="h10">{{permanent_zip}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">13. SSS NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{SSS}}</p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">19. TELEPHONE NO.</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10">{{tel_no}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">14. TIN NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{TIN}}</p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">20. MOBILE NO.</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10">{{mobile_no}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="bordered questBg">
+              <p class="h10">15. AGENCY EMPLOYEE NO.</p>
+            </td>
+            <td colspan="2" class="bordered">
+              <p class="h10">{{agency_employee_num}}</p>
+            </td>
+            <td class="bordered questBg">
+              <p class="h10">21. EMAIL ADDRESS (if any)</p>
+            </td>
+            <td colspan="4" class="bordered">
+              <p class="h10">{{email}}</p>
+            </td>
+          </tr>
+        </table>
+        {{/../userdetail}}
+        {{!-- family background --}}
+        <table class="table">
+          <tr>
+            <td colspan="2 " class="legend_bg">
+              <p class="h12 ">II. FAMILY BACKGROUND</p>
+            </td>
+          </tr>
+        </table>
+        <div class="row">
+          <table class="table" style=" width: 60%;float: left; ">
+            <tr>
+              <td class="bordered questBg" style="border-bottom: none ;">
+                <p class="h10">22. SPOUSE'S SURNAME</p>
+              </td>
+              <td colspan="2" width="80%" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="questBg">
+                <p class="h10">&nbsp;FIRST NAME</p>
+              </td>
+              <td class="bordered" width="50%">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered questBg" width="30%">
+                <p class="h6">NAME EXTENSION(JR., SR)</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;MIDDLE NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;OCCUPATION</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;EMPLOYER/BUSINESS NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;BUSINESS ADDRESS</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;TELEPHONE NO.</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="bordered questBg" width="28%" style="border-bottom: none ;">
+                <p class="h10">24. FATHER'S SURNAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="questBg">
+                <p class="h10">&nbsp;FIRST NAME</p>
+              </td>
+              <td class="bordered" width="40%">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered questBg" width="20%">
+                <p class="h6">NAME EXTENSION(JR., SR)</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;MIDDLE NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="bordered questBg" width="28%" style="border-bottom: none ;">
+                <p class="h10">25. MOTHER'S MAIDEN NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="questBg">
+                <p class="h10">&nbsp;SURNAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="questBg">
+                <p class="h10">&nbsp;FIRST NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="bordered questBg" style="border-top: none ;">
+                <p class="h10">&nbsp;MIDDLE NAME</p>
+              </td>
+              <td colspan="2" class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+
+          </table>
+          <table class="table" style="width: 40%;float: left; ">
+            <tr>
+              <td class="bordered questBg" width="62%">
+                <p class="h10">23. NAME OF CHILDREN <span class="h6">(Write full name and list all)</span></p>
+              </td>
+              <td class="bordered questBg" width="38%">
+                <p class="h10">DATE OF BIRTH <span class="h6">(mm/dd/yyyy)</span></p>
+              </td>
+            </tr>
+
+            {{#each this}}
+            <tr>
+              <td class="bordered">
+                <p class="h10"><span style="visibility: hidden;"></span>{{name}}</p>
+              </td>
+              <td class="bordered">
+                <p class="h10">{{dateFormat bdate}}</p>
+              </td>
+            </tr>
+            {{/each}}
+            {{!-- {{#for 0 excessChild1 1}}
+            <tr>
+              <td class="bordered">
+                <p class="h10"><span style="visibility: hidden;"></span></p>
+              </td>
+              <td class="bordered">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            {{/for}} --}}
+
+            <tr>
+              <td class="bordered" colspan="2" align="center">
+                <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span>(Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+              </td>
+
+            </tr>
+
+          </table>
+
+        </div>
+        {{!-- educational backgroud --}}
+        <table class="table">
+          <tr>
+            <td colspan="8" class="h12 legend_bg">III. EDUCATIONAL BACKGROUND</td>
+          </tr>
+          <tr>
+            <td rowspan="2" class="bordered questBg" width="17%">
+              <p class="h10">26. LEVEL</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="23%" align="center">
+              <p class="h10">NAME OF SCHOOL<br> (Write in full)</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="20%" align="center">
+              <p class="h10">BASIC EDUCATION/DEGREE/COURSE <br>(Write in full)</p>
+            </td>
+            <td class="bordered questBg" colspan="2" width="10%" align="center">
+              <p class="h10">PERIOD OF ATTENDANCE</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="5%" align="center">
+              <p class="h10">HIGHEST LEVEL/UNITS EARNED<br> (if not graduated)</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="5%" align="center">
+              <p class="h10">YEAR GRADUATED</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="10%" align="center">
+              <p class="h10">SCHOLARSHIP/ACADEMIC HONORS RECEIVED</p>
+            </td>
+
+          </tr>
+          <tr>
+            <td class="bordered questBg" width="5%" align="center">
+              <p class="h10">From</p>
+            </td>
+            <td class="bordered questBg" width="5%" align="center">
+              <p class="h10">To</p>
+            </td>
+          </tr>
+          {{#for 0 ../educLength 1}}
+          <tr>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+
+          </tr>
+          {{/for}}
+          <tr>
+            <td class="bordered" colspan="8" align="center">
+              <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+            </td>
+
+          </tr>
+
+        </table>
+
+
+
+        {{!-- <footer> --}}
+          <table class="table ">
+            <tr>
+              <td class="bordered questBg" width="17" align="center">
+                <p class="h12"><i>SIGNATURE</i></p>
+              </td>
+              {{#ifCond ../hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+              <td colspan="2" width="20%" class="bordered questBg" align="center">
+                <p class="h12 "><i>DATE</i></p>
+              </td>
+              <td width="30%" align="center" colspan="3" class="bordered">
+                <p class="h12">{{dateFormat dateToDisplay}}</p>
+              </td>
+            </tr>
+          </table>
+          <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+              class="page-number"></span>
+            / <span>{{../numPage}}</span> </p>
+
+
+      </div>
+    </div>
+    {{/each}}
+    {{/hasData}}
+    {{!-- 1st page if number of educational background dount < 10 --}} 
+{{#hasData educ_background1 0}} 
+  {{#each educ_background1}}
+  <div
+      class="pages">
+      <div style="margin-top: 10px;">
+     
+        {{!-- educational backgroud --}}
+        <table class="table">
+          <tr>
+            <td colspan="8" class="h12 legend_bg">III. EDUCATIONAL BACKGROUND</td>
+          </tr>
+          <tr>
+            <td rowspan="2" class="bordered questBg" width="17%">
+              <p class="h10">26. LEVEL</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="23%" align="center">
+              <p class="h10">NAME OF SCHOOL<br> (Write in full)</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="20%" align="center">
+              <p class="h10">BASIC EDUCATION/DEGREE/COURSE <br>(Write in full)</p>
+            </td>
+            <td class="bordered questBg" colspan="2" width="10%" align="center">
+              <p class="h10">PERIOD OF ATTENDANCE</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="5%" align="center">
+              <p class="h10">HIGHEST LEVEL/UNITS EARNED<br> (if not graduated)</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="5%" align="center">
+              <p class="h10">YEAR GRADUATED</p>
+            </td>
+            <td rowspan="2" class="bordered questBg" width="10%" align="center">
+              <p class="h10">SCHOLARSHIP/ACADEMIC HONORS RECEIVED</p>
+            </td>
+
+          </tr>
+          <tr>
+            <td class="bordered questBg" width="5%" align="center">
+              <p class="h10">From</p>
+            </td>
+            <td class="bordered questBg" width="5%" align="center">
+              <p class="h10">To</p>
+            </td>
+          </tr>
+          {{#each this}}
+          <tr>
+            <td class="bordered" height="30">
+              {{#ifCond level 'Vocational'}}
+               <p class="h10">{{toUpperCase (concatenate level 'TRADE COURSE')}}</p>
+              {{else}}
+               <p class="h10">{{toUpperCase level}}</p>
+              {{/ifCond}}
+           
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{school_name}}</p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{educ_course}}</p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{educ_from}}</p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{educ_to}}</p>
+              {{!-- {{#ifCond educ_to null}}
+              <p class="h10">Present</p>
+              {{else}}
+              <p class="h10">{{educ_to}}</p>
+              {{/ifCond}} --}}
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{units_earned}}</p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{year_graduated}}</p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10">{{honors_received}}</p>
+            </td>
+
+          </tr>
+          {{/each}}
+          {{!-- {{#for 0 excessEducLength1 1}}
+          <tr>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+
+          </tr>
+          {{/for}} --}}
+          <tr>
+            <td class="bordered" colspan="8" align="center">
+              <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span>(Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+            </td>
+
+          </tr>
+
+        </table>
+
+        {{!-- <footer> --}}
+          <table class="table ">
+            <tr>
+              <td class="bordered" width="17" align="center">
+                <p class="h12"><i>SIGNATURE</i></p>
+              </td>
+               {{#ifCond ../hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+              <td colspan="2" width="20%" class="bordered questBg" align="center">
+                <p class="h12"><i>DATE</i></p>
+              </td>
+              <td width="30%" align="center" colspan="3" class="bordered">
+                <p class="h12">{{dateFormat dateToDisplay}}</p>
+              </td>
+            </tr>
+          </table>
+          <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+              class="page-number"></span>
+            / <span>{{../numPage}}</span> </p>
+
+      </div>
+  </div>
+{{/each}}
+  {{/hasData}}
+
+  {{!-- 2nd page --}}
+  <div class="pages">
+    <div>
+      {{!--Civil SERVICE ELIGIBILITY --}}
+      <table class="table" style="margin-top: 10px;">
+        <tr>
+          <td colspan="7" class="h12 legend_bg bordered">IV. CIVIL SERVICE ELIGIBILITY</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">27.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10">CAREER SERVICE/RA 1080 (BOARD/BAR) UNDER SPECIAL LAWS/CES/CSEE BARANGAY ELIGIBILTY /
+              DRIVER'S
+              LICENSE</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">RATING<br> (if applicable)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">DATE OF EXAMINATION/CONFERMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="30%" align="center">
+            <p class="h10">PLACE OF EXAMINATION/CONFERMENT</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="20%" align="center">
+            <p class="h10">LICENSE (if applicable)</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">Number</p>
+          </td>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">Date of Validity</p>
+          </td>
+        </tr>
+          {{#hasData cs_eligibility 0}}
+            {{#cs_eligibility}}
+            <tr>
+              <td align="center" colspan="2" class="bordered" height="30">
+                <p class="h10">{{eligibility_type}}</p>
+              </td>
+              <td align="center" class="bordered" height="30">
+                <p class="h10">{{rating}}</p>
+              </td>
+              {{#ifCond conferment_date_to null}}
+              <td align="center" class="bordered" height="30">
+                <p class="h10">{{conferment_date}}</p>
+              </td>
+              {{else}}
+              <td align="center" class="bordered" height="30">
+                <p class="h10">{{conferment_date}} to {{conferment_date_to}}</p>
+              </td>
+                {{/ifCond}}
+              <td align="center" class="bordered" height="30">
+                <p class="h10">{{conferment_place}}</p>
+              </td>
+              <td align="center" class="bordered" height="30">
+                <p class="h10">{{license_num}}</p>
+              </td>
+              <td align="center" class="bordered" height="30">
+                {{#isNotNullAndNotNAandNotEmpty validity}}
+                <p class="h10">{{dateFormat validity}}</p>
+                {{else}}
+                <p class="h10">N/A</p>
+                {{/isNotNullAndNotNAandNotEmpty}}
+              </td>
+
+            </tr>
+            {{/cs_eligibility}}
+            {{#for 0 excessCSElig 1}}
+            <tr>
+              <td colspan="2" class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+
+            </tr>
+            {{/for}}
+          {{else}}
+              <tr>
+                <td colspan="2" class="bordered" height="30">
+                  <p class="h10">N/A</p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10">N/A</p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10">N/A</p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10">N/A</p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10">N/A</p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10">N/A</p>
+                </td>
+
+              </tr>
+              {{#for 1 7 1}}
+              <tr>
+                <td colspan="2" class="bordered" height="30">
+                  <p class="h10"></p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10"></p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10"></p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10"></p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10"></p>
+                </td>
+                <td class="bordered" height="30">
+                  <p class="h10"></p>
+                </td>
+
+              </tr>
+              {{/for}}
+          {{/hasData}}
+        <tr>
+          <td class="bordered" colspan="8" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+      {{!-WORK EXPERIENCE--}}
+      <table class="table">
+        <tr>
+          <td colspan="9" class="h12 legend_bg bordered">V. WORK EXPERIENCE<br>(Include private employment. Start
+            from your recent work) Description of duties should be indicated in the attached Work Experience sheet.
+          </td>
+        </tr>
+        <tr>
+          <td width="1%" align="center" class="questBg">
+            <p class="h10">28.</p>
+          </td>
+          <td colspan="2" class="bordered questBg" style="border-left: none;" width="20%" align="center">
+            <p class="h10">INCLUSIVE DATES (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="30%" align="center">
+            <p class="h10">POSITION TITLE <br>(Write in full/Do not abbreviate)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">DEPARTMENT/AGENCY/OFFICE/COMPANY <br>(Write in full/Do not abbreviate)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">MONTHLY SALARY</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">SALARY/JOB/PAY GRADE (if applicable)& STEP (Format "00-0")/ INCREMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">STATUS OF APPOINTMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">GOV'T SERVICE <br> (Y / N)</p>
+          </td>
+
+        </tr>
+        <tr>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+        {{#hasData work_exp 0}}
+          {{#work_exp}}
+          <tr>
+            <td align="center" colspan="2" class="bordered" height="30">
+              <p class="h10">{{dateFormat date_from}}</p>
+            </td>
+            <td align="center" class="bordered" height="30">
+
+              {{#ifCond is_present_date_to 1}}
+              <p class="h10">Present</p>
+              {{else}}
+              <p class="h10">{{dateFormat date_to}}</p>
+              {{/ifCond }}
+
+            </td>
+            <td align="center" class="bordered" height="30">
+              <p class="h10">{{position}}</p>
+            </td>
+            <td align="center" class="bordered" height="30">
+              <p class="h10">{{company}}</p>
+            </td>
+            
+
+            <td align="center" class="bordered" height="30">
+            
+              {{#ifCond appointment_status 'Job Order'}}
+                <p class="h10">{{formatAmount rate_per_day}} / day</p>
+              {{else}}
+                {{#ifCond appointment_status 'Casual'}}
+                  <p class="h10">{{formatAmount rate_per_day}} / day</p>
+                {{else}}
+                  {{#ifCond appointment_status 'Permanent'}}
+                      <p class="h10">{{formatAmount month_salary}}</p>
+                    {{else}}
+                      {{#ifCond appointment_status 'Temporary'}}
+                        <p class="h10">{{formatAmount month_salary}}</p>
+                      {{else}}
+                          {{#ifCond appointment_status 'Contract of Service'}}
+                            <p class="h10">{{formatAmount month_salary}}</p>
+                          {{else}}
+                                {{#ifCond appointment_status 'Contractual'}}
+                                  <p class="h10">{{formatAmount month_salary}}</p>
+                                {{else}}
+                                  {{#ifCond appointment_status 'Coterminous'}}
+                                      <p class="h10">{{formatAmount month_salary}}</p>
+                                    {{else}}
+
+                                        <p class="h10">{{formatAmount rate_per_day}} / day</p>
+                                  {{/ifCond}}    
+                                {{/ifCond}}
+                            {{/ifCond}}
+                      {{/ifCond}}
+                    {{/ifCond}}
+                {{/ifCond}}
+              {{/ifCond}}
+            </td>
+            <td align="center" class="bordered" height="30">
+              {{#ifCond salary_grade null}}
+                  <p class="h10">N/A</p>
+              {{else}}
+                  <p class="h10">{{salary_grade}}-{{salary_grade_step}}</p>
+              {{/ifCond}}
+
+            </td>
+            <td align="center" class="bordered" height="30">
+              <p class="h10">{{appointment_status}}</p>
+            </td>
+            <td align="center" class="bordered" height="30">
+              {{#ifCond gov_service 'Yes'}}
+              <p class="h10">Y</p>
+              {{else}}
+              <p class="h10">N</p>
+              {{/ifCond }}
+            </td>
+          </tr>
+          {{/work_exp}}
+          {{#for 0 excessWork_exp 1}}
+          <tr>
+            <td colspan="2" class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+            <td class="bordered" height="30">
+              <p class="h10"></p>
+            </td>
+          </tr>
+          {{/for}}
+        {{else}}
+         <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+        </tr>
+        {{#for 1 25 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+        {{/hasData}}
+        <tr>
+          <td class="bordered" colspan="9" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+      <table class="table ">
+        <tr>
+          <td class="bordered questBg" width="17" align="center">
+            <p class="h12"><i>SIGNATURE</i></p>
+          </td>
+          {{#ifCond hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+          <td colspan="2" width="20%" class="bordered questBg" align="center">
+            <p class="h12"><i>DATE</i></p>
+          </td>
+          <td width="30%" align="center" colspan="3" class="bordered">
+            <p class="h12">{{dateFormat dateToDisplay}}</p>
+          </td>
+        </tr>
+      </table>
+      <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+          class="page-number"></span>
+        / <span>{{numPage}}</span> </p>
+    </div>
+  </div>
+
+  {{!-- if cs eligibility count > 10 --}}
+  {{!-- 2nd page --}}
+  {{#hasData cs_eligibility1 0}}
+{{#each cs_eligibility1}}
+  <div class="pages">
+    <div>
+      {{!--Civil Service eligibility --}}
+      <table class="table" style="margin-top: 10px;">
+        <tr>
+          <td colspan="7" class="h12 legend_bg bordered">IV. CIVIL SERVICE ELIGIBILITY</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">27.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10">CAREER SERVICE/RA 1080 (BOARD/BAR) UNDER SPECIAL LAWS/CES/CSEE BARANGAY ELIGIBILTY /
+              DRIVER'S
+              LICENSE</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">RATING<br> (if applicable)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">DATE OF EXAMINATION/CONFERMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="30%" align="center">
+            <p class="h10">PLACE OF EXAMINATION/CONFERMENT</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="20%" align="center">
+            <p class="h10">LICENSE (if applicable)</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">Number</p>
+          </td>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">Date of Validity</p>
+          </td>
+        </tr>
+        {{#each this}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10">{{eligibility_type}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{rating}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{conferment_date}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{conferment_place}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{license_num}}</p>
+          </td>
+          <td class="bordered" height="30">
+            {{#isNotNullAndNotNAandNotEmpty validity}}
+                <p class="h10">{{dateFormat validity}}</p>
+                {{else}}
+                <p class="h10">N/A</p>
+                {{/isNotNullAndNotNAandNotEmpty}}
+           
+          </td>
+
+        </tr>
+        {{/each}}
+        {{!-- {{#for 0 excessCSElig1 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+
+        </tr>
+        {{/for}} --}}
+
+        <tr>
+          <td class="bordered" colspan="8" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+      {{!-WORK EXPERIENCE--}}
+      {{!-- <table class="table">
+        <tr>
+          <td colspan="9" class="h12 legend_bg bordered">V. WORK EXPERIENCE<br>(Include private employment. Start
+            from your recent work) Description of duties should be indicated in the attached Work Experience sheet.
+          </td>
+        </tr>
+        <tr>
+          <td width="1%" align="center" class="questBg">
+            <p class="h10">28.</p>
+          </td>
+          <td colspan="2" class="bordered questBg" style="border-left: none;" width="20%" align="center">
+            <p class="h10">INCLUSIVE DATES (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="30%" align="center">
+            <p class="h10">POSITION TITLE <br>(Write in full/Do not abbreviate)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">DEPARTMENT/AGENCY/OFFICE/COMPANY <br>(Write in full/Do not abbreviate)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">MONTHLY SALARY</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">SALARY/JOB/PAY GRADE (if applicable)& STEP (Format "00-0")/ INCREMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">STATUS OF APPOINTMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">GOV'T SERVICE <br> (Y / N)</p>
+          </td>
+
+        </tr>
+        <tr>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+        {{#for 0 ../work_expCount 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+
+        <tr>
+          <td class="bordered" colspan="9" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span>(Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table> --}}
+
+      <table class="table ">
+        <tr>
+          <td class="bordered questBg" width="17" align="center">
+            <p class="h12"><i>SIGNATURE</i></p>
+          </td>
+         {{#ifCond ../hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+          <td colspan="2" width="20%" class="bordered questBg" align="center">
+            <p class="h12"><i>DATE</i></p>
+          </td>
+          <td width="30%" align="center" colspan="3" class="bordered">
+            <p class="h12">{{dateFormat dateToDisplay}}</p>
+          </td>
+        </tr>
+      </table>
+      <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+          class="page-number"></span>
+        / <span>{{../numPage}}</span> </p>
+
+    </div>
+  </div>
+  {{/each}}
+  {{/hasData}}
+  {{!-- if workexperience count > 25 --}}
+  {{#hasData work_exp1 0}}
+  {{#each work_exp1}}
+  <div class="pages">
+    <div>
+      {{!--Civil status --}}
+      {{!-- <table class="table" style="margin-top: 10px;">
+        <tr>
+          <td colspan="7" class="h12 legend_bg bordered">IV. CIVIL SERVICE ELIGIBILITY</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">27.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10">CAREER SERVICE/RA 1080 (BOARD/BAR) UNDER SPECIAL LAWS/CES/CSEE BARANGAY ELIGIBILTY /
+              DRIVER'S
+              LICENSE</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">RATING<br> (if applicable)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">DATE OF EXAMINATION/CONFERMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="30%" align="center">
+            <p class="h10">PLACE OF EXAMINATION/CONFERMENT</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="20%" align="center">
+            <p class="h10">LICENSE (if applicable)</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">Number</p>
+          </td>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">Validity</p>
+          </td>
+        </tr>
+        {{#for 0 ../csEligCount 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+
+        </tr>
+        {{/for}}
+
+        <tr>
+          <td class="bordered" colspan="8" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span>(Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table> --}}
+
+      {{!-WORK EXPERIENCE--}}
+      <table class="table">
+        <tr>
+          <td colspan="9" class="h12 legend_bg bordered">V. WORK EXPERIENCE<br>(Include private employment. Start
+            from your recent work) Description of duties should be indicated in the attached Work Experience sheet.
+          </td>
+        </tr>
+        <tr>
+          <td width="1%" align="center" class="questBg">
+            <p class="h10">28.</p>
+          </td>
+          <td colspan="2" class="bordered questBg" style="border-left: none;" width="20%" align="center">
+            <p class="h10">INCLUSIVE DATES (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="30%" align="center">
+            <p class="h10">POSITION TITLE <br>(Write in full/Do not abbreviate)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">DEPARTMENT/AGENCY/OFFICE/COMPANY <br>(Write in full/Do not abbreviate)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">MONTHLY SALARY</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">SALARY/JOB/PAY GRADE (if applicable)& STEP (Format "00-0")/ INCREMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">STATUS OF APPOINTMENT</p>
+          </td>
+          <td class="bordered questBg" rowspan="2" width="10%" align="center">
+            <p class="h10">GOV'T SERVICE <br> (Y / N)</p>
+          </td>
+
+        </tr>
+        <tr>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="10%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+        {{#each this}}
+        <tr>
+          <td align="center" colspan="2" class="bordered" height="30">
+            <p class="h10">{{dateFormat date_from}}</p>
+          </td>
+          <td align="center"  class="bordered" height="30">
+
+            {{#ifCond is_present_date_to 1}}
+            <p class="h10">Present</p>
+            {{else}}
+            <p class="h10">{{dateFormat date_to}}</p>
+            {{/ifCond }}
+
+          </td>
+          <td align="center"  class="bordered" height="30">
+            <p class="h10">{{position}}</p>
+          </td>
+          <td align="center"  class="bordered" height="30">
+            <p class="h10">{{company}}</p>
+          </td>
+          
+          <td align="center"  class="bordered" height="30">
+            
+               
+          
+            {{#ifCond appointment_status 'Job Order'}}
+               <p class="h10">{{formatAmount rate_per_day}} / day</p>
+            {{else}}
+              {{#ifCond appointment_status 'Casual'}}
+                 <p class="h10">{{formatAmount rate_per_day}} / day</p>
+              {{else}}
+                 {{#ifCond appointment_status 'Permanent'}}
+                    <p class="h10">{{formatAmount month_salary}}</p>
+                  {{else}}
+                    {{#ifCond appointment_status 'Temporary'}}
+                      <p class="h10">{{formatAmount month_salary}}</p>
+                    {{else}}
+                        {{#ifCond appointment_status 'Contract of Service'}}
+                          <p class="h10">{{formatAmount month_salary}}</p>
+                        {{else}}
+                              {{#ifCond appointment_status 'Contractual'}}
+                                <p class="h10">{{formatAmount month_salary}}</p>
+                              {{else}}
+                                 {{#ifCond appointment_status 'Coterminous'}}
+                                    <p class="h10">{{formatAmount month_salary}}</p>
+                                  {{else}}
+                                   {{#isNotNull rate_per_day}}
+                                    <p class="h10"> {{ rate_per_day}} / day</p>
+                                  
+                                  {{else}}
+                                        <p class="h10"></p>
+                                     
+                                      {{/isNotNull}}
+                                {{/ifCond}}    
+                              {{/ifCond}}
+                          {{/ifCond}}
+                     {{/ifCond}}
+                  {{/ifCond}}
+              {{/ifCond}}
+            {{/ifCond}}
+          </td>
+          
+           <td align="center"  align="center" class="bordered" height="30">
+                {{#ifCond salary_grade null}}
+                <p class="h10">N/A</p>
+                {{else}}
+                {{#ifCond salary_grade undefined}}
+                <p class="h10"></p>
+                {{else}}
+                <p class="h10">{{salary_grade}}-{{salary_grade_step}}</p>
+                {{/ifCond}}
+            {{/ifCond}}
+          
+          </td>
+         
+          <td align="center"  class="bordered" height="30">
+             {{#ifCond appointment_status null}}
+                <p class="h10"></p>
+                {{else}}
+                    <p class="h10">{{appointment_status}}</p>
+                {{/ifCond}}
+        
+          </td>
+          <td align="center" class="bordered" height="30">
+            {{#ifCond gov_service 'Yes'}}
+            <p class="h10">Y</p>
+            {{else}}
+             {{#ifCond gov_service null}}
+            <p class="h10"></p>
+            {{else}}
+            <p class="h10">N</p>
+             {{/ifCond }}
+            {{/ifCond }}
+          </td>
+        </tr>
+        {{/each}}
+        {{!-- {{#for 0 excessWork_exp1 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}} --}}
+        <tr>
+          <td class="bordered" colspan="9" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+      <table class="table ">
+        <tr>
+          <td class="bordered questBg" width="17" align="center">
+            <p class="h12"><i>SIGNATURE</i></p>
+          </td>
+           {{#ifCond ../hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+          <td colspan="2" width="20%" class="bordered questBg" align="center">
+            <p class="h12"><i>DATE</i></p>
+          </td>
+          <td width="30%" align="center" colspan="3" class="bordered">
+            <p class="h12">{{dateFormat dateToDisplay}}</p>
+          </td>
+        </tr>
+      </table>
+      <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+          class="page-number"></span>
+        / <span>{{../numPage}}</span> </p>
+
+    </div>
+  </div>
+  {{/each}}
+  {{/hasData}}
+
+
+  {{!-- 3ed page --}}
+  <div class="pages">
+    <div>
+      {{!--VOLUNTARY WORK OR INVOLVEMENT IN CIVIC --}}
+      <table class="table" style="margin-top: 10px;">
+        <tr>
+          <td colspan="6" class="h12 legend_bg bordered">VI. VOLUNTARY WORK OR INVOLVEMENT IN CIVIC / NON-GOVERNMENT
+            /
+            PEOPLE / VOLUNTARY ORGANIZATION/S</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">29.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10"> NAME AND ADDRESS OF ORGANIZATION <br> (Write in full)</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="5%" align="center">
+            <p class="h10">INCLUSIVE DATES <br> (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="5%" align="center">
+            <p class="h10">NUMBER OF HOURS</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="15%" align="center">
+            <p class="h10">POSITION / NATURE OF WORK</p>
+          </td>
+
+
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+        {{#hasData voluntary_work 0}}
+            {{#voluntary_work}}
+            <tr>
+              <td colspan="2" class="bordered" height="30">
+                <p class="h10">{{org_name}}</p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10">{{dateFormat date_from}}</p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10">{{dateFormat date_to}}</p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10">{{num_hours}}</p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10">{{position}}</p>
+              </td>
+
+            </tr>
+            {{/voluntary_work}}
+
+            {{#for 0 excessVolWork 1}}
+            <tr>
+              <td colspan="2" class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+              <td class="bordered" height="30">
+                <p class="h10"></p>
+              </td>
+            </tr>
+            {{/for}}
+        {{else}}
+         <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+        </tr>
+          {{#for 1 4 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+         {{/hasData}}
+
+        <tr>
+          <td class="bordered" colspan="8" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+      {{!--LEARNING AND DEVELOPMENT --}}
+      <table class="table">
+        <tr>
+          <td colspan="7" class="h12 legend_bg bordered">VII. LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS/TRAINING
+            PROGRAMS
+            ATTENDED <br>(Start from the most recent L&D/training program and include only the relevant L&D/training
+            taken
+            for the last five (5)
+            years for Division Chief/Executive/Managerial positions)</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">30.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="40%" align="center">
+            <p class="h10"> TITLE OF LEARNING AND DEVELOPMENT INTERVENTIONS/TRAINING PROGRAMS <br> (Write in full)</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">INCLUSIVE DATES  OF ATTENDANCE<br> (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="5%" align="center">
+            <p class="h10">NUMBER OF HOURS</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="5%" align="center">
+            <p class="h10">TYPE OF LD <br> (Management/<br>Supervisory/Technical/etc.)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="25%" align="center">
+            <p class="h10">CONDUCTED/SPONSORED BY <br> (Write in full)</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+        {{#hasData learning_and_development 0}}
+        {{#learning_and_development}}      
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10">{{title}}</p>
+          </td>
+          <td class="bordered" height="30">
+           
+             <div class="h10">{{dateFormat date_from}}</div>
+          
+          </td>
+          <td class="bordered" height="30">
+          
+            <div class="h10">{{dateFormat date_to}}</div>
+            
+          </td>
+          <td align="center" class="bordered" height="30">
+            <p class="h10">{{num_hours}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{type}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{conducted_by}}</p>
+          </td>
+        </tr>   
+        {{/learning_and_development}}
+
+        {{#for 0 excessLnd 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+        {{else}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">N/A</p>
+          </td>
+        </tr>
+         {{#for 1 14 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+        {{/hasData}}
+        <tr>
+          <td class="bordered" colspan="7" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+      {{!--OTHER INFORMATION --}}
+      <table class="table">
+        <tr>
+          <td colspan="6" class="h12 legend_bg bordered">VIII. OTHER INFORMATION</td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">31. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">SPECIAL SKILLS and HOBBIES</p>
+          </td>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">32. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">NON-ACADEMIC DISTINCTIONS / RECOGNITION <br> (Write in full)</p>
+          </td>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">33. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">MEMBERSHIP IN ASSOCIATION / ORGANIZATION <br> (Write in full)</p>
+          </td>
+
+        </tr>
+        {{#hasData other_infos 0}}
+        {{#other_infos}}
+        <tr>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10">{{hobbies}}</p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="40%">
+            <p class="h10">{{non_acad_distinction}}</p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10">{{org_membership}}</p>
+          </td>
+
+        </tr>
+        {{/other_infos}}
+
+        {{#for 0 excessOtherInfo 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="40%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+
+        </tr>
+        {{/for}}
+
+        {{else}}
+         <tr>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10">N/A</p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="40%">
+            <p class="h10">N/A</p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10">N/A</p>
+          </td>
+
+        </tr>
+         {{#for 1 7 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="40%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+
+        </tr>
+        {{/for}}
+        {{/hasData}}
+        <tr>
+          <td class="bordered" colspan="6" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+
+      <table class="table ">
+        <tr>
+          <td class="bordered questBg" width="17" align="center">
+            <p class="h12"><i>SIGNATURE</i></p>
+          </td>
+          {{#ifCond hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+          <td colspan="2" width="20%" class="bordered questBg" align="center">
+            <p class="h12"><i>DATE</i></p>
+          </td>
+          <td width="30%" align="center" colspan="3" class="bordered">
+            <p class="h12">{{dateFormat dateToDisplay}}</p>
+          </td>
+        </tr>
+      </table>
+      <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+          class="page-number"></span>
+        / <span>{{numPage}}</span> </p>
+    </div>
+  </div>
+  {{!-- if voluntary work count > 9 --}}
+  {{#hasData voluntary_work1 0}}
+  {{#each voluntary_work1}}
+  <div class="pages">
+    <div>
+      {{!--VOLUNTARY WORK OR INVOLVEMENT IN CIVIC --}}
+      <table class="table" style="margin-top: 10px;">
+        <tr>
+          <td colspan="6" class="h12 legend_bg bordered">VI. VOLUNTARY WORK OR INVOLVEMENT IN CIVIC / NON-GOVERNMENT
+            /
+            PEOPLE / VOLUNTARY ORGANIZATION/S</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">29.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10"> NAME AND ADDRESS OF ORGANIZATION <br> (Write in full)</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">INCLUSIVE DATES <br> (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">NUMBER OF HOURS</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">POSITION / NATURE OF WORK</p>
+          </td>
+
+
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+        {{#each this}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10">{{org_name}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{dateFormat date_from}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{dateFormat date_to}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{num_hours}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{position}}</p>
+          </td>
+
+        </tr>
+        {{/each}}
+
+        {{!-- {{#for 0 excessVolWork1 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}} --}}
+
+        <tr>
+          <td class="bordered" colspan="8" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span>(Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+      {{!--LEARNING AND DEVELOPMENT --}}
+      {{!-- <table class="table">
+        <tr>
+          <td colspan="7" class="h12 legend_bg bordered">VII. LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS/TRAINING
+            PROGRAMS
+            ATTENDED <br>(Start from the most recent L&D/training program and include only the relevant L&D/training
+            taken
+            for the last five (5)
+            years for Division Chief/Executive/Managerial positions)</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">30.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10">  TITLE OF LEARNING AND DEVELOPMENT INTERVENTIONS/TRAINING PROGRAMS <br> (Write in full)</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">INCLUSIVE DATES  OF ATTENDANCE<br> (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">NUMBER OF HOURS</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">TYPE OF LD <br> (Management/Supervisory/Technical/etc.)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">CONDUCTED/SPONSORED BY <br> (Write in full)</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+
+        {{#for 0 ../lndLen 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+
+        <tr>
+          <td class="bordered" colspan="7" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table> --}}
+
+      {{!--OTHER INFORMATION --}}
+      {{!-- <table class="table">
+        <tr>
+          <td colspan="6" class="h12 legend_bg bordered">VIII. OTHER INFORMATION</td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">31. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">SPECIAL SKILLS and HOBBIES</p>
+          </td>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">32. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">NON-ACADEMIC DISTINCTIONS / RECOGNITION <br> (Write in full)</p>
+          </td>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">33. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">MEMBERSHIP IN ASSOCIATION / ORGANIZATION <br> (Write in full)</p>
+          </td>
+
+        </tr>
+
+
+        {{#for 0 ../other_infos_len 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="40%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+
+        </tr>
+        {{/for}}
+
+
+        <tr>
+          <td class="bordered" colspan="6" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table> --}}
+
+
+      <table class="table ">
+        <tr>
+          <td class="bordered questBg" width="17" align="center">
+            <p class="h12"><i>SIGNATURE</i></p>
+          </td>
+          {{#ifCond ../hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+          <td colspan="2" width="20%" class="bordered questBg" align="center">
+            <p class="h12"><i>DATE</i></p>
+          </td>
+          <td width="30%" align="center" colspan="3" class="bordered">
+            <p class="h12">{{dateFormat dateToDisplay}}</p>
+          </td>
+        </tr>
+      </table>
+      <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+          class="page-number"></span>
+        / <span>{{../numPage}}</span> </p>
+    </div>
+  </div>
+  {{/each}}
+  {{/hasData}}
+  {{!-- if lnd count > 14 --}}
+  {{#hasData learning_and_development1 0}}
+    {{#each learning_and_development1}}
+  <div class="pages">
+    <div>
+      {{!--VOLUNTARY WORK OR INVOLVEMENT IN CIVIC --}}
+      {{!-- <table class="table" style="margin-top: 10px;">
+        <tr>
+          <td colspan="6" class="h12 legend_bg bordered">VI. VOLUNTARY WORK OR INVOLVEMENT IN CIVIC / NON-GOVERNMENT
+            /
+            PEOPLE / VOLUNTARY ORGANIZATION/S</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">29.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10"> NAME AND ADDRESS OF ORGANIZATION <br> (Write in full)</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">INCLUSIVE DATES<br> (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">NUMBER OF HOURS</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">POSITION / NATURE OF WORK</p>
+          </td>
+
+
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+
+        {{#for 0 ../volWorkLen 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+
+        <tr>
+          <td class="bordered" colspan="8" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table> --}}
+
+      {{!--LEARNING AND DEVELOPMENT --}}
+      <table class="table">
+        <tr>
+          <td colspan="7" class="h12 legend_bg bordered">VII. LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS/TRAINING
+            PROGRAMS
+            ATTENDED <br>(Start from the most recent L&D/training program and include only the relevant L&D/training
+            taken
+            for the last five (5)
+            years for Division Chief/Executive/Managerial positions)</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">30.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="40%" align="center">
+            <p class="h10"> TITLE OF LEARNING AND DEVELOPMENT INTERVENTIONS/TRAINING PROGRAMS <br> (Write in full)</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">INCLUSIVE DATES  OF ATTENDANCE<br> (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="5%" align="center">
+            <p class="h10">NUMBER OF HOURS</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="5%" align="center">
+            <p class="h10">TYPE OF LD <br> (Management/<br>Supervisory/Technical/etc.)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="25%" align="center">
+            <p class="h10">CONDUCTED/SPONSORED BY <br> (Write in full)</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+    
+  
+      {{#each this}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10">{{title}}</p>
+          </td>
+          <td class="bordered" height="30">
+           
+            <p class="h10">{{dateFormat date_from}}</p>
+        
+          </td>
+          <td class="bordered" height="30">
+          
+            <p class="h10">{{dateFormat date_to}}</p>
+      
+          </td>
+          <td align="center" class="bordered" height="30">
+            <p class="h10">{{num_hours}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{type}}</p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10">{{conducted_by}}</p>
+          </td>
+        </tr>
+      {{/each}}  
+    
+
+     
+      {{!-- {{#each learning_and_development1 }} --}}
+    
+        
+      
+      
+        {{!-- {{/getObject}} --}}
+      
+          
+          {{!-- {{/each}} --}}
+        {{#for 0 excessLnd1 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+
+        <tr>
+          <td class="bordered" colspan="7" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span>(Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+      {{!--OTHER INFORMATION --}}
+      {{!-- <table class="table">
+        <tr>
+          <td colspan="6" class="h12 legend_bg bordered">VIII. OTHER INFORMATION</td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">31. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">SPECIAL SKILLS and HOBBIES</p>
+          </td>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">32. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">NON-ACADEMIC DISTINCTIONS / RECOGNITION <br> (Write in full)</p>
+          </td>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">33. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">MEMBERSHIP IN ASSOCIATION / ORGANIZATION <br> (Write in full)</p>
+          </td>
+
+        </tr>
+
+
+        {{#for 0 ../other_infos_len 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="40%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+
+        </tr>
+        {{/for}}
+
+
+        <tr>
+          <td class="bordered" colspan="6" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table> --}}
+
+
+      <table class="table ">
+        <tr>
+          <td class="bordered questBg" width="17" align="center">
+            <p class="h12"><i>SIGNATURE</i></p>
+          </td>
+         {{#ifCond hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+          <td colspan="2" width="20%" class="bordered questBg" align="center">
+            <p class="h12"><i>DATE</i></p>
+          </td>
+          <td width="30%" align="center" colspan="3" class="bordered">
+            <p class="h12">{{dateFormat dateToDisplay}}</p>
+          </td>
+        </tr>
+      </table>
+      <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+          class="page-number"></span>
+        / <span>{{../numPage}}</span> </p>
+    </div>
+  </div>
+  {{/each}}
+  {{/hasData}}
+  {{!-- if other info count > 9 --}}
+  {{#hasData other_infos1 0}}
+  {{#each other_infos1}}
+  <div class="pages">
+    <div>
+      {{!--VOLUNTARY WORK OR INVOLVEMENT IN CIVIC --}}
+      {{!-- <table class="table" style="margin-top: 10px;">
+        <tr>
+          <td colspan="6" class="h12 legend_bg bordered">VI. VOLUNTARY WORK OR INVOLVEMENT IN CIVIC / NON-GOVERNMENT
+            /
+            PEOPLE / VOLUNTARY ORGANIZATION/S</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">29.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10"> NAME AND ADDRESS OF ORGANIZATION <br> (Write in full)</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">INCLUSIVE DATES<br> (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">NUMBER OF HOURS</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">POSITION / NATURE OF WORK</p>
+          </td>
+
+
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+
+
+        {{#for 0 ../volWorkLen 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+
+        <tr>
+          <td class="bordered" colspan="8" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table> --}}
+
+      {{!--LEARNING AND DEVELOPMENT --}}
+      {{!-- <table class="table">
+        <tr>
+          <td colspan="7" class="h12 legend_bg bordered">VII. LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS/TRAINING
+            PROGRAMS
+            ATTENDED <br>(Start from the most recent L&D/training program and include only the relevant L&D/training
+            taken
+            for the last five (5)
+            years for Division Chief/Executive/Managerial positions)</td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="1%" align="center" class="questBg">
+            <p class="h10">30.</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" style="border-left: none;" width="30%" align="center">
+            <p class="h10">  TITLE OF LEARNING AND DEVELOPMENT INTERVENTIONS/TRAINING PROGRAMS <br> (Write in full)</p>
+          </td>
+          <td colspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">INCLUSIVE DATES  OF ATTENDANCE<br> (mm/dd/yyyy)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">NUMBER OF HOURS</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">TYPE OF LD <br> (Management/Supervisory/Technical/etc.)</p>
+          </td>
+          <td rowspan="2" class="bordered questBg" width="10%" align="center">
+            <p class="h10">CONDUCTED/SPONSORED BY <br> (Write in full)</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">From</p>
+          </td>
+          <td class="bordered questBg" width="5%" align="center">
+            <p class="h10">To</p>
+          </td>
+        </tr>
+
+
+        {{#for 0 ../lndLen 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+          <td class="bordered" height="30">
+            <p class="h10"></p>
+          </td>
+        </tr>
+        {{/for}}
+
+        <tr>
+          <td class="bordered" colspan="7" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table> --}}
+
+      {{!--OTHER INFORMATION --}}
+      <table class="table">
+        <tr>
+          <td colspan="6" class="h12 legend_bg bordered">VIII. OTHER INFORMATION</td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">31. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">SPECIAL SKILLS and HOBBIES</p>
+          </td>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">32. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">NON-ACADEMIC DISTINCTIONS / RECOGNITION <br> (Write in full)</p>
+          </td>
+          <td class="bordered questBg" style="border-right: none;" align="center">
+            <p class="h10">33. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none;" align="center">
+            <p class="h10">MEMBERSHIP IN ASSOCIATION / ORGANIZATION <br> (Write in full)</p>
+          </td>
+
+        </tr>
+        {{#each this}}
+        <tr>
+          <td colspan="2" class="bordered" height="30" width="30">
+            <p class="h10">{{hobbies}}</p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="40">
+            <p class="h10">{{non_acad_distinction}}</p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="30">
+            <p class="h10">{{org_membership}}</p>
+          </td>
+
+        </tr>
+        {{/each}}
+
+        {{#for 0 excessOtherInfo 1}}
+        <tr>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="40%">
+            <p class="h10"></p>
+          </td>
+          <td colspan="2" class="bordered" height="30" width="30%">
+            <p class="h10"></p>
+          </td>
+
+        </tr>
+        {{/for}}
+
+
+        <tr>
+          <td class="bordered" colspan="6" align="center">
+            <p class="h10" style="color: red; font-style:italic"><span style="visibility: hidden;"></span> (Continue
+                  on
+                  separate sheet if
+                  necessary)</p>
+          </td>
+
+        </tr>
+
+      </table>
+
+
+      <table class="table ">
+        <tr>
+          <td class="bordered questBg" width="17" align="center">
+            <p class="h12"><i>SIGNATURE</i></p>
+          </td>
+          {{#ifCond ../hasEsig true}}
+              <td width="33%" class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+               <td width="33%" class="bordered"></td>
+              {{/ifCond}}
+          <td colspan="2" width="20%" class="bordered questBg" align="center">
+            <p class="h12"><i>DATE</i></p>
+          </td>
+          <td width="30%" align="center" colspan="3" class="bordered">
+            <p class="h12">{{dateFormat dateToDisplay}}</p>
+          </td>
+        </tr>
+      </table>
+      <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+          class="page-number"></span>
+        / <span>{{../numPage}}</span> </p>
+    </div>
+  </div>
+  {{/each}}
+  {{/hasData}}
+  {{!-- last page --}}
+  <div class="pages">
+    <div>
+      {{!-- PERSONAL QUESTION --}}
+      {{#personal_question_answer}}
+      <table class="table" style="margin-top: 10px;">
+        {{!-- question 34--}}
+        <tr>
+          <td width="" class="bordered questBg"
+            style="border-right: none;border-bottom: none;text-align:left;vertical-align:top;padding:0">
+            <p class="h10" style="margin-top: 5px;">&nbsp;34. </p>
+          </td>
+          <td class="bordered questBg" style="border-left: none; border-bottom:none;" colspan="2">
+            <p class="h12">Are you related by consanguinity or affinity to the appointing or recommending authority,
+              or
+              to
+              the chief of bureau or office or to the person who has immediate supervision over you in the Office,
+              Bureau
+              or
+              Department where you will be appointed,</p>
+          </td>
+          <td width="30%" colspan="2">
+            <p class="h12"></p>
+          </td>
+        </tr>
+        {{!-- question 34A--}}
+
+        <tr>
+          <td width="" class="questBg">
+            <p class="h10"> </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-bottom:none; border-top:none;text-align:left;vertical-align:top;padding:0"
+            colspan="2">
+            <p class="h12">a. within the third degree?</p>
+          </td>
+          <td width="30%" colspan="2" >
+            {{#_1a}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex;margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+            <div style="width: 100%; display: flex;margin-top:-10px">
+              <p class="h10"  style="width: 40%;">If YES, give details:</p>
+              <p class="h10" style="width: 60%; border-bottom:1px solid black;">{{details}}</p>
+           
+              
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex;margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+             <div style="width: 100%; display: flex;margin-top:-10px">
+             
+               <p class="h10" style="width: 40%;">If YES, give details:</p>
+              <p class="h10" style="width: 60%; border-bottom:1px solid black;"></p>
+            </div>
+            {{/ifCond}}
+            {{/_1a}}
+          </td>
+        </tr>
+
+        {{!-- question 34B--}}
+
+        <tr>
+          <td width="" class="questBg">
+            <p class="h10"> </p>
+          </td>
+          <td colspan="2" class="bordered questBg"
+            style="border-left: none;border-top:none;text-align:left;vertical-align:top;padding:0">
+            <p class="h12">b. within the fourth degree (for Local Government Unit - Career Employees) ?</p>
+          </td>
+          <td width="30%" colspan="2" style="border-left: none;border-bottom:1px solid; border-top:none;">
+            {{#_1b}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+             <div style="width: 100%; display: flex; margin-top:-10px">
+                <p class="h10" style="width: 40%;">If YES, give details:</p>
+                <p class="h10" style="width: 60%; border-bottom:1px solid black;">{{details}}</p>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" ><label class="h10">NO</label>
+              </div>
+            </div>
+              <div style="width: 100%; display: flex; margin-top:-10px">
+                <p class="h10" style="width: 40%;">If YES, give details:</p>
+              <p class="h10" style="width: 60%; border-bottom:1px solid black;"></p>
+              
+            </div>
+            {{/ifCond}}
+            {{/_1b}}
+          </td>
+        </tr>
+
+        {{!-- question 35A--}}
+
+        <tr>
+          <td width="" class="bordered questBg"
+            style="border-right: none; border-bottom: none;text-align:left;vertical-align:top;padding:0">
+            <p class="h10" style="margin-top: 2px;">&nbsp;35. </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-bottom: none;text-align:left;vertical-align:top;padding:0" colspan="2">
+            <p class="h12">a. Have you ever been found guilty of any administrative offense?</p>
+          </td>
+          <td width="30%" colspan="2">
+            {{#_2a}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex;">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+              <div style="width: 100%; display: flex; margin-top:-10px">
+                <p class="h10" style="width: 40%;">If YES, give details:</p>
+                <p class="h10" style="width: 60%; border-bottom:1px solid black;">{{details}}</p>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex;">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+             <div style="width: 100%; display: flex; margin-top:-10px">
+                <p class="h10" style="width: 40%;">If YES, give details:</p>
+                <p class="h10" style="width: 60%; border-bottom:1px solid black;"></p>
+            </div>
+            {{/ifCond}}
+            {{/_2a}}
+          </td>
+        </tr>
+
+        {{!-- question 35B--}}
+
+        <tr>
+          <td width="" class="bordered questBg" style="border-right: none; border-top:none">
+            <p class="h12"> </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-top:none;text-align:left;vertical-align:top;padding:0" colspan="2">
+            <p class="h12">b. Have you ever been criminally charged before any court?</p>
+          </td>
+
+          <td width="30%" class="bordered" style="border-top:none" colspan="2">
+            {{#_2b}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+            <div style="width: 100%; display: flex; margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%">{{details}}</p>
+            </div>
+
+            <div style="width: 100%; display:flex">
+              <div style="width: 100%; text-align:left; display: flex">
+                <p class="h10" style="width:40%">Date Filed:</p>
+                <p class="h10" style="border-bottom:1px solid black; width:60%">{{dateFormat date_filed}}</p>
+              </div>
+            </div>
+
+            <div style="width: 100%; display:flex">
+             <div style="width: 100%; text-align:left; display: flex">
+                <p class="h10" style="width:40%">Status of Case/s</p>
+                <p class="h10" style="border-bottom:1px solid black; width:60%">{{case_status}}</p>
+              </div>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+           
+            <div style="width: 100%; display:flex;margin-top:-10px">
+                <p class="h10" style="width: 40%;">If YES, give details:</p>
+                <p class="h10" style="width: 60%; border-bottom:1px solid black;"></p>
+             </div>
+
+            <div style="width: 100%; display:flex;margin-top:-10px">
+              <div style="width: 100%; text-align:left; display: flex">
+                <p class="h10" style="width:40%">Date Filed:</p>
+                 <p class="h10" style="border-bottom:1px solid black; width:60%"></p>
+              </div>
+             
+            </div>
+            <div style="width: 100%; display:flex; margin-top:-20px">
+             
+              <div style="width: 100%; text-align:left; display: flex">
+                <p class="h10" style="width:40%">Status of Case/s</p>
+                 <p class="h10" style="border-bottom:1px solid black; width:60%"></p>
+              </div>
+            </div>
+            {{/ifCond}}
+            {{/_2b}}
+          </td>
+        </tr>
+
+        {{!-- question 36--}}
+
+        <tr>
+          <td width="" class="bordered questBg"
+            style="border-right: none; border-bottom: none;text-align:left;vertical-align:top;padding:0">
+            <p class="h10" style="margin-top: 2px;">&nbsp;36. </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-bottom: none;text-align:left;vertical-align:top;padding:0" colspan="2">
+            <p class="h12"> Have you ever been convicted of any crime or violation of any law, decree, ordinance or
+              regulation by any court or tribunal?</p>
+          </td>
+          <td width="30%" colspan="2" style="border-left: none;border-bottom:1px solid; border-top:none;">
+            {{#_3a}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+            <div style="width: 100%; display: flex;">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%">{{details}}</p>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+             <div style="width: 100%; display: flex; margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p style="border-bottom:1px solid black; width:60%"></p>
+            </div>
+            {{/ifCond}}
+            {{/_3a}}
+          </td>
+        </tr>
+
+        {{!-- question 37--}}
+
+        <tr>
+          <td width="" class="bordered questBg"
+            style="border-right: none; border-bottom: none;text-align:left;vertical-align:top;padding:0">
+            <p class="h10" style="margin-top: 2px;">&nbsp;37. </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-bottom: none;text-align:left;vertical-align:top;padding:0" colspan="2">
+            <p class="h12"> Have you ever been separated from the service in any of the following modes:
+              resignation,
+              retirement, dropped from the
+              rolls, dismissal, termination, end of term, finished contract or phased out (abolition) in the public
+              or
+              private sector?</p>
+          </td>
+          <td width="30%" colspan="2" style="border-left: none;border-bottom:1px solid; border-top:none;">
+            {{#_4a}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+            <div style="width: 100%; display: flex;">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%">{{details}}</p>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+             <div style="width: 100%; display: flex;margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p style="border-bottom:1px solid black; width:60%"></p>
+            </div>
+            {{/ifCond}}
+            {{/_4a}}
+          </td>
+        </tr>
+
+        {{!-- question 38A--}}
+
+        <tr>
+          <td width="" class="bordered questBg"
+            style="border-right: none; border-bottom: none;text-align:left;vertical-align:top;padding:0">
+            <p class="h10" style="margin-top: 2px;">&nbsp;38. </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-bottom: none;text-align:left;vertical-align:top;padding:0" colspan="2">
+            <p class="h12">a. Have you ever been a candidate in a national or local election held within the last
+              year
+              (except Barangay Election)?</p>
+          </td>
+          <td width="30%" colspan="2">
+            {{#_5a}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+               <div style="width: 100%; display: flex;">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%">{{details}}</p>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+              <div style="width: 100%; display: flex;margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%"></p>
+            </div>
+            {{/ifCond}}
+            {{/_5a}}
+          </td>
+        </tr>
+
+        {{!-- question 38B--}}
+
+        <tr>
+          <td width="" class="bordered questBg" style="border-right: none; border-top:none">
+            <p class="h12"> </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-top:none;text-align:left;vertical-align:top;padding:0" colspan="2">
+            <p class="h12">b. Have you Resigned from the government service during the three (3)-month period before
+              the
+              last election to promote/actively campaign for a national or local candidate?</p>
+          </td>
+          <td width="30%" colspan="2" style="border-left: none;border-bottom:1px solid; border-top:none;">
+            {{#_5b}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+            <div style="width: 100%; display: flex;margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%">{{details}}</p>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+             <div style="width: 100%; display: flex; margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, give details:</p>
+              <p style="border-bottom:1px solid black; width:60%"></p>
+            </div>
+            {{/ifCond}}
+            {{/_5b}}
+          </td>
+        </tr>
+
+        {{!-- question 39--}}
+
+        <tr>
+          <td width="" class="bordered questBg"
+            style="border-right: none; border-bottom: none;text-align:left;vertical-align:top;padding:0">
+            <p class="h10" style="margin-top: 2px;">&nbsp;39. </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-bottom: none;text-align:left;vertical-align:top;padding:0" colspan="2">
+            <p class="h12"> Have you acquired the status of an immigrant or permanent resident of another country?
+            </p>
+          </td>
+          <td width="30%" colspan="2" style="border-left: none;border-bottom:1px solid; border-top:none;">
+            {{#_6a}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+            <div style="width: 100%; display: flex">
+              <p class="h10" style="width:40%">If YES, give details (country):</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%">{{details}}</p>
+            </div>
+           
+            {{else}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+            <div style="width: 100%; display: flex;margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, give details (country):</p>
+              <p style="border-bottom:1px solid black; width:60%"></p>
+            </div>
+          
+            {{/ifCond}}
+            {{/_6a}}
+          </td>
+        </tr>
+
+        {{!-- question 40--}}
+        <tr>
+          <td width="" class="bordered questBg"
+            style="border-right: none;border-bottom: none;text-align:left;vertical-align:top;padding:0">
+            <p class="h10" style="margin-top: 2px;">&nbsp;40. </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none; border-bottom:none;text-align:left;vertical-align:top;padding:0" colspan="2">
+            <p class="h12">Pursuant to: (a) Indigenous People's Act (RA 8371); (b) Magna Carta for Disabled Persons
+              (RA
+              7277); and (c) Solo Parents
+              Welfare Act of 2000 (RA 8972), please answer the following items:</p>
+          </td>
+          <td width="30%" colspan="2">
+            <p class="h12"></p>
+          </td>
+        </tr>
+        {{!-- question 40A--}}
+
+        <tr>
+          <td width="" class="questBg">
+            <p class="h10"> </p>
+          </td>
+          <td class="bordered questBg"
+            style="border-left: none;border-bottom:none; border-top:none;text-align:left;vertical-align:top;padding:0"
+            colspan="2">
+            <p class="h12">a. Are you a member of any Indigenous group?</p>
+          </td>
+          <td width="30%" colspan="2">
+            {{#_7a}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+           
+            <div style="width: 100%; display: flex;">
+              <p class="h10" style="width:40%">If YES, please specify:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%">{{details}}</p>
+            </div>
+          
+            {{else}}
+            <div style="width: 100%; display:flex">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+            
+            <div style="width: 100%; display: flex;margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, please specify:</p>
+              <p style="border-bottom:1px solid black; width:60%"></p>
+            </div>
+          
+            {{/ifCond}}
+            {{/_7a}}
+          </td>
+        </tr>
+
+        {{!-- question 40B--}}
+
+
+        <tr>
+          <td width="" class="questBg">
+            <p class="h10"> </p>
+          </td>
+          <td colspan="2" class="bordered questBg"
+            style="border-left: none;border-top:none; border-bottom:none;text-align:left;vertical-align:top;padding:0">
+            <p class="h12">b. Are you a person with disability?</p>
+          </td>
+          <td width="30%" colspan="2">
+            {{#_7b}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+           
+            <div style="width: 100%; display: flex;margin-top:-10px">
+              <p class="h10" style="width:40%">If YES, please specify ID No:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:60%">{{details}}</p>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+           
+            <div style="width: 100%; display: flex;">
+              <p class="h10" style="width:50%">If YES, please specify ID No:</p>
+              <p style="border-bottom:1px solid black; width:50%"></p>
+            </div>
+            {{/ifCond}}
+            {{/_7b}}
+          </td>
+        </tr>
+
+        {{!-- question 40C--}}
+
+        <tr>
+          <td width=""   class="questBg">
+            <p class="h10"> </p>
+          </td>
+          <td colspan="2" class="bordered questBg"
+            style="border-left: none;border-top:none;text-align:left;vertical-align:top;padding-top:0;padding-bottom:0">
+            <p class="h12">c. Are you a solo parent?</p>
+          </td>
+          <td width="30%" style="padding-top: 0;" colspan="2">
+            {{#_7c}}
+            {{#ifCond answer 1}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">NO</label>
+              </div>
+            </div>
+           
+              <div style="width: 100%; display: flex">
+              <div style="width: 50%;"><p class="h10">If YES, please specify ID No:</p></div>
+              <div style="width: 50%; border-bottom:1px solid black;" ><p class="h10" >{{details}}</p></div>
+              
+            </div>
+            <div style="width: 100%; display: flex; margin-top:-10px">
+              <p class="h10" style="width:50%">If YES, please specify ID No:</p>
+              <p class="h10" style="border-bottom:1px solid black; width:50%">{{details}}</p>
+            </div>
+            {{else}}
+            <div style="width: 100%; display:flex; margin-top:-10px">
+              <div style="width: 50%;">
+                <input type="checkbox"><label class="h10">YES</label>
+              </div>
+              <div style="width: 50%;">
+                <input type="checkbox" checked><label class="h10">NO</label>
+              </div>
+            </div>
+             
+            <div style="width: 100%; display: flex; margin-top:-10px">
+              <p class="h10" style="width:50%">If YES, please specify ID No:</p>
+              <p style="border-bottom:1px solid black; width:50%"></p>
+            </div>
+           
+            {{/ifCond}}
+            {{/_7c}}
+          </td>
+        </tr>
+
+      </table>
+      {{/personal_question_answer}}
+      {{!-- REFERENCES --}}
+      <table class="table">
+        <tr>
+          <td colspan="3" class="bordered questBg">
+            <p class="h12 "><span class="h10">41.</span> REFERENCES <span class="h8" style="color: red;">(Person not related by consanguinity
+                or
+                affinity to applicant/appointee)</span></p>
+          </td>
+          <td rowspan="8" width="20%" class="bordered " align="center">
+            {{#ifCond hasPic 'true'}}
+            <img src="data:image/png;base64, {{profileImg}}" style="width: 3.5cm; height: 4.5cm">
+            {{else}}
+
+            <div class="bordered" style="padding: 10px; width:70px">
+              <p class="h8" style="text-center">ID picture taken within the last 6 months 4.5cm X 3.5cm (passport size)
+                <br><br>
+                Computer generated or photocopied picture is not acceptable.
+              </p>
+            </div>
+            <div>
+              <p class="h10">PHOTO</p>
+            </div>
+            {{/ifCond}}
+          </td>
+        </tr>
+        <tr>
+          <td class="bordered questBg" width="35%" height="10" align="center">
+            <p class="h10">NAME</p>
+          </td>
+          <td class="bordered questBg" width="35%" height="10" align="center">
+            <p class="h10">ADDRESS</p>
+          </td>
+          <td class="bordered questBg" width="30%" height="10" align="center">
+            <p class="h10">TEL. NO.</p>
+          </td>
+        </tr>
+        {{#references}}
+        <tr>
+          <td class="bordered" width="35%" height="20" align="center">
+            <p class="h12">{{name}}</p>
+          </td>
+          <td class="bordered" width="35%" height="20" align="center">
+            <p class="h12">{{address}}</p>
+          </td>
+          <td class="bordered" width="30%" height="20" align="center">
+            <p class="h12">{{tel_no}}</p>
+          </td>
+        </tr>
+        {{/references}}
+
+        {{#for 0 excessRef 1}}
+        <tr>
+          <td class="bordered" width="35%" height="20" align="center">
+            <p class="h12"></p>
+          </td>
+          <td class="bordered" width="35%" height="20" align="center">
+            <p class="h12"></p>
+          </td>
+          <td class="bordered" width="30%" height="20" align="center">
+            <p class="h12"></p>
+          </td>
+        </tr>
+        {{/for}}
+
+        <tr>
+
+          <td rowspan="4" colspan="3" class="questBg">
+            <div style="display: flex; width:100%">
+              <div class="h10" style="width: 2% ;">42.</div>
+              <div class="h12" style="text-align: justify; width:98%; padding-left:2px; padding-right:2px">I declare
+                under oath that I have
+                personally
+                accomplished
+                this
+                Personal Data Sheet which is a
+                true, correct and complete
+                statement pursuant to the provisions of pertinent laws, rules and regulations of the Republic of the
+                Philippines. I
+                authorize the agency head / authorized representative to verify/validate the contents stated herein. I
+                agree
+                that any
+                misrepresentation made in this document and its attachments shall cause the filing of
+                administrative/criminal
+                case/s
+                against me.</div>
+            </div>
+
+          </td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr>
+
+          <td class="bordered" style="border-left: none;" rowspan="2" style="padding: 5px;" align="center">
+            <div class="bordered" style="height: 100px; width:130px"></div>
+            <div class="bordered questBg" style="height: 20px; width:130px">
+              <p class="h8">Right Thumbmark</p>
+            </div>
+          </td>
+
+
+        </tr>
+        <tr>
+
+          <td class="bordered" style="border-right:none" width="50%">
+            {{#gov_issued_id}}
+            <table class="table">
+              <tr>
+                <td colspan="2" class="bordered questBg">
+                  <p class="h10">Government Issued ID <span class="h8">(i.e Passport, GSIS, SSS, PRC, Driver's
+                      License,
+                      etc)</span><br> PLEASE INDICATE ID Number and Date of Issuance</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="50%" class="bordered" style="border-right: none;">
+                  <p class="h10">Government Issued ID:</p>
+                </td>
+                <td width="50%" class="bordered" style="border-left: none;">
+                  <p class="h10">{{gov_id}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="bordered" style="border-right: none;">
+                  <p class="h10">ID/License/Passport No:</p>
+                </td>
+                <td class="bordered" style="border-left: none;">
+                  <p class="h10">{{gov_id_no}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="bordered" style="border-right: none;">
+                  <p class="h10">Date/Place of Issuance:</p>
+                </td>
+                <td class="bordered" style="border-left: none;">
+                  <p class="h10">{{formatGovIDDateIssued date_issued}}</p>
+                </td>
+              </tr>
+
+            </table>
+            {{/gov_issued_id}}
+          </td>
+          <td colspan="2" width="50%" style="border-right:none">
+            <table class="table">
+              <tr>
+              
+                 {{#ifCond hasEsig true}}
+              <td class="bordered" align="center"><img src="{{esign}}" width="50px" height="20px" alt=""></td>
+              {{else}}
+                <td class="bordered">
+                  <p style="font-size:24px;visibility: hidden;">S</p>
+                </td>
+              {{/ifCond}}
+              </tr>
+              <tr>
+                <td class="bordered questBg" align="center">
+                  <p class="h8">Signature(Sign inside the box)</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="bordered">
+                  <p class="h8"></p>
+                </td>
+              </tr>
+              <tr>
+                <td class="bordered questBg" align="center">
+                  <p class="h8">Date Accomplished</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+
+
+
+        </tr>
+
+      </table>
+
+
+
+
+
+
+      <table class="table ">
+        <tr>
+          <td align="center" colspan="3">
+            <p class="h12">SUBSCRIBED AND SWORN to before me this _____________________, affiant exhibiting his/her
+              validly issued government ID as indicated above.</p>
+          </td>
+
+        </tr>
+        <tr>
+          <td></td>
+          <td align="center" width="50%" class="bordered">
+            <p class="h12" style="height: 40px;"></p>
+            <p class="h12 questBg" style="border-top: 1px solid;">Person Administering Oath</p>
+          </td>
+          <td></td>
+
+        </tr>
+        <tr>
+          <td colspan="3">
+          </td>
+
+        </tr>
+      </table>
+
+      <p class="h8" style="float: right; font-style:italic">CS FORM 212 (Revised 2017), Page <span
+          class="page-number"></span> / <span>{{numPage}}</span> </p>
+
+    </div>
+
+  </div>
+  </div>
+
+  {{/each}}
+</body>
+
+</html>

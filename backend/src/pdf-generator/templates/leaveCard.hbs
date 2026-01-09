@@ -1,0 +1,558 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <style>
+      /**body { font-family: 'Liberation Sans'; }*/ .container{ width: 100%;
+      margin: 0 auto; } .header { position: fixed; top: 0px; left: 0px; right:
+      0px; height: 100px; } .footer { position: fixed; bottom: 0px; left: 0px;
+      right: 0px; height: 120px; } body { font-family: 'Arial Narrow' } table{
+      width: 100%; } table,th, td { page-break-inside: auto; } .strong {
+      font-weight: bold; } .bordered { border: 1px solid black; } .font-10 {
+      font-size: 10px; } .font-12 { font-size: 12px; } .font-14 {font-size:
+      14px; } .font-16 { font-size: 16px; } .font-18 { font-size:18px; }.font-24
+      { font-size:24px; } .extra-spacing-tr { height: 20px; } .header { height:
+      60px; } tr {page-break-inside: avoid; page-break-after: auto; } thead {
+      display:table-header-group; } tfoot { display: table-footer-group; }
+      .to_title{ margin-top: 0px;}.to_title_div{ text-align: center; }
+      .to_content{page-break-inside: auto; margin-top: 120px; margin-left: 40px;
+      margin-right: 40px; } .to_number{margin-right: 100px;} .employee_table{
+      }.recommending_approval{ display: flex; justify-content: space-between; }
+      .underline{ border-bottom:1px solid black } #eval_table tr td, #eval_table
+      tr th{ padding: 8px; } #eval_table{ page-break-after: always; } #f_table
+      th,#f_table td,#eval_table th,#eval_table td{ border: 1px solid black; }
+      #f_table,#eval_table{ border-collapse: collapse; } #eval_table{ border:
+      1px solid black; }
+    </style>
+  </head>
+
+  <body>
+    {{#each this}}
+
+      <div class='container'>
+        <div class='header'>
+          <img
+            src='data:image/png;base64, {{header_img}}'
+            width='100%'
+            alt=''
+          />
+
+        </div>
+        {{!-- <div class='footer'>
+
+          <img
+            style='position:fixed; bottom:0; left:0;right:0;'
+            src='data:image/png;base64, {{footer_img}}'
+            width='100%'
+            alt=''
+          />
+        </div> --}}
+
+        <div style='width: 100%;'>
+          <table
+            style='table-layout: fixed;margin:0 auto; width: 95%; page-break-inside:auto'
+          >
+            {{! // Add this css to make main table fixed, child tables will still scroll }}
+            <thead>
+              <tr>
+                <td colspan='2'>
+                  <div style='height: 120px;'></div>
+                </td>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan='2'>
+                  <div style='height: 80px;'></div>
+
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <td height='50' colspan='2' align='center'>
+
+                  <h3>PERSONNEL LEAVE CARD
+                    <br />
+                  </h3></td>
+              </tr>
+              {{!-- <tr>
+                  <td colspan='2'>
+                    <div style='margin-top: -30px;'>
+                      <div style='display: flex;'>
+                        <div style='width:55%'>
+                          <div style='display: flex;margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='width: 20%;'
+                            >Employee:</div>
+                            <div
+                              class='font-14 underline'
+                              style='width: 65%;'
+                            >{{name}}</div>
+                          </div>
+                          <div style='display: flex;margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='text-align:justify;'
+                            >Unit:
+                              <span
+                                style='text-decoration: underline; line-height: 1.3;'
+                              >{{office}}</span></div>
+                           
+                          </div>
+                          <div style='margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='text-align:justify; margin-right:10px'
+                            >Title of Activity:
+                              <span
+                                style='text-decoration: underline; line-height: 1.3;'
+                              >{{title}}</span></div>
+
+                          </div>
+                        </div>
+                        <div style='width:45%'>
+                          <div style='display: flex;margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='width: 35%;'
+                            >Position:</div>
+                            <div
+                              class='font-14 underline'
+                              style='width: 60%;'
+                            >{{position}}</div>
+                          </div>
+                          <div style='display: flex;margin-top:3px'>
+                            <div class='font-14' style='width: 35%;'>Travel
+                              Order No.:</div>
+                            <div
+                              class='font-14 underline'
+                              style='width: 60%;'
+                            >{{travel_order_num}}</div>
+                          </div>
+                          <div style='display: flex;margin-top:3px'>
+                            <div
+                              class='font-14'
+                              style='width: 35%;'
+                            >Venue:</div>
+                            <div
+                              class='font-14 strong'
+                              style='width: 60%;text-decoration:underline'
+                            >{{travel_place}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style='display: flex; margin-top:3px'>
+                        <div class='font-14'>Date of Activity:</div>
+                        <div
+                          class='font-14 underline strong'
+                        >{{travelDates}}</div>
+                      </div>
+                      <div style='margin-top:3px'>
+                        <div class='font-14'>Purpose:
+                          <span
+                            style='text-decoration:underline;line-height:1.3'
+                          >{{travel_purpose}}</span></div>
+
+                      </div>
+                    </div>
+                  </td>
+                </tr> --}}
+              <tr>
+                <td colspan='2'>
+                  <div
+                    style='display: flex; justify-content:space-around; margin-bottom:-14px'
+                  >
+                    <div
+                      class='font-10'
+                      style='border-width:1px 0 0 1px ; border-color:black;  border-style:solid ;width:100%; height:30px;display:flex;justify-content:space-between; align-items:center;padding:5px'
+                    >
+                      <div style='width: 40%;'>Name:</div>
+                      <div style='width: 60%;'> <b>{{user.name}}</b></div>
+
+                    </div>
+                    <div
+                      class='font-10'
+                      style='border-width:1px 0 0 0 ; border-color:black;  border-style:solid ;width:100%; height:30px;display:flex;justify-content:space-between; align-items:center;padding:5px'
+                    >
+                      <div style='width: 30%;'>Division/Office:</div>
+                      <div style='width: 60%;'><b>{{user.officeName}}</b></div>
+                    </div>
+                    <div
+                      class='font-10'
+                      style='border-width:1px 1px 0 0 ; border-color:black;  border-style:solid ;width:100%; height:30px;display:flex;justify-content:space-between; align-items:center;padding:5px'
+                    >
+                      <div style='width: 50%;'>1st Day of Service:</div>
+
+                      <div style='width: 50%;'>
+                        {{#ifCond hasFirstDateOfDuty true}}
+                          <b>{{formatAlphanumericDate firstDayOfService}}</b>
+                        {{/ifCond}}
+
+                      </div>
+
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan='2'>
+                  <div class='' style='margin-top: 10px;'>
+                    <table id='f_table'>
+                      <thead>
+
+                        <tr>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            rowspan='2'
+                            colspan='2'
+                            width='15%'
+                          >
+                            Period
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            colspan='2'
+                            width='20%'
+                          >
+                            Particulars
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            colspan='4'
+                            width='20%'
+                          >
+                            Vacation Leave
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            colspan='4'
+                            width='20%'
+                          >
+                            Sick Leave
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            rowspan='2'
+                            width='8%'
+                          >
+                            Total
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            rowspan='2'
+                            width='8%'
+                          >
+                            Date Filed
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            rowspan='2'
+                            width='8%'
+                          >
+                            Remarks
+                          </th>
+
+                        </tr>
+                        <tr>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Type
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Days
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Earned
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Abs.<br />
+                            W/P
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Bal.
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Abs.<br />
+                            W/OP
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Earned
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Abs.<br />
+                            W/P
+                          </th>
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Bal.
+                          </th>
+
+                          <th
+                            align='center'
+                            class='font-12'
+                            style='padding: 2px;'
+                            width='5%'
+                          >
+                            Abs.<br />
+                            W/OP
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#leaveCard}}
+                          <tr>
+                            <td
+                              align='left'
+                              class='font-10'
+                              style='padding: 5px;'
+                              width='5%'
+                            >
+                              {{period_earned}}
+                            </td>
+                            <td
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                              width='5%'
+                            >
+                              {{period}}
+                            </td>
+
+                            {{#ifCond type 'Balance Forwarded'}}
+                              <td
+                                colspan='2'
+                                align='center'
+                                class='font-10'
+                                width='5%'
+                                style='padding: 5px;'
+                              >
+                                {{type}}
+                              </td>
+                            {{else}}
+                              <td
+                                align='center'
+                                class='font-10'
+                                width='5%'
+                                style='padding:2px'
+                              >
+                                {{type}}
+
+                              </td>
+
+                            {{/ifCond}}
+
+                            {{#ifCond type 'Balance Forwarded'}}{{else}}
+                              <td
+                                width='5%'
+                                align='center'
+                                class='font-10'
+                                style='padding: 2px;'
+                              >
+                                {{days}}
+                              </td>
+                            {{/ifCond}}
+
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{#ifCond vl_earned null}}
+                                {{vl_earned}}
+                              {{else}}
+                                {{formatNumberValue vl_earned 3}}
+                              {{/ifCond}}
+
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{vl_auwp}}
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{#ifCond vl_bal null}}
+                                {{vl_earned}}
+                              {{else}}
+                                {{formatNumberValue vl_bal 3}}
+                              {{/ifCond}}
+
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{vl_auwop}}
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{#ifCond sl_earned null}}
+                                {{sl_earned}}
+                              {{else}}
+                                {{formatNumberValue sl_earned 3}}
+                              {{/ifCond}}
+
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{sl_auwp}}
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{#ifCond sl_bal null}}
+                                {{sl_bal}}
+                              {{else}}
+                                {{formatNumberValue sl_bal 3}}
+                              {{/ifCond}}
+
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{sl_auwop}}
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{#ifCond total null}}
+                                {{sl_bal}}
+                              {{else}}
+                                {{formatNumberValue total 3}}
+                              {{/ifCond}}
+
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              {{#ifCond date_filed null}}{{else}}
+                                {{formatDate date_filed}}
+                              {{/ifCond}}
+
+                            </td>
+                            <td
+                              width='5%'
+                              align='center'
+                              class='font-10'
+                              style='padding: 5px;'
+                            >
+                              <div
+                                style='width:100px'
+                                class='text-wrap text-justify'
+                              >
+                                {{remarks}}
+                              </div>
+                            </td>
+
+                          </tr>
+                        {{/leaveCard}}
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+
+    {{/each}}
+  </body>
+
+</html>
