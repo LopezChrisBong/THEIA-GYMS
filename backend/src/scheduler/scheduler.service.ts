@@ -381,7 +381,7 @@ export class SchedulerService {
           i.saleDate ? new Date(i.saleDate).toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit' }) : '',
           i.itemCode || '',
           i.category || '',
-          i.brand || '',
+          i.name || '',
           i.description || '',
           Number(i.unitPrice.toFixed(2)),
         ]),

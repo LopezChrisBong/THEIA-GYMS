@@ -399,7 +399,7 @@ export class MailService {
     changeAmount: number;
     items: {
       itemCode: string;
-      brand: string | null;
+      name: string | null;
       category: string | null;
       unitPrice: number;
     }[];
@@ -418,7 +418,7 @@ export class MailService {
     const itemRows = params.items.map((item) => `
       <tr>
         <td style="padding:8px 10px;color:#3A2515;font-weight:600;font-family:monospace;">${item.itemCode}</td>
-        <td style="padding:8px 10px;color:#3A2515;">${item.brand || '—'}</td>
+        <td style="padding:8px 10px;color:#3A2515;">${item.name || '—'}</td>
         <td style="padding:8px 10px;color:#6B4A30;">${item.category || '—'}</td>
         <td style="padding:8px 10px;color:#3D7A5A;font-weight:600;text-align:right;">${fmt(item.unitPrice)}</td>
       </tr>`).join('');

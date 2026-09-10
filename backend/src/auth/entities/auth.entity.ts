@@ -55,7 +55,7 @@ export class Users {
     type: 'text',
     nullable: true,
   })
-  otp: string;
+  otp: string | null;
 
   @Column({ type: 'tinyint', default: false })
   isValidated: boolean;

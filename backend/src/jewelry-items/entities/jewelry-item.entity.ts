@@ -49,8 +49,8 @@ export class JewelryItem {
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
-  @Column({ name: 'brand', type: 'varchar', length: 100, nullable: true })
-  brand: string;
+  @Column({ name: 'name', type: 'varchar', length: 100, nullable: true })
+  name: string;
 
   @Column({ name: 'color', type: 'varchar', length: 50, nullable: true })
   color: string;

@@ -112,7 +112,7 @@
                       <tbody>
                         <tr v-for="ti in itemsMap[item.id]" :key="ti.id">
                           <td class="mono">{{ ti.jewelryItem?.itemCode || '—' }}</td>
-                          <td>{{ ti.jewelryItem?.brand || '—' }}</td>
+                          <td>{{ ti.jewelryItem?.name || '—' }}</td>
                           <td>{{ ti.jewelryItem?.category?.categoryName || '—' }}</td>
                           <td>{{ ti.quantity ?? 1 }}</td>
                           <td class="dim">{{ ti.notes || '—' }}</td>

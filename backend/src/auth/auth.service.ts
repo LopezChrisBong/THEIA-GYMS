@@ -154,22 +154,35 @@ export class AuthService {
   }
 
   async changePassID(id: number, changPassDto: ChangePasswordDto) {
-    console.log(id)
-    let user_details = await this.dataSource.query(
-      'SELECT * FROM user_detail WHERE id = ' + id,
+    const user_details = await this.dataSource.query(
+      'SELECT * FROM user_detail WHERE id = ?',
+      [id],
     );
-    let activeUser = await this.dataSource.query(
-      'SELECT * FROM users WHERE id = ' + user_details[0].userID,
+    if (!user_details.length) {
+      return {
+        msg: 'User not found.',
+        status: HttpStatus.NOT_FOUND,
+      };
+    }
+
+    const activeUser = await this.dataSource.query(
+      'SELECT * FROM users WHERE id = ?',
+      [user_details[0].userID],
     );
-    console.log(activeUser)
+    if (!activeUser.length) {
+      return {
+        msg: 'User not found.',
+        status: HttpStatus.NOT_FOUND,
+      };
+    }
+
     try {
-        let pass = hashPassword(changPassDto.new_password);
-        await this.usersRepository.update(activeUser[0].id, { password: pass });
-        return {
-          msg: 'New password saved.',
-          status: HttpStatus.OK,
-        };
-   
+      const pass = hashPassword(changPassDto.new_password);
+      await this.usersRepository.update(activeUser[0].id, { password: pass });
+      return {
+        msg: 'New password saved.',
+        status: HttpStatus.OK,
+      };
     } catch (error) {
       return {
         msg: error,
@@ -430,23 +443,41 @@ async confirmOTP(conOTP: ConfirmOTPDto) {
         .where('u.email = :email', { email: resetPassDto.email })
         .getOne();
 
-      if (data) {
-        let hashPass = hashPassword(resetPassDto.password);
-        await queryRunner.manager.update(Users, data.id, {
-          password: hashPass,
-        });
-        await queryRunner.commitTransaction();
-        return {
-          msg: 'Reset successful.',
-          status: HttpStatus.OK,
-        };
-      } else {
+      if (!data) {
         await queryRunner.rollbackTransaction();
         return {
           msg: 'Data not found.',
           status: HttpStatus.NOT_FOUND,
         };
       }
+
+      if (!data.otp) {
+        await queryRunner.rollbackTransaction();
+        return {
+          msg: 'OTP verification required before resetting password.',
+          status: HttpStatus.BAD_REQUEST,
+        };
+      }
+
+      const otpMatches = comparePassword(resetPassDto.otp, data.otp);
+      if (!otpMatches) {
+        await queryRunner.rollbackTransaction();
+        return {
+          msg: 'Invalid or expired OTP.',
+          status: HttpStatus.BAD_REQUEST,
+        };
+      }
+
+      const hashPass = hashPassword(resetPassDto.password);
+      await queryRunner.manager.update(Users, data.id, {
+        password: hashPass,
+        otp: null,
+      });
+      await queryRunner.commitTransaction();
+      return {
+        msg: 'Reset successful.',
+        status: HttpStatus.OK,
+      };
     } catch (error) {
       await queryRunner.rollbackTransaction();
       return {

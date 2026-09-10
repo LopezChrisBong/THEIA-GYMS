@@ -255,7 +255,7 @@
                     <div class="dim" style="font-size:11px">{{ si.jewelryItem?.barcode || '' }}</div>
                   </td>
                   <td>
-                    <div style="font-size:13px">{{ si.jewelryItem?.brand || '—' }}</div>
+                    <div style="font-size:13px">{{ si.jewelryItem?.name || '—' }}</div>
                     <div class="dim" style="font-size:11px">{{ si.jewelryItem?.material || '' }}</div>
                   </td>
                   <td class="text-right amount-col">₱{{ formatNumber(si.unitPrice) }}</td>

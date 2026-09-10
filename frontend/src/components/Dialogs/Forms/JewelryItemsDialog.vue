@@ -64,7 +64,7 @@
                 <!-- Name -->
                 <v-col cols="12" md="4" class="mb-4">
                   <v-text-field
-                    v-model="brand"
+                    v-model="name"
                     label="Name"
                     outlined
                     dense
@@ -88,7 +88,7 @@
                 <!-- Description -->
                 <v-col cols="12" md="4" class="mb-4">
                   <v-text-field
-                    v-model="material"
+                    v-model="description"
                     label="Description"
                     outlined
                     dense
@@ -458,9 +458,9 @@ export default {
       itemCode: null,
       barcode: null,
       categoryId: null,
-      brand: null,
+      name: null,
       color: null,
-      material: null,
+      description: null,
       stoneTypeId: null,
       jewelryTypeId: null,
       goldType: null,
@@ -531,9 +531,9 @@ export default {
           this.itemCode = data.itemCode;
           this.barcode = data.barcode;
           this.categoryId = data.categoryId;
-          this.brand = data.brand;
+          this.name = data.name;
           this.color = data.color;
-          this.material = data.material;
+          this.description = data.description;
           this.stoneTypeId = data.stoneTypeId;
           this.jewelryTypeId = data.jewelryTypeId;
           this.goldType = data.goldType;
@@ -597,9 +597,9 @@ export default {
       this.itemCode = null;
       this.barcode = null;
       this.categoryId = null;
-      this.brand = null;
+      this.name = null;
       this.color = null;
-      this.material = null;
+      this.description = null;
       this.stoneTypeId = null;
       this.jewelryTypeId = null;
       this.goldType = null;
@@ -629,9 +629,9 @@ export default {
         itemCode: this.itemCode,
         barcode: this.barcode || null,
         categoryId: this.categoryId,
-        brand: this.brand || null,
+        name: this.name || null,
         color: this.color || null,
-        material: this.material || null,
+        description: this.description || null,
         stoneTypeId: this.stoneTypeId || null,
         jewelryTypeId: this.jewelryTypeId || null,
         goldType: this.goldType || null,

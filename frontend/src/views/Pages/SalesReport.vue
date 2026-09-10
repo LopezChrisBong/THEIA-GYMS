@@ -245,7 +245,7 @@
                   <span v-if="item.category" class="cat-chip">{{ item.category }}</span>
                   <span v-else class="dim">—</span>
                 </td>
-                <td>{{ item.brand || '—' }}</td>
+                <td>{{ item.name || '—' }}</td>
                 <td>{{ item.description || '—' }}</td>
                 <td class="text-right amt-col">₱{{ formatNumber(item.unitPrice) }}</td>
               </tr>
@@ -392,7 +392,7 @@
                   <td class="mono">{{ si.jewelryItem?.itemCode || '—' }}</td>
                   <td class="dim small">{{ si.jewelryItem?.barcode || '—' }}</td>
                   <td>
-                    <div>{{ si.jewelryItem?.brand || '—' }}</div>
+                    <div>{{ si.jewelryItem?.name || '—' }}</div>
                     <div class="dim small">{{ si.jewelryItem?.material || '' }}</div>
                   </td>
                   <td class="text-right amt-col">₱{{ formatNumber(si.unitPrice) }}</td>
@@ -469,7 +469,7 @@ export default {
       const q = this.itemSearch.toLowerCase().trim();
       if (!q) return this.reportData.items;
       return this.reportData.items.filter((item) =>
-        [item.saleNumber, item.itemCode, item.barcode, item.category, item.brand, item.description, item.branchName]
+        [item.saleNumber, item.itemCode, item.barcode, item.category, item.name, item.description, item.branchName]
           .some((v) => v && String(v).toLowerCase().includes(q)),
       );
     },
@@ -656,7 +656,7 @@ export default {
             i.itemCode || '',
             i.barcode || '',
             i.category || '',
-            i.brand || '',
+            i.name || '',
             i.description || '',
             Number(Number(i.unitPrice).toFixed(2)),
           ]),

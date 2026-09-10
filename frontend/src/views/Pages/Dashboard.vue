@@ -217,7 +217,7 @@
                 <span class="ls-dot" :style="{ background: ls.stock <= 1 ? '#ff8a80' : '#E3C485', boxShadow: ls.stock <= 1 ? '0 0 6px rgba(255,138,128,0.7)' : '0 0 6px rgba(227,196,133,0.5)' }"></span>
                 <div class="ls-info">
                   <div class="ls-name">{{ ls.itemCode }}</div>
-                  <div class="ls-sub">{{ ls.brand || ls.material || '—' }}</div>
+                  <div class="ls-sub">{{ ls.name || ls.material || '—' }}</div>
                 </div>
                 <div class="ls-count" :style="{ color: ls.stock <= 1 ? '#ff8a80' : '#E3C485' }">{{ ls.stock }} left</div>
               </div>
