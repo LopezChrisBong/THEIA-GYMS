@@ -246,35 +246,10 @@ export default {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Decorative gem shapes */
-.login-card::before,
-.login-card::after {
-  content: '';
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='75,10 130,46 130,104 75,140 20,104 20,46' fill='none' stroke='rgba(155,107,58,0.15)' stroke-width='1'/%3E%3Cpolygon points='75,10 130,46 75,66 20,46' fill='none' stroke='rgba(155,107,58,0.08)' stroke-width='0.7'/%3E%3C/svg%3E");
-  background-size: cover;
-}
-
-.login-card::before {
-  top: -30px;
-  left: -30px;
-  opacity: 0.8;
-}
-
-.login-card::after {
-  bottom: -30px;
-  right: -30px;
-  opacity: 0.5;
-  transform: rotate(30deg);
-}
-
 /* ─── EMBLEM ─── */
 .login-emblem {
-  width: 80px;
-  height: 80px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 2.5px solid rgba(155,107,58,0.5);
   display: flex;

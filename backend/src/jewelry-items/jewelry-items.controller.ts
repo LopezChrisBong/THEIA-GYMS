@@ -46,13 +46,15 @@ export class JewelryItemsController {
   @ApiQuery({ name: 'status', required: false })
   @ApiQuery({ name: 'categoryId', required: false })
   @ApiQuery({ name: 'supplierId', required: false })
+  @ApiQuery({ name: 'jewelryTypeId', required: false })
   findAll(
     @Query('branchId') branchId?: number,
     @Query('status') status?: string,
     @Query('categoryId') categoryId?: number,
     @Query('supplierId') supplierId?: number,
+    @Query('jewelryTypeId') jewelryTypeId?: number,
   ): Promise<JewelryItem[]> {
-    return this.jewelryItemsService.findAll(branchId, status, categoryId, supplierId);
+    return this.jewelryItemsService.findAll(branchId, status, categoryId, supplierId, jewelryTypeId);
   }
 
   @Get(':id')

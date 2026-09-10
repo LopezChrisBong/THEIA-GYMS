@@ -32,6 +32,13 @@
             <option v-for="c in categoryList" :key="c.id" :value="c.id">{{ c.categoryName }}</option>
           </select>
         </div>
+        <div class="per-pg">
+          Jewelry Type:
+          <select v-model="filterJewelryType" @change="initialize()">
+            <option :value="null">All</option>
+            <option v-for="jt in jewelryTypeList" :key="jt.id" :value="jt.id">{{ jt.name }}</option>
+          </select>
+        </div>
         <div v-if="!userBranchId" class="per-pg">
           Branch:
           <select v-model="filterBranch" @change="initialize()">
@@ -623,6 +630,7 @@ export default {
   data: () => ({
     search: "",
     filterCategory: null,
+    filterJewelryType: null,
     filterBranch: null,
     filterStatus: null,
     statusOptions: [
@@ -636,6 +644,7 @@ export default {
     ],
     data: [],
     categoryList: [],
+    jewelryTypeList: [],
     branchList: [],
     totalCount: 0,
     deleteData: null,
@@ -757,6 +766,7 @@ export default {
     if (this.userBranchId) this.filterBranch = this.userBranchId;
     this.initialize();
     this.loadCategories();
+    this.loadJewelryTypes();
     this.loadBranches();
     eventBus.on("closeJewelryItemsDialog", () => {
       this.initialize();
@@ -839,6 +849,14 @@ export default {
       });
     },
 
+    loadJewelryTypes() {
+      this.axiosCall("/jewelry-types", "GET").then((res) => {
+        if (res && res.data) {
+          this.jewelryTypeList = res.data;
+        }
+      });
+    },
+
     loadBranches() {
       this.axiosCall("/branches", "GET").then((res) => {
         if (res && res.data) {
@@ -853,6 +871,7 @@ export default {
       let url = "/jewelry-items";
       const params = [];
       if (this.filterCategory) params.push(`categoryId=${this.filterCategory}`);
+      if (this.filterJewelryType) params.push(`jewelryTypeId=${this.filterJewelryType}`);
       // Branch-assigned users always see only their branch; owners use the dropdown filter
       const effectiveBranch = this.userBranchId || this.filterBranch;
       if (effectiveBranch) params.push(`branchId=${effectiveBranch}`);

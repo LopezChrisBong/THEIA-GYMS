@@ -94,7 +94,7 @@ export class JewelryItemsService {
     return saved;
   }
 
-  async findAll(branchId?: number, status?: string, categoryId?: number, supplierId?: number): Promise<JewelryItem[]> {
+  async findAll(branchId?: number, status?: string, categoryId?: number, supplierId?: number, jewelryTypeId?: number): Promise<JewelryItem[]> {
     const queryBuilder = this.jewelryItemRepository
       .createQueryBuilder('item')
       .leftJoinAndSelect('item.category', 'category')
@@ -122,6 +122,10 @@ export class JewelryItemsService {
 
     if (categoryId) {
       queryBuilder.andWhere('item.categoryId = :categoryId', { categoryId });
+    }
+
+    if (jewelryTypeId) {
+      queryBuilder.andWhere('item.jewelryTypeId = :jewelryTypeId', { jewelryTypeId });
     }
 
     if (supplierId) {

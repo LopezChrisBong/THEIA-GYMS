@@ -10,10 +10,6 @@
           <v-icon size="14" color="#9A7858">mdi-magnify</v-icon>
           <input v-model="search" type="text" placeholder="Search logs..." class="search-input-proto" />
         </div>
-        <button class="btn-add" @click="addNew()">
-          <v-icon size="13" color="white">mdi-plus</v-icon>
-          Add Log
-        </button>
       </div>
     </div>
 
@@ -22,6 +18,7 @@
         <button class="filter-chip" :class="{ on: filterAction === null }" @click="filterAction = null">All</button>
         <button class="filter-chip" :class="{ on: filterAction === 'add' }" @click="filterAction = 'add'">Add</button>
         <button class="filter-chip" :class="{ on: filterAction === 'edit' }" @click="filterAction = 'edit'">Edit</button>
+        <button class="filter-chip" :class="{ on: filterAction === 'status_change' }" @click="filterAction = 'status_change'">Status Change</button>
         <button class="filter-chip" :class="{ on: filterAction === 'sale' }" @click="filterAction = 'sale'">Sale</button>
         <button class="filter-chip" :class="{ on: filterAction === 'transfer_out' }" @click="filterAction = 'transfer_out'">Transfer Out</button>
         <button class="filter-chip" :class="{ on: filterAction === 'transfer_in' }" @click="filterAction = 'transfer_in'">Transfer In</button>
@@ -37,8 +34,7 @@
               <th>Item</th>
               <th>Branch</th>
               <th>Action</th>
-              <th>Change</th>
-              <th>Qty (Before / After)</th>
+              <th>Status Change</th>
               <th>Reference</th>
               <th>By</th>
               <th>Date</th>
@@ -49,7 +45,10 @@
             <tr v-for="item in filteredData" :key="item.id">
               <td class="mono">{{ item.id }}</td>
               <td>
-                <span v-if="item.product" class="cust-name">{{ item.product.productName }}</span>
+                <span v-if="item.jewelryItem">
+                  <span class="mono">{{ item.jewelryItem.itemCode }}</span>
+                  <span v-if="item.jewelryItem.name" class="dim" style="margin-left:6px">{{ item.jewelryItem.name }}</span>
+                </span>
                 <span v-else class="dim">—</span>
               </td>
               <td>
@@ -57,31 +56,28 @@
                 <span v-else class="dim">—</span>
               </td>
               <td><span class="repeat-badge" :class="'r-action-' + item.actionType">{{ formatActionType(item.actionType) }}</span></td>
-              <td>
-                <span :class="{ 'text-pos': item.quantityChange > 0, 'text-neg': item.quantityChange < 0 }">
-                  {{ item.quantityChange > 0 ? '+' : '' }}{{ item.quantityChange }}
-                </span>
+              <td class="dim">
+                <span v-if="item.previousStatus || item.newStatus">{{ item.previousStatus || '—' }} → {{ item.newStatus || '—' }}</span>
+                <span v-else>—</span>
               </td>
-              <td class="dim">{{ item.previousQuantity }} / {{ item.newQuantity }}</td>
               <td>
                 <span v-if="item.referenceType" class="cust-name">{{ item.referenceType }}</span>
                 <span v-if="item.referenceId" class="dim"> #{{ item.referenceId }}</span>
                 <span v-if="!item.referenceType && !item.referenceId" class="dim">—</span>
               </td>
               <td>
-                <span v-if="item.performer">{{ item.performer.firstName }} {{ item.performer.lastName }}</span>
+                <span v-if="item.performer">{{ item.performer.email }}</span>
                 <span v-else class="dim">—</span>
               </td>
               <td class="dim">{{ formatDateTime(item.createdAt) }}</td>
               <td>
                 <div class="act-btns">
-                  <button class="act-btn" title="Edit" @click="editItem(item)"><v-icon size="14">mdi-pencil-outline</v-icon></button>
-                  <button class="act-btn del" title="Delete" @click="deleteItem(item)"><v-icon size="14">mdi-delete-outline</v-icon></button>
+                  <button class="act-btn view-btn" title="View" @click="viewItem(item)"><v-icon size="14">mdi-eye-outline</v-icon></button>
                 </div>
               </td>
             </tr>
             <tr v-if="filteredData.length === 0">
-              <td colspan="10">
+              <td colspan="9">
                 <div class="empty-state">
                   <div class="empty-icon"><v-icon size="20" color="#9B6B3A">mdi-clipboard-text-clock-outline</v-icon></div>
                   <div class="empty-title">No inventory logs found</div>
@@ -97,17 +93,62 @@
       </div>
     </div>
 
-    <InventoryLogsDialog :data="updateData" :action="action" />
+    <!-- View Log Modal -->
+    <v-dialog v-model="dialogView" max-width="480px">
+      <v-card v-if="viewData" class="sale-view-card">
+        <div class="sv-header">
+          <div>
+            <div class="sv-title">
+              <v-icon size="16" color="#9B6B3A" style="margin-right:8px">mdi-clipboard-text-clock-outline</v-icon>
+              Inventory Log Details
+            </div>
+            <div class="sv-sub mono">{{ viewData.jewelryItem?.itemCode || '—' }}</div>
+          </div>
+          <button class="sv-close" @click="dialogView = false">
+            <v-icon size="18">mdi-close</v-icon>
+          </button>
+        </div>
 
-    <v-dialog v-model="dialogConfirmDelete" max-width="500">
-      <v-card style="border-radius: 16px; border: 1px solid rgba(155,107,58,0.16);">
-        <v-card-title class="text-h6" style="font-family: 'Cormorant Garamond', serif;">Confirm Deletion</v-card-title>
-        <v-card-text style="color: #6B4A30;">Are you sure you want to delete this inventory log?</v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <button class="btn-cancel-proto" @click="dialogConfirmDelete = false">Cancel</button>
-          <button class="btn-danger-proto" @click="confirmDelete" :disabled="deleting">{{ deleting ? 'Deleting...' : 'Delete' }}</button>
-        </v-card-actions>
+        <div class="sv-body">
+          <div class="sv-section">
+            <div class="sv-row">
+              <span class="sv-lbl">Item</span>
+              <span class="sv-val">{{ viewData.jewelryItem?.name || viewData.jewelryItem?.itemCode || '—' }}</span>
+            </div>
+            <div class="sv-row">
+              <span class="sv-lbl">Branch</span>
+              <span class="sv-val">{{ viewData.branch?.branchName || '—' }}</span>
+            </div>
+            <div class="sv-row">
+              <span class="sv-lbl">Action</span>
+              <span class="sv-val">
+                <span class="repeat-badge" :class="'r-action-' + viewData.actionType">{{ formatActionType(viewData.actionType) }}</span>
+              </span>
+            </div>
+            <div class="sv-row" v-if="viewData.previousStatus || viewData.newStatus">
+              <span class="sv-lbl">Status Change</span>
+              <span class="sv-val">{{ viewData.previousStatus || '—' }} → {{ viewData.newStatus || '—' }}</span>
+            </div>
+            <div class="sv-row" v-if="viewData.referenceType || viewData.referenceId">
+              <span class="sv-lbl">Reference</span>
+              <span class="sv-val">{{ viewData.referenceType || '—' }}<template v-if="viewData.referenceId"> #{{ viewData.referenceId }}</template></span>
+            </div>
+            <div class="sv-row">
+              <span class="sv-lbl">Performed By</span>
+              <span class="sv-val">{{ viewData.performer?.email || '—' }}</span>
+            </div>
+            <div class="sv-row">
+              <span class="sv-lbl">Date</span>
+              <span class="sv-val">{{ formatDateTime(viewData.createdAt) }}</span>
+            </div>
+          </div>
+
+          <template v-if="viewData.notes">
+            <div class="sv-divider"></div>
+            <div class="sv-section-title">Notes</div>
+            <div class="sv-notes">{{ viewData.notes }}</div>
+          </template>
+        </div>
       </v-card>
     </v-dialog>
 
@@ -116,14 +157,10 @@
 </template>
 
 <script>
-import InventoryLogsDialog from "../../components/Dialogs/Forms/InventoryLogsDialog.vue";
-import eventBus from "@/eventBus";
-
 export default {
-  components: { InventoryLogsDialog },
   data: () => ({
-    search: "", filterAction: null, data: [], deleteData: null, updateData: null,
-    loading: false, deleting: false, action: null, dialogConfirmDelete: false,
+    search: "", filterAction: null, data: [],
+    loading: false, dialogView: false, viewData: null,
     fadeAwayMessage: { show: false, type: "success", header: "Success", message: "", top: 10 },
   }),
   computed: {
@@ -133,7 +170,7 @@ export default {
       if (this.search) {
         const q = this.search.toLowerCase();
         result = result.filter((l) =>
-          [l.product?.productName, l.branch?.branchName, l.actionType, l.referenceType, l.performer?.firstName].filter(Boolean).some((f) => String(f).toLowerCase().includes(q))
+          [l.jewelryItem?.itemCode, l.jewelryItem?.name, l.branch?.branchName, l.actionType, l.referenceType, l.performer?.email].filter(Boolean).some((f) => String(f).toLowerCase().includes(q))
         );
       }
       return result;
@@ -141,13 +178,11 @@ export default {
   },
   mounted() {
     this.initialize();
-    eventBus.on("closeInventoryLogsDialog", () => this.initialize());
   },
-  beforeUnmount() { eventBus.off("closeInventoryLogsDialog"); },
   methods: {
     formatDateTime(d) { if (!d) return "—"; return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }); },
     formatActionType(t) {
-      const labels = { add: "Add", edit: "Edit", delete: "Delete", adjust: "Adjust", transfer_out: "Transfer Out", transfer_in: "Transfer In", sale: "Sale", return: "Return" };
+      const labels = { add: "Add", edit: "Edit", delete: "Delete", adjust: "Adjust", transfer_out: "Transfer Out", transfer_in: "Transfer In", sale: "Sale", return: "Return", status_change: "Status Change" };
       return labels[t] || t || "—";
     },
     initialize() {
@@ -156,16 +191,7 @@ export default {
         .catch(() => { this.fadeAwayMessage = { show: true, type: "error", header: "Error", message: "Failed to load logs", top: 10 }; })
         .finally(() => { this.loading = false; });
     },
-    addNew() { this.updateData = { id: null }; this.action = "Add"; },
-    editItem(item) { this.updateData = { ...item }; this.action = "Update"; },
-    deleteItem(item) { this.dialogConfirmDelete = true; this.deleteData = item; },
-    confirmDelete() {
-      this.deleting = true;
-      this.axiosCall("/inventory-logs/" + this.deleteData.id, "DELETE")
-        .then((r) => { if (r && (r.status === 200 || r.status === 204)) { this.fadeAwayMessage = { show: true, type: "success", header: "Success", message: "Log deleted", top: 10 }; this.dialogConfirmDelete = false; this.deleteData = null; this.initialize(); } })
-        .catch((e) => { this.fadeAwayMessage = { show: true, type: "error", header: "Error", message: e?.response?.data?.message || "Failed to delete", top: 10 }; })
-        .finally(() => { this.deleting = false; });
-    },
+    viewItem(item) { this.viewData = item; this.dialogView = true; },
   },
 };
 </script>
@@ -179,8 +205,6 @@ export default {
 .search-wrap { display: flex; align-items: center; gap: 8px; background: #FDFAF6; border: 1px solid rgba(155,107,58,0.16); border-radius: 9px; padding: 8px 13px; box-shadow: 0 1px 6px rgba(80,30,10,0.08); min-width: 210px; }
 .search-input-proto { border: none; background: none; outline: none; font-size: 13px; font-family: 'Outfit'; color: #3A2515; width: 100%; }
 .search-input-proto::placeholder { color: #9A7858; }
-.btn-add { display: flex; align-items: center; gap: 7px; background: #9B6B3A; color: #FDFAF6; border: none; padding: 9px 16px; border-radius: 9px; font-size: 12px; font-weight: 600; font-family: 'Outfit'; cursor: pointer; letter-spacing: 0.04em; box-shadow: 0 2px 8px rgba(155,107,58,0.3); transition: background 0.13s; }
-.btn-add:hover { background: #C49455; }
 .cust-table-card { background: #FDFAF6; border: 1px solid rgba(155,107,58,0.16); border-radius: 16px; box-shadow: 0 2px 14px rgba(80,30,10,0.08); overflow: hidden; }
 .filter-row { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-bottom: 1px solid rgba(155,107,58,0.16); background: #F5EFE4; flex-wrap: wrap; }
 .filter-chip { padding: 5px 12px; border-radius: 20px; font-size: 12px; border: 1px solid rgba(155,107,58,0.16); background: #FDFAF6; color: #9A7858; cursor: pointer; font-family: 'Outfit'; transition: all 0.12s; }
@@ -196,8 +220,6 @@ export default {
 td.mono { font-family: monospace; font-size: 12px; color: #9B6B3A; font-weight: 600; }
 .dim { color: #9A7858; font-size: 12px; }
 .cust-name { font-weight: 500; }
-.text-pos { color: #3D7A5A; font-weight: 600; }
-.text-neg { color: #B84040; font-weight: 600; }
 .repeat-badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
 .r-primary { background: rgba(155,107,58,0.12); color: #9B6B3A; }
 .r-action-add { background: rgba(61,122,90,0.1); color: #3D7A5A; }
@@ -208,13 +230,28 @@ td.mono { font-family: monospace; font-size: 12px; color: #9B6B3A; font-weight: 
 .r-action-transfer_in { background: rgba(0,150,136,0.1); color: #009688; }
 .r-action-sale { background: rgba(155,107,58,0.15); color: #9B6B3A; }
 .r-action-return { background: rgba(120,80,160,0.1); color: #7850A0; }
+.r-action-status_change { background: rgba(90,122,155,0.12); color: #5A7A9B; }
 .act-btns { display: flex; align-items: center; gap: 4px; }
 .act-btn { width: 27px; height: 27px; border-radius: 7px; border: 1px solid rgba(155,107,58,0.16); background: #F5EFE4; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.12s; color: #9A7858; }
-.act-btn:hover { border-color: #C49455; color: #9B6B3A; background: #EDE0CC; }
-.act-btn.del:hover { border-color: rgba(184,64,64,0.4); color: #B84040; background: rgba(184,64,64,0.06); }
+.act-btn.view-btn:hover { border-color: #5A7A9B; color: #5A7A9B; background: rgba(90,122,155,0.06); }
 .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 52px 20px; gap: 10px; color: #9A7858; }
 .empty-icon { width: 48px; height: 48px; border-radius: 13px; background: #EDE0CC; display: flex; align-items: center; justify-content: center; }
 .empty-title { font-size: 14px; font-weight: 500; color: #6B4A30; }
-.btn-cancel-proto { background: none; border: 1px solid rgba(155,107,58,0.16); padding: 8px 16px; border-radius: 8px; font-size: 13px; font-family: 'Outfit'; color: #9A7858; cursor: pointer; margin-right: 8px; }
-.btn-danger-proto { background: #B84040; color: #FDFAF6; border: none; padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; font-family: 'Outfit'; cursor: pointer; }
+
+/* View Log Modal */
+.sale-view-card { border-radius: 16px !important; overflow: hidden; font-family: 'Outfit', sans-serif; background: #FDFAF6; }
+.sv-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 20px; background: #F5EFE4; border-bottom: 1px solid rgba(155,107,58,0.16); }
+.sv-title { font-size: 15px; font-weight: 600; color: #3A2515; display: flex; align-items: center; }
+.sv-sub { font-size: 12px; color: #9B6B3A; margin-top: 3px; padding-left: 24px; }
+.sv-close { background: none; border: none; cursor: pointer; color: #9A7858; padding: 4px; border-radius: 6px; display: flex; align-items: center; transition: color 0.12s; }
+.sv-close:hover { color: #B84040; }
+.sv-body { padding: 16px 20px; max-height: 70vh; overflow-y: auto; }
+.sv-divider { height: 1px; background: rgba(155,107,58,0.16); margin: 12px 0; }
+.sv-section-title { font-size: 10px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: #9A7858; margin-bottom: 6px; }
+.sv-section { margin-bottom: 4px; }
+.sv-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 13px; color: #3A2515; border-bottom: 1px solid rgba(155,107,58,0.08); }
+.sv-row:last-child { border-bottom: none; }
+.sv-lbl { color: #9A7858; font-size: 12px; flex-shrink: 0; }
+.sv-val { font-weight: 500; text-align: right; }
+.sv-notes { font-size: 13px; color: #6B4A30; background: rgba(155,107,58,0.06); border-radius: 8px; padding: 8px 12px; margin-bottom: 4px; line-height: 1.5; }
 </style>
