@@ -1,5 +1,6 @@
 import { BadRequestException, Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { MailService } from './mail.service';
 import { TestSendMailDto } from './dto/test-send-mail.dto';
 import { JWTAuthGuard } from 'src/auth/utils/jwt-auth-guard';
@@ -90,6 +91,7 @@ export class MailController {
    * Fires any mail template with sample data merged with caller-supplied overrides.
    * Built for manual QA of the notification system, not for production traffic.
    */
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @Post('test-send')
   async testSend(@Body() dto: TestSendMailDto) {
     const defaults = SAMPLE_DEFAULTS[dto.template] || {};

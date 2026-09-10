@@ -33,8 +33,8 @@
               </td>
               <td>
                 <span v-if="item.jewelryItem" class="cust-name">{{ item.jewelryItem.itemCode }}</span>
-                <br v-if="item.jewelryItem && item.jewelryItem.brand">
-                <span v-if="item.jewelryItem && item.jewelryItem.brand" class="dim">{{ item.jewelryItem.brand }}</span>
+                <br v-if="item.jewelryItem && item.jewelryItem.name">
+                <span v-if="item.jewelryItem && item.jewelryItem.name" class="dim">{{ item.jewelryItem.name }}</span>
                 <span v-if="!item.jewelryItem" class="dim">—</span>
               </td>
               <td>

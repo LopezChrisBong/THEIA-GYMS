@@ -83,7 +83,7 @@
               <td class="dim">{{ idx + 1 }}</td>
               <td class="mono">{{ item.itemCode }}</td>
               <td>
-                <span class="item-name">{{ item.brand || '—' }}</span>
+                <span class="item-name">{{ item.name || '—' }}</span>
                 <div v-if="item.description" class="item-desc">{{ item.description }}</div>
               </td>
               <td>{{ item.category ? item.category.categoryName : '—' }}</td>
@@ -217,7 +217,7 @@ export default {
         ...this.items.map((item, idx) => [
           idx + 1,
           item.itemCode || '',
-          item.brand || '',
+          item.name || '',
           item.category?.categoryName || '',
           item.stoneType?.name || '',
           item.jewelryType?.name || '',

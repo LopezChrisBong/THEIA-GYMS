@@ -18,6 +18,7 @@ import {
   Res,
   NotFoundException,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { UserDetailsService } from './user-details.service';
 import { CreateUserDetailDto } from './dto/create-user-detail.dto';
 import { UpdateUserDetailDto } from './dto/update-user-detail.dto';
@@ -29,7 +30,7 @@ import { diskStorage } from 'multer';
 import { Helper } from 'src/shared/helper';
 import { JwtService } from '@nestjs/jwt';
 import { createReadStream, existsSync } from 'fs';
-import { join } from 'path';
+import { basename, join } from 'path';
 import * as fs from 'fs';
 import { fileURLToPath } from 'url';
 import { fileMimetypeFilter } from './validation/file-mimetype-filters';
@@ -228,20 +229,20 @@ export class UserDetailsController {
   //   }
   // }
 
+  @Throttle({ default: { limit: 30, ttl: 60000 } }) // no auth guard on this route — throttle as a public endpoint
   @Get('getProfileImg/:filename')
   getProfileImg(
     @Param('filename') filename: string,
     @Res({ passthrough: true }) res: Response,
   ): StreamableFile {
-    const filePath = join(process.cwd(), '../upload_img', filename);
-    console.log('[getProfileImg] Looking for file at:', filePath);
-    console.log('[getProfileImg] File exists:', existsSync(filePath));
+    const safeFilename = basename(filename);
+    const filePath = join(process.cwd(), '../upload_img', safeFilename);
 
     if (!existsSync(filePath)) {
       throw new NotFoundException('File not found');
     }
 
-    const ext = (filename.split('.').pop() ?? 'jpeg').toLowerCase();
+    const ext = (safeFilename.split('.').pop() ?? 'jpeg').toLowerCase();
     const mimeTypes = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' };
     const contentType = mimeTypes[ext] || 'application/octet-stream';
 

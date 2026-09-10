@@ -65,8 +65,8 @@
               <th @click="sortBy('itemCode')">Code</th>
               <th @click="sortBy('barcode')">Barcode</th>
               <th @click="sortBy('category')">Category</th>
-              <th @click="sortBy('brand')">Name</th>
-              <th @click="sortBy('material')">Description</th>
+              <th @click="sortBy('name')">Name</th>
+              <th @click="sortBy('description')">Description</th>
               <th @click="sortBy('ringSize')">Ring Size</th>
               <th @click="sortBy('price')">Price</th>
               <th @click="sortBy('status')">Status</th>
@@ -83,8 +83,8 @@
                 <span v-if="item.category" class="cat-badge">{{ item.category.categoryName }}</span>
                 <span v-else class="dim">—</span>
               </td>
-              <td>{{ item.brand || '—' }}</td>
-              <td>{{ item.material || '—' }}</td>
+              <td>{{ item.name || '—' }}</td>
+              <td>{{ item.description || '—' }}</td>
               <td class="text-center">{{ item.ringSize || '—' }}</td>
               <td class="text-right">
                 <span v-if="item.price" class="amt-col">₱{{ formatNumber(item.price) }}</span>
@@ -241,14 +241,14 @@
             </v-col>
             <v-col cols="12" md="4">
               <div class="view-label">Name</div>
-              <div class="view-value">{{ viewData.brand || '—' }}</div>
+              <div class="view-value">{{ viewData.name || '—' }}</div>
             </v-col>
             <v-col cols="12" md="4">
               <div class="view-label">Color</div>
               <div class="view-value">{{ viewData.color || '—' }}</div>
             </v-col>
             <v-col cols="12" md="4">
-              <div class="view-label">Description</div>
+              <div class="view-label">Material</div>
               <div class="view-value">{{ viewData.material || '—' }}</div>
             </v-col>
             <v-col cols="12" md="4">
@@ -495,10 +495,11 @@
               </v-col>
               <v-col cols="12" class="mb-2">
                 <v-alert type="info" density="compact" variant="tonal">
-                  Branch is auto-detected from cell colors:
+                  For flat inventory sheets (CATEGORY/JEWELRY TYPE/CODE/NAME columns), every row uses the
+                  Default Branch above. Legacy multi-sheet workbooks still auto-detect branch from cell color:
                   <v-chip size="x-small" color="pink" variant="flat" class="mx-1">DAVAO</v-chip>
                   <v-chip size="x-small" color="orange" variant="flat" class="mx-1">BGC</v-chip>
-                  Items without color use the default branch above.
+                  Items without a detected color use the default branch above.
                 </v-alert>
               </v-col>
             </v-row>
@@ -511,6 +512,13 @@
           <div v-if="importPreviewData.length">
             <v-alert type="success" density="compact" class="mb-4">
               Found <strong>{{ importPreviewData.length }}</strong> items to import
+            </v-alert>
+
+            <v-alert v-if="importDuplicateCodes.length" type="warning" density="compact" class="mb-4">
+              <div class="font-weight-medium mb-1">{{ importDuplicateCodes.length }} duplicate item code(s) in the file were auto-suffixed:</div>
+              <div v-for="(d, i) in importDuplicateCodes" :key="i" class="text-caption">
+                {{ d.original }} → {{ d.resolved }} ({{ d.name || 'no name' }})
+              </div>
             </v-alert>
 
             <v-data-table
@@ -655,15 +663,19 @@ export default {
     importResult: { imported: 0, errors: [] },
     importHeaders: [
       { title: "Code", value: "itemCode", width: 90 },
-      { title: "Barcode", value: "barcode", width: 150 },
+      { title: "Name", value: "name", width: 110 },
+      { title: "Category", value: "categoryName", width: 90 },
+      { title: "Jewelry Type", value: "jewelryTypeName", width: 130 },
+      { title: "Stone Type", value: "stoneTypeName", width: 110 },
       { title: "Branch", value: "_branch", width: 90 },
-      { title: "Sheet", value: "_sheet", width: 100 },
-      { title: "Model", value: "description", width: 140 },
+      { title: "Model/Desc", value: "description", width: 140 },
+      { title: "Karat", value: "karat", width: 60 },
       { title: "Carat", value: "carat", width: 70 },
       { title: "Gold", value: "goldType", width: 60 },
       { title: "Price", value: "price", width: 90 },
       { title: "Status", value: "status", width: 90 },
     ],
+    importDuplicateCodes: [],
     fadeAwayMessage: {
       show: false,
       type: "success",
@@ -688,7 +700,8 @@ export default {
           [
             it.itemCode,
             it.barcode,
-            it.brand,
+            it.name,
+            it.description,
             it.material,
             it.category?.categoryName,
             it.supplier?.supplierName,
@@ -950,6 +963,7 @@ export default {
             allItems.push(...parsed);
           }
 
+          this.importDuplicateCodes = this.resolveDuplicateCodes(allItems);
           this.importPreviewData = allItems;
         } catch (err) {
           console.error("Excel parse error:", err);
@@ -962,6 +976,22 @@ export default {
         }
       };
       reader.readAsArrayBuffer(file);
+    },
+
+    // First occurrence of a code keeps it; later duplicates get a "-2", "-3", ... suffix.
+    resolveDuplicateCodes(items) {
+      const seen = new Map();
+      const resolved = [];
+      for (const item of items) {
+        const count = (seen.get(item.itemCode) || 0) + 1;
+        seen.set(item.itemCode, count);
+        if (count > 1) {
+          const original = item.itemCode;
+          item.itemCode = `${original}-${count}`;
+          resolved.push({ original, resolved: item.itemCode, name: item.name || item.description });
+        }
+      }
+      return resolved;
     },
 
     getCellColor(ws, row, col) {
@@ -986,7 +1016,116 @@ export default {
       return map[rgb] !== undefined ? map[rgb] : null;
     },
 
+    // Flat single-table format: CATEGORY | JEWELRY TYPE | CODE | NAME | DESCRIPTION | KARAT | COLOR | DIAMOND TYPE | CARAT SIZE | SIZE/INCHES | BAND WIDTH | PRICE
+    detectFlatHeader(rows) {
+      const required = ["CATEGORY", "CODE", "NAME"];
+      const colNames = {
+        CATEGORY: "category",
+        "JEWELRY TYPE": "jewelryType",
+        CODE: "code",
+        NAME: "name",
+        DESCRIPTION: "description",
+        KARAT: "karat",
+        COLOR: "color",
+        "DIAMOND TYPE": "diamondType",
+        "CARAT SIZE": "caratSize",
+        "SIZE/INCHES": "size",
+        "BAND WIDTH": "bandWidth",
+        PRICE: "price",
+      };
+      for (let i = 0; i < Math.min(5, rows.length); i++) {
+        const row = (rows[i] || []).map((c) => String(c || "").toUpperCase().trim());
+        if (required.every((r) => row.includes(r))) {
+          const colMap = {};
+          row.forEach((cell, idx) => {
+            if (colNames[cell]) colMap[colNames[cell]] = idx;
+          });
+          return { headerRowIdx: i, colMap };
+        }
+      }
+      return null;
+    },
+
+    mapColorToGoldType(rawColor) {
+      if (!rawColor) return null;
+      const key = rawColor.toUpperCase().replace(/\s+/g, "");
+      const map = {
+        YG: "YG",
+        WG: "WG",
+        RG: "RG",
+        "2T": "TWO_TONED",
+        "WG/YG": "TWO_TONED",
+        "YG/WG": "TWO_TONED",
+      };
+      return map[key] || null;
+    },
+
+    canonicalStoneType(rawDiamondType) {
+      if (!rawDiamondType) return null;
+      const key = rawDiamondType.toUpperCase().trim();
+      const map = {
+        "LAB GROWN": "Lab Grown",
+        NATURAL: "Natural",
+        MOISSANITE: "Moissanite",
+      };
+      return map[key] || rawDiamondType.trim();
+    },
+
+    parseFlatSheet(sheetName, rows, { headerRowIdx, colMap }) {
+      const items = [];
+      for (let i = headerRowIdx + 1; i < rows.length; i++) {
+        const row = rows[i] || [];
+        if (!row.some((c) => c !== null && c !== undefined && String(c).trim() !== "")) continue;
+
+        const get = (key) => {
+          if (colMap[key] === undefined) return null;
+          const v = row[colMap[key]];
+          if (v === null || v === undefined) return null;
+          const s = String(v).trim();
+          return s === "" ? null : s;
+        };
+
+        const code = get("code");
+        if (!code) continue;
+
+        const colorRaw = get("color");
+        const priceRaw = get("price");
+        let price = null;
+        if (priceRaw !== null) {
+          const parsed = parseFloat(priceRaw.replace(/[^0-9.]/g, ""));
+          if (!isNaN(parsed)) price = parsed;
+        }
+
+        items.push({
+          itemCode: code,
+          barcode: this.generateBarcode(code),
+          name: get("name"),
+          categoryName: get("category") || "Jewelry",
+          jewelryTypeName: get("jewelryType"),
+          stoneTypeName: this.canonicalStoneType(get("diamondType")),
+          description: get("description"),
+          karat: get("karat"),
+          color: colorRaw,
+          goldType: this.mapColorToGoldType(colorRaw),
+          carat: get("caratSize"),
+          size: get("size"),
+          bandWidth: get("bandWidth"),
+          price,
+          status: "IN_STOCK",
+          _sheet: sheetName,
+          _branch: null,
+          _format: "flat",
+        });
+      }
+      return items;
+    },
+
     parseSheet(sheetName, rows, ws) {
+      const flatHeader = this.detectFlatHeader(rows);
+      if (flatHeader) {
+        return this.parseFlatSheet(sheetName, rows, flatHeader);
+      }
+
       const items = [];
       const sn = sheetName.toUpperCase().trim();
 
@@ -1046,16 +1185,22 @@ export default {
             items.push({
               itemCode: code,
               barcode: this.generateBarcode(code),
+              name: null,
+              categoryName: "Jewelry",
+              jewelryTypeName: jewelryType || "Bracelet",
+              stoneTypeName: stoneType || null,
               description: "Piyao 14K",
+              karat: null,
+              color: null,
               carat: null,
               goldType: null,
               size: null,
+              bandWidth: null,
               price: null,
               status: remarks.includes("SOLD") ? "SOLD" : "IN_STOCK",
               _sheet: sheetName,
-              _stoneType: stoneType,
-              _jewelryType: jewelryType || "Bracelet",
               _branch: branch,
+              _format: "legacy",
             });
           }
           return items;
@@ -1073,16 +1218,22 @@ export default {
             items.push({
               itemCode: code,
               barcode: this.generateBarcode(code),
+              name: null,
+              categoryName: "Jewelry",
+              jewelryTypeName: "Bracelet",
+              stoneTypeName: null,
               description: "Evil Eye String",
+              karat: null,
+              color: null,
               carat: null,
               goldType: null,
               size: null,
+              bandWidth: null,
               price: price,
               status: remarks.includes("SOLD") ? "SOLD" : "IN_STOCK",
               _sheet: sheetName,
-              _stoneType: "",
-              _jewelryType: "Bracelet",
               _branch: branch,
+              _format: "legacy",
             });
           }
           return items;
@@ -1155,16 +1306,22 @@ export default {
         items.push({
           itemCode: code,
           barcode: this.generateBarcode(code),
+          name: null,
+          categoryName: "Jewelry",
+          jewelryTypeName: jewelryType || null,
+          stoneTypeName: stoneType || null,
           description: model,
+          karat: null,
+          color: null,
           carat: carat,
           goldType: goldType,
           size: size,
+          bandWidth: null,
           price: price,
           status: status,
           _sheet: sheetName,
-          _stoneType: stoneType,
-          _jewelryType: jewelryType,
           _branch: branch,
+          _format: "legacy",
         });
       }
 
@@ -1180,6 +1337,7 @@ export default {
 
     resetImport() {
       this.importPreviewData = [];
+      this.importDuplicateCodes = [];
       this.importFile = null;
     },
 
@@ -1218,10 +1376,17 @@ export default {
           itemCode: item.itemCode,
           barcode: item.barcode,
           branchId: branchId,
+          name: item.name || null,
+          categoryName: item.categoryName || "Jewelry",
+          jewelryTypeName: item.jewelryTypeName || null,
+          stoneTypeName: item.stoneTypeName || null,
           description: item.description || null,
+          karat: item.karat || null,
+          color: item.color || null,
           carat: item.carat || null,
           goldType: item.goldType || null,
           size: item.size || null,
+          bandWidth: item.bandWidth || null,
           price: item.price || null,
           status: item.status || "IN_STOCK",
         };

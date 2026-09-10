@@ -1,11 +1,14 @@
 import { Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { SchedulerService } from './scheduler.service';
 import { JWTAuthGuard } from 'src/auth/utils/jwt-auth-guard';
 
+// Every route here fans real SMS/email out to every matching customer — keep tightly throttled.
 @ApiTags('Scheduler (Testing)')
 @ApiBearerAuth()
 @UseGuards(JWTAuthGuard)
+@Throttle({ default: { limit: 3, ttl: 300000 } })
 @Controller('scheduler')
 export class SchedulerController {
   constructor(private readonly schedulerService: SchedulerService) {}

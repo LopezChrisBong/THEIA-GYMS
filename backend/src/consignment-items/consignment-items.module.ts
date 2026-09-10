@@ -3,11 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConsignmentItemsService } from './consignment-items.service';
 import { ConsignmentItemsController } from './consignment-items.controller';
 import { ConsignmentItem } from './entities/consignment-item.entity';
+import { JewelryItem } from '../jewelry-items/entities/jewelry-item.entity';
 import { MailModule } from '../mail/mail.module';
 import { SmsModule } from '../sms/sms.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ConsignmentItem]), MailModule, SmsModule],
+  imports: [TypeOrmModule.forFeature([ConsignmentItem, JewelryItem]), MailModule, SmsModule],
   controllers: [ConsignmentItemsController],
   providers: [ConsignmentItemsService],
   exports: [ConsignmentItemsService],

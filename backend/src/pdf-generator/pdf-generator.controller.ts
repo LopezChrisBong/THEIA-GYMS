@@ -18,11 +18,14 @@ import { CreatePdfGeneratorDto } from './dto/create-pdf-generator.dto';
 import { UpdatePdfGeneratorDto } from './dto/update-pdf-generator.dto';
 import { SendNewEmailDto } from './dto/send-new-email.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { createReadStream } from 'fs';
-import { join } from 'path';
+import { basename, join } from 'path';
 import { JWTAuthGuard } from 'src/auth/utils/jwt-auth-guard';
 
+// No auth guard on this controller — these routes serve files publicly, so keep them throttled.
 @ApiTags('PDF generator')
+@Throttle({ default: { limit: 30, ttl: 60000 } })
 @Controller('pdf-generator')
 export class PdfGeneratorController {
   constructor(private readonly pdfGeneratorService: PdfGeneratorService) {}
@@ -37,6 +40,7 @@ export class PdfGeneratorController {
     @Response({ passthrough: true }) res,
   ): StreamableFile {
     let file;
+    const safeFilename = basename(filename);
 
     //check if app is in production
     // if (process.env.NODE_ENV == 'production') {
@@ -44,7 +48,7 @@ export class PdfGeneratorController {
     // file = createReadStream(join(__dirname, '../static/img/' + filename));
     // } else {
 
-    file = createReadStream(join(process.cwd(), '/../static/img/' + filename));
+    file = createReadStream(join(process.cwd(), '/../static/img/' + safeFilename));
     // file = createReadStream(join(process.cwd(), '/static/img/' + filename));
     // }
 
@@ -64,12 +68,13 @@ export class PdfGeneratorController {
     @Response({ passthrough: true }) res,
   ): StreamableFile {
     let file;
+    const safeFilename = basename(filename);
 
     //check if app is in production
     // if (process.env.NODE_ENV == 'production') {
     //   file = createReadStream(join(__dirname, '../static/img/' + filename));
     // } else {
-    file = createReadStream(join(process.cwd(), '/../static/img/' + filename));
+    file = createReadStream(join(process.cwd(), '/../static/img/' + safeFilename));
     // file = createReadStream(join(process.cwd(), '/static/img/' + filename));
     // }
     res.set({

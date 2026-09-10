@@ -150,7 +150,7 @@
                               <v-autocomplete
                                 v-model="row.jewelryItemId"
                                 :items="availableJewelryItems(idx)"
-                                :item-title="(item) => `${item.itemCode}${item.brand ? ' - ' + item.brand : ''}`"
+                                :item-title="(item) => `${item.itemCode}${item.name ? ' - ' + item.name : ''}`"
                                 item-value="id"
                                 density="compact"
                                 variant="outlined"
@@ -224,7 +224,7 @@
                     <v-autocomplete
                       v-model="jewelryItemId"
                       :items="jewelryItems"
-                      :item-title="(item) => `${item.itemCode}${item.brand ? ' - ' + item.brand : ''}${item.category ? ' (' + item.category.categoryName + ')' : ''}`"
+                      :item-title="(item) => `${item.itemCode}${item.name ? ' - ' + item.name : ''}${item.category ? ' (' + item.category.categoryName + ')' : ''}`"
                       item-value="id"
                       label="Item"
                       :rules="[formRules.required]"
@@ -474,23 +474,21 @@ export default {
     },
 
     loadDropdownData(currentJewelryItemId = null) {
-      // Only items with CONSIGNMENT status are eligible
-      this.axiosCall("/jewelry-items?status=CONSIGNMENT", "GET")
+      // Items in stock are eligible to be newly consigned. Creating/updating a consignment
+      // flips the item's status to CONSIGNMENT on the backend, so items already under an
+      // active consignment naturally drop out of this pool on their own.
+      this.axiosCall("/jewelry-items?status=IN_STOCK", "GET")
         .then((res) => {
           const eligible = res?.data || [];
-          // Exclude items already linked to an active consignment
-          this.axiosCall("/consignment-items", "GET")
-            .then((c) => {
-              const takenIds = new Set(
-                (c?.data || [])
-                  .filter((ci) => ci.status === "active")
-                  .map((ci) => ci.jewelryItemId)
-              );
-              // Keep the current item visible in Update mode
-              if (currentJewelryItemId) takenIds.delete(currentJewelryItemId);
-              this.jewelryItems = eligible.filter((i) => !takenIds.has(i.id));
-            })
-            .catch(() => { this.jewelryItems = eligible; });
+          if (currentJewelryItemId && !eligible.some((i) => i.id === currentJewelryItemId)) {
+            // Update mode: the currently-linked item is already marked CONSIGNMENT (not
+            // IN_STOCK), so fetch it directly to keep it selectable in the dropdown.
+            this.axiosCall(`/jewelry-items/${currentJewelryItemId}`, "GET")
+              .then((r) => { this.jewelryItems = r?.data ? [...eligible, r.data] : eligible; })
+              .catch(() => { this.jewelryItems = eligible; });
+          } else {
+            this.jewelryItems = eligible;
+          }
         })
         .catch(() => {});
       this.axiosCall("/branches", "GET")

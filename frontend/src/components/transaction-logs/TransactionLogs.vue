@@ -24,16 +24,6 @@ export default {
   components: {
     TransactionLogsDataTable,
   },
-  created() {
-    this.requiredLogin();
-  },
-  methods: {
-    requiredLogin() {
-      if (!this.$session.exists()) {
-        this.$router.push("/");
-      }
-    },
-  },
 };
 </script>
 

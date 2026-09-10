@@ -140,7 +140,7 @@
               <div class="rv-item-left">
                 <span class="rv-item-code">{{ si.jewelryItem?.itemCode || '—' }}</span>
                 <span class="rv-item-desc">
-                  {{ [si.jewelryItem?.brand, si.jewelryItem?.material].filter(Boolean).join(' · ') || si.jewelryItem?.itemCode || '—' }}
+                  {{ [si.jewelryItem?.name, si.jewelryItem?.material].filter(Boolean).join(' · ') || si.jewelryItem?.itemCode || '—' }}
                 </span>
               </div>
               <span class="rv-item-price">₱{{ formatNumber(si.lineTotal) }}</span>
@@ -329,12 +329,12 @@ export default {
         ? saleItems.map((si) => {
             const ji = si.jewelryItem || {};
             const isJewelry = !!(ji.jewelryTypeId || ji.stoneTypeId);
-            const name = ji.brand || ji.description || ji.itemCode || "—";
+            const name = ji.name || ji.description || ji.itemCode || "—";
             let details = "";
             if (isJewelry) {
               details = [ji.stoneType?.name].filter(Boolean).join(" · ");
             } else {
-              details = [ji.brand, ji.description ? ji.description.substring(0, 40) : ""].filter(Boolean).join(" · ");
+              details = [ji.name, ji.description ? ji.description.substring(0, 40) : ""].filter(Boolean).join(" · ");
             }
             return `<div class="row"><span class="iname">${name}</span><span class="iprice">${fmt(si.lineTotal)}</span></div>` +
                    `<div class="icode">${ji.itemCode || ""}</div>` +

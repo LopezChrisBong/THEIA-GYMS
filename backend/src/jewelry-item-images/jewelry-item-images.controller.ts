@@ -14,6 +14,7 @@ import {
   UploadedFiles,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { Throttle } from '@nestjs/throttler';
 import { diskStorage } from 'multer';
 import { ApiBearerAuth, ApiTags, ApiConsumes } from '@nestjs/swagger';
 import { JewelryItemImagesService } from './jewelry-item-images.service';
@@ -29,6 +30,7 @@ import { Helper } from 'src/shared/helper';
 export class JewelryItemImagesController {
   constructor(private readonly jewelryItemImagesService: JewelryItemImagesService) {}
 
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Post('upload/:jewelryItemId')
   @HttpCode(HttpStatus.CREATED)
   @ApiConsumes('multipart/form-data')

@@ -258,9 +258,9 @@ export default {
       if (first && second && third && fourth && fifth && sixth) {
         this.isLoading = true;
 
-        console.log(data);
         this.axiosCall("/auth/compareOTP", "POST", data).then((res) => {
           if (res.data.status == 200) {
+            this.otp = otp;
             this.isLoading = false;
             this.showEmail = false;
             this.showPass = true;
@@ -338,11 +338,13 @@ export default {
           let formData = {
             email: this.$store.state.email,
             password: this.password,
+            otp: this.otp,
           };
           this.axiosCall("/auth/resetPassword", "POST", formData).then(
             (res) => {
               if (res.data.status == 200) {
                 this.$store.dispatch("setEmail", null);
+                this.otp = "";
                 this.fadeAwayMessage.show = true;
                 this.fadeAwayMessage.type = "success";
                 this.fadeAwayMessage.message = "Password changed successfully";

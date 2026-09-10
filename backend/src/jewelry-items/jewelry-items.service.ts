@@ -8,7 +8,8 @@ import { Repository } from 'typeorm';
 import { JewelryItem } from './entities/jewelry-item.entity';
 import { CreateJewelryItemDto } from './dto/create-jewelry-item.dto';
 import { UpdateJewelryItemDto } from './dto/update-jewelry-item.dto';
-import { UserDetail } from 'src/entities';
+import { BulkImportJewelryItemDto } from './dto/bulk-import-jewelry-item.dto';
+import { UserDetail, Category, JewelryType, StoneType } from 'src/entities';
 import { TransactionLogsService } from '../transaction-logs/transaction-logs.service';
 import { TransactionAction } from '../transaction-logs/entities/transaction-log.entity';
 
@@ -19,8 +20,32 @@ export class JewelryItemsService {
     private readonly jewelryItemRepository: Repository<JewelryItem>,
     @InjectRepository(UserDetail)
     private readonly userDetailRepository: Repository<UserDetail>,
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
+    @InjectRepository(JewelryType)
+    private readonly jewelryTypeRepository: Repository<JewelryType>,
+    @InjectRepository(StoneType)
+    private readonly stoneTypeRepository: Repository<StoneType>,
     private readonly transactionLogsService: TransactionLogsService,
   ) {}
+
+  private async findOrCreateLookupId(
+    repository: Repository<any>,
+    nameColumn: string,
+    rawName: string,
+    cache: Map<string, number>,
+  ): Promise<number> {
+    const name = rawName.trim();
+    if (cache.has(name)) return cache.get(name) as number;
+    const existing = await repository.findOne({ where: { [nameColumn]: name } });
+    if (existing) {
+      cache.set(name, existing.id);
+      return existing.id;
+    }
+    const created = await repository.save(repository.create({ [nameColumn]: name }));
+    cache.set(name, created.id);
+    return created.id;
+  }
 
   private async attachAddedByNames(items: JewelryItem[]): Promise<JewelryItem[]> {
     const ids = [...new Set(items.map((i) => Number(i.addedBy)).filter((n) => n > 0))];
@@ -151,12 +176,49 @@ export class JewelryItemsService {
     return this.jewelryItemRepository.save(jewelryItem);
   }
 
-  async bulkImport(items: CreateJewelryItemDto[]): Promise<{ imported: number; errors: string[] }> {
+  async bulkImport(items: BulkImportJewelryItemDto[]): Promise<{ imported: number; errors: string[] }> {
     let imported = 0;
     const errors: string[] = [];
+    const categoryCache = new Map<string, number>();
+    const jewelryTypeCache = new Map<string, number>();
+    const stoneTypeCache = new Map<string, number>();
 
     for (const item of items) {
       try {
+        let categoryId = item.categoryId;
+        if (!categoryId && item.categoryName) {
+          categoryId = await this.findOrCreateLookupId(
+            this.categoryRepository,
+            'categoryName',
+            item.categoryName,
+            categoryCache,
+          );
+        }
+        if (!categoryId) {
+          errors.push(`Item "${item.itemCode}" skipped: no category provided`);
+          continue;
+        }
+
+        let jewelryTypeId = item.jewelryTypeId || null;
+        if (!jewelryTypeId && item.jewelryTypeName) {
+          jewelryTypeId = await this.findOrCreateLookupId(
+            this.jewelryTypeRepository,
+            'name',
+            item.jewelryTypeName,
+            jewelryTypeCache,
+          );
+        }
+
+        let stoneTypeId = item.stoneTypeId || null;
+        if (!stoneTypeId && item.stoneTypeName) {
+          stoneTypeId = await this.findOrCreateLookupId(
+            this.stoneTypeRepository,
+            'name',
+            item.stoneTypeName,
+            stoneTypeCache,
+          );
+        }
+
         // Skip if item code already exists
         const existing = await this.jewelryItemRepository.findOne({
           where: { itemCode: item.itemCode },
@@ -165,7 +227,27 @@ export class JewelryItemsService {
           errors.push(`Item code "${item.itemCode}" already exists, skipped`);
           continue;
         }
-        const jewelryItem = this.jewelryItemRepository.create(item);
+
+        const jewelryItem = this.jewelryItemRepository.create({
+          itemCode: item.itemCode,
+          categoryId,
+          name: item.name,
+          color: item.color,
+          material: item.material,
+          stoneTypeId: stoneTypeId ?? undefined,
+          jewelryTypeId: jewelryTypeId ?? undefined,
+          goldType: item.goldType,
+          carat: item.carat,
+          karat: item.karat,
+          size: item.size,
+          bandWidth: item.bandWidth,
+          price: item.price,
+          status: item.status,
+          branchId: item.branchId,
+          barcode: item.barcode,
+          description: item.description,
+          addedBy: item.addedBy,
+        });
         await this.jewelryItemRepository.save(jewelryItem);
         imported++;
       } catch (error) {

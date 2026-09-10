@@ -11,6 +11,7 @@ import {
   HttpStatus,
   UseGuards,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { PromotionalMessagesService } from './promotional-messages.service';
 import { CreatePromotionalMessageDto } from './dto/create-promotional-message.dto';
@@ -39,6 +40,7 @@ export class PromotionalMessagesController {
     return this.promotionalMessagesService.create(createPromotionalMessageDto);
   }
 
+  @Throttle({ default: { limit: 5, ttl: 60000 } }) // can dispatch to many customers at once
   @Post('bulk')
   createBulk(@Body() createBulkDto: CreateBulkPromotionalMessageDto) {
     return this.promotionalMessagesService.createBulk(createBulkDto);
@@ -111,6 +113,7 @@ export class PromotionalMessagesController {
     return this.promotionalMessagesService.markAsSent(id);
   }
 
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Post(':id/send-now')
   sendNow(@Param('id', ParseIntPipe) id: number): Promise<PromotionalMessage> {
     return this.promotionalMessagesService.sendNow(id);

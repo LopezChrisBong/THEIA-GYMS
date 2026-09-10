@@ -184,7 +184,7 @@
                         <div v-for="ti in transferItems" :key="ti.id" class="item-row">
                           <div class="item-info">
                             <span class="item-code">{{ ti.jewelryItem?.itemCode || '—' }}</span>
-                            <span class="item-detail" v-if="ti.jewelryItem?.brand">{{ ti.jewelryItem.brand }}</span>
+                            <span class="item-detail" v-if="ti.jewelryItem?.name">{{ ti.jewelryItem.name }}</span>
                             <span class="item-qty">× {{ ti.quantity ?? 1 }}</span>
                             <span class="item-notes" v-if="ti.notes">· {{ ti.notes }}</span>
                           </div>
@@ -204,7 +204,7 @@
                           <v-autocomplete
                             v-model="newItem.jewelryItemId"
                             :items="jewelryItems"
-                            :item-title="(item) => `${item.itemCode}${item.brand ? ' – ' + item.brand : ''}`"
+                            :item-title="(item) => `${item.itemCode}${item.name ? ' – ' + item.name : ''}`"
                             item-value="id"
                             label="Jewelry Item"
                             variant="outlined"

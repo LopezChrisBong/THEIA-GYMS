@@ -26,7 +26,7 @@ export interface SaleLineItem {
   itemCode: string | null;
   barcode: string | null;
   category: string | null;
-  brand: string | null;
+  name: string | null;
   description: string | null;
   unitPrice: number;
   lineTotal: number;
@@ -251,7 +251,7 @@ export class SalesService {
 
       const items = saleItems.map((si) => ({
         itemCode: si.jewelryItem?.itemCode || `#${si.jewelryItemId}`,
-        brand: si.jewelryItem?.brand || null,
+        name: si.jewelryItem?.name || null,
         category: si.jewelryItem?.category?.categoryName || null,
         unitPrice: Number(si.unitPrice),
       }));
@@ -348,8 +348,8 @@ export class SalesService {
           itemCode: si.jewelryItem?.itemCode ?? null,
           barcode: si.jewelryItem?.barcode ?? null,
           category: category?.categoryName ?? null,
-          brand: si.jewelryItem?.brand ?? null,
-          description: si.jewelryItem?.material ?? null,
+          name: si.jewelryItem?.name ?? null,
+          description: si.jewelryItem?.description ?? null,
           unitPrice: Number(si.unitPrice),
           lineTotal: Number(si.lineTotal),
         };

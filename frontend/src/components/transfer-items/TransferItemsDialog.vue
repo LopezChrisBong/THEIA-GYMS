@@ -42,7 +42,7 @@
                 <v-autocomplete
                   v-model="editedItem.jewelryItemId"
                   :items="jewelryItems"
-                  :item-title="(item) => `${item.itemCode}${item.brand ? ' - ' + item.brand : ''}${item.category ? ' (' + item.category.categoryName + ')' : ''}`"
+                  :item-title="(item) => `${item.itemCode}${item.name ? ' - ' + item.name : ''}${item.category ? ' (' + item.category.categoryName + ')' : ''}`"
                   item-value="id"
                   label="Item"
                   :rules="[rules.required]"

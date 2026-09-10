@@ -40,7 +40,7 @@
           >
             <div class="sr-left">
               <span class="sr-code">{{ item.itemCode }}</span>
-              <span class="sr-name">{{ item.brand || item.material || '—' }}</span>
+              <span class="sr-name">{{ item.name || item.material || '—' }}</span>
             </div>
             <span class="sr-price">{{ formatCurrency(item.price) }}</span>
           </div>
@@ -677,7 +677,7 @@ export default {
           (i) =>
             (i.itemCode || "").toLowerCase().includes(q) ||
             (i.barcode || "").toLowerCase().includes(q) ||
-            (i.brand || "").toLowerCase().includes(q)
+            (i.name || "").toLowerCase().includes(q)
         )
         .slice(0, 6);
       this.showDropdown = this.searchResults.length > 0;
@@ -729,7 +729,7 @@ export default {
         return;
       }
       const name =
-        item.brand ||
+        item.name ||
         item.jewelryType?.type ||
         item.category?.categoryName ||
         item.itemCode;
@@ -746,7 +746,7 @@ export default {
         price: Number(item.price) || 0,
         isJewelry: !!(item.jewelryTypeId || item.stoneTypeId),
         stoneName: item.stoneType?.name || null,
-        brand: item.brand || null,
+        brand: item.name || null,
         description: item.description || null,
       });
       this.availableItems = this.availableItems.filter((i) => i.id !== item.id);

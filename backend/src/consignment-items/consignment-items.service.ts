@@ -8,8 +8,17 @@ import { Repository } from 'typeorm';
 import { ConsignmentItem, ConsignmentStatus } from './entities/consignment-item.entity';
 import { CreateConsignmentItemDto } from './dto/create-consignment-item.dto';
 import { UpdateConsignmentItemDto } from './dto/update-consignment-item.dto';
+import { JewelryItem, JewelryItemStatus } from '../jewelry-items/entities/jewelry-item.entity';
 import { MailService } from '../mail/mail.service';
 import { SmsService } from '../sms/sms.service';
+
+const CONSIGNMENT_TO_JEWELRY_STATUS: Record<ConsignmentStatus, JewelryItemStatus> = {
+  [ConsignmentStatus.ACTIVE]: JewelryItemStatus.CONSIGNMENT,
+  [ConsignmentStatus.SOLD]: JewelryItemStatus.SOLD,
+  [ConsignmentStatus.RETURNED]: JewelryItemStatus.PULLED_OUT,
+  [ConsignmentStatus.PULLOUT]: JewelryItemStatus.PULLED_OUT,
+  [ConsignmentStatus.BUYOUT]: JewelryItemStatus.IN_STOCK,
+};
 
 @Injectable()
 export class ConsignmentItemsService {
@@ -18,13 +27,24 @@ export class ConsignmentItemsService {
   constructor(
     @InjectRepository(ConsignmentItem)
     private readonly consignmentItemRepository: Repository<ConsignmentItem>,
+    @InjectRepository(JewelryItem)
+    private readonly jewelryItemRepository: Repository<JewelryItem>,
     private readonly mailService: MailService,
     private readonly smsService: SmsService,
   ) {}
 
+  /** Keeps the linked jewelry item's status in step with the consignment lifecycle (mirrors Transfers' pattern). */
+  private async syncJewelryItemStatus(jewelryItemId: number, consignmentStatus: ConsignmentStatus): Promise<void> {
+    const newStatus = CONSIGNMENT_TO_JEWELRY_STATUS[consignmentStatus];
+    if (!newStatus) return;
+    await this.jewelryItemRepository.update(jewelryItemId, { status: newStatus });
+  }
+
   async create(createConsignmentItemDto: CreateConsignmentItemDto): Promise<ConsignmentItem> {
     const consignmentItem = this.consignmentItemRepository.create(createConsignmentItemDto);
-    return this.consignmentItemRepository.save(consignmentItem);
+    const saved = await this.consignmentItemRepository.save(consignmentItem);
+    await this.syncJewelryItemStatus(saved.jewelryItemId, saved.status ?? ConsignmentStatus.ACTIVE);
+    return saved;
   }
 
   async findAll(): Promise<ConsignmentItem[]> {
@@ -129,13 +149,16 @@ export class ConsignmentItemsService {
   async updateStatus(id: number, status: ConsignmentStatus): Promise<ConsignmentItem> {
     const consignmentItem = await this.findOne(id);
     consignmentItem.status = status;
-    return this.consignmentItemRepository.save(consignmentItem);
+    const saved = await this.consignmentItemRepository.save(consignmentItem);
+    await this.syncJewelryItemStatus(saved.jewelryItemId, status);
+    return saved;
   }
 
   async markAsSold(id: number): Promise<ConsignmentItem> {
     const item = await this.findOne(id);
     item.status = ConsignmentStatus.SOLD;
     const saved = await this.consignmentItemRepository.save(item);
+    await this.syncJewelryItemStatus(saved.jewelryItemId, ConsignmentStatus.SOLD);
 
     // Notify consignor with payout details
     const { commission, netToConsignor } = await this.calculateCommission(id);

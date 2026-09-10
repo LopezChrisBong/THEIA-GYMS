@@ -5,6 +5,7 @@ import {
   Body,
   Patch,
   Param,
+  ParseIntPipe,
   Delete,
   Request,
   Headers,
@@ -15,6 +16,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
+import { Throttle } from '@nestjs/throttler';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { ChangePasswordDto } from './dto/change-pass.dto';
@@ -37,18 +39,28 @@ export class AuthController {
 
   // @ApiBearerAuth()
   // @UsePipes(ValidationPipe)
+  @Throttle({ default: { limit: 5, ttl: 600000 } }) // 5 per 10 min per IP
   @Post('registerUser')
   create(@Body() registerUser: RegisterUserDto) {
     return this.authService.create(registerUser);
   }
 
+  @UseGuards(JWTAuthGuard)
+  @ApiBearerAuth()
+  @Throttle({ default: { limit: 5, ttl: 600000 } })
   @Post('addAccount')
   addAccount(@Body() registerUser: RegisterUserDto) {
     return this.authService.addAccount(registerUser);
   }
 
+  @UseGuards(JWTAuthGuard)
+  @ApiBearerAuth()
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @Post('changePassIDCred/:id')
-  changePassID(@Param('id') id: number, @Body() changPassDto: ChangePasswordDto) {
+  changePassID(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() changPassDto: ChangePasswordDto,
+  ) {
     return this.authService.changePassID(id, changPassDto);
   }
 
@@ -57,16 +69,19 @@ export class AuthController {
     return this.authService.sendMail();
   }
 
+  @Throttle({ default: { limit: 5, ttl: 60000 } }) // 5 attempts per minute per IP
   @Post('login')
   login(@Body() loginUser: LoginDto) {
     return this.authService.login(loginUser);
   }
 
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @Get('checkEmailIfExist/:email')
   checkEmail(@Param('email') email: string) {
     return this.authService.checkEmail(email);
   }
 
+  @Throttle({ default: { limit: 5, ttl: 300000 } }) // 5 per 5 min — OTP verification
   @Post('confirmOtp')
   confirmOTP(@Body() conOTP: ConfirmOTPDto) {
     return this.authService.confirmOTP(conOTP);
@@ -98,11 +113,13 @@ export class AuthController {
 
   // @UseGuards(JWTAuthGuard)
   // @ApiBearerAuth()
+  @Throttle({ default: { limit: 3, ttl: 300000 } }) // 3 per 5 min — sends a real email
   @Get('sendOTP/:email')
   sendOTP(@Param('email') email: string) {
     return this.authService.sendOTP(email);
   }
 
+  @Throttle({ default: { limit: 5, ttl: 300000 } })
   @Post('compareOTP')
   compareOTP(@Body() data: any) {
     return this.authService.compareOTP(data);
@@ -152,6 +169,7 @@ export class AuthController {
     return this.authService.changePassword(curr_user, changePassDto);
   }
 
+  @Throttle({ default: { limit: 5, ttl: 300000 } })
   @Post('resetPassword')
   resetPassword(@Body() resetPassDto: ResetPasswordDto) {
     return this.authService.resetPassword(resetPassDto);

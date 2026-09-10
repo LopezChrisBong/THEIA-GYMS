@@ -159,7 +159,7 @@
               <tr v-for="item in supplierItems" :key="item.id">
                 <td class="item-code">{{ item.itemCode }}</td>
                 <td>{{ item.category?.categoryName || '—' }}</td>
-                <td>{{ item.brand || '—' }}</td>
+                <td>{{ item.name || '—' }}</td>
                 <td>{{ item.material || '—' }}</td>
                 <td>{{ item.carat || '—' }}</td>
                 <td>
